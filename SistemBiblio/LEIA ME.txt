@@ -1,0 +1,7 @@
+Essa é a pasta onde todos os arquivos devem ser criado. 
+Para manter a organização, seguir as seguintes regras:
+
+1°- Não criar arquivos desorganizados e desnecessários;
+2°- Se possível, não usar AutoSave e sempre conferir o que mudou;
+3°- Faça sempre comentários sobre o código;
+4°- Seja feliz, tenha AMBIÇÃO !!
