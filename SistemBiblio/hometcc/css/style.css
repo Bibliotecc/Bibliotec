@@ -6,12 +6,12 @@
 
 @font-face{
     font-family: FonteTitulo;
-    src: url(/Bibliotec/hometcc/font/Inter-Black.ttf);
+    src: url(../font/Inter-Black.ttf);
 }
 
 @font-face{
     font-family: Paragrafos;
-    src: url(/Bibliotec/hometcc/font/Inter-Light.ttf);
+    src: url(../font/Inter-Light.ttf);
 }
 
 a{

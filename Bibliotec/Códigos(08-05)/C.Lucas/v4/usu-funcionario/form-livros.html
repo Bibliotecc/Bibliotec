@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Cadastro de Livros | BiblioTec</title>
+</head>
+<body>
+    <h1>Cadastrando os Livros</h1>
+    <form action="cadastro-livros.php" method="POST">
+        <!-- LABELS E INPUTS // PESSOAL DO FRONT, ELABORAR COM ESSES ID,NAME E FOR.-->
+        <label for="txtnomeLivro">Digite o Nome do Livro</label> <br><br>
+        <input type="text" id="txtnomeLivro" name="txtnomeLivro" placeholder="Nome do Livro"> <br><br>
+
+        <label for="txtgênero">Digite o Gênero do Livro</label> <br><br>
+        <input type="text" id="txtgênero" name="txtgênero" placeholder="Gênero"> <br><br>
+
+        <label for="txtautor">Digite o Nome do Autor do Livro</label> <br><br>
+        <input type="text" id="txtautor" name="txtautor" placeholder="Nome do Autor"> <br><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>
