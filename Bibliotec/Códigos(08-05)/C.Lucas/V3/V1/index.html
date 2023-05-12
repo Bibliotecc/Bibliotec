@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>BiblioTec</title>
+</head>
+<body>
+    <div>
+    <!-- <a href="#">
+        <img class="test" src="logos/logo1.png" alt="BiblioTec Logo" > 
+    </a> -->
+
+        <input type="text" name="pesquisa" id="pesquisar" placeholder="Pesquisa">
+        <button type="submit" onClick="searchData()">Q</button>
+</div>
+
+<script>
+// pega valor do id pesquisar
+var search = document.getElementById("pesquisar");
+
+// verifico se a tecla pressionada é o enter
+search.addEventListener("keydown", function(event)
+{
+    if (event.key == "Enter")
+    {
+        searchData();
+    }
+});
+
+//crio a função, uma ação para o searchData()
+function searchData()
+{
+    window.location = 'teste.php?search='+search.value;
+}
+
+</script>
+</body>
+</html>
