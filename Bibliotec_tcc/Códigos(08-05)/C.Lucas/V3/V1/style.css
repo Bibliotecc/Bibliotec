@@ -1,0 +1,16 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+.test{
+position: absolute;
+width: 122px;
+height: 122px;
+left: -13px;
+top: -21px;
+background: url(logos/logo1.png);
+}
