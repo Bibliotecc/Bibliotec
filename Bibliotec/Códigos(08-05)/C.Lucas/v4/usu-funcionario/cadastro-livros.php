@@ -25,6 +25,6 @@ fclose($fp);
 // TESTANDO RECEPÇÃO DAS VARIAVEIS. SE DER CERTO, ELE VAI FALAR O NOME DO LIVRO
     echo $nomeLivro;
     echo $genero;
-    echo $autor;
+    echo $autor ;
    
 ?>
