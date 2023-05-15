@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body{
+    background-color: #e5f3f7;
+}
+
 @font-face{
     font-family: FonteTitulo;
     src: url(../font/Inter-Black.ttf);
@@ -95,4 +99,53 @@ input{
 
 .dropdown:hover .dropdown-menu{
     display: block;
+}
+
+.container-books img{
+    width: 220px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.container h1{
+    margin-top: 80px;
+    font-family: Paragrafos;
+    font-size: 30px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.container-books{
+    display: flex;
+    justify-content: space-between;
+}
+
+.estil-books a{
+    margin: 5px 0px;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: FonteTitulo;
+    font-size: 20px;
+    text-align: center;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #1D6A96;
+    color: #fff;
+}
+
+.estil-books a:hover{
+    background-color: #3092ca;
+    transition: .2s
+}
+
+.estil-books{
+    background-color: #fff;
+    box-shadow: 0px 5px 15px 0px #a8acad;
+    border-radius: 10px;
+    border-bottom: 1px solid #bebebe;
+    border-right: 1px solid #bebebe;
+    border-left: 1px solid #bebebe;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
 }
