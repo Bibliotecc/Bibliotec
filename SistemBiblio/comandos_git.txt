@@ -1,0 +1,22 @@
+git clone url - clonar repositório
+git status - ver status do repositório
+git add -
+git add diretoriodoArquivo - 
+git add . - adicionar TODOS modificados e novos
+git commit -m "menssagem" - menssagem pequena sobre oq fiz
+git push origin nomedaBranch - upload pra nuvem
+git pull origin nomedaBranch - atualiza todas alterações da Branch 
+git checkout -b nomedaBranch - cria Branch e vai direto para ela
+git checkout nomedaBranch - vai direto para branch ela
+gitk - ver tela de alterações
+
+ORDEM:
+git pull - atualizar repositório principal
+git checkout - b nomedaBranch - criar uma nova Branch copiando a Branch anterior 
+git status - ver status do repositório do que foi alterado
+git add - vai preparar
+git commit -m "menssagem" - comita os arquivos/alterações adicionados
+git push origin nomedaBranch - vai pegar os commit e atualizar na nuvem
+
+
+
