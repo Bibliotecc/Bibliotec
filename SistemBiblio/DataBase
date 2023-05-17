@@ -1,0 +1,3 @@
+create database bibliotec; -- Criando a base de dados
+
+use database 
