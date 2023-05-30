@@ -5,7 +5,7 @@
 }
 
 body{
-    background-color: #e5f3f7;
+    background-image: url(../img/background/background.png);
 }
 
 @font-face{
@@ -178,7 +178,7 @@ footer{
 .end-page{
     height: 100%;
     color: #fff;
-    background-color: #000000d3;
+    background-color: #1b1b1b;
 }
 
 .container-desc{
@@ -269,13 +269,20 @@ footer{
     font-size: 23px;
 }
 
-.descricao-livro{
-    
+.container-background-desc-espec{
+    background-color: #fff;
+    margin-top: 5%;
+    padding: 3% 5%;
+    box-shadow: 0px 5px 15px 0px #a8acad;
+    border-radius: 10px;
+    border-bottom: 1px solid #bebebe;
+    border-right: 1px solid #bebebe;
+    border-left: 1px solid #bebebe;
 }
 
 .descricao-livro h1{
     font-size: 35px;
-    margin-top: 15%;
+    margin-top: 2%;
     margin-bottom: 2%;
 }
 
