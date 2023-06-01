@@ -32,7 +32,7 @@ header{
     height: 120px;
 }
 
-input{
+.menu input{
     width: 450px;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -323,9 +323,7 @@ footer{
 
 .body-login{
     background-size: cover;
-    background-position: left center;
-    width: 100vw;
-    height: 100vh;
+    height: 75vh;
     display: flex;
     align-items:center ;
     justify-content: space-around;
@@ -376,32 +374,36 @@ footer{
 .btncolor{
     border-radius: 25px;
     position: absolute;
-    width: 120px;
+    width: 100px;
     height: 100%;
     background: linear-gradient(to right, #006ce7, #006ce7);
     transition: .3s;
 }
 
 .container-login input[type="text"], input[type="password"]{
-    border: solid black;
+    font-family: Paragrafos;
+    font-size: 17px;
+    border: solid #000000 2px;
     margin-top: 40px;
     border-radius: 60px;
     padding: 8px 0 8px 35px;
     outline: none;
     width: 100%;
-    color: black;
+    color: #000000;
 }
 
 .container-login button[type="submit"]{
+    font-family: FonteTitulo;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
     background: #006ce7;
-    color: rgb(14, 13, 13);
     border-radius: 30px;
     width: 100%;
     border: none;
     outline: none;
-    padding: 8px 0 8px 15px;
-    font-size: 15px;
-    margin-top: 40px;
+    padding: 8px 0 8px 0px;
+    margin-top: 5%;
     cursor: pointer;
 }
 
@@ -409,7 +411,26 @@ footer{
     margin: 10px 0 0 5px;
     width: 80%;
     font-size: 13px;
-    color: black;
+    color: #000000;
+}
+
+.container-login span{
+    font-family: Especificacoes;
+    font-size: 16px;
+    margin-left: 3%;
+}
+
+.container-login input[type="checkbox"]{
+    margin-left: 4%;
+    margin-top: 4%;
+}
+
+.container-login button[type="submit"]:hover{
+    background-color: #3092ca;
+}
+
+.container-footer-login footer{
+    margin-top: 0;
 }
 
 #entrar{
