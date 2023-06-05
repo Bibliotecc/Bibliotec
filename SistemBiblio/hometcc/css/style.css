@@ -440,3 +440,8 @@ footer{
 #cadastrar-se{
     left: 450px;
 }
+
+.swal2-popup {
+    font-size: 25px;
+    font-family: FonteTitulo;
+  }
