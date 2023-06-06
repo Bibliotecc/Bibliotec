@@ -426,7 +426,7 @@ footer{
     margin-top: 4%;
 }
 
-.container-login button[type="submit"]:hover{
+.container-login .buttoncadastro:hover{
     background-color: #3092ca;
 }
 
