@@ -392,8 +392,9 @@ footer{
     color: #000000;
 }
 
-.container-login button[type="submit"]{
+.container-login .buttoncadastro{
     font-family: FonteTitulo;
+    position: absolute;
     font-size: 20px;
     color: #fff;
     text-align: center;
