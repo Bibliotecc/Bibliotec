@@ -25,6 +25,42 @@ function ValidaForm(){
   var usuEmailVal = usuEmail.value;
   var usuSenhaVal = usuSenha.value;
   var usuSenha2Val = usuSenha2.value;
+
+if(!usuEmailVal){
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'E-mail não pode ficar em branco!',
+  })
+  return false;
+}
+
+if(!usuSenhaVal){
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Senhas não pode ficar em branco!',
+  })
+  return false;
+}
+
+if(!usuSenha2Val){
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Confirmação de senha não pode ficar em branco!',
+  })
+  return false;
+}
+
+if(usuSenhaVal && usuSenha2Val && (usuSenhaVal != usuSenha2Val)) {
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Senhas não são iguais!',
+  })
+  return false;
+}
   
   Swal.fire({
     title: 'Você deseja salvar seus dados?',
