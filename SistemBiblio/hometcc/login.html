@@ -44,17 +44,17 @@
                         <input type="checkbox">
                         <span>Lembrar senha</span>
                     </div>
-                    <button type="submit">Entrar</button>
+                    <a href="#" class="buttoncadastro"> Entrar </a>
                 </form>
-                <form  id="cadastrar-se"> 
-                    <input type="text" placeholder=" Criar Email" required/>
-                    <input type="password" placeholder=" Criar senha" required/>
-                    <input type="password" placeholder="Confirme a senha"required/>
+                <form id="cadastrar-se"> 
+                    <input type="text" placeholder=" Criar Email" id="txtusuEmail"/>
+                    <input type="password" placeholder=" Criar senha" id="txtusuSenha"/>
+                    <input type="password" placeholder="Confirme a senha" id="txtusuSenha2"/>
                     <div class="divcheck">
                         <input type="checkbox"/>
                         <span>Aceito os termos</span>    
                     </div>
-                    <button type="submit">Cadastrar-se</button>
+                    <a href="#" onclick="return ValidaForm();" class="buttoncadastro" > Cadastrar-se </a>
                 </form>
             </div>
         </div>
@@ -92,5 +92,6 @@
         </div>
     </div>
     <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
