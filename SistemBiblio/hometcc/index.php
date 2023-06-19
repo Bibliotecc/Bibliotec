@@ -46,16 +46,16 @@
         <div class="container">
             <h1> Romance </h1>
             <div class="container-books">
-                <div class="estil-books">
+
         <!--INICIO DO PHP FOR EACH-->
-                <?php foreach ($livros->getValue() as $livros) : ?>
+        <?php foreach ($livros->getValue() as $livros) : ?>
+            <div class="estil-books">
                     <img src="img/livros/<?php echo $livros['nomeLivro']?>.jpg" alt="">
                     <a href="aluguel.html"> Alugar </a>
-                <?php endforeach; ?>
-        <!--FIM DO PHP FOR EACH-->    
-                </div>
-
             </div>
+            <?php endforeach; ?>
+        <!--FIM DO PHP FOR EACH-->    
+             </div>
             <h1> Poesia </h1>
             <div class="container-books">
                 <div class="estil-books">
@@ -71,7 +71,7 @@
                     <a href="aluguel.html"> Alugar </a>
                 </div>
                 <div class="estil-books">
-                    <img src="img/livros/a selecao.jpg" alt="">
+                    <img src="img/livros/A Seleção.jpg" alt="">
                     <a href="aluguel.html"> Alugar </a>
                 </div>
             </div>
