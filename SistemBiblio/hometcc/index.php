@@ -47,21 +47,14 @@
             <h1> Romance </h1>
             <div class="container-books">
                 <div class="estil-books">
-                    <img src="img/livros/a elite.jpg" alt="">
+        <!--INICIO DO PHP FOR EACH-->
+                <?php foreach ($livros->getValue() as $livros) : ?>
+                    <img src="img/livros/<?php echo $livros['nomeLivro']?>.jpg" alt="">
                     <a href="aluguel.html"> Alugar </a>
+                <?php endforeach; ?>
+        <!--FIM DO PHP FOR EACH-->    
                 </div>
-                <div class="estil-books">
-                    <img src="img/livros/a escolha.jpg" alt="">
-                    <a href="aluguel.html"> Alugar </a>
-                </div>
-                <div class="estil-books">
-                    <img src="img/livros/a herdeira.jpg" alt="">
-                    <a href="aluguel.html"> Alugar </a>
-                </div>
-                <div class="estil-books">
-                    <img src="img/livros/a selecao.jpg" alt="">
-                    <a href="aluguel.html"> Alugar </a>
-                </div>
+
             </div>
             <h1> Poesia </h1>
             <div class="container-books">
