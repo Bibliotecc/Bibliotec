@@ -17,6 +17,3 @@ git status - ver status do repositório do que foi alterado
 git add - vai preparar
 git commit -m "menssagem" - comita os arquivos/alterações adicionados
 git push origin nomedaBranch - vai pegar os commit e atualizar na nuvem
-
-
-
