@@ -7,7 +7,7 @@
      
     $database = $factory->createDatabase();
     $livros = $database->getReference('livros')->getSnapshot();
-    $buscaLivro = $database;
+    $buscaLivro = $database->getReference('livros/'+$_POST[''])->getSnapshot()->getValue();
    
 
 ?>
