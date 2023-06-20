@@ -7,9 +7,12 @@
      
     $database = $factory->createDatabase();
     $livros = $database->getReference('livros')->getSnapshot();
-    $buscaLivro = $database->getReference('livros/'+$_POST[''])->getSnapshot()->getValue();
-   
 
+if(!empty($_GET['search']))
+    {
+        $pesquisa = $_GET['search'];
+        $buscaLivro = $database->getReference('livros/'.$pesquisa)->getSnapshot();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,10 +28,11 @@
         <div class="container">
             <nav class="menu">
                 <ul>
-                    <li> <a href="index.html"> <img src="img/logo/logotcc.png" alt="logotcc"> </a> </li>
-                    <li> 
-                        <input type="text" name="txtBuscaLivro" id="txtBuscaLivro" placeholder="O que você esta procurando?"> </li>
-                    <li class="dropdown"> <a href="#"> Filtros <img src="img/icons/seta.png" alt="" class="icon"> </a> 
+                    <li> <a href="index.php"> <img src="img/logo/logotcc.png" alt="logotcc"> </a> </li>
+                    <li>
+                         <input type="text" name="txtBuscaLivro" id="txtBuscaLivro" placeholder="O que você esta procurando?"> 
+                    </li>
+                        <li class="dropdown"> <a href="#"> Filtros <img src="img/icons/seta.png" alt="" class="icon"> </a> 
                         <div class="dropdown-menu">
                             <a href="#"> Ação </a>
                             <a href="#"> Aventura </a>
@@ -44,36 +48,28 @@
     </header>
     <div class="background-fundo-all">
         <div class="container">
-            <h1> Romance </h1>
+        <?php if(empty($pesquisa)){  ?>
+            <h1> Romance </h1> 
+        <?php } ?>
             <div class="container-books">
-
-        <!--INICIO DO PHP FOR EACH-->
-        <?php foreach ($livros->getValue() as $livros) : ?>
+        <!--INICIO DO PHP FOR EACH PARA CATEGORIA ROMANCE-->
+        <?php if(empty($pesquisa)){  // IF condicional da pesquisa! 
+        foreach ($livros->getValue() as $livros) : ?>
             <div class="estil-books">
                     <img src="img/livros/<?php echo $livros['nomeLivro']?>.jpg" alt="">
                     <a href="aluguel.html"> Alugar </a>
             </div>
-            <?php endforeach; ?>
-        <!--FIM DO PHP FOR EACH-->    
+            <?php endforeach; }?> 
+        <!--FIM DO PHP FOR EACH PARA A CATEGORIA ROMANCA-->    
              </div>
             <h1> Poesia </h1>
-            <div class="container-books">
-                <div class="estil-books">
-                    <img src="img/livros/a elite.jpg" alt="">
+            <?php if(empty($pesquisa)){  // IF condicional da pesquisa! 
+        foreach ($livros->getValue() as $livros) : ?>
+            <div class="estil-books">
+                    <img src="img/livros/<?php echo $livros['nomeLivro']?>.jpg" alt="">
                     <a href="aluguel.html"> Alugar </a>
-                </div>
-                <div class="estil-books">
-                    <img src="img/livros/a escolha.jpg" alt="">
-                    <a href="aluguel.html"> Alugar </a>
-                </div>
-                <div class="estil-books">
-                    <img src="img/livros/a herdeira.jpg" alt="">
-                    <a href="aluguel.html"> Alugar </a>
-                </div>
-                <div class="estil-books">
-                    <img src="img/livros/A Seleção.jpg" alt="">
-                    <a href="aluguel.html"> Alugar </a>
-                </div>
+            </div>
+            <?php endforeach; }?> 
             </div>
         </div>
     </div>
@@ -107,5 +103,24 @@
             </div>
         </div>
     </div>
+<script>
+// pega valor do id pesquisar
+var search = document.getElementById("txtBuscaLivro");
+
+// verifico se a tecla pressionada é o enter
+search.addEventListener("keydown", function(event)
+{
+    if (event.key == "Enter")
+    {
+        searchData();
+    }
+});
+
+//crio a função, uma ação para o searchData()
+function searchData()
+{
+    window.location = 'index.php?search='+search.value;
+}
+    </script>
 </body>
 </html>
