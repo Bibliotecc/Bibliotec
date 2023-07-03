@@ -7,6 +7,7 @@
      
     $database = $factory->createDatabase();
     $livros = $database->getReference('livros')->getSnapshot();
+    $livrosR = $database->getReference('livros')->getSnapshot();
 
 if(!empty($_GET['search']))
     {
@@ -52,21 +53,21 @@ if(!empty($_GET['search']))
             <h1> Romance </h1> 
         <?php } ?>
             <div class="container-books">
-        <!--INICIO DO PHP FOR EACH PARA CATEGORIA ROMANCE-->
+<!--INICIO DO PHP FOR EACH PARA CATEGORIA ROMANCE-->
         <?php if(empty($pesquisa)){  // IF condicional da pesquisa! 
-        foreach ($livros->getValue() as $livros) : ?>
+        foreach ($livrosR->getValue() as $livrosR) : ?>
             <div class="estil-books">
-                    <img src="img/livros/<?php echo $livros['nomeLivro']?>.jpg" alt="">
+                    <img src="img/livros/<?php echo $livrosR['nomeLivro']?>.jpg" alt="">
                     <a href="aluguel.html"> Alugar </a>
             </div>
             <?php endforeach; }?> 
-        <!--FIM DO PHP FOR EACH PARA A CATEGORIA ROMANCA-->    
+<!--FIM DO PHP FOR EACH PARA A CATEGORIA ROMANCE-->    
              </div>
             <h1> Poesia </h1>
             <?php if(empty($pesquisa)){  // IF condicional da pesquisa! 
-        foreach ($livros->getValue() as $livros) : ?>
+        foreach ($livrosR->getValue() as $livrosR) : ?>
             <div class="estil-books">
-                    <img src="img/livros/<?php echo $livros['nomeLivro']?>.jpg" alt="">
+                    <img src="img/livros/<?php echo $livrosR['nomeLivro']?>.jpg" alt="">
                     <a href="aluguel.html"> Alugar </a>
             </div>
             <?php endforeach; }?> 
