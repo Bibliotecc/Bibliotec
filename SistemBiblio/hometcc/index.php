@@ -1,20 +1,15 @@
 <?php
-
      require __DIR__.'/vendor/autoload.php';
     use Kreait\Firebase\Factory;
 
-    $factory = (new Factory())->withDatabaseUri('https://otccsb-default-rtdb.firebaseio.com');
+    $factory = (new Factory)->withDatabaseUri('https://otccsb-default-rtdb.firebaseio.com');
      
     $database = $factory->createDatabase();
     $livros = $database->getReference('livros')->getSnapshot();
-    $livrosR = $database->getReference('livros')->getSnapshot();
-
-if(!empty($_GET['search']))
-    {
-        $pesquisa = $_GET['search'];
-        $buscaLivro = $database->getReference('livros/'.$pesquisa)->getSnapshot();
-    }
+   
+ 
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -47,31 +42,30 @@ if(!empty($_GET['search']))
             </nav>
         </div>
     </header>
-    <div class="background-fundo-all">
-        <div class="container">
-        <?php if(empty($pesquisa)){  ?>
-            <h1> Romance </h1> 
-        <?php } ?>
-            <div class="container-books">
-<!--INICIO DO PHP FOR EACH PARA CATEGORIA ROMANCE-->
-        <?php if(empty($pesquisa)){  // IF condicional da pesquisa! 
-        foreach ($livrosR->getValue() as $livrosR) : ?>
-            <div class="estil-books">
-                    <img src="img/livros/<?php echo $livrosR['nomeLivro']?>.jpg" alt="">
-                    <a href="aluguel.html"> Alugar </a>
-            </div>
-            <?php endforeach; }?> 
-<!--FIM DO PHP FOR EACH PARA A CATEGORIA ROMANCE-->    
-             </div>
-            <h1> Poesia </h1>
-            <?php if(empty($pesquisa)){  // IF condicional da pesquisa! 
-        foreach ($livrosR->getValue() as $livrosR) : ?>
-            <div class="estil-books">
-                    <img src="img/livros/<?php echo $livrosR['nomeLivro']?>.jpg" alt="">
-                    <a href="aluguel.html"> Alugar </a>
-            </div>
-            <?php endforeach; }?> 
-            </div>
+<div class="background-fundo-all">
+<div class="container">
+    <h1> Romance </h1> 
+                <div class="container-books">
+    <!--ENTENDA O FOREACH COMO UM WHILE -->                
+                    <?php foreach($livros->getValue() as $livros) : 
+                            if($livros['gênero'] == 'Romance'){ ?>
+                                <div class="estil-books">
+                                    <img src="img/livros/<?php echo $livros['nomeLivro']; ?>.jpg" alt="">
+                                    <a href="aluguel.html"> Alugar </a>
+                                </div>
+                    <?php }endforeach; ?>                
+                </div>
+        <!-- FIM DIV  container-books -->
+    <h1> Poesia </h1>
+                <div class="container-books">
+                <?php foreach($livros->getValue() as $livros) :
+                            if($livros['gênero'] == 'Biografia'){ ?>
+                                <div class="estil-books">
+                                    <img src="img/livros/<?php echo $livros['nomeLivro']; ?>.jpg" alt="">
+                                    <a href="aluguel.html"> Alugar </a>
+                                </div>
+                    <?php }endforeach; ?>   
+                </div><!-- FIM DIV  container-books -->
         </div>
     </div>
     <footer>
@@ -105,10 +99,10 @@ if(!empty($_GET['search']))
         </div>
     </div>
 <script>
-// pega valor do id pesquisar
+// Pega Valor do ID Pesquisar
 var search = document.getElementById("txtBuscaLivro");
 
-// verifico se a tecla pressionada é o enter
+// Verifico se a Tecla Pressionada é o ENTER
 search.addEventListener("keydown", function(event)
 {
     if (event.key == "Enter")
@@ -117,7 +111,7 @@ search.addEventListener("keydown", function(event)
     }
 });
 
-//crio a função, uma ação para o searchData()
+// Crio a função, uma ação para o searchData()
 function searchData()
 {
     window.location = 'index.php?search='+search.value;
