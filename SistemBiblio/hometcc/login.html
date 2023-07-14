@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
-</head>
+   </head>
 <header> 
     <div class="container">
         <nav class="menu">
             <ul>
-                <li> <a href="index.html"> <img src="img/logo/logotcc.png" alt="logotcc"> </a> </li>
+                <li> <a href="index.php"> <img src="img/logo/logotcc.png" alt="logotcc"> </a> </li>
                 <li> 
                     <input type="text" name="txtBuscaLivro" id="txtBuscaLivro" placeholder="O que você esta procurando?"> </li>
                 <li class="dropdown"> <a href="#"> Filtros <img src="img/icons/seta.png" alt="" class="icon"> </a> 
@@ -46,15 +47,16 @@
                     </div>
                     <a href="#" class="buttoncadastro"> Entrar </a>
                 </form>
-                <form id="cadastrar-se"> 
-                    <input type="text" placeholder=" Criar Email" id="txtusuEmail"/>
-                    <input type="password" placeholder=" Criar senha" id="txtusuSenha"/>
+                <form id="cadastrar-se">
+                    <input type="text" placeholder="Nome Completo" id="txtusuNome"/> 
+                    <input type="text" placeholder="Criar Email" id="txtusuEmail"/>
+                    <input type="password" placeholder="Criar senha" id="txtusuSenha"/>
                     <input type="password" placeholder="Confirme a senha" id="txtusuSenha2"/>
                     <div class="divcheck">
                         <input type="checkbox"/>
                         <span>Aceito os termos</span>    
                     </div>
-                    <a href="#" onclick="return ValidaForm();" class="buttoncadastro" > Cadastrar-se </a>
+                    <a href="#" id="ValidaForm" class="buttoncadastro" > Cadastrar-se </a>
                 </form>
             </div>
         </div>
@@ -91,7 +93,16 @@
             </div>
         </div>
     </div>
-    <script src="js/script.js"></script>
+    <script type="module" src="js/login.js"></script>
+        <script>
+        // ----------- CRIPTOGRAFA SENHA ----------
+        var usuSenha = document.getElementById("txtusuSenha");
+
+            function cripSenha(){
+                var senhaCrip = CryptoJS.AES.encrypt(usuSenha.value, usuSenha.value);
+                return senhaCrip.toString();
+            }
+        </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

@@ -1,15 +1,3 @@
-<?php
-     require __DIR__.'/vendor/autoload.php';
-    use Kreait\Firebase\Factory;
-
-    $factory = (new Factory)->withDatabaseUri('https://otccsb-default-rtdb.firebaseio.com');
-     
-    $database = $factory->createDatabase();
-    $livros = $database->getReference('livros')->getSnapshot();
-   
- 
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -30,41 +18,28 @@
                     </li>
                         <li class="dropdown"> <a href="#"> Filtros <img src="img/icons/seta.png" alt="" class="icon"> </a> 
                         <div class="dropdown-menu">
-                            <a href="#"> Ação </a>
-                            <a href="#"> Aventura </a>
-                            <a href="#"> Romance </a>
-                            <a href="#"> Comédia </a>
-                            <a href="#">Ficção cientifica</a>
+                            <a href="index.php?filtro=Ação"> Ação </a>
+                            <a href="index.php?filtro=Aventura"> Aventura </a>
+                            <a href="index.php?filtro=Romance"> Romance </a>
+                            <a href="index.php?filtro=Comédia"> Comédia </a>
+                            <a href="index.php?filtro=Ficção Cientifica">Ficção Cientifica</a>
                         </div>
                     </li>
                     <li> <a href="login.html"> Login <img src="img/icons/login.png" alt="" class="icon"> </a> </li>
                 </ul>
             </nav>
-        </div>
+        </div> 
     </header>
 <div class="background-fundo-all">
 <div class="container">
     <h1> Romance </h1> 
-                <div class="container-books">
-    <!--ENTENDA O FOREACH COMO UM WHILE -->                
-                    <?php foreach($livros->getValue() as $livros) : 
-                            if($livros['gênero'] == 'Romance'){ ?>
-                                <div class="estil-books">
-                                    <img src="img/livros/<?php echo $livros['nomeLivro']; ?>.jpg" alt="">
-                                    <a href="aluguel.html"> Alugar </a>
-                                </div>
-                    <?php }endforeach; ?>                
+                <div id="container-books-Romance" class="container-books">           
+                    
                 </div>
         <!-- FIM DIV  container-books -->
-    <h1> Poesia </h1>
-                <div class="container-books">
-                <?php foreach($livros->getValue() as $livros) :
-                            if($livros['gênero'] == 'Biografia'){ ?>
-                                <div class="estil-books">
-                                    <img src="img/livros/<?php echo $livros['nomeLivro']; ?>.jpg" alt="">
-                                    <a href="aluguel.html"> Alugar </a>
-                                </div>
-                    <?php }endforeach; ?>   
+    <h1>Ficção Cientifica</h1>
+                <div id="container-books-FC" class="container-books">
+
                 </div><!-- FIM DIV  container-books -->
         </div>
     </div>
@@ -98,6 +73,11 @@
             </div>
         </div>
     </div>
+
+<script type="module" src="js\consultaa.js"></script>
+
+
+<!-- 
 <script>
 // Pega Valor do ID Pesquisar
 var search = document.getElementById("txtBuscaLivro");
@@ -116,6 +96,6 @@ function searchData()
 {
     window.location = 'index.php?search='+search.value;
 }
-    </script>
+    </script> -->
 </body>
 </html>
