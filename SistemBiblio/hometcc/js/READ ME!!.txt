@@ -1,0 +1,19 @@
+14/07/2023
+    Olá amigos,
+
+    DIOGO CANEVAROLLO {
+                    Diogo, o 'script.js' (arquivo onde acontecia a mágica do botões login ) foi alterado para 
+                        'login.js'. O que mudou, foi apenas a implentação de uma função e mais um sweet alert 
+                        onde há a verificação do campo nome completo. 
+                    Vale ressaltar que, o banco de dados está no firebase, por tanto, no momento, apenas eu 
+                        tenho acesso direto, mas se precisar, passo minha conta! E mesmo sem acesso direto, é possível 
+                        realizar o cadasto de novos usuários.       
+    }
+
+    FELIPE AGUILAR {
+                    Felipe, se você ler isso, me manda menssagem!! Existe alguns detalhes que precisam ser melhorados.
+                    Há pontos no front-end que darão conflitos no back-end, por exemplo, informações de cadastro que tive 
+                        que adicionar. Lembrando que nosso BANCO DE DADOS está no Firebase e a nossa linguagem para o back, 
+                        por enquanto, é o 'JavaScript'/'Node.js'.
+                        
+    }

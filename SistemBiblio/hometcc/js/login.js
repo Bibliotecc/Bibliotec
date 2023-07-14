@@ -126,9 +126,7 @@ function VerificaContaExistente(){
       Swal.fire('Dados Já Existentes!', '', 'error')
     }
     else{
-      
       RegistreUsuario();
-      
     }
   })
 }
