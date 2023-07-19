@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Bibliotec</title>
 </head>
-<body>
+<body onload="pega()">
     <header>
         <div class="container">
             <nav class="menu">
@@ -25,7 +25,9 @@
                             <a href="index.php?filtro=Ficção Cientifica">Ficção Cientifica</a>
                         </div>
                     </li>
-                    <li> <a href="login.html"> Login <img src="img/icons/login.png" alt="" class="icon"> </a> </li>
+                    <li id="loginLI"> 
+
+                    </li>
                 </ul>
             </nav>
         </div> 
@@ -76,26 +78,66 @@
 
 <script type="module" src="js\consultaa.js"></script>
 
-
-<!-- 
 <script>
-// Pega Valor do ID Pesquisar
-var search = document.getElementById("txtBuscaLivro");
+    var li = document.getElementById('loginLI');
 
-// Verifico se a Tecla Pressionada é o ENTER
-search.addEventListener("keydown", function(event)
-{
-    if (event.key == "Enter")
-    {
-        searchData();
+      //  let signoutlink =document.getElementById('signoutlink');
+    var currentUser = "a"; 
+
+    function getUsername(){
+        let keepLoggedIn = localStorage.getItem("keepLoggedIn");
+        if(keepLoggedIn == "yes"){
+            currentUser = JSON.parse(localStorage.getItem('user'));
+        }
     }
-});
+    function Signout(){
+        localStorage.removeItem('user');
+        localStorage.removeItem('keepLoggedIn');
+        window.location = "index.php";
+    }
+    getUsername();
+        if(currentUser == "a"){
+        let a = document.createElement("a");
+            a.innerText = "Login";
+            a.href = "login.html";
+        let img = document.createElement("img");
+            img.src = "img/icons/login.png";
+            img.className = "icon";
+        a.appendChild(img);
+        li.appendChild(a);
+        
 
-// Crio a função, uma ação para o searchData()
-function searchData()
-{
-    window.location = 'index.php?search='+search.value;
-}
-    </script> -->
+        }
+        else{
+            let a = document.createElement("a");
+                a.innerText = currentUser.email;
+                a.href = "javascript:Signout()";
+
+            li.appendChild(a);
+            console.log("Nome usu");
+        }
+
+</script>
+
+<!--<script>
+    // Pega Valor do ID Pesquisar
+    var search = document.getElementById("txtBuscaLivro");
+
+    // Verifico se a Tecla Pressionada é o ENTER
+    search.addEventListener("keydown", function(event)
+    {
+        if (event.key == "Enter")
+        {
+            searchData();
+        }
+    });
+
+    // Crio a função, uma ação para o searchData()
+    function searchData()
+    {
+        window.location = 'index.php?search='+search.value;
+    }
+    </script> 
+-->
 </body>
 </html>

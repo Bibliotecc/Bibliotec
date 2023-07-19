@@ -39,7 +39,7 @@ document.querySelector('#cadastrar').addEventListener('click',()=>{
   btncolor.style.left = "105px"
   btncolor.style.width = "134px"
 });
-
+// --------------------INICIO DO CADASTRO--------------------------------------------------------------------------
 var validaForm = document.getElementById('ValidaForm');
 
 function ValidaForm(){
@@ -150,4 +150,40 @@ function RegistreUsuario(){
 }
 validaForm.addEventListener('click', ValidaForm);
 // Info.: O ValidaForm está funcionando corretamente, se houver alguma dúvida, fale com Dev. Lucas Moreira Ferreira
+// --------------------FIM DO CADASTRO-----------------------------------------------------------------------------
 
+
+// --------------------INICIO LOGIN--------------------------------------------------------------------------
+var loginForm = document.getElementById('LoginForm');
+function LoginForm(){
+  var usuNome = document.getElementById('txtusuNomeL');
+  var usuSenhaL = document.getElementById('txtusuSenhaL');
+
+  const dbRef = ref(db);
+
+  
+
+      get(child(dbRef, "usuário/"+usuNome.value)).then((snapshot)=>{
+        if(snapshot.exists()){
+          let dbpass = decPass(snapshot.val().password);
+          if(dbpass == usuSenhaL.value){
+            Login(snapshot.val());
+          }
+          else{
+            alert("Email não existe");
+          }
+        }
+        else{
+          alert("Email ou Senha invalidos");
+        }
+      });
+}
+function Login(user){
+  localStorage.setItem('keepLoggedIn', 'yes');
+  localStorage.setItem('user', JSON.stringify(user));
+  window.location ='index.php';
+
+}
+
+loginForm.addEventListener('click', LoginForm);
+// --------------------FIM LOGIN-----------------------------------------------------------------------------

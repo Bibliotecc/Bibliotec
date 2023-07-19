@@ -31,13 +31,13 @@
                     <button id="cadastrar">Cadastrar</button>
                 </div>
                 <form  id="entrar">
-                    <input type="text" placeholder="Email" required/>
-                    <input type="password" placeholder="Senha" required/>
+                    <input type="text" placeholder="Nome Completo" id="txtusuNomeL" required/>
+                    <input type="password" placeholder="Senha" id="txtusuSenhaL" required/>
                     <div class="divcheck">
                         <input type="checkbox">
                         <span>Lembrar senha</span>
                     </div>
-                    <a href="#" class="buttoncadastro"> Entrar </a>
+                    <a id="LoginForm" class="buttoncadastro"> Entrar </a>
                 </form>
                 <form id="cadastrar-se">
                     <input type="text" placeholder="Nome Completo" id="txtusuNome"/> 
@@ -48,7 +48,7 @@
                         <input type="checkbox"/>
                         <span>Aceito os termos</span>    
                     </div>
-                    <a href="#" id="ValidaForm" class="buttoncadastro" > Cadastrar-se </a>
+                    <a  id="ValidaForm" class="buttoncadastro" > Cadastrar-se </a>
                 </form>
             </div>
         </div>
@@ -89,10 +89,16 @@
         <script>
         // ----------- CRIPTOGRAFA SENHA ----------
         var usuSenha = document.getElementById("txtusuSenha");
-
+        var usuSenhaL = document.getElementById("txtusuSenhaL");
+        
             function cripSenha(){
                 var senhaCrip = CryptoJS.AES.encrypt(usuSenha.value, usuSenha.value);
                 return senhaCrip.toString();
+            }
+
+            function decPass(dbpass){
+                var senhaCrip = CryptoJS.AES.decrypt(dbpass, usuSenhaL.value);
+                return senhaCrip.toString(CryptoJS.enc.Utf8);
             }
         </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
