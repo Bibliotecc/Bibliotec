@@ -17,3 +17,7 @@
                         por enquanto, é o 'JavaScript'/'Node.js'.
                         
     }
+21/07/2023
+Nota:
+        Na pasta js, há um arquivo chamado 'repositórioJS.js' e nesse arquivo contem praticamente todo sistema backend.
+            pesquisas, buscas pela fonte desse sistema buscar lá e com seu devsenvolvedor, Lucas Moreira, este que vos fala.

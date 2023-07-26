@@ -52,7 +52,7 @@ function InserirDados(){
            if(snapshot.exists()){
                 nomeLivroP.value = snapshot.val().nomeLivro;
            }
-           else{
+           else{ 
                alert("Não há dados");
            }
 

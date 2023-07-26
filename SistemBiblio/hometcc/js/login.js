@@ -135,6 +135,7 @@ function RegistreUsuario(){
   const dbRef = ref(db);
       set(ref(db, "usuário/"+usuNome.value),
       {
+        nomeUsu: usuNome.value,
         email: usuEmail.value,
         password: cripSenha()
       })

@@ -66,13 +66,11 @@ function InserirDados(){
     window.location = "../index.php";
     const dbref = ref(db);
 
-    get(child(dbref,"livros/"+nomeLivro.value))
+    get(child(dbref,"livros/"+search.value))
     .then((snapshot)=>{
         if(snapshot.exists()){
          // FILTRO COM IF :
-         if(snapshot.val().gênero == 'Romance'){
-             nomeLivroP.value = snapshot.val().nomeLivro; 
-          }
+
         }
         else{
             alert("Não há dados");
@@ -90,12 +88,34 @@ function InserirDados(){
     var urlAtual = window.location.href;
 
     var urlClass = new URL(urlAtual);
+    var urlSearch = new URL(urlAtual);
 
+    var search = urlSearch.searchParams.get("search");
     var filtro = urlClass.searchParams.get("filtro");
 
    function AddItemToTable(nomeLivro, gênero){
     console.log(filtro);
-    if(gênero == filtro){
+    console.log(search);
+    var a;
+    if(search == null && a == 1){
+        window.location = "./index.php";
+        a = 0;
+    }
+    if(search == nomeLivro && filtro == null){
+        let divE= document.createElement("div");
+        divE.className = 'estil-books';
+    let img = document.createElement("img");
+        img.src = "img/livros/"+nomeLivro+".jpg";
+    let a = document.createElement("a");
+        a.innerText = 'Alugar';
+        a.href = "aluguel.html?alugar="+nomeLivro;
+
+    divE.appendChild(img);
+    divE.appendChild(a);
+
+    cBooks.appendChild(divE);
+    }
+    if(gênero == filtro && search == null){
     let divE= document.createElement("div");
         divE.className = 'estil-books';
     let img = document.createElement("img");
@@ -103,7 +123,6 @@ function InserirDados(){
     let a = document.createElement("a");
         a.innerText = 'Alugar';
         a.href = "aluguel.html?alugar="+nomeLivro;
- 
 
     divE.appendChild(img);
     divE.appendChild(a);

@@ -22,7 +22,7 @@
                             <a href="index.php?filtro=Aventura"> Aventura </a>
                             <a href="index.php?filtro=Romance"> Romance </a>
                             <a href="index.php?filtro=Comédia"> Comédia </a>
-                            <a href="index.php?filtro=Ficção Cientifica">Ficção Cientifica</a>
+                            <a href="index.php?filtro=Ficção Cientifica"> Ficção Cientifica </a>
                         </div>
                     </li>
                     <li id="loginLI"> 
@@ -110,7 +110,7 @@
         }
         else{
             let a = document.createElement("a");
-                a.innerText = currentUser.email;
+                a.innerText = currentUser.nomeUsu;
                 a.href = "javascript:Signout()";
 
             li.appendChild(a);
@@ -119,7 +119,7 @@
 
 </script>
 
-<!--<script>
+<script>
     // Pega Valor do ID Pesquisar
     var search = document.getElementById("txtBuscaLivro");
 
@@ -138,6 +138,5 @@
         window.location = 'index.php?search='+search.value;
     }
     </script> 
--->
 </body>
 </html>
