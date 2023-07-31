@@ -36,7 +36,7 @@
 <div class="container">
     <h1> Romance </h1> 
                 <div id="container-books-Romance" class="container-books">           
-                    
+                    <!-- LIVROS -->
                 </div>
         <!-- FIM DIV  container-books -->
     <h1>Ficção Cientifica</h1>
@@ -49,7 +49,7 @@
         <div class="container">
             <div class="container-footer">
                 <a href="#"> <img src="img/logo/facebook.png" alt=""> </a>
-                <a href="#"> <img src="img/logo/instagram.png" alt=""> </a>
+                <a href="https://www.instagram.com/bibliotecaetecolimpia/"> <img src="img/logo/instagram.png" alt=""> </a>
                 <a href="#"> <img src="img/logo/twitter.png" alt=""> </a>
             </div>
         </div>
