@@ -8,6 +8,11 @@
     background-image: url(../img/background/background.png);
 }
 
+h1 {
+    font-family: Paragrafos;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 @font-face{
     font-family: FonteTitulo;
     src: url(../font/Inter-Black.ttf);
@@ -212,7 +217,8 @@ footer{
     background-color: #fff;
     margin-top: 5%;
     padding: 2%;
-    width: 35%;
+    max-width: 720px;
+    width: auto;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0px 5px 15px 0px #a8acad;
@@ -220,11 +226,12 @@ footer{
     border-bottom: 1px solid #bebebe;
     border-right: 1px solid #bebebe;
     border-left: 1px solid #bebebe;
+    word-break: break-word;
 }
 
 .desc-livro-content{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -238,6 +245,7 @@ footer{
     flex-direction: column;
     align-items: center;
     height: 100%;
+    padding-left: 7%;
 }
 
 .espec-estil-livro a{
@@ -272,7 +280,11 @@ footer{
 .container-background-desc-espec{
     background-color: #fff;
     margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
     padding: 3% 5%;
+    max-width: 1080px;
+    width: auto;
     box-shadow: 0px 5px 15px 0px #a8acad;
     border-radius: 10px;
     border-bottom: 1px solid #bebebe;
@@ -445,4 +457,4 @@ footer{
 .swal2-popup {
     font-size: 20px;
     font-family: FonteTitulo;
-  }
+}
