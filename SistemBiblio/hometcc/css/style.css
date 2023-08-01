@@ -127,7 +127,7 @@ header{
 .container-books{
     display: flex;
     justify-content: flex-start;
-    column-gap: 6%;
+    column-gap: 7.3%;
     flex-wrap: wrap;
 }
 
