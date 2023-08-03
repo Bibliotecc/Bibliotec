@@ -468,7 +468,7 @@ footer{
 }
 
 .container-adm{
-    width: 70%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -497,4 +497,63 @@ footer{
     border-radius: 10px;
     height: 500px;
     width: 39%;
+}
+
+.btn-expandir{
+    width: 100%;
+    padding-left: 10px;
+}
+
+.btn-expandir i img{
+    width: 32px;
+    cursor: pointer;
+}
+
+.menu-lateral ul{
+    height: 100%;
+    list-style-type: none;
+}
+
+.menu-lateral ul li.item-menu:hover{
+    background: #006ce7;
+}
+
+.menu-lateral ul li.item-menu{
+    transition: .4s;
+}
+
+.menu-lateral ul li.item-menu a{
+    color: #000;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 4%;
+    font-family: Especificacoes;
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.menu-lateral ul li.item-menu a .icone > img{
+    width: 40px;
+}
+
+.menu-lateral ul li.item-menu a .txt-link{
+    margin-left: 30px;
+}
+
+nav.menu-lateral{
+    box-shadow: 4px 0 0 #000;
+    width: 80px;
+    height: 100%;
+    background-color: #fff;
+    padding: 40px 0px 40px 1%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transition: .4s;
+}
+
+nav.menu-lateral:hover{
+    width: 300px;
 }
