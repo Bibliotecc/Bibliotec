@@ -507,6 +507,7 @@ footer{
 .btn-expandir i img{
     width: 32px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .menu-lateral ul{
@@ -531,6 +532,7 @@ footer{
     display: flex;
     margin-bottom: 20px;
     align-items: center;
+    white-space: nowrap;
 }
 
 .menu-lateral ul li.item-menu a .icone > img{
