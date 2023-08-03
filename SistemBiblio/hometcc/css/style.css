@@ -126,7 +126,9 @@ header{
 
 .container-books{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    column-gap: 7.3%;
+    flex-wrap: wrap;
 }
 
 .estil-books a{
@@ -457,4 +459,103 @@ footer{
 .swal2-popup {
     font-size: 20px;
     font-family: FonteTitulo;
+}
+
+/* TELA ADM */
+
+.body-adm{
+    background-color: #1D6A96;
+}
+
+.container-adm{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.box-conteudo-adm p{
+    font-family: Especificacoes;
+}
+
+.box-conteudo-adm{
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.livros-alocados-list{
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    height: 500px;
+    width: 57%;
+}
+
+.alunos-vencimento-list{
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    height: 500px;
+    width: 39%;
+}
+
+.btn-expandir{
+    width: 100%;
+    padding-left: 10px;
+}
+
+.btn-expandir i img{
+    width: 32px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.menu-lateral ul{
+    height: 100%;
+    list-style-type: none;
+}
+
+.menu-lateral ul li.item-menu:hover{
+    background: #006ce7;
+}
+
+.menu-lateral ul li.item-menu{
+    transition: .4s;
+}
+
+.menu-lateral ul li.item-menu a{
+    color: #000;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 4%;
+    font-family: Especificacoes;
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.menu-lateral ul li.item-menu a .icone > img{
+    width: 40px;
+}
+
+.menu-lateral ul li.item-menu a .txt-link{
+    margin-left: 30px;
+}
+
+nav.menu-lateral{
+    box-shadow: 4px 0 0 #000;
+    width: 80px;
+    height: 100%;
+    background-color: #fff;
+    padding: 40px 0px 40px 1%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transition: .4s;
+}
+
+nav.menu-lateral:hover{
+    width: 300px;
 }

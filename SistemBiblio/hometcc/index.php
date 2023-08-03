@@ -26,25 +26,23 @@
                         </div>
                     </li>
                     <li id="loginLI"> 
-
                     </li>
                 </ul>
             </nav>
         </div> 
     </header>
 <div class="background-fundo-all">
-<div class="container">
-    <h1> Romance </h1> 
-                <div id="container-books-Romance" class="container-books">           
-                    <!-- LIVROS -->
-                </div>
-        <!-- FIM DIV  container-books -->
-    <h1>Ficção Cientifica</h1>
-                <div id="container-books-FC" class="container-books">
-
-                </div><!-- FIM DIV  container-books -->
+    <div class="container">
+        <h1> Romance </h1> 
+        <div id="container-books-Romance" class="container-books">           
+            <!-- LIVROS -->
         </div>
+            <!-- FIM DIV  container-books -->
+        <h1>Ficção Cientifica</h1>
+        <div id="container-books-FC" class="container-books">
+        </div><!-- FIM DIV  container-books -->
     </div>
+</div>
     <footer>
         <div class="container">
             <div class="container-footer">
