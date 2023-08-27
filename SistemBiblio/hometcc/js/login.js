@@ -182,8 +182,12 @@ function LoginForm(){
 function Login(user){
   localStorage.setItem('keepLoggedIn', 'yes');
   localStorage.setItem('user', JSON.stringify(user));
-  window.location ='index.php';
-
+  if(user.nomeUsu == "adm"){
+    window.location = 'admin/index.html';
+  }
+  else{
+    window.location ='index.html';
+  }
 }
 
 loginForm.addEventListener('click', LoginForm);
