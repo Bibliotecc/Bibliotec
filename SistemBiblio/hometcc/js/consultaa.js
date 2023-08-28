@@ -98,7 +98,7 @@ function InserirDados(){
     console.log(search);
     var a;
     if(search == null && a == 1){
-        window.location = "./index.php";
+        window.location = "./index.html";
         a = 0;
     }
     if(search == nomeLivro && filtro == null){
