@@ -32,6 +32,7 @@ function InsertLivro(newId){
 
     console.log(newId);
     alert("Fase 2: "+newId);
+
     set(ref(db, "livros/"+nomeLivro.value),{
         autor: nomeAutor.value,
         editora: editora.value,

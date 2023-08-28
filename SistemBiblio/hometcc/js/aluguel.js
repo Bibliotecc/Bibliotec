@@ -66,7 +66,7 @@ function AddItemToTable(nomeLivro, autor, lançamento, editora, idioma, numPagin
             let p = document.createElement("p");
                 p.innerText = 'Sem descrição curta no momento';
             let a = document.createElement("a");
-                a.innerText = 'Alugar';
+                a.innerText = 'Reservar';
                 a.href = 'aluguel.html?alugar='+nomeLivro+'&confirmar=pstv'; // pstv = positivo
                 
 
@@ -192,15 +192,22 @@ console.log(alugarLivro);
     get(child(dbref,"livros/"+alugarLivro))
     .then((snapshot)=>{
         if(snapshot.exists()){
-            dp = snapshot.val().numDp;
+            dp = snapshot.val().dp;
             console.log(dp);
 //ALUGANDO O LIVRO.            
             if(dp > 0){
                 var dpNova = dp - 1;
                     set(ref(db, "livros/"+alugarLivro),{
+                        autor: snapshot.val().autor,
                         dp: dpNova,
+                        editora: snapshot.val().editora,
                         gênero: snapshot.val().gênero,
-                        nomeLivro: snapshot.val().nomeLivro
+                        idLivro: snapshot.val().idLivro,
+                        idioma: snapshot.val().idioma,
+                        lançamento: snapshot.val().lançamento,
+                        nomeLivro: snapshot.val().nomeLivro,
+                        numExemplar: snapshot.val().numExemplar,
+                        numPagina: snapshot.val().numPagina
                     })  
                     .then(()=>{
                         alert("Livro alugado!!");
@@ -224,7 +231,6 @@ console.log(alugarLivro);
     });
 
  }
-
 //-------------------------------------------------------------------------------------------------------------
 // EVENTOS
 if(confirmaAluguel == "pstv"){
