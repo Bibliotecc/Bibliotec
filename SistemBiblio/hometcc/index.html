@@ -89,9 +89,12 @@
         }
     }
     function Signout(){
-        localStorage.removeItem('user');
-        localStorage.removeItem('keepLoggedIn');
-        window.location = "index.html";
+        var result = confirm("Tem certeza que deseja sair?");
+        if(result == true){
+            localStorage.removeItem('user');
+            localStorage.removeItem('keepLoggedIn');
+            window.location = "index.html";
+        }
     }
     getUsername();
         if(currentUser == "a"){
@@ -133,7 +136,7 @@
     // Crio a função, uma ação para o searchData()
     function searchData()
     {
-        window.location = 'index.php?search='+search.value;
+        window.location = 'index.html?search='+search.value;
     }
     </script> 
 </body>

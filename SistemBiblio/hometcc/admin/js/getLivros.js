@@ -46,7 +46,7 @@ function AddItemToTable(nomeLivro, gênero, dp){
   function AddAllItemToTable(livro){
    corpo.innerHTML="";
    livro.forEach(element => {
-       AddItemToTable(element.nomeLivro, element.gênero, element.dp);
+       AddItemToTable(element.nomeLivro, element.gênero, element.numExemplar);
 
    });
   }

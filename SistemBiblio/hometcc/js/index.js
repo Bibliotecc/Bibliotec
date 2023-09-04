@@ -63,7 +63,7 @@ function InserirDados(){
    }
 
    function SelecionarDadosFiltro(){
-    window.location = "../index.php";
+    window.location = "../index.html";
     const dbref = ref(db);
 
     get(child(dbref,"livros/"+search.value))
@@ -101,6 +101,7 @@ function InserirDados(){
         window.location = "./index.html";
         a = 0;
     }
+// ----------------------------------------------------- FILTRO NULA        
     if(search == nomeLivro && filtro == null){
         let divE= document.createElement("div");
         divE.className = 'estil-books';
@@ -115,8 +116,24 @@ function InserirDados(){
 
     cBooks.appendChild(divE);
     }
+// ----------------------------------------------------- PESQUISA NULA    
     if(gênero == filtro && search == null){
     let divE= document.createElement("div");
+        divE.className = 'estil-books';
+    let img = document.createElement("img");
+        img.src = "img/livros/"+nomeLivro+".jpg";
+    let a = document.createElement("a");
+        a.innerText = 'Alugar';
+        a.href = "aluguel.html?alugar="+nomeLivro;
+
+    divE.appendChild(img);
+    divE.appendChild(a);
+
+    cBooks.appendChild(divE);
+    }
+// ----------------------------------------------------- PESQUISA E FILTRO SÃO NULOS
+    if(search == null && filtro == null || search == null){
+        let divE= document.createElement("div");
         divE.className = 'estil-books';
     let img = document.createElement("img");
         img.src = "img/livros/"+nomeLivro+".jpg";
@@ -172,6 +189,3 @@ function InserirDados(){
  window.onload = GetAllDataOnce;
 
  // EVENTOS
- //insBtn.addEventListener('click', InserirDados);
- //slctBtn.addEventListener('click', SelecionarDados);
-// filtroFc.addEventListener('click', SelecionarDadosFiltro);
