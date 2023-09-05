@@ -564,14 +564,17 @@ nav.menu-lateral:hover{
 
 .container-insert{
     margin-top: 70px;
-    width: 100%;
+    max-width: 1200px;
+    width: auto;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0px 5px 15px 0px #a8acad;
+    padding: 1px;
 }
 
 .container-insert h1{
     width: max-content;
+    height: max-content;
     margin-right: auto;
     margin-left: auto;
     text-align: center;
@@ -584,8 +587,15 @@ nav.menu-lateral:hover{
 }
 
 .container-dados-insert{
-    display: flex;
+    display: inline-flex;
     justify-content: space-between;
+    column-gap: 35px;
+    padding-bottom: 50px;
+}
+
+.type1-itens{
+    display: block;
+    width: min-content;
 }
 
 .container-dados-insert input{
@@ -594,8 +604,37 @@ nav.menu-lateral:hover{
     border: none;
     background-color: #E9E9E9;
     margin-top: 25px;
+    margin-left: 35px;
     padding: 8px 200px 8px 20px;
     outline: none;
-    width: 100%;
+    max-width: 500px;
+    width: auto;
     color: #000000;
+}
+
+.container-dados-insert .type2-itens input{
+    max-width: 250px;
+    width: 100%;
+}
+
+.container-dados-insert input::placeholder{
+    width: max-content;
+}
+
+.button-cadastrar-livro{
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+
+.button-cadastrar-livro a{
+    margin-top: 10%;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #1D6A96;
+    font-family: FonteTitulo;
+    font-size: 30px;
+    padding: 10px 50px;
 }
