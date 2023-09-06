@@ -162,8 +162,6 @@ function LoginForm(){
 
   const dbRef = ref(db);
 
-  
-
       get(child(dbRef, "usuário/"+usuNome.value)).then((snapshot)=>{
         if(snapshot.exists()){
           let dbpass = decPass(snapshot.val().password);
@@ -182,7 +180,7 @@ function LoginForm(){
 function Login(user){
   localStorage.setItem('keepLoggedIn', 'yes');
   localStorage.setItem('user', JSON.stringify(user));
-  if(user.nomeUsu == "adm"){
+  if(user.usuNome == "adm"){
     window.location = 'admin/index.html';
   }
   else{

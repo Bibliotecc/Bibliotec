@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
    </head>
 <header> 
@@ -20,7 +21,7 @@
         </nav>
     </div>
 </header>
-<body> 
+<body id="corpo"> 
     <div class="background-fundo-all">
         <div class="body-login">
             <div class="container-login">
@@ -36,7 +37,7 @@
                         <input type="checkbox">
                         <span>Lembrar senha</span>
                     </div>
-                    <a id="LoginForm" class="buttoncadastro"> Entrar </a>
+                    <button id="LoginForm"><a id="LoginForm" class="buttoncadastro"> Entrar </a></button>
                 </form>
                 <form id="cadastrar-se">
                     <input type="text" placeholder="Nome Completo" id="txtusuNome"/> 
@@ -85,6 +86,7 @@
         </div>
     </div>
     <script type="module" src="js/login.js"></script>
+    <!-- CRIP PASSWORD-->
         <script>
         // ----------- CRIPTOGRAFA SENHA ----------
         var usuSenha = document.getElementById("txtusuSenha");
@@ -100,6 +102,22 @@
                 return senhaCrip.toString(CryptoJS.enc.Utf8);
             }
         </script>
+    <!-- EVENTOS ENTER-->
+ <!--   <script>   
+        $(function(){
+        
+       $('corpo').keypress(function (e) {
+       var key = e.which;
+       if(key == 13)  // the enter key code
+        {
+          $('loginForm').click();
+          return false;  
+        }
+      });
+        
+      });  
+    </script> -->
+  
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

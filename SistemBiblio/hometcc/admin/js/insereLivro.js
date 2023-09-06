@@ -16,7 +16,7 @@ const app = initializeApp(firebaseConfig);
 import {getDatabase, ref, set, get, child, onValue, update, remove, limitToLast, orderByKey, limitToFirst } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
 const db = getDatabase();
 
-// REFERÊNCIAS 
+//-------------------------------------------------------------------REFERÊNCIAS 
 var nomeAutor = document.getElementById("nomeAutor");
 var editora = document.getElementById("editora");
 var genLivro = document.getElementById("genLivro");
@@ -25,7 +25,7 @@ var lançamento = document.getElementById("lançamento");
 var nomeLivro = document.getElementById("nomeLivro");
 var numExemplar = document.getElementById("numExemplar");
 var numPagina = document.getElementById("numPagina");
-//Referencia Botão
+//-----------------------------------------------------------------Referencia Botão
 var btnCadastrar = document.getElementById("btnCadastrar");
 
 function InsertLivro(newId){
