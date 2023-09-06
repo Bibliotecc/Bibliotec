@@ -589,13 +589,17 @@ nav.menu-lateral:hover{
 .container-dados-insert{
     display: inline-flex;
     justify-content: space-between;
-    column-gap: 35px;
+    column-gap: 30px;
     padding-bottom: 50px;
 }
 
 .type1-itens{
     display: block;
     width: min-content;
+}
+
+.container-dados-insert .type1-itens input{
+    width: 470px;
 }
 
 .container-dados-insert input{
@@ -605,7 +609,7 @@ nav.menu-lateral:hover{
     background-color: #E9E9E9;
     margin-top: 25px;
     margin-left: 35px;
-    padding: 8px 200px 8px 20px;
+    padding: 8px 0px 8px 20px;
     outline: none;
     max-width: 500px;
     width: auto;
@@ -637,4 +641,9 @@ nav.menu-lateral:hover{
     font-family: FonteTitulo;
     font-size: 30px;
     padding: 10px 50px;
+}
+
+.button-cadastrar-livro a:hover{
+    background-color: #3092ca;
+    transition: .2s
 }
