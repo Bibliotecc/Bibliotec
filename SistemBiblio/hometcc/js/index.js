@@ -96,10 +96,20 @@ function InserirDados(){
    function AddItemToTable(nomeLivro, gênero){
     console.log(filtro);
     console.log(search);
-    var a;
-    if(search == null && a == 1){
-        window.location = "./index.html";
-        a = 0;
+
+    if(search == null || filtro == null){
+        let divE= document.createElement("div");
+            divE.className = 'estil-books';
+        let img = document.createElement("img");
+            img.src = "img/livros/"+nomeLivro+".jpg";
+        let a = document.createElement("a");
+            a.innerText = 'Reservar';
+            a.href = "aluguel.html?alugar="+nomeLivro;
+
+        divE.appendChild(img);
+        divE.appendChild(a);
+
+        cBooks.appendChild(divE);
     }
 // ----------------------------------------------------- FILTRO NULA        
     if(search == nomeLivro && filtro == null){
@@ -108,7 +118,7 @@ function InserirDados(){
     let img = document.createElement("img");
         img.src = "img/livros/"+nomeLivro+".jpg";
     let a = document.createElement("a");
-        a.innerText = 'Alugar';
+        a.innerText = 'Reservar';
         a.href = "aluguel.html?alugar="+nomeLivro;
 
     divE.appendChild(img);
@@ -123,7 +133,7 @@ function InserirDados(){
     let img = document.createElement("img");
         img.src = "img/livros/"+nomeLivro+".jpg";
     let a = document.createElement("a");
-        a.innerText = 'Alugar';
+        a.innerText = 'Reservar';
         a.href = "aluguel.html?alugar="+nomeLivro;
 
     divE.appendChild(img);

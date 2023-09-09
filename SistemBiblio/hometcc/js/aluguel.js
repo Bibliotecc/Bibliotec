@@ -56,6 +56,7 @@ function AddItemToTable(nomeLivro, autor, lançamento, editora, idioma, numPagin
    console.log(alugarLivro);
 //Função Adiciona Itens no local desejado
    if(alugarLivro == nomeLivro){
+
 //EXIBINDO CAPA DO LIVRO, DESCRIÇÃO E TÍTULO--------------------------------------------------------------------------
         let img = document.createElement("img");
             img.src = "img/livros/"+nomeLivro+".jpg";
@@ -146,9 +147,14 @@ function AddAllItemToTable(livro){
    cDescBooks.innerHTML="";
    livro.forEach(element => {
        AddItemToTable(element.nomeLivro, element.autor, element.lançamento, element.editora, element.idioma, element.numPagina);
-
    });
   }
+  function ChamaReservaLivro(livro){
+    cDescBooks.innerHTML="";
+    livro.forEach(element => {
+        ReservarLivro(element.nomeLivro, element.idLivro);
+    });
+   }
 //-------------------------------------------------------------------------------------------------------------  
 function GetAllDataOnce(){
     //-------- get all dados ---------
@@ -159,10 +165,10 @@ function GetAllDataOnce(){
        var livros =[];
 
        snapshot.forEach(childSnapshot => {
-
            livros.push(childSnapshot.val());
        });
-   
+
+       ChamaReservaLivro(livros);
        GetAllDataRealTime();
    });
 }
@@ -184,29 +190,45 @@ function GetAllDataRealTime(){
 //-------------------------------------------------------------------------------------------------------------
 window.onload = GetAllDataOnce;
 //-------------------------------------------------------------------------------------------------------------
-var dp;
-function ReservarLivro(){
+var numExemplarA;
+var reservaLivro;
+function ReservarLivro(nomeLivro,idLivro){
     const dbref = ref(db);
 //PRIMEIRO PEGA VALOR DE DISPONIBILIDADE (alugarLivro == nomeLivro)
 console.log(alugarLivro);
-    get(child(dbref,"livros/"+alugarLivro))
+if(alugarLivro == nomeLivro){
+console.log(idLivro);
+    get(child(dbref,"livros/"+idLivro))
     .then((snapshot)=>{
         if(snapshot.exists()){
-            dp = snapshot.val().dp;
-            console.log(dp);
+            numExemplarA = snapshot.val().numExemplar;
+            reservaLivro = snapshot.val().nomeLivro;
+            console.log(numExemplarA);
 //ALUGANDO O LIVRO.            
-            if(dp > 0){
-                var dpNova = dp - 1;
-                    set(ref(db, "livros/"+alugarLivro),{
+            if(numExemplarA > 0){
+                    // UPDATE NO USUARIO
+                    var dadosUser = JSON.parse(localStorage.getItem('user'));
+                console.log(dadosUser.nomeUsu);
+                    update(ref(db, "usuário/"+dadosUser.nomeUsu),{
+                        livroReservado: reservaLivro,
+                    })  
+                    .then(()=>{
+                        alert("Livro alugado pro usuario!!");
+                    })
+                    .catch((error)=>{
+                        alert("Erro: "+ error);
+                    });
+                var numExemplarNovo = numExemplarA - 1;
+                // UPDATE NOS LIVROS
+                    set(ref(db, "livros/"+idLivro),{
                         autor: snapshot.val().autor,
-                        dp: dpNova,
                         editora: snapshot.val().editora,
                         gênero: snapshot.val().gênero,
                         idLivro: snapshot.val().idLivro,
                         idioma: snapshot.val().idioma,
                         lançamento: snapshot.val().lançamento,
                         nomeLivro: snapshot.val().nomeLivro,
-                        numExemplar: snapshot.val().numExemplar,
+                        numExemplar: numExemplarNovo,
                         numPagina: snapshot.val().numPagina
                     })  
                     .then(()=>{
@@ -231,6 +253,7 @@ console.log(alugarLivro);
     });
 
  }
+}
 //-------------------------------------------------------------------------------------------------------------
 // EVENTOS
 if(confirmaAluguel == "pstv"){
