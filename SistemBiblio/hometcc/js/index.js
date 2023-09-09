@@ -83,15 +83,15 @@ function InserirDados(){
 }
 
    //  GET ALL 
-   var stdNo= 0;
-   var cBooks = document.getElementById('container-books-Romance');
+    var stdNo= 0;
+    var cBooks = document.getElementById('container-books-Romance');
     var urlAtual = window.location.href;
 
-    var urlClass = new URL(urlAtual);
+    var urlFiltro = new URL(urlAtual);
     var urlSearch = new URL(urlAtual);
 
     var search = urlSearch.searchParams.get("search");
-    var filtro = urlClass.searchParams.get("filtro");
+    var filtro = urlFiltro.searchParams.get("filtro");
 
    function AddItemToTable(nomeLivro, gênero){
     console.log(filtro);
@@ -131,31 +131,15 @@ function InserirDados(){
 
     cBooks.appendChild(divE);
     }
-// ----------------------------------------------------- PESQUISA E FILTRO SÃO NULOS
-    if(search == null && filtro == null || search == null){
-        let divE= document.createElement("div");
-        divE.className = 'estil-books';
-    let img = document.createElement("img");
-        img.src = "img/livros/"+nomeLivro+".jpg";
-    let a = document.createElement("a");
-        a.innerText = 'Alugar';
-        a.href = "aluguel.html?alugar="+nomeLivro;
-
-    divE.appendChild(img);
-    divE.appendChild(a);
-
-    cBooks.appendChild(divE);
-    }
    } 
    function AddAllItemToTable(livro){
     stdNo = 0;
     cBooks.innerHTML="";
     livro.forEach(element => {
         AddItemToTable(element.nomeLivro, element.gênero);
-
     });
    }
- //-------- get all dados ---------
+ //---------GET ALL DADOS-----------------
  function GetAllDataOnce(){
     const dbref = ref(db);
 
@@ -171,7 +155,7 @@ function InserirDados(){
         GetAllDataRealTime();
     });
  }
-//GET ALL TEMPO REAL
+//----------GET ALL TEMPO REAL------------
  function GetAllDataRealTime(){
     const dbref = ref(db, "livros");
 
