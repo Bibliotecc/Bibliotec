@@ -98,20 +98,20 @@ if(usuSenhaVal && usuSenha2Val && (usuSenhaVal != usuSenha2Val)) {
   return false;
 }
   
-  Swal.fire({
-    title: 'Você deseja salvar seus dados?',
-    showDenyButton: true,
-    showCancelButton: true,
-    confirmButtonText: 'Salvar',
-    denyButtonText: `Não Salvar`,
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      VerificaContaExistente();
-    } else if (result.isDenied) {
-      Swal.fire('Dados não salvos', '', 'error')
-    }
-  })
+Swal.fire({
+  title: 'Você deseja salvar seus dados?',
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: 'Salvar',
+  denyButtonText: `Não Salvar`,
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    VerificaContaExistente();
+  } else if (result.isDenied) {
+    Swal.fire('Dados não salvos', '', 'error')
+  }
+})
 
  //------- REFERENCIAS -----------
 var usuEmail = document.getElementById("txtusuEmail");
@@ -160,8 +160,28 @@ function LoginForm(){
   var usuNome = document.getElementById('txtusuNomeL');
   var usuSenhaL = document.getElementById('txtusuSenhaL');
 
-  const dbRef = ref(db);
+  var usuNomeVal = usuNome.value;
+  var usuSenhaLVal = usuSenhaL.value;
 
+if(!usuNomeVal){
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Preencha o campo nome, por favor! ',
+  })
+  return false;
+}
+
+if(!usuSenhaLVal){
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'A senha não pode ficar em branco!',
+  })
+  return false;
+}
+
+  const dbRef = ref(db);
       get(child(dbRef, "usuário/"+usuNome.value)).then((snapshot)=>{
         if(snapshot.exists()){
           let dbpass = decPass(snapshot.val().password);
@@ -169,18 +189,19 @@ function LoginForm(){
             Login(snapshot.val());
           }
           else{
-            alert("Email não existe");
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Senha Incorreta Amigo Leitor!',
+              })
           }
-        }
-        else{
-          alert("Email ou Senha invalidos");
         }
       });
 }
 function Login(user){
   localStorage.setItem('keepLoggedIn', 'yes');
   localStorage.setItem('user', JSON.stringify(user));
-  if(user.usuNome == "adm"){
+  if(user.typeUser == "admin" ){
     window.location = 'admin/index.html';
   }
   else{

@@ -89,12 +89,22 @@
         }
     }
     function Signout(){
-        var result = confirm("Tem certeza que deseja sair?");
-        if(result == true){
-            localStorage.removeItem('user');
-            localStorage.removeItem('keepLoggedIn');
-            window.location = "index.html";
-        }
+                    Swal.fire({
+                        title: 'Tem certeza que deseja sair?',
+                        showDenyButton: true,
+                        confirmButtonText: 'Quero Sair',
+                        denyButtonText: `Não Quero Sair`,
+                        }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if(result.isConfirmed) {
+                            localStorage.removeItem('user');
+                            localStorage.removeItem('keepLoggedIn');
+                            window.location = "index.html";
+                        } 
+                        else if(result.isDenied) {
+                            Swal.fire('Entendo entendo, você não vai sair!', '', 'error');
+                        }
+                    })
     }
     getUsername();
         if(currentUser == "a"){
@@ -115,7 +125,7 @@
                 a.href = "javascript:Signout()";
 
             li.appendChild(a);
-            console.log("Nome usu");
+            console.log(currentUser.typeUser);
         }
 
 </script>
@@ -139,5 +149,7 @@
         window.location = 'index.html?search='+search.value;
     }
     </script> 
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
