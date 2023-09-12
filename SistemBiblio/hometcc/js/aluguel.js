@@ -208,8 +208,8 @@ console.log(idLivro);
             if(numExemplarA > 0){
                     // UPDATE NO USUARIO
                     var dadosUser = JSON.parse(localStorage.getItem('user'));
-                console.log(dadosUser.nomeUsu);
-                    update(ref(db, "usuário/"+dadosUser.nomeUsu),{
+                console.log(dadosUser.usuNome);
+                    update(ref(db, "usuário/"+dadosUser.usuNome),{
                         livroReservado: reservaLivro,
                     })  
                     .then(()=>{

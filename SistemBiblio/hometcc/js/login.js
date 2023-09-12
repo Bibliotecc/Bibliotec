@@ -43,11 +43,18 @@ document.querySelector('#cadastrar').addEventListener('click',()=>{
 var validaForm = document.getElementById('ValidaForm');
 
 function ValidaForm(){
+  var usuNome = document.getElementById('txtusuNome');
+  var usuDataNasc = "DD-MM-AAAA";                       //document.getElementById('usuDataNasc');
+  var usuCurso = "3° Desenvolvimento de Sistemas";      //document.getElementById('usuCurso');
+  var usuRM = "04535";                                 //document.getElementById('usuRM');
+  var usuTelefone = "(17) 99123-4567";                 //document.getElementById('usuTelefone');
+  var usuEndereço = "Rua José Piton, 238 - Jardim II"; //document.getElementById('usuEndereço');
+  var usuCPF = "123.456.789-00";                       //document.getElementById('usuCPF');
   var usuEmail = document.getElementById('txtusuEmail');
   var usuSenha = document.getElementById('txtusuSenha');
   var usuSenha2 = document.getElementById('txtusuSenha2');
-  var usuNome = document.getElementById('txtusuNome');
- 
+
+
   var usuNomeVal = usuNome.value;
   var usuEmailVal = usuEmail.value;
   var usuSenhaVal = usuSenha.value;
@@ -113,10 +120,6 @@ Swal.fire({
   }
 })
 
- //------- REFERENCIAS -----------
-var usuEmail = document.getElementById("txtusuEmail");
-var usuNome = document.getElementById("txtusuNome");
-// var usuSenha = document.getElementById("txtusuSenha");
 
 //--------------- VERIFICA EXISTENCIA DE CONTA ------------
 function VerificaContaExistente(){
@@ -135,9 +138,16 @@ function RegistreUsuario(){
   const dbRef = ref(db);
       set(ref(db, "usuário/"+usuNome.value),
       {
-        nomeUsu: usuNome.value,
-        email: usuEmail.value,
-        password: cripSenha()
+        usuNome: usuNome.value,
+        usuDataNasc: usuDataNasc,
+        usuCurso: usuCurso,
+        usuRM: usuRM,
+        usuTelefone: usuTelefone,
+        usuEndereço: usuEndereço,
+        usuCPF: usuCPF,
+        usuEmail: usuEmail,
+        password: cripSenha(),
+        typeUser: "leitor"
       })
       .then(()=>{
         Swal.fire('Dados Salvos!', '', 'success')

@@ -150,7 +150,7 @@ function InserirDados(){
     });
    }
  //---------GET ALL DADOS-----------------
- function GetAllDataOnce(){
+ function GetAllDataOnce(){ 
     const dbref = ref(db);
 
     get(child(dbref, "livros"))
