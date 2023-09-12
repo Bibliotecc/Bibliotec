@@ -80,7 +80,7 @@
     var li = document.getElementById('loginLI');
 
       //  let signoutlink =document.getElementById('signoutlink');
-    var currentUser = "a"; 
+    var currentUser = "!logado"; 
 
     function getUsername(){
         let keepLoggedIn = localStorage.getItem("keepLoggedIn");
@@ -107,7 +107,7 @@
                     })
     }
     getUsername();
-        if(currentUser == "a"){
+        if(currentUser == "!logado"){
         let a = document.createElement("a");
             a.innerText = "Login";
             a.href = "login.html";

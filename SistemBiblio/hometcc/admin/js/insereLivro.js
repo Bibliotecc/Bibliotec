@@ -28,13 +28,13 @@ var numPagina = document.getElementById("numPagina");
 //-----------------------------------------------------------------Referencia Botão
 var btnCadastrar = document.getElementById("btnCadastrar");
 
-function InsertLivro(newId){
+function InsertLivro(newId, newAutorId){
 
     console.log(newId);
     alert("Fase 2: "+newId);
 
     set(ref(db, "livros/"+nomeLivro.value),{
-        autor: nomeAutor.value,
+        autor: newAutorId,
         editora: editora.value,
         gênero: genLivro.value,
         idLivro: newId,
@@ -51,9 +51,31 @@ function InsertLivro(newId){
         alert("Erro: "+ error);
     });
 
+    set(ref(db, "autores/"+newAutorId),{
+        autorNome: nomeAutor.value,      
+    })
+    .then(()=>{
+        alert("Autor Inserido na tabela Autores");
+    })
+    .catch((error)=>{
+        alert("Erro: "+ error);
+    });
+
 }
+
+function lançaInformações(){ 
+    function infoIds(newId, newAutorId)   
+
+}
+
 function GetUltimoId(){
     const dbref = ref(db);
+
+    get(child(dbref, "autores"))
+    .then((snapshot)=>{
+
+    });
+
 
     get(child(dbref, "livros"))
     .then((snapshot)=>{
@@ -63,13 +85,23 @@ function GetUltimoId(){
             livros.push(childSnapshot.val());
         });
 
-    var newId = livros[livros.length - 1].idLivro + 1;
+        var newId = livros[livros.length - 1].idLivro + 1;
+        var newAutorId = livros[livros.length - 1].autorId + 1;
+//-----------------------------------------------------------------------------
+        var autores =[];
 
-    alert("Fase 1:"+newId);
-    InsertLivro(newId);
+        snapshot.forEach(childSnapshot => {
+            autores.push(childSnapshot.val());
+        })
+
+         var idAutor = autores[autores.length - 1].autorId;
+    
+        InsertLivro(newId, newAutorId, idAutor);
 
     });
- }
+
+}
+
 
 //EVENTOS
 btnCadastrar.addEventListener('click', GetUltimoId);

@@ -94,7 +94,7 @@
         var li = document.getElementById('loginLI');
     
           //  let signoutlink =document.getElementById('signoutlink');
-        var currentUser = "a"; 
+        var currentUser = "!logado"; 
     
         function getUsername(){
             let keepLoggedIn = localStorage.getItem("keepLoggedIn");
@@ -111,7 +111,7 @@
             }
         }
         getUsername();
-            if(currentUser == "a"){
+            if(currentUser == "!logado"){
             let a = document.createElement("a");
                 a.innerText = "Login";
                 a.href = "login.html";
@@ -125,7 +125,7 @@
             }
             else{
                 let a = document.createElement("a");
-                    a.innerText = currentUser.nomeUsu;
+                    a.innerText = currentUser.usuNome;
                     a.href = "javascript:Signout()";
     
                 li.appendChild(a);
