@@ -63,16 +63,22 @@ function InsertLivro(newId, newAutorId){
 
 }
 
-function lançaInformações(){ 
-    function infoIds(newId, newAutorId)   
 
-}
 
 function GetUltimoId(){
     const dbref = ref(db);
 
     get(child(dbref, "autores"))
     .then((snapshot)=>{
+        var autores =[];
+
+        snapshot.forEach(childSnapshot => {
+            autores.push(childSnapshot.val());
+        })
+
+         var idAutor = autores[autores.length - 1].autorId;
+         var nomeAutor = autores[autores.length - 1].autorNome;
+
 
     });
 
@@ -88,18 +94,10 @@ function GetUltimoId(){
         var newId = livros[livros.length - 1].idLivro + 1;
         var newAutorId = livros[livros.length - 1].autorId + 1;
 //-----------------------------------------------------------------------------
-        var autores =[];
-
-        snapshot.forEach(childSnapshot => {
-            autores.push(childSnapshot.val());
-        })
-
-         var idAutor = autores[autores.length - 1].autorId;
     
-        InsertLivro(newId, newAutorId, idAutor);
+        
 
     });
-
 }
 
 
