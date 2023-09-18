@@ -45,14 +45,15 @@ function InsertLivro(newId, newAutorId){
         numPagina: numPagina.value        
     })
     .then(()=>{
-        alert("Dados Inseridos");
+        alert("Dados do Livro Inseridos");
     })
     .catch((error)=>{
         alert("Erro: "+ error);
     });
 
     set(ref(db, "autores/"+newAutorId),{
-        autorNome: nomeAutor.value,      
+        autorId: newAutorId,
+        autorNome: nomeAutor.value      
     })
     .then(()=>{
         alert("Autor Inserido na tabela Autores");
