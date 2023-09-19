@@ -64,25 +64,8 @@ function InsertLivro(newId, newAutorId){
 
 }
 
-
-
-function GetUltimoId(){
+function GetUltimoIdLivro(){
     const dbref = ref(db);
-
-    get(child(dbref, "autores"))
-    .then((snapshot)=>{
-        var autores =[];
-
-        snapshot.forEach(childSnapshot => {
-            autores.push(childSnapshot.val());
-        })
-
-         var idAutor = autores[autores.length - 1].autorId;
-         var nomeAutor = autores[autores.length - 1].autorNome;
-
-
-    });
-
 
     get(child(dbref, "livros"))
     .then((snapshot)=>{
@@ -93,16 +76,18 @@ function GetUltimoId(){
         });
 
         var newId = livros[livros.length - 1].idLivro + 1;
-        var newAutorId = livros[livros.length - 1].autorId + 1;
+      //  var newAutorId = livros[livros.length - 1].autorId + 1;
 //-----------------------------------------------------------------------------
     
+        return [newId];
+         
 
     });
 }
 
-function verificaAutorExiste(){
+function GetUltimoIdAutor(){
     const dbref = ref(db);
-
+    
     get(child(dbref, "autores"))
     .then((snapshot)=>{
         var autores =[];
@@ -110,24 +95,41 @@ function verificaAutorExiste(){
         snapshot.forEach(childSnapshot => {
             autores.push(childSnapshot.val());
         })
-        var nomeAutorVal = nomeAutor.value;
-        var nAutor = autores.find((element) => element.autorNome == nomeAutorVal);
-        if(nAutor){
-            console.log("Oiieee");
-            console.log(nAutor);
-        }else{
-            console.log("epa");
-            console.log(nAutor);
+
+         var idAutor = autores[autores.length - 1].autorId;
+         var nomeAutor2 = autores.map((autorNome) => autorNome.autorNome);
+         if(nomeAutor2 == nomeAutor.value){
+        console.log(nomeAutor2);
+        console.log("JA EXISTE");
         }
+        else{
+            console.log("epa");
+            console.log(nomeAutor.value);
+            console.log(nomeAutor2);
+            console.log(autores);
+        }
+        //return [idAutor];
+        
     });
+}
+
+function AvaliaAutorExistente(){
+    const [newId] = GetUltimoIdLivro();
+
+
+
+
+
+    const [idAutor] = GetUltimoIdAutor();
+
+    nomeAutor
 
 
 }
 
 
 //EVENTOS
-btnCadastrar.addEventListener('click', verificaAutorExiste);
-
+btnCadastrar.addEventListener('click', GetUltimoIdAutor);
 
 
 // NOTAS :
