@@ -28,7 +28,7 @@ var numPagina = document.getElementById("numPagina");
 //-----------------------------------------------------------------Referencia Botão
 var btnCadastrar = document.getElementById("btnCadastrar");
 
-function InsertLivro(newId, newAutorId){
+function InsertLivroAutor(newId, newAutorId){
 
     console.log(newId);
     alert("Fase 2: "+newId);
@@ -63,25 +63,34 @@ function InsertLivro(newId, newAutorId){
     });
 
 }
+function InsertLivro(newId){
 
+    console.log(newId);
+    alert("Fase 2: "+newId);
+
+    set(ref(db, "livros/"+nomeLivro.value),{
+        autor: newAutorId,
+        editora: editora.value,
+        gênero: genLivro.value,
+        idLivro: newId,
+        idioma: idioma.value,
+        lançamento: lançamento.value,
+        nomeLivro: nomeLivro.value,
+        numExemplar: numExemplar.value,
+        numPagina: numPagina.value        
+    })
+    .then(()=>{
+        alert("Dados do Livro Inseridos");
+    })
+    .catch((error)=>{
+        alert("Erro: "+ error);
+    });
+
+}
 
 
 function GetUltimoId(){
     const dbref = ref(db);
-
-    get(child(dbref, "autores"))
-    .then((snapshot)=>{
-        var autores =[];
-
-        snapshot.forEach(childSnapshot => {
-            autores.push(childSnapshot.val());
-        })
-
-         var idAutor = autores[autores.length - 1].autorId;
-         var nomeAutor = autores[autores.length - 1].autorNome;
-
-
-    });
 
 
     get(child(dbref, "livros"))
@@ -93,7 +102,6 @@ function GetUltimoId(){
         });
 
         var newId = livros[livros.length - 1].idLivro + 1;
-        var newAutorId = livros[livros.length - 1].autorId + 1;
 //-----------------------------------------------------------------------------
     
 
@@ -111,10 +119,13 @@ function verificaAutorExiste(){
             autores.push(childSnapshot.val());
         })
         var nomeAutorVal = nomeAutor.value;
+        var newIdAutor = autores[autores.length - 1].autorId + 1;
         var nAutor = autores.find((element) => element.autorNome == nomeAutorVal);
         if(nAutor){
             console.log("Oiieee");
             console.log(nAutor);
+            InsertLivro(autores)
+
         }else{
             console.log("epa");
             console.log(nAutor);
