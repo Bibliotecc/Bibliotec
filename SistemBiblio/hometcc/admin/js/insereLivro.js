@@ -89,11 +89,11 @@ function InsertLivro(newId){
 }
 
 
-function GetUltimoId(){
+function GetUltimoId(tbllivros){
     const dbref = ref(db);
 
 
-    get(child(dbref, "livros"))
+    get(child(dbref, tbllivros))
     .then((snapshot)=>{
         var livros =[];
 
@@ -102,6 +102,7 @@ function GetUltimoId(){
         });
 
         var newId = livros[livros.length - 1].idLivro + 1;
+        return newId
 //-----------------------------------------------------------------------------
     
 
@@ -120,11 +121,12 @@ function verificaAutorExiste(){
         })
         var nomeAutorVal = nomeAutor.value;
         var newIdAutor = autores[autores.length - 1].autorId + 1;
+        const ultimoId = GetUltimoId("livros");
         var nAutor = autores.find((element) => element.autorNome == nomeAutorVal);
         if(nAutor){
             console.log("Oiieee");
             console.log(nAutor);
-            InsertLivro(autores)
+            console.log(ultimoId);
 
         }else{
             console.log("epa");
