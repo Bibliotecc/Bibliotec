@@ -92,7 +92,6 @@ function InsertLivro(newId){
 function GetUltimoId(tbllivros){
     const dbref = ref(db);
 
-
     get(child(dbref, tbllivros))
     .then((snapshot)=>{
         var livros =[];
@@ -102,9 +101,10 @@ function GetUltimoId(tbllivros){
         });
 
         var newId = livros[livros.length - 1].idLivro + 1;
+        console.log(newId);
         return newId
 //-----------------------------------------------------------------------------
-    
+   
 
     });
 }
@@ -119,21 +119,20 @@ function verificaAutorExiste(){
         snapshot.forEach(childSnapshot => {
             autores.push(childSnapshot.val());
         })
+
         var nomeAutorVal = nomeAutor.value;
-        var newIdAutor = autores[autores.length - 1].autorId + 1;
         const ultimoId = GetUltimoId("livros");
         var nAutor = autores.find((element) => element.autorNome == nomeAutorVal);
+        var nAutorId = autores[autores.length - 1].autorId + 1;
         if(nAutor){
-            console.log("Oiieee");
+            console.log("Este Autor Existe! Vou linka-lo ao novo livro inserido");
             console.log(nAutor);
-            console.log(ultimoId);
-
         }else{
             console.log("epa");
-            console.log(nAutor);
+            console.log(nomeAutorVal);
+            console.log(nAutorId);
         }
     });
-
 
 }
 
