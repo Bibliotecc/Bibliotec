@@ -63,13 +63,13 @@ function InsertLivroAutor(newId, newAutorId){
     });
 
 }
-function InsertLivro(newId){
+function InsertLivro(newId, autalIdAutor){
 
     console.log(newId);
     alert("Fase 2: "+newId);
 
     set(ref(db, "livros/"+nomeLivro.value),{
-        autor: newAutorId,
+        autor: autalIdAutor,
         editora: editora.value,
         gênero: genLivro.value,
         idLivro: newId,
@@ -101,7 +101,7 @@ function GetUltimoId(tbllivros){
         });
 
         var newId = livros[livros.length - 1].idLivro + 1;
-        console.log(newId);
+        console.log("Novo ID livro:"+newId);
         return newId
 //-----------------------------------------------------------------------------
    
@@ -121,16 +121,17 @@ function verificaAutorExiste(){
         })
 
         var nomeAutorVal = nomeAutor.value;
-        const ultimoId = GetUltimoId("livros");
+        var ultimoId = GetUltimoId("livros");
         var nAutor = autores.find((element) => element.autorNome == nomeAutorVal);
         var nAutorId = autores[autores.length - 1].autorId + 1;
         if(nAutor){
             console.log("Este Autor Existe! Vou linka-lo ao novo livro inserido");
-            console.log(nAutor);
+            InsertLivro(ultimoId);
         }else{
-            console.log("epa");
-            console.log(nomeAutorVal);
-            console.log(nAutorId);
+            console.log("Novo Autor Inserido:");
+            InsertLivroAutor(nAutorId, ultimoId);
+           /* console.log(""+nomeAutorVal);
+              console.log(nAutorId); */
         }
     });
 

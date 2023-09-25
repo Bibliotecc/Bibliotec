@@ -54,6 +54,7 @@ const db = getDatabase();
 //-------------------------------------------------------------------------------------------------------------
 function AddItemToTable(nomeLivro, autor, lançamento, editora, idioma, numPagina){
    console.log(alugarLivro);
+
 //Função Adiciona Itens no local desejado
    if(alugarLivro == nomeLivro){
 
@@ -198,7 +199,7 @@ function ReservarLivro(nomeLivro,idLivro){
 console.log(alugarLivro);
 if(alugarLivro == nomeLivro){
 console.log(idLivro);
-    get(child(dbref,"livros/"+idLivro))
+    get(child(dbref,"livros/"+nomeLivro))
     .then((snapshot)=>{
         if(snapshot.exists()){
             numExemplarA = snapshot.val().numExemplar;
@@ -209,7 +210,7 @@ console.log(idLivro);
                     // UPDATE NO USUARIO
                     var dadosUser = JSON.parse(localStorage.getItem('user'));
                 console.log(dadosUser.usuNome);
-                    update(ref(db, "usuário/"+dadosUser.usuNome),{
+                /*    update(ref(db, "usuário/"+dadosUser.usuNome),{
                         livroReservado: reservaLivro,
                     })  
                     .then(()=>{
@@ -217,11 +218,12 @@ console.log(idLivro);
                     })
                     .catch((error)=>{
                         alert("Erro: "+ error);
-                    });
+                    }); */
                 var numExemplarNovo = numExemplarA - 1;
                 // UPDATE NOS LIVROS
-                    set(ref(db, "livros/"+idLivro),{
-                        autor: snapshot.val().autor,
+
+                    set(ref(db, "livros/"+nomeLivro),{
+                        autorId: snapshot.val().autorId,
                         editora: snapshot.val().editora,
                         gênero: snapshot.val().gênero,
                         idLivro: snapshot.val().idLivro,
@@ -239,14 +241,10 @@ console.log(idLivro);
                     });
             }
             else{
-                alert("Livro não disponível para locação!")
+                alert("Livro indisponível para locação!");
             }
         
         }
-        else{
-            alert("Não existe esse livro em nosso banco de dados");
-        }
-
     })
     .catch((error)=>{
         alert("Erro: "+ error);
