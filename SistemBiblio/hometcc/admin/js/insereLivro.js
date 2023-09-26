@@ -63,8 +63,8 @@ function InsertLivroAutor(newId, newAutorId){
     });
 
 }
-function InsertLivro(newId, autalIdAutor){
 
+function InsertLivro(newId, autalIdAutor){
     console.log(newId);
     alert("Fase 2: "+newId);
 
@@ -88,11 +88,10 @@ function InsertLivro(newId, autalIdAutor){
 
 }
 
-
-function GetUltimoId(tbllivros){
+function GetUltimoId(){
     const dbref = ref(db);
 
-    get(child(dbref, tbllivros))
+    get(child(dbref, "livros"))
     .then((snapshot)=>{
         var livros =[];
 
@@ -100,16 +99,14 @@ function GetUltimoId(tbllivros){
             livros.push(childSnapshot.val());
         });
 
-        var newId = livros[livros.length - 1].idLivro + 1;
-        console.log("Novo ID livro:"+newId);
-        return newId
-//-----------------------------------------------------------------------------
-   
+        var newIdLivros = livros[livros.length - 1].idLivro + 1;
+        console.log("Novo ID livro:"+newIdLivros);
+        verificaAutorExiste(newIdLivros);
 
     });
 }
 
-function verificaAutorExiste(){
+function verificaAutorExiste(newIdLivros){
     const dbref = ref(db);
 
     get(child(dbref, "autores"))
@@ -120,18 +117,21 @@ function verificaAutorExiste(){
             autores.push(childSnapshot.val());
         })
 
-        var nomeAutorVal = nomeAutor.value;
-        var ultimoId = GetUltimoId("livros");
-        var nAutor = autores.find((element) => element.autorNome == nomeAutorVal);
-        var nAutorId = autores[autores.length - 1].autorId + 1;
+        var nomeAutorVal = nomeAutor.value; // Nome do Autor
+        var nAutor = autores.find((element) => element.autorNome == nomeAutorVal); // Nome do Autor
+        var nAutorId = autores[autores.length - 1].autorId + 1; // Novo ID do Autores
+//                                 ^^^^ SOBRE O AUTOR ^^^^        
+
+        var novoIdLivro = newIdLivros; // Novo ID do Livro 
+         
+
         if(nAutor){
             console.log("Este Autor Existe! Vou linka-lo ao novo livro inserido");
-            InsertLivro(ultimoId);
+            console.log("verificaAutorExiste: "+novoIdLivro+"||"+nAutor.autorNome+"||"+nAutor.autorId);
+//            console.log("verificaAutorExiste: "+novoIdLivro+"|| Agora vou chamar a função InsertLivro()");
+            
         }else{
             console.log("Novo Autor Inserido:");
-            InsertLivroAutor(nAutorId, ultimoId);
-           /* console.log(""+nomeAutorVal);
-              console.log(nAutorId); */
         }
     });
 
@@ -139,7 +139,7 @@ function verificaAutorExiste(){
 
 
 //EVENTOS
-btnCadastrar.addEventListener('click', verificaAutorExiste);
+btnCadastrar.addEventListener('click', GetUltimoId);
 
 
 
