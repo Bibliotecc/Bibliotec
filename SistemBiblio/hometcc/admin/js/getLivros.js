@@ -22,27 +22,32 @@ import {getDatabase, ref, set, get, child, onValue,update, remove } from "https:
 
 const db = getDatabase();
   //------- Referencias -----------
-  var corpo = document.getElementById('corpo');
+  var corpo = document.getElementById('livros-alocados-list');
+  var corpoU = document.getElementById('alunos-vencimento-list');
 
 function AddItemToTable(nomeLivro, gênero, dp){
 
     let hr = document.createElement("hr");
     let nL = document.createElement("p");
         nL.innerText = nomeLivro;
-    let gen = document.createElement("p");
-        gen.innerText = gênero;
-    let disponivel = document.createElement("p");
-        disponivel.innerText = dp;
-
 
 
     corpo.appendChild(hr);              // Linha           //
     corpo.appendChild(nL);             // Nome Livro      //
-    corpo.appendChild(gen);           // Gênero          //
-    corpo.appendChild(disponivel);   // Disponibilidade //
+  }
+  
+function UsuTable(nomeDoUsu){
+
+    let hr = document.createElement("hr");
+    let nL = document.createElement("p");
+        nL.innerText = nomeDoUsu;
+
+    corpoU.appendChild(hr);              // Linha           //
+    corpoU.appendChild(nL);             // Nome Livro      //
+  }
+  
 
 
-  } 
   function AddAllItemToTable(livro){
    corpo.innerHTML="";
    livro.forEach(element => {
@@ -50,6 +55,13 @@ function AddItemToTable(nomeLivro, gênero, dp){
 
    });
   }
+  function AddTableUsu(usuario){
+    corpo.innerHTML="";
+    usuario.forEach(element => {
+        UsuTable(element.usuNome);
+ 
+    });
+   }
 //-------- get all dados ---------
 function GetAllDataOnce(){
    const dbref = ref(db);
@@ -78,7 +90,17 @@ function GetAllDataRealTime(){
        });
 
        AddAllItemToTable(livros);
-   }) 
+   })
+   const dbrefU = ref(db, "usuário");
+   onValue(dbrefU,(snapshot)=>{
+    var usuario =[];
+    snapshot.forEach(childSnapshot => {
+
+        usuario.push(childSnapshot.val());
+    });
+
+    AddTableUsu(usuario);
+}) 
 }
 
 window.onload = GetAllDataOnce;
