@@ -31,10 +31,11 @@ var btnCadastrar = document.getElementById("btnCadastrar");
 function InsertLivroAutor(newId, newAutorId){
 
     console.log(newId);
-    alert("Fase 2: "+newId);
+    alert("InsertLivroAutor (ID LIVRO NOVO): "+newId);
+    alert("InsertLivroAutor (ID AUTOR NOVO): "+newAutorId);
 
     set(ref(db, "livros/"+nomeLivro.value),{
-        autor: newAutorId,
+        autorId: newAutorId,
         editora: editora.value,
         gênero: genLivro.value,
         idLivro: newId,
@@ -66,10 +67,11 @@ function InsertLivroAutor(newId, newAutorId){
 
 function InsertLivro(newId, autalIdAutor){
     console.log(newId);
-    alert("Fase 2: "+newId);
+    alert("Fase InsertLivro (ID NOVO): "+newId);
+    alert("Fase InsertLivro (ID ATUAL DO AUTOR): "+autalIdAutor);
 
     set(ref(db, "livros/"+nomeLivro.value),{
-        autor: autalIdAutor,
+        autorId: autalIdAutor,
         editora: editora.value,
         gênero: genLivro.value,
         idLivro: newId,
@@ -119,19 +121,15 @@ function verificaAutorExiste(newIdLivros){
 
         var nomeAutorVal = nomeAutor.value; // Nome do Autor
         var nAutor = autores.find((element) => element.autorNome == nomeAutorVal); // Nome do Autor
-        var nAutorId = autores[autores.length - 1].autorId + 1; // Novo ID do Autores
-//                                 ^^^^ SOBRE O AUTOR ^^^^        
+        var novoAutorId = autores[autores.length - 1].autorId + 1; // Novo ID do Autores
+//                                 ^^^^ SOBRE O AUTOR ^^^^
 
         var novoIdLivro = newIdLivros; // Novo ID do Livro 
-         
 
         if(nAutor){
-            console.log("Este Autor Existe! Vou linka-lo ao novo livro inserido");
-            console.log("verificaAutorExiste: "+novoIdLivro+"||"+nAutor.autorNome+"||"+nAutor.autorId);
-//            console.log("verificaAutorExiste: "+novoIdLivro+"|| Agora vou chamar a função InsertLivro()");
-            
+            InsertLivro(novoIdLivro, nAutor.autorId);
         }else{
-            console.log("Novo Autor Inserido:");
+            InsertLivroAutor(novoIdLivro, novoAutorId);
         }
     });
 
