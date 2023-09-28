@@ -121,7 +121,7 @@ function verificaAutorExiste(newIdLivros){
 
         var nomeAutorVal = nomeAutor.value; // Nome do Autor
         var nAutor = autores.find((element) => element.autorNome == nomeAutorVal); // Nome do Autor
-        var novoAutorId = autores[autores.length - 1].autorId + 1; // Novo ID do Autores
+        var novoAutorId = autores[autores.length -1].autorId + 1; // Novo ID do Autores
 //                                 ^^^^ SOBRE O AUTOR ^^^^
 
         var novoIdLivro = newIdLivros; // Novo ID do Livro 
@@ -146,5 +146,9 @@ btnCadastrar.addEventListener('click', GetUltimoId);
     22/08/2023 ---- 20h36 
             Esse arquivo está funcionando corretamente! É necessário ajustar detalhes. 
 
-    Dev. Lucas Moreira :>        
+    Dev. Lucas Moreira :>
+    27/09/2023 ---- 22h50 
+            Esse arquivo está funcionando corretamente! É necessário ajustar detalhes das informações do livro. 
+
+    Dev. Lucas Moreira :>          
 */

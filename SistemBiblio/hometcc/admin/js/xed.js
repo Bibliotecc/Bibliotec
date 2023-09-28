@@ -23,55 +23,43 @@ import {getDatabase, ref, set, get, child, onValue,update, remove } from "https:
 const db = getDatabase();
   //------- Referencias -----------
   var corpo = document.getElementById('livros-alocados-list');
+  var corpoU = document.getElementById('alunos-vencimento-list');
 
-function AddItemToTable(nomeLivro, gênero, dp){
+  
+function UsuTable(nomeDoUsu){
 
     let hr = document.createElement("hr");
     let nL = document.createElement("p");
-        nL.innerText = nomeLivro;
+        nL.innerText = nomeDoUsu;
 
-
-    corpo.appendChild(hr);              // Linha           //
-    corpo.appendChild(nL);             // Nome Livro      //
+    corpoU.appendChild(hr);              // Linha           //
+    corpoU.appendChild(nL);             // Nome Livro      //
   }
+  
 
-  function AddAllItemToTable(livro){
-   corpo.innerHTML="";
-   livro.forEach(element => {
-       AddItemToTable(element.nomeLivro, element.gênero, element.numExemplar);
-
-   });
-  }
-
+  function AddTableUsu(usuario){
+    corpoU.innerHTML="";
+    usuario.forEach(element => {
+        UsuTable(element.usuNome);
+ 
+    });
+   }
 //-------- get all dados ---------
 function GetAllDataOnce(){
-   const dbref = ref(db);
-
-   get(child(dbref, "livros"))
-   .then((snapshot)=>{
-       var livros =[];
-
-       snapshot.forEach(childSnapshot => {
-
-           livros.push(childSnapshot.val());
-       });
-   
        GetAllDataRealTime();
-   });
 }
 //GET ALL TEMPO REAL
 function GetAllDataRealTime(){
-   const dbref = ref(db, "livros");
+   const dbrefU = ref(db, "usuário");
+   onValue(dbrefU,(snapshot)=>{
+    var usuario =[];
+    snapshot.forEach(childSnapshot => {
 
-   onValue(dbref,(snapshot)=>{
-       var livros =[];
-       snapshot.forEach(childSnapshot => {
+        usuario.push(childSnapshot.val());
+    });
 
-           livros.push(childSnapshot.val());
-       });
-
-       AddAllItemToTable(livros);
-   })
+    AddTableUsu(usuario);
+}) 
 }
 
 window.onload = GetAllDataOnce;

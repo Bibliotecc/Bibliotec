@@ -93,12 +93,15 @@ function InserirDados(){
 
     var search = urlSearch.searchParams.get("search");
     var filtro = urlFiltro.searchParams.get("filtro");
+    var urlArray = urlAtual.split('/');
+    var ultimaBarra = urlArray[urlArray.length - 1];
 
    function AddItemToTable(nomeLivro, gênero){
     console.log(filtro);
     console.log(search);
+    console.log(ultimaBarra);
 
- /*   if(search == null || filtro == null){
+    if(ultimaBarra == "index.html" || search == ""){
         let divE= document.createElement("div");
             divE.className = 'estil-books';
         let img = document.createElement("img");
@@ -110,8 +113,13 @@ function InserirDados(){
         divE.appendChild(img);
         divE.appendChild(a);
 
-        cBooks.appendChild(divE);
-    }*/
+        if(gênero == "Romance"){
+            cBooks.appendChild(divE);
+        }
+        if(gênero == "Ficção Cientifica"){
+            cBooksFc.appendChild(divE);
+        }
+    }
 // ----------------------------------------------------- FILTRO NULA        
     if(search == nomeLivro && filtro == null){
         let divE= document.createElement("div");
