@@ -84,6 +84,7 @@ function InserirDados(){
 
    //  GET ALL 
     var stdNo= 0;
+    var cntrPrin = document.getElementById('container-principal');
     var cBooks = document.getElementById('container-books-Romance');
     var cBooksFc = document.getElementById('container-books-FC');
     var urlAtual = window.location.href;
@@ -101,7 +102,7 @@ function InserirDados(){
     console.log(search);
     console.log(ultimaBarra);
 
-    if(ultimaBarra == "index.html" || search == ""){
+    if(ultimaBarra == "index.html" || ultimaBarra == "" ||search == ""){
         let divE= document.createElement("div");
             divE.className = 'estil-books';
         let img = document.createElement("img");
@@ -112,7 +113,6 @@ function InserirDados(){
 
         divE.appendChild(img);
         divE.appendChild(a);
-
         if(gênero == "Romance"){
             cBooks.appendChild(divE);
         }
@@ -153,7 +153,7 @@ function InserirDados(){
     divE.appendChild(img);
     divE.appendChild(a);
     if(gênero == "Romance"){
-    cBooks.appendChild(divE);
+        cBooks.appendChild(divE);
     }
     if(gênero == "Ficção Cientifica"){
         cBooksFc.appendChild(divE);
