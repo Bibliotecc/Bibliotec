@@ -27,7 +27,14 @@ var numExemplar = document.getElementById("numExemplar");
 var numPagina = document.getElementById("numPagina");
 //-----------------------------------------------------------------Referencia Botão
 var btnCadastrar = document.getElementById("btnCadastrar");
-
+//-------------------------------------------
+function limparString(txt) {
+    return txt.toLowerCase().replace(/[^\w\s]/gi, '');
+}
+function PadraoValue(texto){
+// Limpa a string do texto
+return textoPadrao = limparString(texto);
+}
 function InsertLivroAutor(newId, newAutorId){
 
     console.log(newId);
@@ -69,8 +76,8 @@ function InsertLivro(newId, autalIdAutor){
     console.log(newId);
     alert("Fase InsertLivro (ID NOVO): "+newId);
     alert("Fase InsertLivro (ID ATUAL DO AUTOR): "+autalIdAutor);
-
-    set(ref(db, "livros/"+nomeLivro.value),{
+    var nomeLivroReg = PadraoValue(nomeLivro.value);
+    set(ref(db, "livros/"+nomeLivroReg.value),{
         autorId: autalIdAutor,
         editora: editora.value,
         gênero: genLivro.value,
@@ -138,7 +145,7 @@ function verificaAutorExiste(newIdLivros){
 
 //EVENTOS
 btnCadastrar.addEventListener('click', GetUltimoId);
-
+//btnCadastrar.addEventListener('click', tst);
 
 
 // NOTAS :

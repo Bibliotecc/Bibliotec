@@ -197,7 +197,7 @@ function InserirDados(){
         AddAllItemToTable(livros);
     }) 
  }
- 
+
  window.onload = GetAllDataOnce;
 
  // EVENTOS
