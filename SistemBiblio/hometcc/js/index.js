@@ -197,7 +197,11 @@ function InserirDados(){
         AddAllItemToTable(livros);
     }) 
  }
+function reloadCache(){
+    window.location.reload();
+}
 
- window.onload = GetAllDataOnce;
 
- // EVENTOS
+// EVENTOS
+setInterval(reloadCache, 30 * 1000);
+window.onload = GetAllDataOnce;

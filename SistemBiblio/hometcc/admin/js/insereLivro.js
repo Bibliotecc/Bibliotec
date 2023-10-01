@@ -29,9 +29,10 @@ var numPagina = document.getElementById("numPagina");
 var btnCadastrar = document.getElementById("btnCadastrar");
 //-------------------------------------------
 function limparString(txt) {
-    return txt.toLowerCase().replace(/[^\w\s]/gi, '');
+    return txt.toLowerCase().replace(/[^\w]/gi, '');
 }
 function PadraoValue(texto){
+var textoPadrao;
 // Limpa a string do texto
 return textoPadrao = limparString(texto);
 }
@@ -77,7 +78,8 @@ function InsertLivro(newId, autalIdAutor){
     alert("Fase InsertLivro (ID NOVO): "+newId);
     alert("Fase InsertLivro (ID ATUAL DO AUTOR): "+autalIdAutor);
     var nomeLivroReg = PadraoValue(nomeLivro.value);
-    set(ref(db, "livros/"+nomeLivroReg.value),{
+    console.log(nomeLivroReg);
+    /*set(ref(db, "livros/"+nomeLivroReg.value),{
         autorId: autalIdAutor,
         editora: editora.value,
         gênero: genLivro.value,
@@ -93,7 +95,7 @@ function InsertLivro(newId, autalIdAutor){
     })
     .catch((error)=>{
         alert("Erro: "+ error);
-    });
+    }); */
 
 }
 
