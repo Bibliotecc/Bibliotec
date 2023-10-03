@@ -544,7 +544,7 @@ footer{
 }
 
 nav.menu-lateral{
-    box-shadow: 4px 0 0 #000;
+    box-shadow: 4px 0 0  #ffffff;
     width: 80px;
     height: 100%;
     background-color: #fff;
@@ -558,4 +558,9 @@ nav.menu-lateral{
 
 nav.menu-lateral:hover{
     width: 300px;
+}           
+
+.lista-de-nomes{
+    height: 100%;
+    
 }
