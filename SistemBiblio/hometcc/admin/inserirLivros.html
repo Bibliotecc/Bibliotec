@@ -4,35 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inserindo Livro</title>
+    <link rel="stylesheet" href=".././css/style.css">
 </head>
 <body>
-            <label>Autor:</label>
-            <input type="text" id="nomeAutor"/> 
-<br>
-            <label>Nome do Livro:</label>
-            <input type="text" id="nomeLivro"/>
-<br>
-            <label>Gênero:</label>
-            <input type="text" id="genLivro"/>
-<br>
-            <label>Idioma:</label>
-            <input type="text" id="idioma"/>
-<br>                
-            <label>Data de Lançamento:</label>
-            <input type="text" id="lançamento"/> 
-<br>
-            <label>Número de Exemplar:</label>
-            <input type="text" id="numExemplar"/>
-<br>
-            <label>Número de Páginas</label>
-            <input type="text" id="numPagina"/>
-<br>
-            <label>Editora:</label>
-            <input type="text" id="editora"/>
-
-<br>
-            <button id="btnCadastrar">Cadastrar</button>
-            
+    <header>
+        <div class="container">
+            <nav class="menu">
+                <ul>
+                    <li> <a href="index.html"> <img src=".././img/logo/logotcc.png" alt="logotcc"> </a> </li>
+                    <li> 
+                        <input type="text" name="txtBuscaLivro" id="txtBuscaLivro" placeholder="O que você esta procurando?"> </li>
+                    <li> <a href="../admin/index.html"> Administradora <img src="../img/icons/login.png" alt="" class="icon"> </a> </li>
+                </ul>
+            </nav> 
+        </div>
+    </header>
+    <div class="background-fundo-all">
+        <div class="container">
+            <div class="container-insert">
+                <div class="cont-insert">
+                    <h1> Especificações </h1>
+                    <div class="container-dados-insert">
+                        <div class="type1-itens">
+                            <input type="text" name="" id="nomeLivro" placeholder="Nome">
+                            <input type="text" name="" id="nomeAutor" placeholder="Autor">
+                            <input type="text" name="" id="editora" placeholder="Editora">
+                            <input type="text" name="" id="" placeholder="Assunto">
+                            <input type="text" name="" id="" placeholder="Nome da Coleção">
+                            <input type="text" name="" id="idioma" placeholder="Idioma">
+                            <input type="text" name="" id="" placeholder="Tipo do item">
+                        </div>
+                        <div class="type2-itens">
+                            <input type="text" name="" id="" placeholder="Ano da Publicação">
+                            <input type="text" name="" id="" placeholder="Edição">
+                            <input type="text" name="" id="" placeholder="n° Exemplar">
+                            <input type="text" name="" id="" placeholder="n° do Tombo">
+                            <input type="text" name="" id="" placeholder="CDD">
+                            <input type="text" name="" id="" placeholder="Cutter">
+                            <input type="text" name="" id="" placeholder="ISBN">
+                            <input type="text" name="" id="" placeholder="Data de Aquisição">
+                            <input type="text" name="" id="" placeholder="n° de Páginas">
+                            <input type="text" name="" id="" placeholder="Volume">
+                            <div class="button-cadastrar-livro">
+                                <a href="#">Cadastrar</a>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="container-footer">
+                <a href="#"> <img src="../img/logo/facebook.png" alt=""> </a>
+                <a href="#"> <img src="../img/logo/instagram.png" alt=""> </a>
+                <a href="#"> <img src="../img/logo/twitter.png" alt=""> </a>
+            </div>
+        </div>
+    </footer>
+    <div class="end-page">
+        <div class="container">
+            <div class="container-desc">
+                <div class="estil-titulo-endpage">
+                    <h2> Criadores do Site </h2>
+                    <h2> 3º Desenvolvimento de Sistemas </h2>
+                </div>
+                <div class="estil-endpage">
+                    <p>Bruno</p>
+                    <p>Diogo</p>
+                    <p>Felipe</p>
+                    <p>Gabriella</p>
+                    <p>Livia</p>
+                    <p>Lucas</p>
+                    <p>Lucca</p>
+                    <p>Pedro</p>    
+                    <p>Renzo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
     <script type="module" src="js/insereLivro.js"></script>
 </body>
 </html>

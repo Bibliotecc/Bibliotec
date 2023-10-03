@@ -544,7 +544,6 @@ footer{
 }
 
 nav.menu-lateral{
-    box-shadow: 4px 0 0 #000;
     width: 80px;
     height: 100%;
     background-color: #fff;
@@ -558,4 +557,92 @@ nav.menu-lateral{
 
 nav.menu-lateral:hover{
     width: 300px;
+}
+
+/* TELA INSERT LIVROS ADM */
+
+.container-insert{  
+    margin-top: 70px;
+    min-width: 1150px;
+    width: auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px 0px #a8acad;
+    padding: 1px;
+}
+
+.container-insert h1{
+    width: max-content;
+    height: max-content;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    font-family: Especificacoes;
+    background-color: #1D6A96;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 30px;
+    padding: 8px 20px;
+}
+
+.container-dados-insert{
+    display: inline-flex;
+    justify-content: space-between;
+    column-gap: 30px;
+    padding-bottom: 50px;
+}
+
+.type1-itens{
+    display: block;
+    width: min-content;
+}
+
+.container-dados-insert .type1-itens input{
+    width: 470px;
+}
+
+.container-dados-insert input{
+    font-family: Paragrafos;
+    font-size: 17px;
+    border: none;
+    background-color: #E9E9E9;
+    margin-top: 25px;
+    margin-left: 35px;
+    padding: 8px 0px 8px 20px;
+    outline: none;
+    max-width: 500px;
+    width: auto;
+    color: #000000;
+}
+
+.container-dados-insert .type2-itens input{
+    max-width: 250px;
+    width: 100%;
+}
+
+.container-dados-insert input::placeholder{
+    width: max-content;
+}
+
+.button-cadastrar-livro{
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+
+.button-cadastrar-livro a{
+    margin-top: 10%;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #1D6A96;
+    font-family: FonteTitulo;
+    font-size: 30px;
+    padding: 10px 50px;
+}
+
+.button-cadastrar-livro a:hover{
+    background-color: #3092ca;
+    transition: .2s
 }
