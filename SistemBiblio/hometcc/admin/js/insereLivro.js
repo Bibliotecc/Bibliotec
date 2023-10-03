@@ -79,14 +79,14 @@ function InsertLivro(newId, autalIdAutor){
     alert("Fase InsertLivro (ID ATUAL DO AUTOR): "+autalIdAutor);
     var nomeLivroReg = PadraoValue(nomeLivro.value);
     console.log(nomeLivroReg);
-    set(ref(db, "livros/"+nomeLivroReg),{
+    set(ref(db, "livros/"+nomeLivro.value),{
         autorId: autalIdAutor,
         editora: editora.value,
         gênero: genLivro.value,
         idLivro: newId,
         idioma: idioma.value,
         lançamento: lançamento.value,
-        nomeLivro: nomeLivroReg,
+        nomeLivro: nomeLivro.value,
         numExemplar: numExemplar.value,
         numPagina: numPagina.value        
     })

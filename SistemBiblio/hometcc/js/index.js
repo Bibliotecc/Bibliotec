@@ -61,7 +61,6 @@ function SelecionarDados() {
             alert("Erro: " + error);
         })
 }
-
 function SelecionarDadosFiltro() {
     window.location = "../index.html";
     const dbref = ref(db);
@@ -91,40 +90,31 @@ var urlAtual = window.location.href;
 
 var urlFiltro = new URL(urlAtual);
 var urlSearch = new URL(urlAtual);
-
 var search = urlSearch.searchParams.get("search");
 var filtro = urlFiltro.searchParams.get("filtro");
 var urlArray = urlAtual.split('/');
 var ultimaBarra = urlArray[urlArray.length - 1];
 //
-var condiçãoUltb = "ultimaBarra == 'index.html' || ultimaBarra == '' || search == '' ";
 //
-GetAllDataOnce();
-function avaliaNomeLivro(livro) {
-    let encontrouEquivalente = false;
-    
-    var livroExist = livro.find((element) => element.nomeLivro == search.value);
-        if (livroExist && !encontrouEquivalente) {
-            console.log(livroExist);
-            alert("NAO EXISTE");
-            encontrouEquivalente = true;
-        }
-}
 function AddItemToTable(nomeLivro, gênero) {
     console.log(filtro);
     console.log(search);
     console.log(ultimaBarra);
+    var searchSimilar = trataSearch(search);
+        searchSimilar = searchSimilar.join(" ");
 
+        var nomeLivroSimilar = similaLivro(nomeLivro);
+            nomeLivroSimilar = nomeLivroSimilar.join(" ");
     // -------------------------------------------------------- SEM PESQUISA E FILTRO
     if (ultimaBarra == 'index.html' || ultimaBarra == '' || search == '') {
-        
+
         let divE = document.createElement("div");
-            divE.className = 'estil-books';
+        divE.className = 'estil-books';
         let img = document.createElement("img");
-            img.src = "img/livros/" + nomeLivro + ".jpg";
+        img.src = "img/livros/" + nomeLivro + ".jpg";
         let a = document.createElement("a");
-            a.innerText = 'Reservar';
-            a.href = "aluguel.html?alugar=" + nomeLivro;
+        a.innerText = 'Reservar';
+        a.href = "aluguel.html?alugar=" + nomeLivro;
 
         divE.appendChild(img);
         divE.appendChild(a);
@@ -136,7 +126,7 @@ function AddItemToTable(nomeLivro, gênero) {
         }
     }
     // ----------------------------------------------------- PESQUISA POR NOME
-    if (search == nomeLivro && filtro == null) {
+    if (search == nomeLivro || searchSimilar == nomeLivroSimilar && filtro == null) {
         let divE = document.createElement("div");
         divE.className = 'estil-books';
         let img = document.createElement("img");
@@ -192,7 +182,7 @@ function GetAllDataOnce() {
 
                 livros.push(childSnapshot.val());
             });
-            avaliaNomeLivro(livros);
+            GetAllDataRealTime();
         });
 }
 //----------GET ALL TEMPO REAL------------
@@ -214,5 +204,31 @@ function reloadCache() {
 
 
 // EVENTOS
-setInterval(reloadCache, 30 * 1000);
-window.onload = GetAllDataRealTime;
+setInterval(reloadCache, 60 * 1000);
+window.onload = GetAllDataOnce;
+
+// TRATAMENTOS
+// TRATAMENTO DO SEARCH
+function trataSearch(search) {
+    var primeiraLetra = search.substring(0, 1);
+    var restoFrase = search.substring(1);
+        restoFrase = restoFrase.replace(/c/gi, 'ç');
+        restoFrase = restoFrase.replace(/a/gi, 'ã');
+    var searchSimilar = primeiraLetra + restoFrase;
+
+    var palavras = searchSimilar.split(" ");
+    for (let i = 0; i < palavras.length; i++) {
+        palavras[i] = palavras[i][0].toUpperCase() + palavras[i].substr(1);
+    }
+    console.log("trataSearch: " + palavras);
+    return palavras;
+}
+// TARATAMENTO PARA O NOME LIVROS
+function similaLivro(nomeLivro){
+    var nomeLivroSimilar = nomeLivro.split(" ");
+            for (let i = 0; i < nomeLivroSimilar.length; i++) {
+                nomeLivroSimilar[i] = nomeLivroSimilar[i][0].toUpperCase() + nomeLivroSimilar[i].substr(1);
+            }
+    console.log("similaLivro: "+nomeLivroSimilar);
+    return nomeLivroSimilar;
+}
