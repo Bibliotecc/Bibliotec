@@ -561,9 +561,9 @@ nav.menu-lateral:hover{
 
 /* TELA INSERT LIVROS ADM */
 
-.container-insert{
+.container-insert{  
     margin-top: 70px;
-    max-width: 1200px;
+    min-width: 1150px;
     width: auto;
     background-color: #ffffff;
     border-radius: 10px;
