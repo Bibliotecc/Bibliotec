@@ -647,6 +647,7 @@ nav.menu-lateral:hover{
     background-color: #3092ca;
     transition: .2s
 th, td {
+    font-family: Paragrafos;
     padding: 12px;
     text-align: center; 
     vertical-align: middle; 
