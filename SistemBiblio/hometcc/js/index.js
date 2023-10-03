@@ -101,10 +101,9 @@ function AddItemToTable(nomeLivro, gênero) {
     console.log(search);
     console.log(ultimaBarra);
     var searchSimilar = trataSearch(search);
-        searchSimilar = searchSimilar.join(" ");
-
-        var nomeLivroSimilar = similaLivro(nomeLivro);
-            nomeLivroSimilar = nomeLivroSimilar.join(" ");
+        
+    var nomeLivroSimilar = similaLivro(nomeLivro);
+            
     // -------------------------------------------------------- SEM PESQUISA E FILTRO
     if (ultimaBarra == 'index.html' || ultimaBarra == '' || search == '') {
 
@@ -209,26 +208,39 @@ window.onload = GetAllDataOnce;
 
 // TRATAMENTOS
 // TRATAMENTO DO SEARCH
-function trataSearch(search) {
-    var primeiraLetra = search.substring(0, 1);
-    var restoFrase = search.substring(1);
-        restoFrase = restoFrase.replace(/c/gi, 'ç');
-        restoFrase = restoFrase.replace(/a/gi, 'ã');
-    var searchSimilar = primeiraLetra + restoFrase;
+function trataSearch(search){
+    if(!search){
+        console.log("Nada Pesquisado!");
+    }
+    else{
+    var searchSimilar = search;
 
     var palavras = searchSimilar.split(" ");
     for (let i = 0; i < palavras.length; i++) {
         palavras[i] = palavras[i][0].toUpperCase() + palavras[i].substr(1);
     }
+
+        palavras = palavras.join(" ");
+        palavras = palavras.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     console.log("trataSearch: " + palavras);
     return palavras;
+    }
 }
 // TARATAMENTO PARA O NOME LIVROS
 function similaLivro(nomeLivro){
     var nomeLivroSimilar = nomeLivro.split(" ");
             for (let i = 0; i < nomeLivroSimilar.length; i++) {
                 nomeLivroSimilar[i] = nomeLivroSimilar[i][0].toUpperCase() + nomeLivroSimilar[i].substr(1);
-            }
+            } 
+            console.log(nomeLivroSimilar);
+            nomeLivroSimilar = nomeLivroSimilar.join(" ");
+            nomeLivroSimilar = nomeLivroSimilar.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     console.log("similaLivro: "+nomeLivroSimilar);
+   
     return nomeLivroSimilar;
+}
+
+function buscaVarios(search){
+
+
 }
