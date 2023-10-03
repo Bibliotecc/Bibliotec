@@ -585,6 +585,7 @@ table {
 }
 
 th, td {
+    font-family: Paragrafos;
     padding: 12px;
     text-align: center; 
     vertical-align: middle; 
