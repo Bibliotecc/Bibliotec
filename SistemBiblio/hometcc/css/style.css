@@ -646,4 +646,9 @@ nav.menu-lateral:hover{
 .button-cadastrar-livro a:hover{
     background-color: #3092ca;
     transition: .2s
+th, td {
+    padding: 12px;
+    text-align: center; 
+    vertical-align: middle; 
+    border-bottom: 1px solid #ddd;
 }
