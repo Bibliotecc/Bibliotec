@@ -645,7 +645,32 @@ nav.menu-lateral:hover{
 
 .button-cadastrar-livro a:hover{
     background-color: #3092ca;
-    transition: .2s
+    transition: .2s}
+    
+.container-adm-livros .container-livros .box-conteudo-livros ul {
+    display: inline-block; 
+    margin-right: 20px; 
+    align-items: center;
+}
+.container-adm-livros{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 70px;
+}
+.container-livros{
+    background-color: #fff;
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
 th, td {
     font-family: Paragrafos;
     padding: 12px;
