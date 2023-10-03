@@ -646,8 +646,6 @@ nav.menu-lateral:hover{
 .button-cadastrar-livro a:hover{
     background-color: #3092ca;
     transition: .2s}
-    
-}           
 
 .container-adm-livros .container-livros .box-conteudo-livros ul {
     display: inline-block; 
