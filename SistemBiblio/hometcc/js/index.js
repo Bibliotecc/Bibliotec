@@ -159,6 +159,7 @@ function AddItemToTable(nomeLivro, gênero) {
         a.href = "aluguel.html?alugar=" + nomeLivro;
 
         divE.appendChild(img);
+        
         divE.appendChild(a);
         if (gênero == "Romance") {
             cBooks.appendChild(divE);
@@ -247,20 +248,23 @@ function similaLivro(nomeLivro){
 function correspondeString(searchSimilar, nomeLivroSimilar){
     console.log(nomeLivroSimilar);
     var corresponde = 0
-    for (let i = 0; i < nomeLivroSimilar.length || i < searchSimilar.length; i++) {
-        console.log(nomeLivroSimilar[i]);
-        console.log(searchSimilar[i]);
-        if(nomeLivroSimilar[i] == searchSimilar[i]){
-            corresponde = corresponde + 1;
+    if(searchSimilar && nomeLivroSimilar){
+        for (let i = 0; i < nomeLivroSimilar.length || i < searchSimilar.length; i++) {
+            console.log(nomeLivroSimilar[i]);
+            console.log(searchSimilar[i]);
+            if(nomeLivroSimilar[i] == searchSimilar[i]){
+                corresponde = corresponde + 1;
+            }
         }
+        console.log(corresponde);
+        if(corresponde > 2){
+            console.log("Talvez o livro corresponda mesmo");
+            return true;
+        }
+        else{
+            console.log("Se pá, ta errado esse livro aí");
+        }
+        
     }
-    if(corresponde > 2){
-        console.log("Talvez o livro corresponda mesmo");
-        return true;
-    }
-    else{
-        console.log("Se pá, ta errado esse livro aí");
-    }
-    console.log(corresponde);
 
 }
