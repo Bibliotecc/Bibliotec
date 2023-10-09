@@ -241,7 +241,7 @@ function similaLivro(nomeLivro){
             //nomeLivroSimilar = nomeLivroSimilar.join(" ");
             //nomeLivroSimilar = nomeLivroSimilar.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     console.log("similaLivro: "+nomeLivroSimilar);
-   
+    
     return nomeLivroSimilar;
 }
 
@@ -264,7 +264,7 @@ function correspondeString(searchSimilar, nomeLivroSimilar){
         else{
             console.log("Se pá, ta errado esse livro aí");
         }
-        
+    
     }
 
 }
