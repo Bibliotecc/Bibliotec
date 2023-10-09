@@ -28,14 +28,7 @@ var numPagina = document.getElementById("numPagina");
 //-----------------------------------------------------------------Referencia Botão
 var btnCadastrar = document.getElementById("btnCadastrar");
 //-------------------------------------------
-function limparString(txt) {
-    return txt.toLowerCase().normalize('NFD').replace(/[^\w\s\u0300-\u036f]/gi, '');
-}
-function PadraoValue(texto){
-var textoPadrao;
-// Limpa a string do texto
-return textoPadrao = limparString(texto);
-}
+
 function InsertLivroAutor(newId, newAutorId){
 
     console.log(newId);
@@ -77,8 +70,7 @@ function InsertLivro(newId, autalIdAutor){
     console.log(newId);
     alert("Fase InsertLivro (ID NOVO): "+newId);
     alert("Fase InsertLivro (ID ATUAL DO AUTOR): "+autalIdAutor);
-    var nomeLivroReg = PadraoValue(nomeLivro.value);
-    console.log(nomeLivroReg);
+
     set(ref(db, "livros/"+nomeLivro.value),{
         autorId: autalIdAutor,
         editora: editora.value,
@@ -159,5 +151,16 @@ btnCadastrar.addEventListener('click', GetUltimoId);
     27/09/2023 ---- 22h50 
             Esse arquivo está funcionando corretamente! É necessário ajustar detalhes das informações do livro. 
 
-    Dev. Lucas Moreira :>          
+    Dev. Lucas Moreira :>
+    
+    FUNCTIONS
+    function limparString(txt) {
+        return txt.toLowerCase().normalize('NFD').replace(/[^\w\s\u0300-\u036f]/gi, '');
+    }
+    function PadraoValue(texto){
+        var textoPadrao;
+        // Limpa a string do texto
+        return textoPadrao = limparString(texto);
+    }
+
 */

@@ -116,7 +116,7 @@ function AddItemToTable(nomeLivro, gênero) {
         let img = document.createElement("img");
         img.src = "img/livros/" + nomeLivro + ".jpg";
         let a = document.createElement("a");
-        a.innerText = 'Reseedfwef rvar';
+        a.innerText = 'Reservar';
         a.href = "aluguel.html?alugar=" + nomeLivro;
 
         divE.appendChild(img);
@@ -129,7 +129,7 @@ function AddItemToTable(nomeLivro, gênero) {
         }
     }
     // ----------------------------------------------------- PESQUISA POR NOME
-    if (search == nomeLivro || searchSimilar == nomeLivroSimilar && filtro == null) {
+    if (search == nomeLivro ||correspondeString(searchSimilar, nomeLivroSimilar) && filtro == null) {
         let divE = document.createElement("div");
         divE.className = 'estil-books';
         let img = document.createElement("img");
@@ -257,7 +257,7 @@ function correspondeString(searchSimilar, nomeLivroSimilar){
             }
         }
         console.log(corresponde);
-        if(corresponde > 2){
+        if(corresponde >= 1){
             console.log("Talvez o livro corresponda mesmo");
             return true;
         }
