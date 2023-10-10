@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Bibliotec</title>
 </head>
-<body onload="pega()">
+<body>
     <header>
         <div class="container">
             <nav class="menu">
@@ -16,7 +16,7 @@
                     <li>
                          <input type="text" name="txtBuscaLivro" id="txtBuscaLivro" placeholder="O que você esta procurando?"> 
                     </li>
-                        <li class="dropdown"> <a href="#"> Filtros <img src="img/icons/seta.png" alt="" class="icon"> </a> 
+                        <li class="dropdown"> <a> Filtros <img src="img/icons/seta.png" alt="" class="icon"> </a> 
                         <div class="dropdown-menu">
                             <a href="index.html?filtro=Ação"> Ação </a>
                             <a href="index.html?filtro=Aventura"> Aventura </a>
@@ -32,13 +32,13 @@
         </div> 
     </header>
 <div class="background-fundo-all">
-    <div class="container">
-        <h1> Romance </h1> 
+    <div id="container-principal" class="container">
+        <h1>Romance</h1>
         <div id="container-books-Romance" class="container-books">           
             <!-- LIVROS -->
         </div>
             <!-- FIM DIV  container-books -->
-        <h1>Ficção Cientifica</h1>
+        <h1>Ficção Cientifica</h1> 
         <div id="container-books-FC" class="container-books">
         </div><!-- FIM DIV  container-books -->
     </div>
@@ -60,7 +60,7 @@
                     <h2> 3º Desenvolvimento de Sistemas </h2>
                 </div>
                 <div class="estil-endpage">
-                    <p>Bruno</p>
+                    <p>Bruno S.</p>
                     <p>Diogo</p>
                     <p>Felipe</p>
                     <p>Gabriella</p>
@@ -80,7 +80,7 @@
     var li = document.getElementById('loginLI');
 
       //  let signoutlink =document.getElementById('signoutlink');
-    var currentUser = "a"; 
+    var currentUser = "!logado"; 
 
     function getUsername(){
         let keepLoggedIn = localStorage.getItem("keepLoggedIn");
@@ -89,15 +89,25 @@
         }
     }
     function Signout(){
-        var result = confirm("Tem certeza que deseja sair?");
-        if(result == true){
-            localStorage.removeItem('user');
-            localStorage.removeItem('keepLoggedIn');
-            window.location = "index.html";
-        }
+                    Swal.fire({
+                        title: 'Tem certeza que deseja sair?',
+                        showDenyButton: true,
+                        confirmButtonText: 'Quero Sair',
+                        denyButtonText: `Não Quero Sair`,
+                        }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if(result.isConfirmed) {
+                            localStorage.removeItem('user');
+                            localStorage.removeItem('keepLoggedIn');
+                            window.location = "index.html";
+                        } 
+                        else if(result.isDenied) {
+                            Swal.fire('Entendo entendo, você não vai sair!', '', 'error');
+                        }
+                    })
     }
     getUsername();
-        if(currentUser == "a"){
+        if(currentUser == "!logado"){
         let a = document.createElement("a");
             a.innerText = "Login";
             a.href = "login.html";
@@ -111,11 +121,11 @@
         }
         else{
             let a = document.createElement("a");
-                a.innerText = currentUser.nomeUsu;
+                a.innerText = currentUser.usuNome;
                 a.href = "javascript:Signout()";
 
             li.appendChild(a);
-            console.log("Nome usu");
+            console.log(currentUser.typeUser);
         }
 
 </script>
@@ -135,9 +145,11 @@
 
     // Crio a função, uma ação para o searchData()
     function searchData()
-    {
+    {   
         window.location = 'index.html?search='+search.value;
     }
-    </script> 
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

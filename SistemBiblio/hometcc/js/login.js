@@ -43,11 +43,18 @@ document.querySelector('#cadastrar').addEventListener('click',()=>{
 var validaForm = document.getElementById('ValidaForm');
 
 function ValidaForm(){
+  var usuNome = document.getElementById('txtusuNome');
+  var usuDataNasc = "DD-MM-AAAA";                       //document.getElementById('usuDataNasc');
+  var usuCurso = "3° Desenvolvimento de Sistemas";      //document.getElementById('usuCurso');
+  var usuRM = "04535";                                 //document.getElementById('usuRM');
+  var usuTelefone = "(17) 99123-4567";                 //document.getElementById('usuTelefone');
+  var usuEndereço = "Rua José Piton, 238 - Jardim II"; //document.getElementById('usuEndereço');
+  var usuCPF = "123.456.789-00";                       //document.getElementById('usuCPF');
   var usuEmail = document.getElementById('txtusuEmail');
   var usuSenha = document.getElementById('txtusuSenha');
   var usuSenha2 = document.getElementById('txtusuSenha2');
-  var usuNome = document.getElementById('txtusuNome');
- 
+
+
   var usuNomeVal = usuNome.value;
   var usuEmailVal = usuEmail.value;
   var usuSenhaVal = usuSenha.value;
@@ -98,25 +105,21 @@ if(usuSenhaVal && usuSenha2Val && (usuSenhaVal != usuSenha2Val)) {
   return false;
 }
   
-  Swal.fire({
-    title: 'Você deseja salvar seus dados?',
-    showDenyButton: true,
-    showCancelButton: true,
-    confirmButtonText: 'Salvar',
-    denyButtonText: `Não Salvar`,
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      VerificaContaExistente();
-    } else if (result.isDenied) {
-      Swal.fire('Dados não salvos', '', 'error')
-    }
-  })
+Swal.fire({
+  title: 'Você deseja salvar seus dados?',
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: 'Salvar',
+  denyButtonText: `Não Salvar`,
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    VerificaContaExistente();
+  } else if (result.isDenied) {
+    Swal.fire('Dados não salvos', '', 'error')
+  }
+})
 
- //------- REFERENCIAS -----------
-var usuEmail = document.getElementById("txtusuEmail");
-var usuNome = document.getElementById("txtusuNome");
-// var usuSenha = document.getElementById("txtusuSenha");
 
 //--------------- VERIFICA EXISTENCIA DE CONTA ------------
 function VerificaContaExistente(){
@@ -135,9 +138,16 @@ function RegistreUsuario(){
   const dbRef = ref(db);
       set(ref(db, "usuário/"+usuNome.value),
       {
-        nomeUsu: usuNome.value,
-        email: usuEmail.value,
-        password: cripSenha()
+        usuNome: usuNome.value,
+        usuDataNasc: usuDataNasc,
+        usuCurso: usuCurso,
+        usuRM: usuRM,
+        usuTelefone: usuTelefone,
+        usuEndereço: usuEndereço,
+        usuCPF: usuCPF,
+        usuEmail: usuEmail,
+        password: cripSenha(),
+        typeUser: "leitor"
       })
       .then(()=>{
         Swal.fire('Dados Salvos!', '', 'success')
@@ -160,8 +170,28 @@ function LoginForm(){
   var usuNome = document.getElementById('txtusuNomeL');
   var usuSenhaL = document.getElementById('txtusuSenhaL');
 
-  const dbRef = ref(db);
+  var usuNomeVal = usuNome.value;
+  var usuSenhaLVal = usuSenhaL.value;
 
+if(!usuNomeVal){
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Preencha o campo nome, por favor! ',
+  })
+  return false;
+}
+
+if(!usuSenhaLVal){
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'A senha não pode ficar em branco!',
+  })
+  return false;
+}
+
+  const dbRef = ref(db);
       get(child(dbRef, "usuário/"+usuNome.value)).then((snapshot)=>{
         if(snapshot.exists()){
           let dbpass = decPass(snapshot.val().password);
@@ -169,18 +199,19 @@ function LoginForm(){
             Login(snapshot.val());
           }
           else{
-            alert("Email não existe");
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Senha Incorreta Amigo Leitor!',
+              })
           }
-        }
-        else{
-          alert("Email ou Senha invalidos");
         }
       });
 }
 function Login(user){
   localStorage.setItem('keepLoggedIn', 'yes');
   localStorage.setItem('user', JSON.stringify(user));
-  if(user.usuNome == "adm"){
+  if(user.typeUser == "admin" ){
     window.location = 'admin/index.html';
   }
   else{

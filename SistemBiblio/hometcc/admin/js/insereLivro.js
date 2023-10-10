@@ -27,14 +27,16 @@ var numExemplar = document.getElementById("numExemplar");
 var numPagina = document.getElementById("numPagina");
 //-----------------------------------------------------------------Referencia Botão
 var btnCadastrar = document.getElementById("btnCadastrar");
+//-------------------------------------------
 
-function InsertLivro(newId){
+function InsertLivroAutor(newId, newAutorId){
 
     console.log(newId);
-    alert("Fase 2: "+newId);
+    alert("InsertLivroAutor (ID LIVRO NOVO): "+newId);
+    alert("InsertLivroAutor (ID AUTOR NOVO): "+newAutorId);
 
     set(ref(db, "livros/"+nomeLivro.value),{
-        autor: nomeAutor.value,
+        autorId: newAutorId,
         editora: editora.value,
         gênero: genLivro.value,
         idLivro: newId,
@@ -45,13 +47,50 @@ function InsertLivro(newId){
         numPagina: numPagina.value        
     })
     .then(()=>{
-        alert("Dados Inseridos");
+        alert("Dados do Livro Inseridos");
+    })
+    .catch((error)=>{
+        alert("Erro: "+ error);
+    });
+
+    set(ref(db, "autores/"+newAutorId),{
+        autorId: newAutorId,
+        autorNome: nomeAutor.value      
+    })
+    .then(()=>{
+        alert("Autor Inserido na tabela Autores");
     })
     .catch((error)=>{
         alert("Erro: "+ error);
     });
 
 }
+
+function InsertLivro(newId, autalIdAutor){
+    console.log(newId);
+    alert("Fase InsertLivro (ID NOVO): "+newId);
+    alert("Fase InsertLivro (ID ATUAL DO AUTOR): "+autalIdAutor);
+
+    set(ref(db, "livros/"+nomeLivro.value),{
+        autorId: autalIdAutor,
+        editora: editora.value,
+        gênero: genLivro.value,
+        idLivro: newId,
+        idioma: idioma.value,
+        lançamento: lançamento.value,
+        nomeLivro: nomeLivro.value,
+        numExemplar: numExemplar.value,
+        numPagina: numPagina.value        
+    })
+    .then(()=>{
+        alert("Dados do Livro Inseridos");
+    })
+    .catch((error)=>{
+        alert("Erro: "+ error);
+    }); 
+
+}
+
 function GetUltimoId(){
     const dbref = ref(db);
 
@@ -63,17 +102,50 @@ function GetUltimoId(){
             livros.push(childSnapshot.val());
         });
 
-    var newId = livros[livros.length - 1].idLivro + 1;
+        var newIdLivros = livros[livros.length - 1].idLivro + 1;
+        console.log("Novo ID livro:"+newIdLivros);
+        verificaAutorExiste(newIdLivros);
 
-    alert("Fase 1:"+newId);
-    InsertLivro(newId);
+    })
+    .catch(()=>{
+        var newIdLivros = 1;
+        console.log("Novo ID livro:"+newIdLivros);
+        verificaAutorExiste(newIdLivros);
+    }); 
+    
+}
 
+function verificaAutorExiste(newIdLivros){
+    const dbref = ref(db);
+
+    get(child(dbref, "autores"))
+    .then((snapshot)=>{
+        var autores =[];
+
+        snapshot.forEach(childSnapshot => {
+            autores.push(childSnapshot.val());
+        })
+
+        var nomeAutorVal = nomeAutor.value; // Nome do Autor
+        var nAutor = autores.find((element) => element.autorNome == nomeAutorVal); // Nome do Autor
+        var novoAutorId = autores[autores.length -1].autorId + 1; // Novo ID do Autores
+//                                 ^^^^ SOBRE O AUTOR ^^^^
+
+        var novoIdLivro = newIdLivros; // Novo ID do Livro 
+
+        if(nAutor){
+            InsertLivro(novoIdLivro, nAutor.autorId);
+        }else{
+            InsertLivroAutor(novoIdLivro, novoAutorId);
+        }
     });
- }
+
+}
+
 
 //EVENTOS
 btnCadastrar.addEventListener('click', GetUltimoId);
-
+//btnCadastrar.addEventListener('click', tst);
 
 
 // NOTAS :
@@ -81,5 +153,20 @@ btnCadastrar.addEventListener('click', GetUltimoId);
     22/08/2023 ---- 20h36 
             Esse arquivo está funcionando corretamente! É necessário ajustar detalhes. 
 
-    Dev. Lucas Moreira :>        
+    Dev. Lucas Moreira :>
+    27/09/2023 ---- 22h50 
+            Esse arquivo está funcionando corretamente! É necessário ajustar detalhes das informações do livro. 
+
+    Dev. Lucas Moreira :>
+    
+    FUNCTIONS
+    function limparString(txt) {
+        return txt.toLowerCase().normalize('NFD').replace(/[^\w\s\u0300-\u036f]/gi, '');
+    }
+    function PadraoValue(texto){
+        var textoPadrao;
+        // Limpa a string do texto
+        return textoPadrao = limparString(texto);
+    }
+
 */
