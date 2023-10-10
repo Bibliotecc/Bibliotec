@@ -106,7 +106,13 @@ function GetUltimoId(){
         console.log("Novo ID livro:"+newIdLivros);
         verificaAutorExiste(newIdLivros);
 
-    });
+    })
+    .catch(()=>{
+        var newIdLivros = 1;
+        console.log("Novo ID livro:"+newIdLivros);
+        verificaAutorExiste(newIdLivros);
+    }); 
+    
 }
 
 function verificaAutorExiste(newIdLivros){
