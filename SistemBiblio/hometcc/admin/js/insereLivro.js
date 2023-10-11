@@ -17,14 +17,25 @@ import {getDatabase, ref, set, get, child, onValue, update, remove, limitToLast,
 const db = getDatabase();
 
 //-------------------------------------------------------------------REFERÊNCIAS 
+var nomeLivro = document.getElementById("nomeLivro");
 var nomeAutor = document.getElementById("nomeAutor");
 var editora = document.getElementById("editora");
 var genLivro = document.getElementById("genLivro");
+var nomeColecao = document.getElementById("nomeColecao");
 var idioma = document.getElementById("idioma");
+var tipoItem = document.getElementById("tipoItem");
 var lançamento = document.getElementById("lançamento");
-var nomeLivro = document.getElementById("nomeLivro");
+var edicao = document.getElementById("edição");
 var numExemplar = document.getElementById("numExemplar");
+var numTombo =  document.getElementById("numTombo");
 var numPagina = document.getElementById("numPagina");
+var CDD = document.getElementById("CDD");
+var Cutter = document.getElementById("Cutter");
+var ISBN =document.getElementById("ISBN");
+var dataAquisicao = document.getElementById("dataAquisicao");
+var volume = document.getElementById("volume");
+
+
 //-----------------------------------------------------------------Referencia Botão
 var btnCadastrar = document.getElementById("btnCadastrar");
 //-------------------------------------------
@@ -32,19 +43,34 @@ var btnCadastrar = document.getElementById("btnCadastrar");
 function InsertLivroAutor(newId, newAutorId){
 
     console.log(newId);
+    console.log(newAutorId);
+    if(newId == undefined || newId == null){
+        newId = 1;
+    }
+    if(newAutorId == undefined || newAutorId == null){
+        newAutorId = 1;
+    }
     alert("InsertLivroAutor (ID LIVRO NOVO): "+newId);
     alert("InsertLivroAutor (ID AUTOR NOVO): "+newAutorId);
-
     set(ref(db, "livros/"+nomeLivro.value),{
+        idLivro: newId,
+        nomeLivro: nomeLivro.value,
         autorId: newAutorId,
         editora: editora.value,
         gênero: genLivro.value,
-        idLivro: newId,
+        nomeColecao: nomeColecao.value,
         idioma: idioma.value,
+        tipoItem: tipoItem.value,
         lançamento: lançamento.value,
-        nomeLivro: nomeLivro.value,
+        edição: edicao.value,
         numExemplar: numExemplar.value,
-        numPagina: numPagina.value        
+        numTombo: numTombo.value,
+        CDD: CDD.value,
+        Cutter: Cutter.value,
+        ISBN: ISBN.value,
+        dataAquisicao: dataAquisicao.value,
+        numPagina: numPagina.value,        
+        volume: volume.value
     })
     .then(()=>{
         alert("Dados do Livro Inseridos");
@@ -68,19 +94,31 @@ function InsertLivroAutor(newId, newAutorId){
 
 function InsertLivro(newId, autalIdAutor){
     console.log(newId);
+    if(newId == undefined || newId == null){
+        newId = 1;
+    }
     alert("Fase InsertLivro (ID NOVO): "+newId);
     alert("Fase InsertLivro (ID ATUAL DO AUTOR): "+autalIdAutor);
 
     set(ref(db, "livros/"+nomeLivro.value),{
+        idLivro: newId,
+        nomeLivro: nomeLivro.value,
         autorId: autalIdAutor,
         editora: editora.value,
         gênero: genLivro.value,
-        idLivro: newId,
+        nomeColecao: nomeColecao.value,
         idioma: idioma.value,
+        tipoItem: tipoItem.value,
         lançamento: lançamento.value,
-        nomeLivro: nomeLivro.value,
+        edição: edicao.value,
         numExemplar: numExemplar.value,
-        numPagina: numPagina.value        
+        numTombo: numTombo.value,
+        CDD: CDD.value,
+        Cutter: Cutter.value,
+        ISBN: ISBN.value,
+        dataAquisicao: dataAquisicao.value,
+        numPagina: numPagina.value,        
+        volume: volume.value     
     })
     .then(()=>{
         alert("Dados do Livro Inseridos");
