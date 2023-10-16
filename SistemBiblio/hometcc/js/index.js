@@ -103,10 +103,10 @@ function AddItemToTable(nomeLivro, gênero) {
 
     var searchSimilar = [];
         searchSimilar = trataSearch(search);
-        console.log(searchSimilar);  
+      //  console.log(searchSimilar);  
     var nomeLivroSimilar = [];
         nomeLivroSimilar = similaLivro(nomeLivro);
-        console.log(nomeLivroSimilar);
+       // console.log(nomeLivroSimilar);
     correspondeString(searchSimilar, nomeLivroSimilar);
     // -------------------------------------------------------- SEM PESQUISA E FILTRO
     if (ultimaBarra == 'index.html' || ultimaBarra == '' || search == '') {
@@ -224,10 +224,10 @@ function trataSearch(search){
     for (let i = 0; i < palavras.length; i++) {
         palavras[i] = palavras[i][0].toUpperCase() + palavras[i].substr(1);
     }
-    console.log(palavras);
-       // palavras = palavras.join(" ");
-       // palavras = palavras.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    console.log("trataSearch2: " + palavras);
+        //console.log(palavras);
+        palavras = palavras.join(" ");
+        palavras = palavras.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    console.log("TRATA SEARCH: "+ palavras);
     return palavras;
     }
 }
@@ -237,27 +237,30 @@ function similaLivro(nomeLivro){
             for (let i = 0; i < nomeLivroSimilar.length; i++) {
                 nomeLivroSimilar[i] = nomeLivroSimilar[i][0].toUpperCase() + nomeLivroSimilar[i].substr(1);
             } 
-            console.log(nomeLivroSimilar);
-            //nomeLivroSimilar = nomeLivroSimilar.join(" ");
-            //nomeLivroSimilar = nomeLivroSimilar.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    console.log("similaLivro: "+nomeLivroSimilar);
+           // console.log(nomeLivroSimilar);
+            nomeLivroSimilar = nomeLivroSimilar.join(" ");
+            nomeLivroSimilar = nomeLivroSimilar.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    console.log("SIMILA LIVRO: "+nomeLivroSimilar);
     
     return nomeLivroSimilar;
 }
 
 function correspondeString(searchSimilar, nomeLivroSimilar){
+    nomeLivroSimilar = nomeLivroSimilar.split(" ")
+    nomeLivroSimilar = Array(nomeLivroSimilar);
     console.log(nomeLivroSimilar);
-    var corresponde = 0
-    if(searchSimilar && nomeLivroSimilar){
+    console.log(searchSimilar);
+    var corresponde = 0;
+/*  if(searchSimilar && nomeLivroSimilar){
         for (let i = 0; i < nomeLivroSimilar.length || i < searchSimilar.length; i++) {
-            console.log(nomeLivroSimilar[i]);
-            console.log(searchSimilar[i]);
-            if(nomeLivroSimilar[i] == searchSimilar[i]){
-                corresponde = corresponde + 1;
+            if(nomeLivroSimilar.length >= searchSimilar.length ){
+                if(nomeLivroSimilar[i] == searchSimilar[i]){
+                    corresponde = corresponde + 1;
+                }
             }
         }
         console.log(corresponde);
-        if(corresponde >= 1){
+        if(corresponde >= 2){
             console.log("Talvez o livro corresponda mesmo");
             return true;
         }
@@ -265,6 +268,6 @@ function correspondeString(searchSimilar, nomeLivroSimilar){
             console.log("Se pá, ta errado esse livro aí");
         }
     
-    }
+    } */
 
 }
