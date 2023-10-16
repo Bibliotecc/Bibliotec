@@ -131,7 +131,7 @@ function InsertLivro(newId, autalIdAutor){
 
 function GetUltimoId(){
     const dbref = ref(db);
-
+console.log("Chamou GetUltimo");
     get(child(dbref, "livros"))
     .then((snapshot)=>{
         var livros =[];
@@ -155,7 +155,7 @@ function GetUltimoId(){
 
 function verificaAutorExiste(newIdLivros){
     const dbref = ref(db);
-
+    console.log("Chamou verificaAutorExiste");
     get(child(dbref, "autores"))
     .then((snapshot)=>{
         var autores =[];
