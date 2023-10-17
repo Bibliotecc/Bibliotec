@@ -1,18 +1,20 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-storage.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC95RHcPl1VhNT484rnwWDaE_E8cC_q4ZQ",
-  authDomain: "tccsb-39f62.firebaseapp.com",
-  projectId: "tccsb-39f62",
-  storageBucket: "tccsb-39f62.appspot.com",
-  messagingSenderId: "446535834077",
-  appId: "1:446535834077:web:b43e6da142918afae53e34",
-  measurementId: "G-QFJFTQ66ZC"
+    apiKey: "AIzaSyC95RHcPl1VhNT484rnwWDaE_E8cC_q4ZQ",
+    authDomain: "tccsb-39f62.firebaseapp.com",
+    projectId: "tccsb-39f62",
+    storageBucket: "tccsb-39f62.appspot.com",
+    messagingSenderId: "446535834077",
+    appId: "1:446535834077:web:b43e6da142918afae53e34",
+    measurementId: "G-QFJFTQ66ZC"
 };
 
 // Inicia Firebase
 const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
 import {getDatabase, ref, set, get, child, onValue, update, remove, limitToLast, orderByKey, limitToFirst } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
 const db = getDatabase();
 
@@ -34,7 +36,8 @@ var Cutter = document.getElementById("Cutter");
 var ISBN =document.getElementById("ISBN");
 var dataAquisicao = document.getElementById("dataAquisicao");
 var volume = document.getElementById("volume");
-
+//-------------------------------------------------------------------
+//var imgLivros = document.getElementById("imgLivros");
 
 //-----------------------------------------------------------------Referencia Botão
 var btnCadastrar = document.getElementById("btnCadastrar");
@@ -50,8 +53,6 @@ function InsertLivroAutor(newId, newAutorId){
     if(newAutorId == undefined || newAutorId == null){
         newAutorId = 1;
     }
-    alert("InsertLivroAutor (ID LIVRO NOVO): "+newId);
-    alert("InsertLivroAutor (ID AUTOR NOVO): "+newAutorId);
     set(ref(db, "livros/"+nomeLivro.value),{
         idLivro: newId,
         nomeLivro: nomeLivro.value,
@@ -73,21 +74,23 @@ function InsertLivroAutor(newId, newAutorId){
         volume: volume.value
     })
     .then(()=>{
-        alert("Dados do Livro Inseridos");
+        salvaImagem();
+        Swal.fire('Conseguimos Inserir os Dados do Livro!',newId, 'success');
+        
     })
     .catch((error)=>{
-        alert("Erro: "+ error);
-    });
-
+        Swal.fire('Erro ao inserir!', ' :( Provavelmente foi um erro no servidor,Linha 77,veja: '+error, 'error');
+    }); 
+//----------------------------------------------------------------------------------------------------------------
     set(ref(db, "autores/"+newAutorId),{
         autorId: newAutorId,
         autorNome: nomeAutor.value      
     })
     .then(()=>{
-        alert("Autor Inserido na tabela Autores");
+        Swal.fire('Conseguimos Inserir o Autor na Tabela Autores!',newAutorId, 'success');
     })
     .catch((error)=>{
-        alert("Erro: "+ error);
+        Swal.fire('Erro ao inserir!', ' :( Provavelmente foi um erro no servidor,Linha 88,veja: '+error, 'error');
     });
 
 }
@@ -97,8 +100,6 @@ function InsertLivro(newId, autalIdAutor){
     if(newId == undefined || newId == null){
         newId = 1;
     }
-    alert("Fase InsertLivro (ID NOVO): "+newId);
-    alert("Fase InsertLivro (ID ATUAL DO AUTOR): "+autalIdAutor);
 
     set(ref(db, "livros/"+nomeLivro.value),{
         idLivro: newId,
@@ -121,17 +122,17 @@ function InsertLivro(newId, autalIdAutor){
         volume: volume.value     
     })
     .then(()=>{
-        alert("Dados do Livro Inseridos");
+        salvaImagem();
+        Swal.fire('Conseguimos Inserir os Dados do Livro!',newId,'success');
     })
     .catch((error)=>{
-        alert("Erro: "+ error);
+        Swal.fire('Erro ao inserir!', ' :( Provavelmente foi um erro no servidor,Linha 123, veja: '+error, 'error');
     }); 
 
 }
 
 function GetUltimoId(){
     const dbref = ref(db);
-console.log("Chamou GetUltimo");
     get(child(dbref, "livros"))
     .then((snapshot)=>{
         var livros =[];
@@ -140,22 +141,22 @@ console.log("Chamou GetUltimo");
             livros.push(childSnapshot.val());
         });
 
-        var newIdLivros = livros[livros.length - 1].idLivro + 1;
-        console.log("Novo ID livro:"+newIdLivros);
-        verificaAutorExiste(newIdLivros);
+        console.log(livros);
 
+        var newIdLivros = livros[livros.length - 1].idLivro + 1;
+        Swal.fire('Conseguimos gerar o novo ID do Livro! Próxima fase ->','Linha 141', 'success');
+        verificaAutorExiste(newIdLivros);
+        
     })
     .catch(()=>{
-        var newIdLivros = 1;
-        console.log("Novo ID livro:"+newIdLivros);
-        verificaAutorExiste(newIdLivros);
+        Swal.fire('Erro ao inserir!', 'Provavelmente foi um erro no servidor Linha 146 :(', 'error');
     }); 
     
 }
 
 function verificaAutorExiste(newIdLivros){
     const dbref = ref(db);
-    console.log("Chamou verificaAutorExiste");
+
     get(child(dbref, "autores"))
     .then((snapshot)=>{
         var autores =[];
@@ -172,18 +173,56 @@ function verificaAutorExiste(newIdLivros){
         var novoIdLivro = newIdLivros; // Novo ID do Livro 
 
         if(nAutor){
+            Swal.fire('Esse autor já está cadastrado! Esse é ID dele:'+nAutor.autorId,"Proxima fase ->", 'success');
             InsertLivro(novoIdLivro, nAutor.autorId);
         }else{
+            Swal.fire('Conseguimos gerar o novo ID para esse autor não cadastrado! Próxima fase ->',novoAutorId, 'success');
             InsertLivroAutor(novoIdLivro, novoAutorId);
         }
     });
 
 }
 
+function salvaImagem() {
+    // Obtém o elemento de entrada de arquivo pelo ID
+    const inputFile = document.querySelector("#imgLivro");
+    
+    // Verifica se um arquivo foi selecionado
+    if (inputFile.files.length > 0) {
+        // Pega o primeiro arquivo do input
+        const imgLivro = inputFile.files[0];
+        
+        // Referência para o local onde você deseja armazenar o arquivo no Storage
+        const storageRe = storageRef(storage, 'img/livros/' + imgLivro.name);
+        
+        // Faz o upload do arquivo
+        uploadBytes(storageRe, imgLivro)
+            .then((snapshot) => {
+                console.log("Sucesso ao salvar imagem!");
+                // Obtém a URL do arquivo após o upload
+                return getDownloadURL(snapshot.ref);
+            })
+            .then((downloadURL) => {
+                console.log('Imagem disponível em:', downloadURL);
+                
+            })
+            .catch((error) => {
+                console.log("Erro ao salvar imagem!", error);
+            });
+    } else {
+        console.error("Nenhum arquivo selecionado!");
+    }
+}
 
 //EVENTOS
 btnCadastrar.addEventListener('click', GetUltimoId);
 //btnCadastrar.addEventListener('click', tst);
+
+
+
+
+
+
 
 
 // NOTAS :

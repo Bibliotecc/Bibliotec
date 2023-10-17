@@ -96,7 +96,7 @@ var urlArray = urlAtual.split('/');
 var ultimaBarra = urlArray[urlArray.length - 1];
 //
 //
-function AddItemToTable(nomeLivro, gênero) {
+function AddItemToTable(nomeLivro, gênero, urlImg) {
     console.log(filtro);
     console.log(search);
     console.log(ultimaBarra);
@@ -109,12 +109,12 @@ function AddItemToTable(nomeLivro, gênero) {
        // console.log(nomeLivroSimilar);
     //correspondeString(searchSimilar, nomeLivroSimilar);
     // -------------------------------------------------------- SEM PESQUISA E FILTRO
-    if (ultimaBarra == 'index.html' || ultimaBarra == " " || search == " ") {
+    if (ultimaBarra == 'index.html' || ultimaBarra == '' || search == '') {
 
         let divE = document.createElement("div");
         divE.className = 'estil-books';
         let img = document.createElement("img");
-        img.src = "img/livros/" + nomeLivro + ".jpg";
+        img.src = urlImg;
         let a = document.createElement("a");
         a.innerText = 'Reservar';
         a.href = "aluguel.html?alugar=" + nomeLivro;
@@ -130,10 +130,11 @@ function AddItemToTable(nomeLivro, gênero) {
     }
     // ----------------------------------------------------- PESQUISA POR NOME
     if (search == nomeLivro ||correspondeString(searchSimilar, nomeLivroSimilar) && filtro == null) {
+        console.log("URL DA IMAGEM"+urlImg);
         let divE = document.createElement("div");
         divE.className = 'estil-books';
         let img = document.createElement("img");
-        img.src = "img/livros/" + nomeLivro + ".jpg";
+        img.src = urlImg;
         let a = document.createElement("a");
         a.innerText = 'Reservar';
         a.href = "aluguel.html?alugar=" + nomeLivro;
@@ -173,7 +174,7 @@ function AddAllItemToTable(livro) {
     stdNo = 0;
     cBooks.innerHTML = "";
     livro.forEach(element => {
-        AddItemToTable(element.nomeLivro, element.gênero);
+        AddItemToTable(element.nomeLivro, element.gênero, element.urlImg);
     });
 }
 //---------GET ALL DADOS-----------------
