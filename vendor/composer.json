@@ -1,6 +1,0 @@
-{
-    "require": {
-        "kreait/firebase-php": "^5.26",
-        "firebase/php-jwt": "^5.0"
-    }
-}
