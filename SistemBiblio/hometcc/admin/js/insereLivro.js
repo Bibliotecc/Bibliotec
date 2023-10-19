@@ -1,6 +1,4 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
-import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-storage.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC95RHcPl1VhNT484rnwWDaE_E8cC_q4ZQ",
@@ -15,7 +13,6 @@ const firebaseConfig = {
 // Inicia Firebase
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-import {getDatabase, ref, set, get, child, onValue, update, remove, limitToLast, orderByKey, limitToFirst } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
 const db = getDatabase();
 
 //-------------------------------------------------------------------REFERÊNCIAS 
