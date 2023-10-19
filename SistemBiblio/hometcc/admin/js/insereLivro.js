@@ -43,8 +43,9 @@ var volume = document.getElementById("volume");
 var btnCadastrar = document.getElementById("btnCadastrar");
 //-------------------------------------------
 
-function InsertLivroAutor(newId, newAutorId){
 
+
+function InsertLivroAutor(newId, newAutorId, urlImg){
     console.log(newId);
     console.log(newAutorId);
     if(newId == undefined || newId == null){
@@ -71,10 +72,10 @@ function InsertLivroAutor(newId, newAutorId){
         ISBN: ISBN.value,
         dataAquisicao: dataAquisicao.value,
         numPagina: numPagina.value,        
-        volume: volume.value
+        volume: volume.value,
+        urlImg: ""
     })
     .then(()=>{
-        salvaImagem();
         Swal.fire('Conseguimos Inserir os Dados do Livro!',newId, 'success');
         
     })
@@ -87,6 +88,7 @@ function InsertLivroAutor(newId, newAutorId){
         autorNome: nomeAutor.value      
     })
     .then(()=>{
+        salvaImagem();
         Swal.fire('Conseguimos Inserir o Autor na Tabela Autores!',newAutorId, 'success');
     })
     .catch((error)=>{
@@ -96,6 +98,7 @@ function InsertLivroAutor(newId, newAutorId){
 }
 
 function InsertLivro(newId, autalIdAutor){
+    
     console.log(newId);
     if(newId == undefined || newId == null){
         newId = 1;
@@ -119,7 +122,8 @@ function InsertLivro(newId, autalIdAutor){
         ISBN: ISBN.value,
         dataAquisicao: dataAquisicao.value,
         numPagina: numPagina.value,        
-        volume: volume.value     
+        volume: volume.value,
+        urlImg: ""   
     })
     .then(()=>{
         salvaImagem();
@@ -167,11 +171,11 @@ function verificaAutorExiste(newIdLivros){
 
         var nomeAutorVal = nomeAutor.value; // Nome do Autor
         var nAutor = autores.find((element) => element.autorNome == nomeAutorVal); // Nome do Autor
-        var novoAutorId = autores[autores.length -1].autorId + 1; // Novo ID do Autores
+        var novoAutorId = autores[autores.length - 1].autorId + 1; // Novo ID do Autores
 //                                 ^^^^ SOBRE O AUTOR ^^^^
 
         var novoIdLivro = newIdLivros; // Novo ID do Livro 
-
+        console.log(nAutor.autorId);
         if(nAutor){
             Swal.fire('Esse autor já está cadastrado! Esse é ID dele:'+nAutor.autorId,"Proxima fase ->", 'success');
             InsertLivro(novoIdLivro, nAutor.autorId);
@@ -184,9 +188,10 @@ function verificaAutorExiste(newIdLivros){
 }
 
 function salvaImagem() {
+    const dbref = ref(db)
     // Obtém o elemento de entrada de arquivo pelo ID
     const inputFile = document.querySelector("#imgLivro");
-    
+    var urlImg;
     // Verifica se um arquivo foi selecionado
     if (inputFile.files.length > 0) {
         // Pega o primeiro arquivo do input
@@ -203,8 +208,16 @@ function salvaImagem() {
                 return getDownloadURL(snapshot.ref);
             })
             .then((downloadURL) => {
-                console.log('Imagem disponível em:', downloadURL);
-                
+                 urlImg = downloadURL;
+                console.log('Imagem disponível em:', urlImg);
+                update(child(dbref, "livros/"+nomeLivro.value),{
+                    urlImg: downloadURL
+                }).then(() => {
+                    console.log("Dados de 'livros' atualizados com sucesso!");
+                  })
+                  .catch(error => {
+                    console.error("Erro ao atualizar dados de 'livros': ", error);
+                  });
             })
             .catch((error) => {
                 console.log("Erro ao salvar imagem!", error);
@@ -213,7 +226,6 @@ function salvaImagem() {
         console.error("Nenhum arquivo selecionado!");
     }
 }
-
 //EVENTOS
 btnCadastrar.addEventListener('click', GetUltimoId);
 //btnCadastrar.addEventListener('click', tst);
