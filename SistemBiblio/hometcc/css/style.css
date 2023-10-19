@@ -681,7 +681,7 @@ th, td {
 
 /* RESPONSIVIDADE CELULAR */
 
-@media (max-width: 410px){
+@media (max-width: 430px){
     header{
         width: 100%;
         height: 70px;
