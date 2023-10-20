@@ -154,7 +154,7 @@ function AddItemToTable(nomeLivro, gênero, urlImg) {
         let divE = document.createElement("div");
         divE.className = 'estil-books';
         let img = document.createElement("img");
-        img.src = urlImg;
+            img.src = urlImg;
         let a = document.createElement("a");
         a.innerText = 'Reservar';
         a.href = "aluguel.html?alugar=" + nomeLivro;
