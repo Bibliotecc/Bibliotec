@@ -222,16 +222,8 @@ console.log(idLivro);
                 var numExemplarNovo = numExemplarA - 1;
                 // UPDATE NOS LIVROS
 
-                    set(ref(db, "livros/"+nomeLivro),{
-                        autorId: snapshot.val().autorId,
-                        editora: snapshot.val().editora,
-                        gênero: snapshot.val().gênero,
-                        idLivro: snapshot.val().idLivro,
-                        idioma: snapshot.val().idioma,
-                        lançamento: snapshot.val().lançamento,
-                        nomeLivro: snapshot.val().nomeLivro,
+                    update(ref(db, "livros/"+nomeLivro),{
                         numExemplar: numExemplarNovo,
-                        numPagina: snapshot.val().numPagina
                     })  
                     .then(()=>{
                         alert("Livro alugado!!");
@@ -257,3 +249,8 @@ console.log(idLivro);
 if(confirmaAluguel == "pstv"){
     ReservarLivro();
 }
+
+window.addEventListener('beforeunload', function() {
+
+    window.location = "aluguel.html?alugar="+nomeLivro;
+});
