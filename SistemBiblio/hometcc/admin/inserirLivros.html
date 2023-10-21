@@ -14,7 +14,11 @@
                     <li> <a href="index.html"> <img src=".././img/logo/logotcc.png" alt="logotcc"> </a> </li>
                     <li> 
                         <input type="text" name="txtBuscaLivro" id="txtBuscaLivro" placeholder="O que você esta procurando?"> </li>
-                    <li> <a href="../admin/index.html"> Administradora <img src="../img/icons/login.png" alt="" class="icon"> </a> </li>
+                    <li>
+                        <li id="nomeAdm"> </li>
+                        <li> <a href="../admin/index.html"> <img src="../img/icons/login.png" alt="" class="icon"> </a> </li> 
+                         
+                    </li>
                 </ul>
             </nav> 
         </div>
@@ -87,6 +91,46 @@
         </div>
     </div>
     </div>
+    <script>
+        var li = document.getElementById('nomeAdm');
+    
+          //  let signoutlink =document.getElementById('signoutlink');
+        var currentUser = "!logado"; 
+    
+        function getUsername(){
+            let keepLoggedIn = localStorage.getItem("keepLoggedIn");
+            if(keepLoggedIn == "yes"){
+                currentUser = JSON.parse(localStorage.getItem('user'));
+            }
+        }
+        function Signout(){
+            localStorage.removeItem('user');
+            localStorage.removeItem('keepLoggedIn');
+            window.location = "../index.html";
+        }
+        getUsername();
+            if(currentUser == "!logado"){
+            let a = document.createElement("a");
+                a.innerText = "Login";
+                a.href = "../login.html";
+            let img = document.createElement("img");
+                img.src = "img/icons/login.png";
+                img.className = "icon";
+            a.appendChild(img);
+            li.appendChild(a);
+            
+    
+            }
+            else{
+                let a = document.createElement("a");
+                    a.innerText = currentUser.usuNome;
+                    a.href = "javascript:Signout()";
+    
+                li.appendChild(a);
+                console.log("Nome usu");
+            }
+    
+    </script>
     <script type="module" src="js/insereLivro.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
