@@ -69,7 +69,7 @@ function AddItemToTable(nomeLivro, autor, lançamento, editora, idioma, numPagin
                 p.innerText = 'Sem descrição curta no momento';
             let a = document.createElement("a");
                 a.innerText = 'Reservar';
-                a.href = 'aluguel.html?alugar='+nomeLivro+'&confirmar=pstv'; // pstv = positivo
+                a.id = "btnReserva" //+'&confirmar=pstv' pstv = positivo
                 
 
         divEspecLivro.appendChild(h3);
@@ -193,7 +193,7 @@ window.onload = GetAllDataOnce;
 //-------------------------------------------------------------------------------------------------------------
 var numExemplarA;
 var reservaLivro;
-function ReservarLivro(nomeLivro,idLivro){
+/*function ReservarLivro(nomeLivro,idLivro){
     const dbref = ref(db);
 //PRIMEIRO PEGA VALOR DE DISPONIBILIDADE (alugarLivro == nomeLivro)
 console.log(alugarLivro);
@@ -205,20 +205,20 @@ console.log(idLivro);
             numExemplarA = snapshot.val().numExemplar;
             reservaLivro = snapshot.val().nomeLivro;
             console.log(numExemplarA);
-//ALUGANDO O LIVRO.            
+    //ALUGANDO O LIVRO.            
             if(numExemplarA > 0){
                     // UPDATE NO USUARIO
                     var dadosUser = JSON.parse(localStorage.getItem('user'));
                 console.log(dadosUser.usuNome);
-                /*    update(ref(db, "usuário/"+dadosUser.usuNome),{
-                        livroReservado: reservaLivro,
-                    })  
-                    .then(()=>{
-                        alert("Livro alugado pro usuario!!");
-                    })
-                    .catch((error)=>{
-                        alert("Erro: "+ error);
-                    }); */
+                //    update(ref(db, "usuário/"+dadosUser.usuNome),{
+                //         livroReservado: reservaLivro,
+                //     })  
+                //     .then(()=>{
+                //         alert("Livro alugado pro usuario!!");
+                //     })
+                //     .catch((error)=>{
+                //         alert("Erro: "+ error);
+                //     }); 
                 var numExemplarNovo = numExemplarA - 1;
                 // UPDATE NOS LIVROS
 
@@ -244,13 +244,26 @@ console.log(idLivro);
 
  }
 }
+*/
 //-------------------------------------------------------------------------------------------------------------
-// EVENTOS
-if(confirmaAluguel == "pstv"){
-    ReservarLivro();
+
+function teste(){
+    alert("Em teste emprestimos d Livros");
+    // update(ref(db, "emprestimos"), {
+    //     nomeLivro: nomeLivro.value
+    // })
+    //     .then(() => {
+    //         alert("dados inseridos");
+    //     })
+    //     .catch((error) => {
+    //         alert("Erro: " + error);
+    //     });
 }
 
-window.addEventListener('beforeunload', function() {
+// EVENTOS
+btnReserva.addEventListener('click', teste);
 
-    window.location = "aluguel.html?alugar="+nomeLivro;
-});
+// window.addEventListener('beforeunload', function() {
+
+//     window.location = "aluguel.html?alugar="+nomeLivro;
+// });
