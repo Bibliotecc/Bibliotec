@@ -125,10 +125,10 @@ header{
 }
 
 .container-books{
-    display: flex;
-    justify-content: baseline;
-    column-gap: 7.3%;
     flex-wrap: wrap;
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 7.3%;
 }
 
 .estil-books a{
@@ -719,7 +719,8 @@ th, td {
     }
 
     .container-books img{
-        width: 100px;
+        max-width: 95px;
+        width: auto;
     }
 
     .container-books{
