@@ -126,7 +126,7 @@ header{
 
 .container-books{
     display: flex;
-    justify-content: flex-start;
+    justify-content: baseline;
     column-gap: 7.3%;
     flex-wrap: wrap;
 }
@@ -313,7 +313,6 @@ footer{
 
 .container-especificacao-livro{
     margin-bottom: 3%;
-    width: 40%;
 }
 
 .itens-especificacao{
@@ -681,7 +680,7 @@ th, td {
 
 /* RESPONSIVIDADE CELULAR */
 
-@media (max-width: 720px){
+@media (max-width: 624px){
     header{
         width: 100%;
         height: 70px;
@@ -740,7 +739,7 @@ th, td {
     footer{
         width: 100%;
         height: 60px;
-        margin-top: 0px;
+        margin-top: 10px;
     }
 
     .container-footer{
@@ -795,4 +794,23 @@ th, td {
     .desc-livro-content p{
         font-size: 18px;
     }
+
+    .container-background-desc-espec{
+        max-width: 500px;
+        width: auto;
+        padding: 2% 3%;
+    }
+
+    .descricao-livro h1{
+        font-size: 25px;
+    }
+
+    .descricao-livro p{
+        font-size: 20px;
+    }
+
+    .especificacao-livro h1{
+        font-size: 25px;
+    }
+   
 }
