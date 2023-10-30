@@ -377,7 +377,8 @@ footer{
     font-family: Especificacoes;
     font-size: 15px;
     cursor: pointer;
-    background: transparent;
+    background: #006ce7;
+    border-radius: 25px;
     border: none;
     position: relative;
     padding: 10px 29px;
