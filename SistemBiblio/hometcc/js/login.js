@@ -21,29 +21,29 @@ import {getDatabase, ref, set, get, child, onValue,update, remove } from "https:
 
 const db = getDatabase();
 
-var formentrar = document.querySelector('#entrar')
-var formcadastrar = document.querySelector('#cadastrar-se')
+// var formentrar = document.querySelector('#entrar')
+// var formcadastrar = document.querySelector('#cadastrar-se')
 
-var btncolor = document.querySelector('.btncolor')
+// var btncolor = document.querySelector('.btncolor')
 
-document.querySelector('#btnentrar').addEventListener('click',()=>{
-  formentrar.style.left = "25px"
-  formcadastrar.style.left = "450px"
-  btncolor.style.left = "0px"
-  btncolor.style.width = "100px"
-});
+// document.querySelector('#btnentrar').addEventListener('click',()=>{
+//   formentrar.style.left = "25px"
+//   formcadastrar.style.left = "450px"
+//   btncolor.style.left = "0px"
+//   btncolor.style.width = "100px"
+// });
 
-document.querySelector('#cadastrar').addEventListener('click',()=>{
-  formentrar.style.left = "-450px"
-  formcadastrar.style.left = "25px"
-  btncolor.style.left = "105px"
-  btncolor.style.width = "134px"
-});
+// document.querySelector('#cadastrar').addEventListener('click',()=>{
+//   formentrar.style.left = "-450px"
+//   formcadastrar.style.left = "25px"
+//   btncolor.style.left = "105px"
+//   btncolor.style.width = "134px"
+// });
 // --------------------INICIO DO CADASTRO--------------------------------------------------------------------------
 var validaForm = document.getElementById('ValidaForm');
 
 var usuNome = document.getElementById('txtusuNome');
-var usuDataNasc = "DD-MM-AAAA";                       //document.getElementById('usuDataNasc');
+var usuDataNasc = document.getElementById('usuDataNasc');
 var usuCurso = "3° Desenvolvimento de Sistemas";      //document.getElementById('usuCurso');
 var usuRM = document.getElementById('usuRM');
 var usuTelefone = "(17) 99123-4567";                 //document.getElementById('usuTelefone');
@@ -128,7 +128,7 @@ function VerificaContaExistente(){
     console.log("2");
     if(snapshot.exists()){
       console.log("3");
-      if(snapshot.val().usuEmail == txtusuEmail.value){
+      if(snapshot.val().password == usuDataNasc.value){
         usuSenha.value = snapshot.val().usuNome;
         alert("Seu nome cadastrado é: "+snapshot.val().usuNome);
       }

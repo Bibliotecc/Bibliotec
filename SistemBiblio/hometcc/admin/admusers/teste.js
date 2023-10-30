@@ -17,7 +17,7 @@ const db = getDatabase(app);
 
 var uplaund = document.getElementById("uplaund");
 
-// Method to upload a valid excel file
+
 function upload() {
     var files = document.getElementById('file_upload').files;
     if (files.length == 0) {
@@ -33,7 +33,7 @@ function upload() {
     }
 }
 
-// Method to read excel file and convert it into JSON 
+
 function excelFileToJSON(file) {
     try {
         var reader = new FileReader();
@@ -48,8 +48,29 @@ function excelFileToJSON(file) {
                 var roa = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
                 if (roa.length > 0) {
                     roa.forEach(function (item) {
-                        // Assumindo que o RM está na propriedade 'RM' do objeto
                         const rm = item.RM;
+                        const email = item[Object.keys(item)[5]];
+                        const emaili = item[Object.keys(item)[6]];
+                        const dataNascimento = converterNumeroParaData(item['Data de Nasc.']);
+
+                        // Atribui novas propriedades
+                        item['usuNome'] = item.Nome;
+                        item['usuDataNasc'] = dataNascimento;
+                        item['usuTel'] = item.Telefone;
+                        item['usuCel'] = item.Celular;
+                        item['usuEmailPart'] = email;
+                        item['usuEmailInst'] = emaili;
+                        item['typeUser'] = "leitor";
+                        item['password'] = "@"+dataNascimento.replace(/\//g, "");
+                        item['primAcesso'] = true;
+                        // Exclui a propriedades originais
+                        delete item['Nome'];  
+                        delete item['Data de Nasc.'];
+                        delete item['Telefone'];  
+                        delete item['Celular'];
+                        delete item['e-mail'];  
+                        delete item['e-mail institucional'];
+
                         result[rm] = item;
                     });
                 }
@@ -71,4 +92,26 @@ function excelFileToJSON(file) {
     }
 }
 
+
+function converterNumeroParaData(numero) {
+
+    const dataExcel = new Date((numero - 1) * 24 * 60 * 60 * 1000);
+    const dia = dataExcel.getDate().toString().padStart(2, '0');
+    const mes = (dataExcel.getMonth() + 1).toString().padStart(2, '0');
+
+
+    // Número de série do Excel para data base (1 de janeiro de 1900)
+const dataBaseExcel = new Date(1900, 0, 1);
+
+    // Adiciona o número de dias correspondente ao número de série do Excel
+    const dataExcel2 = new Date(dataBaseExcel.getTime() + (numero - 1) * 24 * 60 * 60 * 1000);
+    const ano = dataExcel2.getFullYear();
+    console.log(dia+"/"+mes+"/"+ano);
+
+    return `${dia}/${mes}/${ano}`;
+}
+
+
+
+//EVENTOS
 uplaund.addEventListener('click', upload);
