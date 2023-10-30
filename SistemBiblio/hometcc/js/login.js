@@ -21,89 +21,88 @@ import {getDatabase, ref, set, get, child, onValue,update, remove } from "https:
 
 const db = getDatabase();
 
-var formentrar = document.querySelector('#entrar')
-var formcadastrar = document.querySelector('#cadastrar-se')
+// var formentrar = document.querySelector('#entrar')
+// var formcadastrar = document.querySelector('#cadastrar-se')
 
-var btncolor = document.querySelector('.btncolor')
+// var btncolor = document.querySelector('.btncolor')
 
-document.querySelector('#btnentrar').addEventListener('click',()=>{
-  formentrar.style.left = "25px"
-  formcadastrar.style.left = "450px"
-  btncolor.style.left = "0px"
-  btncolor.style.width = "100px"
-});
+// document.querySelector('#btnentrar').addEventListener('click',()=>{
+//   formentrar.style.left = "25px"
+//   formcadastrar.style.left = "450px"
+//   btncolor.style.left = "0px"
+//   btncolor.style.width = "100px"
+// });
 
-document.querySelector('#cadastrar').addEventListener('click',()=>{
-  formentrar.style.left = "-450px"
-  formcadastrar.style.left = "25px"
-  btncolor.style.left = "105px"
-  btncolor.style.width = "134px"
-});
+// document.querySelector('#cadastrar').addEventListener('click',()=>{
+//   formentrar.style.left = "-450px"
+//   formcadastrar.style.left = "25px"
+//   btncolor.style.left = "105px"
+//   btncolor.style.width = "134px"
+// });
 // --------------------INICIO DO CADASTRO--------------------------------------------------------------------------
 var validaForm = document.getElementById('ValidaForm');
 
+var usuNome = document.getElementById('txtusuNome');
+var usuDataNasc = document.getElementById('usuDataNasc');
+var usuCurso = "3° Desenvolvimento de Sistemas";      //document.getElementById('usuCurso');
+var usuRM = document.getElementById('usuRM');
+var usuTelefone = "(17) 99123-4567";                 //document.getElementById('usuTelefone');
+var usuEndereço = "Rua José Piton, 238 - Jardim II"; //document.getElementById('usuEndereço');
+var usuCPF = "123.456.789-00";                       //document.getElementById('usuCPF');
+var usuEmail = document.getElementById('txtusuEmail');
+var usuSenha = document.getElementById('txtusuSenha');
+var usuSenha2 = document.getElementById('txtusuSenha2');
 function ValidaForm(){
-  var usuNome = document.getElementById('txtusuNome');
-  var usuDataNasc = "DD-MM-AAAA";                       //document.getElementById('usuDataNasc');
-  var usuCurso = "3° Desenvolvimento de Sistemas";      //document.getElementById('usuCurso');
-  var usuRM = "04535";                                 //document.getElementById('usuRM');
-  var usuTelefone = "(17) 99123-4567";                 //document.getElementById('usuTelefone');
-  var usuEndereço = "Rua José Piton, 238 - Jardim II"; //document.getElementById('usuEndereço');
-  var usuCPF = "123.456.789-00";                       //document.getElementById('usuCPF');
-  var usuEmail = document.getElementById('txtusuEmail');
-  var usuSenha = document.getElementById('txtusuSenha');
-  var usuSenha2 = document.getElementById('txtusuSenha2');
 
+//   var usuNomeVal = usuNome.value;
+//   var usuEmailVal = usuEmail.value;
+//   var usuSenhaVal = usuSenha.value;
+//   var usuSenha2Val = usuSenha2.value;
 
-  var usuNomeVal = usuNome.value;
-  var usuEmailVal = usuEmail.value;
-  var usuSenhaVal = usuSenha.value;
-  var usuSenha2Val = usuSenha2.value;
+// if(!usuNomeVal){
+//   Swal.fire({
+//   icon: 'error',
+//   title: 'Oops...',
+//   text: 'Digite seu nome completo, por favor! ',
+//   })
+//   return false;
+// }
 
-if(!usuNomeVal){
-  Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'Digite seu nome completo, por favor! ',
-  })
-  return false;
-}
+// if(!usuEmailVal){
+//   Swal.fire({
+//   icon: 'error',
+//   title: 'Oops...',
+//   text: 'E-mail não pode ficar em branco!',
+//   })
+//   return false;
+// }
 
-if(!usuEmailVal){
-  Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'E-mail não pode ficar em branco!',
-  })
-  return false;
-}
+// if(!usuSenhaVal){
+//   Swal.fire({
+//   icon: 'error',
+//   title: 'Oops...',
+//   text: 'Senhas não pode ficar em branco!',
+//   })
+//   return false;
+// }
 
-if(!usuSenhaVal){
-  Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'Senhas não pode ficar em branco!',
-  })
-  return false;
-}
+// if(!usuSenha2Val){
+//   Swal.fire({
+//   icon: 'error',
+//   title: 'Oops...',
+//   text: 'Confirmação de senha não pode ficar em branco!',
+//   })
+//   return false;
+// }
 
-if(!usuSenha2Val){
-  Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'Confirmação de senha não pode ficar em branco!',
-  })
-  return false;
-}
-
-if(usuSenhaVal && usuSenha2Val && (usuSenhaVal != usuSenha2Val)) {
-  Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'Senhas não são iguais!',
-  })
-  return false;
-}
+// if(usuSenhaVal && usuSenha2Val && (usuSenhaVal != usuSenha2Val)) {
+//   Swal.fire({
+//   icon: 'error',
+//   title: 'Oops...',
+//   text: 'Senhas não são iguais!',
+//   })
+//   return false;
+// }
   
 Swal.fire({
   title: 'Você deseja salvar seus dados?',
@@ -124,12 +123,18 @@ Swal.fire({
 //--------------- VERIFICA EXISTENCIA DE CONTA ------------
 function VerificaContaExistente(){
   const dbRef = ref(db);
-  get(child(dbRef, "usuário/"+usuNome.value)).then((snapshot)=>{
+  console.log("chamado")
+  get(child(dbRef, "UsuárioAutomatico/"+usuRM.value)).then((snapshot)=>{
+    console.log("2");
     if(snapshot.exists()){
-      Swal.fire('Dados Já Existentes!', '', 'error')
+      console.log("3");
+      if(snapshot.val().password == usuDataNasc.value){
+        usuSenha.value = snapshot.val().usuNome;
+        alert("Seu nome cadastrado é: "+snapshot.val().usuNome);
+      }
     }
     else{
-      RegistreUsuario();
+      alert("RM inválido");
     }
   })
 }
