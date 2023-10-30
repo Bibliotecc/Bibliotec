@@ -1,21 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Excel to Firebase | Javacodepoint</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>  
+    <link rel="stylesheet" href="../../css/style.css">
   </head>
   <body>
-    <a href="../index.html"><button>VOLTAR</button></a>
-    <h1>Importando Dados Para o FireBase</h1>
-    <p>Foi muito dificil chegar aqui. Espero que de certo! Que Deus esteja conosco!!</p>
-    <input type="file" id="file_upload" />
-   <button id="uplaund">UPLOAD</button>
-    <br>
-    <br>
-    <!-- container to display the json result -->
-    <textarea id="json-result" style="display:none;height:500px;width:350px;"></textarea>
+    <nav class="menu-lateral">
+      <div class="btn-expandir">
+          <i> <img src="../../img/icons/dashboardarrow.png" alt=""> </i>
+      </div>
+      <ul>
+          <li class="item-menu">
+              <a href="../todosLivros.html">
+                  <span class="icone"> <img src="../../img/icons/book.png" alt=""> </span>
+                  <span class="txt-link">Livros</span>
+              </a>
+          </li> 
+          <li class="item-menu">
+              <a href="../inserirLivros.html">
+                  <span class="icone"> <img src="../../img/icons/Badd.png" alt=""> </span>
+                  <span class="txt-link">Inserir Livro</span>
+              </a>
+          </li>
+  <!--    <li class="item-menu">
+              <a href="#">
+                  <span class="icone"> <img src="../img/icons/Breservados.png" alt=""> </span>
+                  <span class="txt-link">Livros Alocados</span>
+              </a>
+          </li>
+          <li class="item-menu">
+              <a href="livrosDispo.html">
+                  <span class="icone"> <img src="../img/icons/Bdisponiveis.png" alt=""> </span>
+                  <span class="txt-link">Livros Disponiveis</span>
+              </a>
+          </li> -->
+          <li class="item-menu">
+              <a href="admusers/index.html">
+                  <span class="icone"> <img src="../../img/icons/loginDash.png" alt=""> </span>
+                  <span class="txt-link">Inserir Alunos</span>
+              </a>
+          </li>
+          <li class="item-menu">
+              <a href="#">
+                  <span class="icone"> <img src="../../img/icons/loginDash.png" alt=""> </span>
+                  <span class="txt-link">Conta</span>
+              </a>
+          </li>
+      </ul>
+  </nav>
+  <header>
+    <div class="container-adm">
+        <nav class="menu">
+            <ul>
+                <li id="nomeAdm"> </li>
+                <li> <a href="./index.html"> <img src="../../img/logo/logotcc.png" alt="logotcc"> </a> </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+  <div class="background-fundo-all">
+    <div class="container">
+      <h1 class="titulo-ins-aluno">Importando Dados Para o FireBase</h1>
+      <p>Foi muito dificil chegar aqui. Espero que de certo! Que Deus esteja conosco!!</p>
+      <input type="file" id="file_upload" />
+      <button id="uplaund">UPLOAD</button>
+      <br>
+      <br>
+      <!-- container to display the json result -->
+      <textarea id="json-result" style="display:none;height:500px;width:350px;"></textarea>
+    </div>
+  </div>
 
     <script type="module" src="teste.js"></script>
   </body>

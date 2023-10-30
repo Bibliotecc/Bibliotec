@@ -690,6 +690,10 @@ th, td {
     vertical-align: middle; 
     border-bottom: 1px solid #ddd;
 }
+
+/* TELA INSERÇÃO DE ALUNOS */
+
+
 /* RESPONSIVIDADE CELULAR */
 
 @media (max-width: 624px){
