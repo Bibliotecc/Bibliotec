@@ -115,7 +115,9 @@ header{
     width: 220px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    user-select: none; /* Não permitir seleção de texto dentro das imagens (capas) */
 }
+
 
 .container h1{
     margin-top: 80px;
@@ -128,7 +130,8 @@ header{
     display: flex;
     justify-content: flex-start;
     column-gap: 7.3%;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .estil-books a{
@@ -150,6 +153,9 @@ header{
     background-color: #3092ca;
     transition: .2s
 }
+.estil-books img{
+    user-select: none;
+}
 
 .estil-books{
     background-color: #fff;
@@ -161,6 +167,8 @@ header{
     display: flex;
     flex-direction: column;
     margin-top: 2%;
+    touch-action: pan-y; /* Habilita o deslizamento vertical */
+    user-select: none; /* Não permitir seleção de texto dentro dos cards */
 }
 
 footer{
@@ -836,4 +844,23 @@ th, td {
         font-size: 25px;
     }
    
+}
+.carousel {
+    display: flex;
+    transition: all 0.5s;
+}
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition:  0.3s;
+}
+
+.carousel-button:hover {
+    background: #0056b3;
 }
