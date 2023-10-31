@@ -123,7 +123,7 @@
 
     carousel.addEventListener("mouseup", () => {
         isDragging = false;
-        carousel.style.cursor = "grab";
+        carousel.style.cursor= "grab";
     });
 
     carousel.addEventListener("mouseleave", () => {
@@ -155,7 +155,7 @@
     // Calculate the number of visible books based on the container width
     function calculateVisibleBooks() {
         const containerWidth = document.querySelector(".container-books").offsetWidth;
-        const bookWidth = document.querySelector(".book").offsetWidth;
+        const bookWidth = document.querySelector(".stil-books").offsetWidth;
         return Math.floor(containerWidth / bookWidth);
     }
 
