@@ -168,8 +168,6 @@ function GetAllDataOnce(){
        snapshot.forEach(childSnapshot => {
            livros.push(childSnapshot.val());
        });
-
-       ChamaReservaLivro(livros);
        GetAllDataRealTime();
    });
 }
