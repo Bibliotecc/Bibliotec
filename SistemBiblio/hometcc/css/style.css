@@ -776,9 +776,7 @@ th, td {
     white-space: nowrap; /* Isso evita que os elementos quebrem para uma nova linha */
     }
 
-    .carousel-button{
-        display: none;
-    }
+
 
     .container h1{
         margin-top: 40px;
