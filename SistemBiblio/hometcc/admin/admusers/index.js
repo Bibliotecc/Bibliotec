@@ -30,9 +30,6 @@ async function upload() {
 
         console.log(result);
 
-        // var newNum = await GetUltimoId("UsuarioAutomatico/contatos");
-
-        // console.log(newNum);
 
         var usuarios = {};
         var telefones = {};
@@ -45,7 +42,7 @@ async function upload() {
                 usuNome: item.usuNome,
                 usuDataNasc: item.usuDataNasc,
                 typeUser: "leitor",
-                password: "@" + item.usuDataNasc.replace(/\//g, ""),
+                password: "",
                 primAcesso: true
             };
             usuarios[item.RM] = usuario;
@@ -96,6 +93,7 @@ function excelFileToJSON(file) {
                             const rm = item.RM;
                             const email = item[Object.keys(item)[5]];
                             const emaili = item[Object.keys(item)[6]];
+                            console.log(item['Data de Nasc.']);
                             const dataNascimento = converterNumeroParaData(item['Data de Nasc.']);
 
                             // Atribui novas propriedades
@@ -106,7 +104,7 @@ function excelFileToJSON(file) {
                             item['usuEmailPart'] = email;
                             item['usuEmailInst'] = emaili;
                             item['typeUser'] = "leitor";
-                            item['password'] = "@" + dataNascimento.replace(/\//g, "");
+                            item['password'] = " ";
                             item['primAcesso'] = true;
                             // Exclui a propriedades originais
                             delete item['Nome'];
@@ -134,9 +132,8 @@ function excelFileToJSON(file) {
 function converterNumeroParaData(numero) {
 
     const dataExcel = new Date((numero - 1) * 24 * 60 * 60 * 1000);
-    const dia = dataExcel.getDate().toString().padStart(2, '0');
     const mes = (dataExcel.getMonth() + 1).toString().padStart(2, '0');
-
+    const dia = dataExcel.getDate().toString().padStart(2, '0');
 
     // Número de série do Excel para data base (1 de janeiro de 1900)
 const dataBaseExcel = new Date(1900, 0, 1);
@@ -144,30 +141,12 @@ const dataBaseExcel = new Date(1900, 0, 1);
     // Adiciona o número de dias correspondente ao número de série do Excel
     const dataExcel2 = new Date(dataBaseExcel.getTime() + (numero - 1) * 24 * 60 * 60 * 1000);
     const ano = dataExcel2.getFullYear();
-    console.log(dia+"/"+mes+"/"+ano);
-
+    
+    
     return `${dia}/${mes}/${ano}`;
+    
 }
 //-------------------------------------------------------
-function GetUltimoId(nomeTabela) {
-    const dbref = ref(db);
-    const tabelaRef = child(dbref, nomeTabela);
-
-    return new Promise((resolve, reject) => {
-        get(tabelaRef)
-            .then((snapshot) => {
-                let numeroDeNodos = 0;
-                snapshot.forEach(() => {
-                    numeroDeNodos++;
-                });
-                resolve(numeroDeNodos);
-            })
-            .catch((error) => {
-                reject(error);
-            });
-    });
-}
-
 
 //EVENTOS
 uplaund.addEventListener('click', upload);
