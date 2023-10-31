@@ -91,10 +91,13 @@
         </div>
     </div>
     <script>
-       const carousel = document.getElementById("carousel");
+      const carousel = document.getElementById("carousel");
     const prevButton = document.getElementById("prev-button");
     const nextButton = document.getElementById("next-button");
+    let isDragging = false;
+    let startPosition = 0;
     let currentTranslate = 0;
+    let visibleBooks = 1;
 
     prevButton.addEventListener("click", () => {
         navigateCarousel(1);
@@ -104,46 +107,58 @@
         navigateCarousel(-1);
     });
 
-    // Remove event listeners relacionados ao mouse para dispositivos móveis
+    carousel.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startPosition = e.clientX - currentTranslate;
+        carousel.style.cursor = "grabbing";
+    });
 
-    // Prevent user from selecting text during drag
+    carousel.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        const currentPosition = e.clientX;
+        const translate = currentPosition - startPosition;
+        currentTranslate = translate;
+        carousel.style.transform = `translateX(${translate}px)`;
+    });
+
+    carousel.addEventListener("mouseup", () => {
+        isDragging = false;
+        carousel.style.cursor = "grab";
+    });
+
+    carousel.addEventListener("mouseleave", () => {
+        isDragging = false;
+        carousel.style.cursor = "grab";
+    });
+
+    // Prevent user from selecting text while dragging
     carousel.addEventListener("selectstart", (e) => {
         e.preventDefault();
     });
 
     function navigateCarousel(direction) {
         const cardWidth = document.querySelector(".container-books").offsetWidth;
+        const maxTranslate = -cardWidth * (document.querySelectorAll(".container-books").length - visibleBooks);
         currentTranslate += direction * cardWidth;
-        currentTranslate = Math.max(
-            -cardWidth * (document.querySelectorAll(".container-books").length - 1),
-            Math.min(0, currentTranslate)
-        );
+        currentTranslate = Math.max(maxTranslate, Math.min(0, currentTranslate));
         carousel.style.transform = `translateX(${currentTranslate}px)`;
     }
 
-    // Mantenha o scroll habilitado no contêiner do carrossel
-    // Remova event listeners de mousedown, mousemove, mouseup e mouseleave
-
-    // Atualize a exibição do carrossel quando a janela for redimensionada
+    // Update the visible books when the window is resized
     window.addEventListener("resize", () => {
-        // Atualize a largura dos cartões e o tamanho do carrossel
-        updateCarouselSize();
+        visibleBooks = calculateVisibleBooks();
+        navigateCarousel(0); // Reset the carousel position
     });
 
-    // Função para atualizar a largura dos cartões e o tamanho do carrossel
-    function updateCarouselSize() {
+    // Calculate the number of visible books based on the container width
+    function calculateVisibleBooks() {
         const containerWidth = document.querySelector(".container-books").offsetWidth;
-        const cardWidth = document.querySelector(".container-books .book").offsetWidth;
-        const newCarouselWidth = containerWidth * document.querySelectorAll(".container-books").length;
-        document.querySelectorAll(".container-books").forEach((container) => {
-            container.style.width = `${newCarouselWidth}px`;
-        });
-        currentTranslate = Math.min(0, currentTranslate); // Redefina a posição se necessário
-        carousel.style.transform = `translateX(${currentTranslate}px)`;
+        const bookWidth = document.querySelector(".book").offsetWidth;
+        return Math.floor(containerWidth / bookWidth);
     }
 
-    // Inicialmente, atualize a exibição do carrossel
-    updateCarouselSize();
+    // Initially, calculate and set the visible books
+    visibleBooks = calculateVisibleBooks();
     </script>
 
 
