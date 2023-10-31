@@ -135,10 +135,13 @@ header{
     align-items: center;
 }
 
-.carousel {
-    display: flex;
-    transition: all 0.5s;
-}
+
+    .carousel {
+        width: 100%; /* Defina a largura desejada para o carrossel */
+        overflow: hidden; /* Oculta o conteúdo que ultrapassar os limites do carrossel */
+        white-space: nowrap; /* Evita que os elementos quebrem para a próxima linha */
+      }
+
 
 
 
@@ -885,10 +888,12 @@ th, td {
         font-size: 25px;
     }
 
-    #container-books{
-        width: 100%;
-        overflow: auto; /* Adicione isso para permitir o scroll */
-        white-space: nowrap; /* Isso evita que os elementos quebrem para uma nova linha */
-    }
-   
+ 
+}
+
+.ajuste{
+    
+   max-width: 70%; 
+    overflow: visible;
+
 }
