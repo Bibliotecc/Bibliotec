@@ -108,44 +108,59 @@
     </div>
 
     <script>
-        var li = document.getElementById('nomeAdm');
-    
-          //  let signoutlink =document.getElementById('signoutlink');
-        var currentUser = "!logado"; 
-    
-        function getUsername(){
-            let keepLoggedIn = localStorage.getItem("keepLoggedIn");
-            if(keepLoggedIn == "yes"){
-                currentUser = JSON.parse(localStorage.getItem('user'));
-            }
-        }
-        function Signout(){
-            localStorage.removeItem('user');
-            localStorage.removeItem('keepLoggedIn');
-            window.location = "../index.html";
-        }
-        getUsername();
-            if(currentUser == "!logado"){
-            let a = document.createElement("a");
-                a.innerText = "Login";
-                a.href = "../login.html";
-            let img = document.createElement("img");
-                img.src = "img/icons/login.png";
-                img.className = "icon";
-            a.appendChild(img);
-            li.appendChild(a);
-            
-    
-            }
-            else{
-                let a = document.createElement("a");
-                    a.innerText = currentUser.usuNome;
-                    a.href = "javascript:Signout()";
-    
-                li.appendChild(a);
-                console.log("Nome usu");
-            }
-    
+       const carousel = document.getElementById("carousel");
+    const prevButton = document.getElementById("prev-button");
+    const nextButton = document.getElementById("next-button");
+    let currentTranslate = 0;
+
+    prevButton.addEventListener("click", () => {
+        navigateCarousel(2);
+    });
+
+    nextButton.addEventListener("click", () => {
+        navigateCarousel(-2);
+    });
+
+    // Remove event listeners relacionados ao mouse para dispositivos móveis
+
+    // Prevent user from selecting text during drag
+    carousel.addEventListener("selectstart", (e) => {
+        e.preventDefault();
+    });
+
+    function navigateCarousel(direction) {
+        const cardWidth = document.querySelector(".container-books").offsetWidth;
+        currentTranslate += direction * cardWidth;
+        currentTranslate = Math.max(
+            -cardWidth * (document.querySelectorAll(".container-books").length - 1),
+            Math.min(0, currentTranslate)
+        );
+        carousel.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    // Mantenha o scroll habilitado no contêiner do carrossel
+    // Remova event listeners de mousedown, mousemove, mouseup e mouseleave
+
+    // Atualize a exibição do carrossel quando a janela for redimensionada
+    window.addEventListener("resize", () => {
+        // Atualize a largura dos cartões e o tamanho do carrossel
+        updateCarouselSize();
+    });
+
+    // Função para atualizar a largura dos cartões e o tamanho do carrossel
+    function updateCarouselSize() {
+        const containerWidth = document.querySelector(".container-books").offsetWidth;
+        const cardWidth = document.querySelector(".container-books .book").offsetWidth;
+        const newCarouselWidth = containerWidth * document.querySelectorAll(".container-books").length;
+        document.querySelectorAll(".container-books").forEach((container) => {
+            container.style.width = `${newCarouselWidth}px`;
+        });
+        currentTranslate = Math.min(0, currentTranslate); // Redefina a posição se necessário
+        carousel.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    // Inicialmente, atualize a exibição do carrossel
+    updateCarouselSize();
     </script>
     <script type="module" src="js/getLivros.js"></script>
 </body>
