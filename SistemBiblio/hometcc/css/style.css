@@ -795,6 +795,7 @@ th, td {
     .container-books{
     width: 100%;
     white-space: nowrap; /* Isso evita que os elementos quebrem para uma nova linha */
+    margin-left: 0%;
     }
     .estil-button-carousel{
         display: flex;
