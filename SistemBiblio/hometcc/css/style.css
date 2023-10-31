@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 .background-fundo-all{
@@ -139,9 +140,7 @@ header{
     transition: all 0.5s;
 }
 
-.container-estil-carousel-button{
-    
-}
+
 
 .estil-button-carousel{
     display: flex;
