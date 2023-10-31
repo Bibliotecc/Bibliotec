@@ -91,7 +91,7 @@
         </div>
     </div>
     <script>
-     const carousel = document.getElementById("carousel");
+      const carousel = document.getElementById("carousel");
     const prevButton = document.getElementById("prev-button");
     const nextButton = document.getElementById("next-button");
     let isDragging = false;
@@ -123,7 +123,7 @@
 
     carousel.addEventListener("mouseup", () => {
         isDragging = false;
-        carousel.style.cursor= "grab";
+        carousel.style.cursor = "grab";
     });
 
     carousel.addEventListener("mouseleave", () => {
@@ -138,11 +138,9 @@
 
     function navigateCarousel(direction) {
         const cardWidth = document.querySelector(".container-books").offsetWidth;
-        currentTranslate += direction * cardWidth * visibleBooks;
-        currentTranslate = Math.max(
-            -cardWidth * (document.querySelectorAll(".container-books").length - visibleBooks),
-            Math.min(0, currentTranslate)
-        );
+        const maxTranslate = -cardWidth * (document.querySelectorAll(".container-books").length - visibleBooks);
+        currentTranslate += direction * cardWidth;
+        currentTranslate = Math.max(maxTranslate, Math.min(0, currentTranslate));
         carousel.style.transform = `translateX(${currentTranslate}px)`;
     }
 
@@ -155,7 +153,7 @@
     // Calculate the number of visible books based on the container width
     function calculateVisibleBooks() {
         const containerWidth = document.querySelector(".container-books").offsetWidth;
-        const bookWidth = document.querySelector(".stil-books").offsetWidth;
+        const bookWidth = document.querySelector(".book").offsetWidth;
         return Math.floor(containerWidth / bookWidth);
     }
 
