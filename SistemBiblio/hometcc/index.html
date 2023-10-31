@@ -92,58 +92,83 @@
     </div>
     <script>
         const carousel = document.getElementById("carousel");
-const prevButton = document.getElementById("prev-button");
-const nextButton = document.getElementById("next-button");
-let isDragging = false;
-let startPosition = 0;
-let currentTranslate = 0;
+    const botaoAnterior = document.getElementById("prev-button");
+    const botaoSeguinte = document.getElementById("next-button");
+    let estaArrastando = false;
+    let posicaoInicial = 0;
+    let deslocamentoAtual = 0;
 
-prevButton.addEventListener("click", () => {
-    navigateCarousel(1);
-});
+    // Função para calcular a quantidade de livros exibidos com base na largura disponível
+    function calcularQuantidadeLivrosExibidos() {
+        const larguraCarousel = carousel.offsetWidth; // Largura do contêiner do carrossel
+        const larguraLivro = document.querySelector(".container-livros").offsetWidth; // Largura de cada livro
+        return Math.floor(larguraCarousel / larguraLivro);
+    }
 
-nextButton.addEventListener("click", () => {
-    navigateCarousel(-1);
-});
+    // Função para atualizar a exibição do carrossel com a quantidade correta de livros
+    function atualizarExibicaoCarrossel() {
+        const quantidadeLivrosExibidos = calcularQuantidadeLivrosExibidos();
+        // Atualize o número de livros exibidos no carrossel
+        // Certifique-se de definir o limite máximo (1 para evitar valores negativos)
+        const novaQuantidade = Math.max(quantidadeLivrosExibidos, 1);
+        // Atualize o estilo do carrossel para exibir a nova quantidade de livros
+        carousel.style.width = `${novaQuantidade * 100}%`;
+    }
 
-carousel.addEventListener("mousedown", (e) => {
-    isDragging = true;
-    startPosition = e.clientX - currentTranslate;
-    carousel.style.cursor = "grabbing";
-});
+    botaoAnterior.addEventListener("click", () => {
+        navegarCarousel(1);
+    });
 
-carousel.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
-    const currentPosition = e.clientX;
-    const translate = currentPosition - startPosition;
-    currentTranslate = translate;
-    carousel.style.transform = `translateX(${translate}px)`;
-});
+    botaoSeguinte.addEventListener("click", () => {
+        navegarCarousel(-1);
+    });
 
-carousel.addEventListener("mouseup", () => {
-    isDragging = false;
-    carousel.style.cursor = "grab";
-});
+    carousel.addEventListener("mousedown", (e) => {
+        estaArrastando = true;
+        posicaoInicial = e.clientX - deslocamentoAtual;
+        carousel.style.cursor = "grabbing";
+    });
 
-carousel.addEventListener("mouseleave", () => {
-    isDragging = false;
-    carousel.style.cursor = "grab";
-});
+    carousel.addEventListener("mousemove", (e) => {
+        if (!estaArrastando) return;
+        const posicaoAtual = e.clientX;
+        const deslocamento = posicaoAtual - posicaoInicial;
+        deslocamentoAtual = deslocamento;
+        carousel.style.transform = `translateX(${deslocamento}px)`;
+    });
 
-// Evite que o usuário selecione o texto durante o arrastar
-carousel.addEventListener("selectstart", (e) => {
-    e.preventDefault();
-});
+    carousel.addEventListener("mouseup", () => {
+        estaArrastando = false;
+        carousel.style.cursor = "grab";
+    });
 
-function navigateCarousel(direction) {
-    const cardWidth = document.querySelector(".container-books").offsetWidth;
-    currentTranslate += direction * cardWidth;
-    currentTranslate = Math.max(
-        -cardWidth * (document.querySelectorAll(".container-books").length - 1),
-        Math.min(0, currentTranslate)
-    );
-    carousel.style.transform = `translateX(${currentTranslate}px)`;
-}
+    carousel.addEventListener("mouseleave", () => {
+        estaArrastando = false;
+        carousel.style.cursor = "grab";
+    });
+
+    // Evite que o usuário selecione o texto durante o arrastar
+    carousel.addEventListener("selectstart", (e) => {
+        e.preventDefault();
+    });
+
+    function navegarCarousel(direcao) {
+        const larguraLivro = document.querySelector(".container-livros").offsetWidth;
+        deslocamentoAtual += direcao * larguraLivro;
+        deslocamentoAtual = Math.max(
+            -larguraLivro * (document.querySelectorAll(".container-livros").length - 1),
+            Math.min(0, deslocamentoAtual)
+        );
+        carousel.style.transform = `translateX(${deslocamentoAtual}px)`;
+    }
+
+    // Atualize a exibição do carrossel quando a janela for redimensionada
+    window.addEventListener("resize", () => {
+        atualizarExibicaoCarrossel();
+    });
+
+    // Inicialmente, calcule e configure a exibição do carrossel
+    atualizarExibicaoCarrossel();
     </script>
 
 
