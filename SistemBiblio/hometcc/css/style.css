@@ -775,6 +775,12 @@ th, td {
     width: 100%;
     white-space: nowrap; /* Isso evita que os elementos quebrem para uma nova linha */
     }
+    .estil-button-carousel{
+        display: flex;
+        margin-top: 25px;
+        justify-content: center;
+        gap: 10px;
+    }
 
 
 
