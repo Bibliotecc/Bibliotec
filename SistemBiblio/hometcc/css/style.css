@@ -140,12 +140,6 @@ header{
     transition: all 0.5s;
 }
 
-#carousel{
-    width: 100%;
-    overflow: auto; /* Adicione isso para permitir o scroll */
-    white-space: nowrap;
-}
-
 
 
 .estil-button-carousel{
