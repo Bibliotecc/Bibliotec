@@ -373,7 +373,7 @@ footer{
     color: #000000;
 }
 
-.buttonsform button{
+.buttonsform p{
     font-family: Especificacoes;
     font-size: 15px;
     cursor: pointer;
