@@ -146,7 +146,8 @@ header{
 .estil-button-carousel{
     display: flex;
     margin-top: 25px;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 10px;
 }
 
 .carousel-button {
