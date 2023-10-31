@@ -137,18 +137,18 @@
     });
 
     function navigateCarousel(direction) {
-        const cardWidth = document.querySelector(".container-books").offsetWidth;
-        const maxTranslate = -cardWidth * (document.querySelectorAll(".container-books").length - visibleBooks);
-        currentTranslate += direction * cardWidth;
-        currentTranslate = Math.max(maxTranslate, Math.min(0, currentTranslate));
-        carousel.style.transform = `translateX(${currentTranslate}px)`;
-    }
+    const cardWidth = document.querySelector(".container-books").offsetWidth;
+    const maxTranslate = -cardWidth * (document.querySelectorAll(".container-books").length - visibleBooks);
 
-    // Update the visible books when the window is resized
-    window.addEventListener("resize", () => {
-        visibleBooks = calculateVisibleBooks();
-        navigateCarousel(0); // Reset the carousel position
-    });
+    // Atualiza a tradução atual com base na direção
+    currentTranslate += direction * cardWidth;
+
+    // Limita a tradução dentro dos limites do carrossel
+    currentTranslate = Math.max(maxTranslate, Math.min(0, currentTranslate));
+
+    // Aplica a transformação ao carrossel
+    carousel.style.transform = `translateX(${currentTranslate}px)`;
+}
 
     // Calculate the number of visible books based on the container width
     function calculateVisibleBooks() {
