@@ -765,10 +765,12 @@ th, td {
     .container-books img{
         max-width: 95px;
         width: auto;
+        user-select: auto;
     }
 
     .container-books{
     column-gap: 6%;
+    width: 100%;
     }
 
     .container h1{
@@ -856,6 +858,12 @@ th, td {
 
     .especificacao-livro h1{
         font-size: 25px;
+    }
+
+    #container-books{
+        width: 100%;
+        overflow: auto; /* Adicione isso para permitir o scroll */
+        white-space: nowrap; /* Isso evita que os elementos quebrem para uma nova linha */
     }
    
 }
