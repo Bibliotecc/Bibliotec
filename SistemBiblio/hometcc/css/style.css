@@ -385,6 +385,12 @@ footer{
     color: #ffffff;
 }
 
+.buttonsform .redefinir{
+    background-color: transparent;
+    color: #000;
+    font-size: 20px;
+}
+
 .firstAccess{
     font-size: 15px;
     color: #006ce7;

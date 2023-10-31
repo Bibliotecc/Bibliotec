@@ -26,12 +26,12 @@
         <div class="body-login">
             <div class="container-login">
                 <div class="buttonsform">
-                    <div class="btncolor"></div>
-                    <p>Redefina sua senha</p> 
+                    <p class="redefinir">Redefina sua senha</p> 
                 </div>
                <form>
-                    <input type="password" placeholder="Insira sua nova senha" id="newPass" required oninvalid="this.setCustomValidity('Senha não pode ficar em branco')" oninput="setCustomValidity('')"/> 
-                    <input type="password" placeholder="Confirme sua nova senha" id="newPassVal" required oninvalid="this.setCustomValidity('Confirmação de senha não pode ficar em branco')" oninput="setCustomValidity('')"/>
+                <input type="password" placeholder="Senha atual" id="oldPass">
+                    <input type="password" placeholder="Insira sua nova senha" id="newPass"/> 
+                    <input type="password" placeholder="Confirme sua nova senha" id="newPassVal"/>
                     <div class="divcheck">
                     </div>
                     <button class="buttoncadastro" onclick="validaSenha();">Redefinir Senha</button>
