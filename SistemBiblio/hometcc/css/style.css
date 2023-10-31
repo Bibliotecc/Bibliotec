@@ -7,7 +7,7 @@
 
 .background-fundo-all{
     background-image: url(../img/background/background.png);
-    overflow: hidden;
+    overflow: scroll;
 }
 
 h1 {
@@ -54,8 +54,8 @@ header{
 .container{
     width: 60%;
     height: 100%;
-    margin-left: auto;
     margin-right: auto;
+    margin-left: auto;
 }
 
 .menu img{
@@ -130,10 +130,12 @@ header{
 
 .container-books{
     display: flex;
-    justify-content: flex-start;
-    column-gap: 7.3%;
+    justify-content: center,flex-start;
+    column-gap: 6%;
     flex-wrap: nowrap;
     align-items: center;
+    width: 100%;
+    margin-left: 70px;
 }
 
 
@@ -771,7 +773,6 @@ th, td {
     }
 
     .container-books{
-    column-gap: 6%;
     width: 100%;
     white-space: nowrap; /* Isso evita que os elementos quebrem para uma nova linha */
     }
@@ -781,9 +782,6 @@ th, td {
         justify-content: center;
         gap: 10px;
     }
-
-
-
     .container h1{
         margin-top: 40px;
         font-size: 25px;

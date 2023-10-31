@@ -81,6 +81,9 @@ function SelecionarDadosFiltro() {
         })
 }
 
+
+
+
 //  GET ALL 
 var stdNo = 0;
 var cntrPrin = document.getElementById('container-principal');
