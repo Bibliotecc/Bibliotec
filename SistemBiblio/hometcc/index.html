@@ -44,8 +44,12 @@
                         <!-- LIVROS -->
                     </div>
                 </div>
-                
-              
+            </div>
+            <div class="container-estil-carousel-button">
+                <div class="estil-button-carousel">
+                    <button id="prev-button" class="carousel-button">Anterior</button>
+                    <button id="next-button" class="carousel-button">Próximo</button>
+                </div>
             </div>
             <!-- FIM DIV  container-books -->
             <h1>Ficção Cientifica</h1>
@@ -86,14 +90,21 @@
             </div>
         </div>
     </div>
-<script>
-    const carousel = document.getElementById("carousel");
+    <script>
+        const carousel = document.getElementById("carousel");
 const prevButton = document.getElementById("prev-button");
 const nextButton = document.getElementById("next-button");
 let isDragging = false;
 let startPosition = 0;
 let currentTranslate = 0;
 
+prevButton.addEventListener("click", () => {
+    navigateCarousel(1);
+});
+
+nextButton.addEventListener("click", () => {
+    navigateCarousel(-1);
+});
 
 carousel.addEventListener("mousedown", (e) => {
     isDragging = true;
@@ -128,15 +139,21 @@ function navigateCarousel(direction) {
     const cardWidth = document.querySelector(".container-books").offsetWidth;
     currentTranslate += direction * cardWidth;
     currentTranslate = Math.max(
-        -cardWidth * (document.querySelectorAll(".conteiner-books").length - 1),
+        -cardWidth * (document.querySelectorAll(".container-books").length - 1),
         Math.min(0, currentTranslate)
     );
     carousel.style.transform = `translateX(${currentTranslate}px)`;
 }
-</script>
-        <script type="module" src="js\index.js"></script>
+    </script>
 
-<script>
+
+
+
+
+---------------------------------------------------------------------------------
+    <script type="module" src="js\index.js"></script>
+
+    <script>
         var li = document.getElementById('loginLI');
 
         //  let signoutlink =document.getElementById('signoutlink');

@@ -128,10 +128,44 @@ header{
 
 .container-books{
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     column-gap: 7.3%;
     flex-wrap: nowrap;
     align-items: center;
+}
+
+.carousel {
+    display: flex;
+    transition: all 0.5s;
+}
+
+.container-estil-carousel-button{
+    
+}
+
+.estil-button-carousel{
+    display: flex;
+    margin-top: 25px;
+    justify-content: space-between;
+}
+
+.carousel-button {
+    position: relative;
+    top: 50%;
+    border-radius: 25px;
+    font-family: Paragrafos;
+    font-size: 16px;
+    background-color: #1D6A96;
+    transform: translateY(-50%);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition:  0.3s;
+}
+
+.carousel-button:hover {
+    background: #0056b3;
 }
 
 .estil-books a{
@@ -844,23 +878,4 @@ th, td {
         font-size: 25px;
     }
    
-}
-.carousel {
-    display: flex;
-    transition: all 0.5s;
-}
-.carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition:  0.3s;
-}
-
-.carousel-button:hover {
-    background: #0056b3;
 }
