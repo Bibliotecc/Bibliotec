@@ -12,17 +12,23 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-import { getDatabase, ref, set, get, child, onValue, update, remove } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+import { getDatabase, ref, set, get, child, onValue, update, remove, } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
 
 const db = getDatabase();
 
 // Aqui são todas as configurações necessárias para acessar o banco de dados. O que está dentro das chaves do import,
 // são os metódos que executam a função ao qual recebem o nome. Dev. Lucas Moreira
 
+//Referências URL
+var urlAtual = window.location.href;
+var urlClass = new URL(urlAtual);
+var nameLivro = urlClass.searchParams.get("name");
+
+
 var btnEditar = document.getElementById("bntEditar");
+
 // Referências aos campos tanto do FIREBASE quanto no FORMULÁRIO de alteração
 var nomeLivro = document.getElementById('nomeLivro');
-const dbrefLivro = ref(db, "livros/"+nomeLivro.value);
 var nomeAutor = document.getElementById("nomeAutor");
 var editora = document.getElementById("editora");
 var genLivro = document.getElementById("genLivro");
@@ -41,12 +47,64 @@ var dataAquisicao = document.getElementById("dataAquisicao");
 var volume = document.getElementById("volume");
 
 
-// COLOCA OS OUTROS CAMPOS AQ
 
-dbrefLivro.once('value').then(function(snapshot) {
-    var dados = snapshot.val();
-    nomeLivro.value = dados.nomeLivro;
-    genLivro.value = dados.genLivro;
+var nickLivro; // criado fora da função para ser usado em qualquer uma
+function buscaDados(livro){
+    var arrayLivro = livro.find((element) => element.nomeLivro == nameLivro);
+     nickLivro = arrayLivro.idLivro;
+// Acima eu tratei a array do livro que bate com o "pesquisado". Use console.log(arrayLivro) para ver
+
+     const dbref = ref(db, "livros/" + nickLivro);
+     if (nomeLivro.value === "") { //o sinal de = três verifica significa que ele verifica se o valor é igual e se o tipo também é
+        Swal.fire({
+            title: 'Erro',
+            text: 'Por favor, insira o nome do livro',
+            icon: 'error'
+        });
+        return;
+    }
+
+     Swal.fire({
+        title: 'Deseja buscar por: "'+nameLivro+'" ?',
+        cancelButtonText: 'Cancelar',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, buscar',
+        showLoaderOnConfirm: true,
+        preConfirm: () => {
+            return new Promise((resolve, reject) => {
+                onValue(dbref, (snapshot) => {
+                    const dados = snapshot.val();
+                    if (dados) {
+                        resolve(dados);
+                    } else {
+                        reject('Verifique o nome do livro');
+                        closed;
+                    }
+                });
+            });
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    })
+    .then((result) => {
+        if (result.value) {
+            preencherFormulario(result.value);
+            Swal.fire({
+                title: 'Encontrei os dados!',
+                icon: 'success',
+            });
+        } else {
+            Swal.fire({
+                title: 'Busca cancelada',
+                text: result.value,
+                icon: 'error',
+            });
+        }
+    });
+} 
+
+nomeLivro.value = nameLivro;
+function preencherFormulario(dados){   
+    genLivro.value = dados.gênero;
     nomeAutor.value = dados.nomeAutor;
     editora.value = dados.editora;
     nomeColecao.value = dados.nomeColecao;
@@ -62,13 +120,8 @@ dbrefLivro.once('value').then(function(snapshot) {
     ISBN.value = dados.ISBN;
     dataAquisicao.value = dados.dataAquisicao;
     volume.value = dados.volume;
-
     // COLOCA OS OUTROS CAMPOS AQ
-}).catch(function(error) {
-    console.log("NÃO BUSCOU OS DADOS: " + error);
-    alert("NÃO BUSCOU OS DADOS: " + error);
-});
-
+}
 
 function atualizaLivros() {
     var novoNomeLivro = nomeLivro.value;
@@ -89,8 +142,8 @@ function atualizaLivros() {
     var novoDataAquisicao = dataAquisicao.value;
     var novoVolume = volume.value;
 
-    update(child(dbref, "livros/"+nomeLivro.value),{
-
+const dbref = ref(db);
+    update(child(dbref, "livros/"+nickLivro),{
         nomeLivro: novoNomeLivro,
         genLivro: novoGenLivro,
         nomeAutor: novoNomeAutor,
@@ -110,13 +163,36 @@ function atualizaLivros() {
         volume: novoVolume
 
     }).then(function() {
-        console.log("ALTERAÇÃO FEITA!");
-        alert("ALTERAÇÃO FEITA!");
+        Swal.fire({
+            title: 'Dados alterados!',
+            icon: 'success',
+        });
     }).catch(function(error) {
-        console.error("ERRO AO ALTERAR: " + error);
-        alert("ERRO AO ALTERAR: " + error);
+        Swal.fire({
+            title: 'Erro ao alterar!',
+            text: error,
+            icon: 'error',
+        });
     });
 }
 
 // CHAMAR A FUNÇÃO ATUALIZA LIVROS QUANDO PRESSIONAR O BOTÃO
 btnEditar.addEventListener('click', atualizaLivros);
+
+
+// EVENTOS SUSTENTAM O SISTEMA
+function GetAllDataRealTime() {
+    const dbref = ref(db, "livros");
+
+    onValue(dbref, (snapshot) => {
+        var livros = [];
+        snapshot.forEach(childSnapshot => {
+            livros.push(childSnapshot.val());
+        });
+        
+        buscaDados(livros);
+        
+    })
+}
+
+window.onload = GetAllDataRealTime;
