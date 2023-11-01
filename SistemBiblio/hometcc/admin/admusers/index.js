@@ -130,21 +130,15 @@ function excelFileToJSON(file) {
 
 
 function converterNumeroParaData(numero) {
+    const dataExcel = XLSX.SSF.parse_date_code(numero); // FUNÇÃO QUE EU TO FALANDO
+    const dia = dataExcel.d.toString().padStart(2, '0');
+    const mes = (dataExcel.m).toString().padStart(2, '0');
 
-    const dataExcel = new Date((numero - 1) * 24 * 60 * 60 * 1000);
-    const mes = (dataExcel.getMonth() + 1).toString().padStart(2, '0');
-    const dia = dataExcel.getDate().toString().padStart(2, '0');
+    const ano = dataExcel.y;
 
-    // Número de série do Excel para data base (1 de janeiro de 1900)
-const dataBaseExcel = new Date(1900, 0, 1);
-
-    // Adiciona o número de dias correspondente ao número de série do Excel
-    const dataExcel2 = new Date(dataBaseExcel.getTime() + (numero - 1) * 24 * 60 * 60 * 1000);
-    const ano = dataExcel2.getFullYear();
-    
+    console.log(dia + "/" + mes + "/" + ano);
     
     return `${dia}/${mes}/${ano}`;
-    
 }
 //-------------------------------------------------------
 
