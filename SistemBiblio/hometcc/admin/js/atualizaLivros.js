@@ -1,4 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-storage.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC95RHcPl1VhNT484rnwWDaE_E8cC_q4ZQ",
@@ -15,6 +16,7 @@ const app = initializeApp(firebaseConfig);
 import { getDatabase, ref, set, get, child, onValue, update, remove, } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
 
 const db = getDatabase();
+const storage = getStorage(app);
 
 // Aqui são todas as configurações necessárias para acessar o banco de dados. O que está dentro das chaves do import,
 // são os metódos que executam a função ao qual recebem o nome. Dev. Lucas Moreira
@@ -45,7 +47,7 @@ var Cutter = document.getElementById("Cutter");
 var ISBN = document.getElementById("ISBN");
 var dataAquisicao = document.getElementById("dataAquisicao");
 var volume = document.getElementById("volume");
-
+var idLivro;
 
 
 var nickLivro; // criado fora da função para ser usado em qualquer uma
@@ -103,7 +105,8 @@ function buscaDados(livro){
 } 
 
 nomeLivro.value = nameLivro;
-function preencherFormulario(dados){   
+function preencherFormulario(dados){  
+    idLivro = dados.idLivro 
     genLivro.value = dados.gênero;
     nomeAutor.value = dados.nomeAutor;
     editora.value = dados.editora;
@@ -160,9 +163,9 @@ const dbref = ref(db);
         Cutter: novoCutter,
         ISBN: novoISBN,
         dataAquisicao: novoDataAquisicao,
-        volume: novoVolume
-
+        volume: novoVolume,
     }).then(function() {
+        salvaImagem(idLivro);
         Swal.fire({
             title: 'Dados alterados!',
             icon: 'success',
@@ -175,9 +178,51 @@ const dbref = ref(db);
         });
     });
 }
-
+function salvaImagem(idLivro) {
+    const dbref = ref(db);
+    // Obtém o elemento de entrada de arquivo pelo ID
+    const inputFile = document.querySelector("#imgLivro");
+    var urlImg;
+    // Verifica se um arquivo foi selecionado
+    if (inputFile.files.length > 0) {
+        // Pega o primeiro arquivo do input
+        const imgLivro = inputFile.files[0];
+        
+        // Referência para o local onde você deseja armazenar o arquivo no Storage
+        const storageRe = storageRef(storage, 'img/livros/' + imgLivro.name);
+        
+        // Faz o upload do arquivo
+        uploadBytes(storageRe, imgLivro)
+            .then((snapshot) => {
+                console.log("Sucesso ao salvar imagem!");
+                // Obtém a URL do arquivo após o upload
+                return getDownloadURL(snapshot.ref);
+            })
+            .then((downloadURL) => {
+                 urlImg = downloadURL;
+                console.log('Imagem disponível em:', urlImg);
+                update(child(dbref, "livros/"+idLivro),{
+                    urlImg: downloadURL
+                }).then(() => {
+                    console.log("Dados de 'livros' atualizados com sucesso!");
+                  })
+                  .catch(error => {
+                    console.error("Erro ao atualizar dados de 'livros': ", error);
+                  });
+            })
+            .catch((error) => {
+                console.log("Erro ao salvar imagem!", error);
+            });
+    } else {
+        console.error("Nenhum arquivo selecionado!");
+    }
+}
 // CHAMAR A FUNÇÃO ATUALIZA LIVROS QUANDO PRESSIONAR O BOTÃO
 btnEditar.addEventListener('click', atualizaLivros);
+
+
+
+
 
 
 // EVENTOS SUSTENTAM O SISTEMA
@@ -194,5 +239,4 @@ function GetAllDataRealTime() {
         
     })
 }
-
 window.onload = GetAllDataRealTime;
