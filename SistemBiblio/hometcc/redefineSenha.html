@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <script src="js/redefinesenha.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="css/style.css">
-   </head>
+</head>
 <header> 
     <div class="container">
         <nav class="menu">
@@ -26,22 +26,15 @@
         <div class="body-login">
             <div class="container-login">
                 <div class="buttonsform">
-                    <div class="btncolor"></div>
-                    <p>Entrar</p>
-                    <!-- <button id="cadastrar">1° Acesso</button> -->
+                    <p class="redefinir">Redefina sua senha</p> 
                 </div>
-                <form  id="entrar">
-                    <input type="text" placeholder="Nome Completo" id="txtusuNomeL" required/>
-                    <input type="password" placeholder="Senha" id="txtusuSenhaL" required/>
-
-                    <a class="firstAccess" href="primeiroAcesso.html"> * PRIMEIRO ACESSO</a>
-
+               <form>
+                <input type="password" placeholder="Senha atual" id="oldPass">
+                    <input type="password" placeholder="Insira sua nova senha" id="newPass"/> 
+                    <input type="password" placeholder="Confirme sua nova senha" id="newPassVal"/>
                     <div class="divcheck">
-                        <input type="checkbox">
-                        <span>Lembrar senha</span>
                     </div>
-                    <a id="LoginForm" class="buttoncadastro"> Entrar </a>
-                    <a id="ValidaForm">A</a>
+                    <button class="buttoncadastro" onclick="validaSenha();">Redefinir Senha</button>
                 </form>
             </div>
         </div>
@@ -78,39 +71,5 @@
             </div>
         </div>
     </div>
-    <script type="module" src="js/login.js"></script>
-    <!-- CRIP PASSWORD-->
-        <script>
-        // ----------- CRIPTOGRAFA SENHA ----------
-        var usuSenha = document.getElementById("txtusuSenha");
-        var usuSenhaL = document.getElementById("txtusuSenhaL");
-        
-            function cripSenha(){
-                var senhaCrip = CryptoJS.AES.encrypt(usuSenha.value, usuSenha.value);
-                return senhaCrip.toString();
-            }
-
-            function decPass(dbpass){
-                var senhaCrip = CryptoJS.AES.decrypt(dbpass, usuSenhaL.value);
-                return senhaCrip.toString(CryptoJS.enc.Utf8);
-            }
-        </script>
-    <!-- EVENTOS ENTER-->
- <!--   <script>   
-        $(function(){
-        
-       $('corpo').keypress(function (e) {
-       var key = e.which;
-       if(key == 13)  // the enter key code
-        {
-          $('loginForm').click();
-          return false;  
-        }
-      });
-        
-      });  
-    </script> -->
-  
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
