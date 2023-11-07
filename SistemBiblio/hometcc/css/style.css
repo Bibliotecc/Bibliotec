@@ -373,7 +373,7 @@ footer{
     color: #000000;
 }
 
-.buttonsform button{
+.buttonsform p{
     font-family: Especificacoes;
     font-size: 15px;
     cursor: pointer;
@@ -383,6 +383,12 @@ footer{
     position: relative;
     padding: 10px 29px;
     color: #ffffff;
+}
+
+.buttonsform .redefinir{
+    background-color: transparent;
+    color: #000;
+    font-size: 20px;
 }
 
 .firstAccess{
