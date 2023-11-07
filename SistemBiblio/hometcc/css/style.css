@@ -528,6 +528,7 @@ footer{
 
 .container-adm{
     width: 60%;
+    height: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -742,6 +743,73 @@ th, td {
 
 /* TELA INSERÇÃO DE ALUNOS */
 
+.container-alunos{
+    max-width: 600px;
+    height: 300px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    border-radius: 30px;
+}
+
+.conteudo-alunos{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+}
+
+.colocar-arquivo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    border: 3px solid #1D6A96;
+    padding: 30px;
+    border-radius: 30px;
+}
+
+.colocar-arquivo h1{
+    font-family: FonteTitulo;
+    font-size: 27px;
+    text-shadow: none;
+    padding: 15px 0px;
+}
+
+.colocar-arquivo p{
+    font-family: Especificacoes;
+    font-size: 16px;
+}
+
+.colocar-arquivo p a{
+    color: #1D6A96;
+}
+
+.colocar-arquivo img{
+    width: 50px;
+}
+
+.botao-alunos{
+    margin-top: 15px;
+}
+
+.botao-alunos button{
+    font-family: FonteTitulo;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    background: #006ce7;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    padding: 12px 60px;
+}
+
+.botao-alunos button:hover{
+    background-color: #3092ca;
+    transition: .2s
+}
 
 /* RESPONSIVIDADE CELULAR */
 
