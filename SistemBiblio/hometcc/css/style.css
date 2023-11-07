@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    user-select: none;
 }
 
 .background-fundo-all{
@@ -93,6 +92,7 @@ header{
 
 .dropdown-menu{
     position: absolute;
+    z-index: 10;
     background-color: #1D6A96;
     box-shadow: 0px 5px 15px 0px #000;
     display: none;
@@ -130,7 +130,7 @@ header{
 
 .container-books{
     display: flex;
-    justify-content: center,flex-start;
+    justify-content: flex-start;
     column-gap: 6%;
     flex-wrap: nowrap;
     align-items: center;
@@ -138,14 +138,10 @@ header{
     margin-left: 70px;
 }
 
-
-    .carousel {
-        width: 100%; /* Defina a largura desejada para o carrossel */
-        white-space: nowrap; /* Evita que os elementos quebrem para a próxima linha */
-      }
-
-
-
+.carousel {
+    width: 100%; /* Defina a largura desejada para o carrossel */
+    white-space: nowrap; /* Evita que os elementos quebrem para a próxima linha */
+    }
 
 .estil-button-carousel{
     display: flex;
