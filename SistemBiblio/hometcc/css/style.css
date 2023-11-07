@@ -7,7 +7,7 @@
 
 .background-fundo-all{
     background-image: url(../img/background/background.png);
-    overflow: scroll;
+    overflow: hidden;
 }
 
 h1 {
