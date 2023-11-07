@@ -32,7 +32,7 @@ async function upload() {
 
 
         var usuarios = {};
-        var telefones = {};
+        var telefones = {}; 
         var emails = {};
 
         // Normalizar os dados
