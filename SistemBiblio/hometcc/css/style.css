@@ -789,6 +789,11 @@ th, td {
 
 .colocar-arquivo p a{
     color: #1D6A96;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Especificacoes;
 }
 
 .colocar-arquivo img{
@@ -815,6 +820,10 @@ th, td {
 .botao-alunos button:hover{
     background-color: #3092ca;
     transition: .2s
+}
+
+.borda-verde{
+    border-color: rgb(3, 204, 37);
 }
 
 /* RESPONSIVIDADE CELULAR */
