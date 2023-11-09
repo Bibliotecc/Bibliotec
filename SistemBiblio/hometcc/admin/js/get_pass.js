@@ -22,7 +22,7 @@ var rm = document.getElementById("rm");
 var btnRedef = document.getElementById("redPass");
 btnRedef.addEventListener('click', validaEmail);
 //--------FUNÇÕES 
-function validaEmail(){
+export function validaEmail(){
   const dbRef = ref(db);
   get(child(dbRef, "UsuarioAutomatico/emails/"+rm.value)).then((snapshot)=>{
     if(snapshot.exists()){
@@ -156,5 +156,5 @@ function Recovery(){
             swal('error','Campos em branco!')
         }
 
-    }
+}
     

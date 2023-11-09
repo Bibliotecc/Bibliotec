@@ -21,129 +21,131 @@ import {getDatabase, ref, set, get, child, onValue,update, remove } from "https:
 
 const db = getDatabase();
 
-var validaForm = document.getElementById('ValidaForm');
-var usuRM = document.getElementById('txtRM');
-var usuSenha = document.getElementById('txtusuSenha');
+// var validaForm = document.getElementById('ValidaForm');
+// var usuRM = document.getElementById('txtRM');
+// var usuSenha = document.getElementById('txtusuSenha');
 
-function ValidaForm(){
+// function ValidaForm(){
 
-//   var usuNomeVal = usuNome.value;
-//   var usuEmailVal = usuEmail.value;
-//   var usuSenhaVal = usuSenha.value;
-//   var usuSenha2Val = usuSenha2.value;
+// //   var usuNomeVal = usuNome.value;
+// //   var usuEmailVal = usuEmail.value;
+// //   var usuSenhaVal = usuSenha.value;
+// //   var usuSenha2Val = usuSenha2.value;
 
-// if(!usuNomeVal){
-//   Swal.fire({
-//   icon: 'error',
-//   title: 'Oops...',
-//   text: 'Digite seu nome completo, por favor! ',
-//   })
-//   return false;
-// }
+// // if(!usuNomeVal){
+// //   Swal.fire({
+// //   icon: 'error',
+// //   title: 'Oops...',
+// //   text: 'Digite seu nome completo, por favor! ',
+// //   })
+// //   return false;
+// // }
 
-// if(!usuEmailVal){
-//   Swal.fire({
-//   icon: 'error',
-//   title: 'Oops...',
-//   text: 'E-mail não pode ficar em branco!',
-//   })
-//   return false;
-// }
+// // if(!usuEmailVal){
+// //   Swal.fire({
+// //   icon: 'error',
+// //   title: 'Oops...',
+// //   text: 'E-mail não pode ficar em branco!',
+// //   })
+// //   return false;
+// // }
 
-// if(!usuSenhaVal){
-//   Swal.fire({
-//   icon: 'error',
-//   title: 'Oops...',
-//   text: 'Senhas não pode ficar em branco!',
-//   })
-//   return false;
-// }
+// // if(!usuSenhaVal){
+// //   Swal.fire({
+// //   icon: 'error',
+// //   title: 'Oops...',
+// //   text: 'Senhas não pode ficar em branco!',
+// //   })
+// //   return false;
+// // }
 
-// if(!usuSenha2Val){
-//   Swal.fire({
-//   icon: 'error',
-//   title: 'Oops...',
-//   text: 'Confirmação de senha não pode ficar em branco!',
-//   })
-//   return false;
-// }
+// // if(!usuSenha2Val){
+// //   Swal.fire({
+// //   icon: 'error',
+// //   title: 'Oops...',
+// //   text: 'Confirmação de senha não pode ficar em branco!',
+// //   })
+// //   return false;
+// // }
 
-// if(usuSenhaVal && usuSenha2Val && (usuSenhaVal != usuSenha2Val)) {
-//   Swal.fire({
-//   icon: 'error',
-//   title: 'Oops...',
-//   text: 'Senhas não são iguais!',
-//   })
-//   return false;
-// }
+// // if(usuSenhaVal && usuSenha2Val && (usuSenhaVal != usuSenha2Val)) {
+// //   Swal.fire({
+// //   icon: 'error',
+// //   title: 'Oops...',
+// //   text: 'Senhas não são iguais!',
+// //   })
+// //   return false;
+// // }
   
-Swal.fire({
-  title: 'Você deseja salvar seus dados?',
-  showDenyButton: true,
-  showCancelButton: true,
-  confirmButtonText: 'Salvar',
-  denyButtonText: `Não Salvar`,
-}).then((result) => {
-  /* Read more about isConfirmed, isDenied below */
-  if (result.isConfirmed) {
-    VerificaContaExistente();
-  } else if (result.isDenied) {
-    Swal.fire('Dados não salvos', '', 'error')
-  }
-})
+// Swal.fire({
+//   title: 'Você deseja salvar seus dados?',
+//   showDenyButton: true,
+//   showCancelButton: true,
+//   confirmButtonText: 'Salvar',
+//   denyButtonText: `Não Salvar`,
+// }).then((result) => {
+//   /* Read more about isConfirmed, isDenied below */
+//   if (result.isConfirmed) {
+//     VerificaContaExistente();
+//   } else if (result.isDenied) {
+//     Swal.fire('Dados não salvos', '', 'error')
+//   }
+// })
 
 
-//--------------- VERIFICA EXISTENCIA DE CONTA ------------
-function VerificaContaExistente(){
-  const dbRef = ref(db);
-  console.log("chamado")
-  get(child(dbRef, "UsuárioAutomatico/"+usuRM.value)).then((snapshot)=>{
-    console.log("2");
-    if(snapshot.exists()){
-      console.log("3");
-      if(snapshot.val().password == usuDataNasc.value){
-        usuSenha.value = snapshot.val().usuNome;
-        alert("Seu nome cadastrado é: "+snapshot.val().usuNome);
-      }
-    }
-    else{
-      alert("RM inválido");
-    }
-  })
-}
-// -------------- REGISTRA USERS --------------------------
-function RegistreUsuario(){
-  const dbRef = ref(db);
-      set(ref(db, "usuário/"+usuNome.value),
-      {
-        usuNome: usuNome.value,
-        usuDataNasc: usuDataNasc,
-        usuCurso: usuCurso,
-        usuRM: usuRM,
-        usuTelefone: usuTelefone,
-        usuEndereço: usuEndereço,
-        usuCPF: usuCPF,
-        usuEmail: usuEmail,
-        password: cripSenha(),
-        typeUser: "leitor"
-      })
-      .then(()=>{
-        Swal.fire('Dados Salvos!', '', 'success')
-      })
-      .catch((error)=>{
-        alert("Erro: "+ error);
-    });
-  }
+// //--------------- VERIFICA EXISTENCIA DE CONTA ------------
+// function VerificaContaExistente(){
+//   const dbRef = ref(db);
+//   console.log("chamado")
+//   get(child(dbRef, "UsuárioAutomatico/"+usuRM.value)).then((snapshot)=>{
+//     console.log("2");
+//     if(snapshot.exists()){
+//       console.log("3");
+//       if(snapshot.val().password == usuDataNasc.value){
+//         usuSenha.value = snapshot.val().usuNome;
+//         alert("Seu nome cadastrado é: "+snapshot.val().usuNome);
+//       }
+//     }
+//     else{
+//       alert("RM inválido");
+//     }
+//   })
+// }
+// // -------------- REGISTRA USERS --------------------------
+// function RegistreUsuario(){
+//   const dbRef = ref(db);
+//       set(ref(db, "usuário/"+usuNome.value),
+//       {
+//         usuNome: usuNome.value,
+//         usuDataNasc: usuDataNasc,
+//         usuCurso: usuCurso,
+//         usuRM: usuRM,
+//         usuTelefone: usuTelefone,
+//         usuEndereço: usuEndereço,
+//         usuCPF: usuCPF,
+//         usuEmail: usuEmail,
+//         password: cripSenha(),
+//         typeUser: "leitor"
+//       })
+//       .then(()=>{
+//         Swal.fire('Dados Salvos!', '', 'success')
+//       })
+//       .catch((error)=>{
+//         alert("Erro: "+ error);
+//     });
+//   }
 
 
-}
-validaForm.addEventListener('click', ValidaForm);
+// }
+// validaForm.addEventListener('click', ValidaForm);
 // Info.: O ValidaForm está funcionando corretamente, se houver alguma dúvida, fale com Dev. Lucas Moreira Ferreira
 
 // --------------------INICIO LOGIN--------------------------------------------------------------------------
+
+//----------------------------------LOGIN-----------------------------------------------------
 var loginForm = document.getElementById('LoginForm');
 function LoginForm(){
-  var rm = document.getElementById('txtusuNomeL');
+  var rm = document.getElementById('txtRM');
   var usuSenhaL = document.getElementById('txtusuSenhaL');
 
   var usuNomeVal = rm.value;
