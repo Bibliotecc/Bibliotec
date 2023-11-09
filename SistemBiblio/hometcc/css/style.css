@@ -889,4 +889,30 @@ th, td {
  
 }
 
+/*tela locados*/
+
+.h1locados{
+    font-family: Paragrafos;
+    margin-left: 30px;
+    margin-top: 60px;
+    font-size: 30px;
+}
+
+th{
+    border-radius: 10px;
+}
+
+#atraso{
+    color:red
+}
+
+.mensagemFixa,.saudacao{
+    font-family: Paragrafos;
+    font-size:20px;
+    display: inline-flex;
+    margin-top: 30px;
+    
+}
+
+
 
