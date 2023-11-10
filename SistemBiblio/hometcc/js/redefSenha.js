@@ -44,13 +44,14 @@ function solicitaSenha(){
 
 function validaEmail(email, rm){
     const dbRef = ref(db);
-    get(child(dbRef, "UsuarioAutomatico/emails/"+rm)).then((snapshot)=>{
+    get(child(dbRef, "UsuarioAutomatico/usuario/"+rm)).then((snapshot)=>{
       if(snapshot.exists()){
         let emailInst = snapshot.val();
-        var emailTu = emailInst.usuEmailInstitucional
-        console.log(emailTu);
+        var emailTu = emailInst.usuEmailInstitucional;
+        let usuNome = snapshot.val();
+        console.table(emailTu, usuNome);
         if(emailTu == email){
-          geraPassword(email, rm);
+          geraPassword(email, rm, usuNome);
         }
         else{
           Swal.fire({
@@ -70,8 +71,8 @@ function validaEmail(email, rm){
     });
   }
   
-function geraPassword(email, rm) { //GERA SENHA
-      var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ!@#$%^&*()+?><:{}[]"; //TODOS CARACTERES
+function geraPassword(email, rm, nome) { //GERA SENHA
+      var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ!@#$%"; //TODOS CARACTERES
       var passwordLength = 6; //TAMANHO DA SENHA
       var password = "";
   
@@ -79,17 +80,26 @@ function geraPassword(email, rm) { //GERA SENHA
         var randomNumber = Math.floor(Math.random() * chars.length); // BIBLIOTECA MATH PARA FAZER CALCULOS
         password += chars.substring(randomNumber, randomNumber + 1);
       }
-      SolicitaReset(email,password, rm);
+      SolicitaReset(email,password, rm, nome);
     }
   
-async function SolicitaReset(email,password, rm){ 
+async function SolicitaReset(email,password, rm, nome){ 
           if (email) {
+            var Body = '<h1>BIBLIOTEC</h1><br><p> Olá caro leitor, </p>'+nome+'<p>!</p><p>A sua senha para redefinição é: </p>'+password+'<p>!</p><p>A sua senha para redefinição é: </p>';
+            var Title = "BiblioTec | Primeiro Acesso e Redefinição de Senha";
+            var Subject = "REDEFINIÇÃO DE SENHA";   
+            console.log(Body);
           $.ajax({
               type:"POST",
               url:'https://sitedoaugusto.com/bibliotec/get_pass.php',
               data:{
+                // email senha body subject title from
                   email: email,
-                  senha: password
+                  senha: password,
+                  from: 'augusto@sitedoaugusto.com',
+                  subject: Subject,
+                  title: Title,
+                  body: Body
               },crossDomain: true,
               beforeSend: function() {
                   Swal.fire({
