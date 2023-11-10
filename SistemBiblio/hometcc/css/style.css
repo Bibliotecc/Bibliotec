@@ -787,7 +787,11 @@ th, td {
     font-size: 16px;
 }
 
-.colocar-arquivo p a{
+.colocar-arquivo p input[type="file"]{
+    display: none;
+}
+
+.colocar-arquivo p label{
     color: #1D6A96;
     border: none;
     background-color: transparent;
