@@ -30,10 +30,8 @@ async function upload() {
 
         console.log(result);
 
-
         var usuarios = {};
         var telefones = {}; 
-        var emails = {};
 
         // Normalizar os dados
         Object.values(result).forEach(item => {
@@ -43,7 +41,8 @@ async function upload() {
                 usuDataNasc: item.usuDataNasc,
                 typeUser: "leitor",
                 password: "",
-                primAcesso: true
+                primAcesso: true,
+                usuEmailInstitucional: item.usuEmailInst
             };
             usuarios[item.RM] = usuario;
 
@@ -54,12 +53,6 @@ async function upload() {
             };
             telefones[item.RM] = telefone;
 
-            var email = {
-                usuRM: item.RM,
-                usuEmailParticular: item.usuEmailPart,
-                usuEmailInstitucional: item.usuEmailInst
-            };
-            emails[item.RM] = email;
         });
 
         // Inserir dados normalizados no Firebase
@@ -67,7 +60,6 @@ async function upload() {
 
         update(child(dbref, "UsuarioAutomatico/"), {usuarios});
         update(child(dbref, "UsuarioAutomatico/"), {telefones});
-        update(child(dbref, "UsuarioAutomatico/"), {emails});
 
         alert("Dados normalizados inseridos no Firebase!");
     } catch (error) {
@@ -101,10 +93,9 @@ function excelFileToJSON(file) {
                             item['usuDataNasc'] = dataNascimento;
                             item['usuTel'] = item.Telefone;
                             item['usuCel'] = item.Celular;
-                            item['usuEmailPart'] = email;
                             item['usuEmailInst'] = emaili;
                             item['typeUser'] = "leitor";
-                            item['password'] = " ";
+                            item['password'] = "";
                             item['primAcesso'] = true;
                             // Exclui a propriedades originais
                             delete item['Nome'];

@@ -44,13 +44,12 @@ function solicitaSenha(){
 
 function validaEmail(email, rm){
     const dbRef = ref(db);
-    get(child(dbRef, "UsuarioAutomatico/usuario/"+rm)).then((snapshot)=>{
+    get(child(dbRef, "UsuarioAutomatico/usuarios/"+rm)).then((snapshot)=>{
       if(snapshot.exists()){
-        let emailInst = snapshot.val();
-        var emailTu = emailInst.usuEmailInstitucional;
-        let usuNome = snapshot.val();
-        console.table(emailTu, usuNome);
-        if(emailTu == email){
+        let emailInst = snapshot.val().usuEmailInstitucional;
+        let usuNome = snapshot.val().usuNome;
+        console.table(emailInst, usuNome);
+        if(emailInst == email){
           geraPassword(email, rm, usuNome);
         }
         else{
@@ -85,7 +84,7 @@ function geraPassword(email, rm, nome) { //GERA SENHA
   
 async function SolicitaReset(email,password, rm, nome){ 
           if (email) {
-            var Body = '<h1>BIBLIOTEC</h1><br><p> Olá caro leitor, </p>'+nome+'<p>!</p><p>A sua senha para redefinição é: </p>'+password+'<p>!</p><p>A sua senha para redefinição é: </p>';
+            var Body = '<h1>BIBLIOTEC</h1><br><p> Olá caro leitor, '+nome+'!</p><p>A sua senha para redefinição é: '+password+'</p>';
             var Title = "BiblioTec | Primeiro Acesso e Redefinição de Senha";
             var Subject = "REDEFINIÇÃO DE SENHA";   
             console.log(Body);
