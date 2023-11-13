@@ -150,6 +150,61 @@
     // Inicialmente, atualize a exibição do carrossel
     updateCarouselSize();
     </script> -->
+    
+    <script>
+         var li = document.getElementById('nomeAdm');
+
+//  let signoutlink =document.getElementById('signoutlink');
+var currentUser = "!logado";
+
+function getUsername() {
+    let keepLoggedIn = localStorage.getItem("keepLoggedIn");
+    if (keepLoggedIn == "yes") {
+        currentUser = JSON.parse(localStorage.getItem('user'));
+    }
+}
+function Signout() {
+    Swal.fire({
+        title: 'Tem certeza que deseja sair?',
+        showDenyButton: true,
+        confirmButtonText: 'Quero Sair',
+        denyButtonText: `Não Quero Sair`,
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            localStorage.removeItem('user');
+            localStorage.removeItem('keepLoggedIn');
+            window.location = "index.html";
+        }
+        else if (result.isDenied) {
+            Swal.fire('Entendo entendo, você não vai sair!', '', 'error');
+        }
+    })
+}
+getUsername();
+if (currentUser == "!logado") {
+    let a = document.createElement("a");
+    a.innerText = "Login";
+    a.href = "login.html";
+    let img = document.createElement("img");
+    img.src = "img/icons/login.png";
+    img.className = "icon";
+    a.appendChild(img);
+    li.appendChild(a);
+
+
+}
+else {
+    let a = document.createElement("a");
+    a.innerText = currentUser.usuNome;
+    a.href = "javascript:Signout()";
+
+    li.appendChild(a);
+    console.log(currentUser.typeUser);
+}
+
+    </script>
+    
     <script type="module" src="js/getLivros.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
