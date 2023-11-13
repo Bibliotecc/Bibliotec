@@ -51,56 +51,52 @@ function updateSenha(){
     })
     return false;
   }
-if(usuSenha.value == confirmaSenha.value){
-  const dbRef = ref(db);
-      get(child(dbRef, "UsuarioAutomatico/usuarios/"+rm.value)).then((snapshot)=>{
-        if(snapshot.exists()){
-          let dbpass = snapshot.val().password;
-          console.log(decPass(dbpass));
-            if(snapshot.val().primAcesso == true){
-              const dbref = ref(db);
-              update(child(dbref, "UsuarioAutomatico/usuarios/"+rm.value),{
-                password: cripSenha(),
-                primAcesso: false
-            }).then(() => {
-                Swal.fire({
-                    title: "A Senha foi Alterada!",
-                    text:"Vamos prosseguir para a tela principal?",
-                    showCancelButton: true,
-                    confirmButtonText: "Sim!",
-                    showLoaderOnConfirm: true,
-                    preConfirm: function () {
-                        return new Promise(function (resolve) {
-                          resolve([
-                                window.location = "./primeiroAcesso.html"
-                          ])
-                        })  
-                    }});
-                    
-              })
-              .catch(error => {
-                Swal.fire(
-                    `Erro!`,
-                    'Erro ao redefinir senha: ' + error,
-                    `error`)
-              });
-            }
-            else{
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'A Senha Já Foi Redefinida!',
-                })
-            }
-          }
-          });
-}
-else{
+  else{
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'As Senhas não conferem!',
         })
+}
+if (usuSenha.value == confirmaSenha.value) {
+  const dbRef = ref(db);
+  get(child(dbRef, "UsuarioAutomatico/usuarios/" + rm.value)).then((snapshot) => {
+    if (snapshot.exists()) {
+      let dbpass = snapshot.val().password;
+      console.log(decPass(dbpass));
+
+      if (snapshot.val().primAcesso == true) {
+        const dbref = ref(db);
+        update(child(dbref, "UsuarioAutomatico/usuarios/" + rm.value), {
+          password: cripSenha(),
+          primAcesso: false
+        }).then(() => {
+          Swal.fire({
+            title: "A Senha foi Alterada!",
+            text: "Vamos prosseguir para a tela principal?",
+            showCancelButton: true,
+            confirmButtonText: "Sim!",
+            showLoaderOnConfirm: true,
+            preConfirm: function () {
+              window.location = "./primeiroAcesso.html";
+            }
+          });
+        }).catch(error => {
+          Swal.fire(
+            `Erro!`,
+            'Erro ao redefinir senha: ' + error,
+            `error`
+          );
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'A Senha Já Foi Redefinida!',
+        });
+      }
+    }
+  });
 }
 }
 

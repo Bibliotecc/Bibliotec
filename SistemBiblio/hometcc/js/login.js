@@ -52,20 +52,29 @@ if(!usuSenhaLVal){
         if(snapshot.exists()){
           let dbpass = snapshot.val().password;
           console.log(decPass(dbpass));
-          if(decPass(dbpass) == usuSenhaL.value){
-            if(snapshot.val().primAcesso == true){
-              window.location = "./primeiroAcesso.html";
-            }
+          if(snapshot.val().primAcesso == true){
+            if(dbpass == usuSenhaL.value){
+                window.location = "./primeiroAcesso.html";
+              }
             else{
-              Login(snapshot.val());
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Senha Incorreta Amigo Leitor!',
+                })
             }
           }
           else{
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Senha Incorreta Amigo Leitor!',
-              })
+              if(decPass(dbpass) == usuSenhaL.value){
+              Login(snapshot.val());
+              }
+              else{
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Senha Incorreta Amigo Leitor!',
+                  })
+              }
           }
         }
       });

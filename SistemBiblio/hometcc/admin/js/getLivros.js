@@ -24,7 +24,7 @@ const db = getDatabase();
   //------- Referencias -----------
   var corpo = document.getElementById('livros-alocados-list');
 
-function AddItemToTable(nomeLivro, gênero, dp){
+function Livros(nomeLivro, gênero, dp){
 
     let hr = document.createElement("hr");
     let nL = document.createElement("p");
@@ -35,13 +35,49 @@ function AddItemToTable(nomeLivro, gênero, dp){
     corpo.appendChild(nL);             // Nome Livro      //
   }
 
-  function AddAllItemToTable(livro){
+//----------------------------------------
+var corpoS = document.getElementById('solictEmp');
+
+function Emprestimos(nomeLivro, rm, dataPedido, idEmprestimo, statusEmp){
+    if(statusEmp == "Pendente"){
+        let hr = document.createElement("hr");
+        let nL = document.createElement("p");
+            nL.innerText = nomeLivro;
+        let RM = document.createElement("p");
+            RM.innerText = rm;
+        let pedidoData = document.createElement("p");
+            pedidoData.innerText = dataPedido;              
+        let btn = document.createElement("button");
+            btn.className = "btn";
+            btn.innerText = "Confirmar";
+            btn.addEventListener('click', function() {
+                // Adicione a lógica de reserva aqui
+                confirmaEmpres(idEmprestimo); // ou a função que desejo chamar ao clicar
+            });    
+
+
+        corpoS.appendChild(hr);              // Linha               //
+        corpoS.appendChild(nL);             // Nome Livro          //
+        corpoS.appendChild(RM);            //  RM                 //
+        corpoS.appendChild(pedidoData);   //   pedidoData        //
+        corpoS.appendChild(btn);         //    Botao Confirma   //
+    }
+    }
+
+  function AddAllItemToLivros(livro){
    corpo.innerHTML="";
    livro.forEach(element => {
-       AddItemToTable(element.nomeLivro, element.gênero, element.numExemplar);
+        Livros(element.nomeLivro, element.gênero, element.numExemplar);
 
    });
   }
+  function AddAllItemToEmprestimos(emprestimos){
+    corpoS.innerHTML="";
+    emprestimos.forEach(element => {
+        Emprestimos(element.livro, element.rm, element.dataPedido, element.idEmprestimo, element.statusEmp);
+ 
+    });
+   }
 
 //-------- get all dados ---------
 function GetAllDataOnce(){
@@ -56,11 +92,12 @@ function GetAllDataOnce(){
            livros.push(childSnapshot.val());
        });
    
-       GetAllDataRealTime();
+       GetAllLivros();
+       GetAllEmprestimos();
    });
 }
 //GET ALL TEMPO REAL
-function GetAllDataRealTime(){
+function GetAllLivros(){
    const dbref = ref(db, "livros");
 
    onValue(dbref,(snapshot)=>{
@@ -70,10 +107,44 @@ function GetAllDataRealTime(){
            livros.push(childSnapshot.val());
        });
 
-       AddAllItemToTable(livros);
+       AddAllItemToLivros(livros);
    })
 }
+function GetAllEmprestimos(){
+    const dbref = ref(db, "emprestimos");
+ 
+    onValue(dbref,(snapshot)=>{
+        var emprestimos =[];
+        snapshot.forEach(childSnapshot => {
+ 
+            emprestimos.push(childSnapshot.val());
+        });
+ 
+        AddAllItemToEmprestimos(emprestimos);
+    })
+ }
 
 window.onload = GetAllDataOnce;
 
-
+function confirmaEmpres(idEmprestimo) {
+    const dbRef = ref(db);
+  
+    update(child(dbRef, "emprestimos/" + idEmprestimo), {
+      statusEmp: "Emprestado"
+    })
+      .then(() => {
+        Swal.fire(
+          `Sucesso!`,
+          'Empréstimo Autorizado!',
+          `success`
+        );
+      })
+      .catch(error => {
+        Swal.fire(
+          `Erro!`,
+          'Erro ao autorizar empréstimo: ' + error,
+          `error`
+        );
+      });
+  }
+  

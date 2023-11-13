@@ -211,7 +211,7 @@ function solicitaEmprestimo(livro, autor){
             idLivro: livro.idLivro,
             autor: autor.autorNome,
             rm: rm,
-            statusEmp: "pendente",
+            statusEmp: "Pendente",
             dataPedido: dataHoje,
             dataDevolu: dataDevolucaoFormatada
         };

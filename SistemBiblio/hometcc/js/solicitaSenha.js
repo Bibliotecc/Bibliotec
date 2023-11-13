@@ -44,6 +44,7 @@ function solicitaSenha(){
 
 function validaEmail(email, rm){
     const dbRef = ref(db);
+    console.log(rm);
     get(child(dbRef, "UsuarioAutomatico/usuarios/"+rm)).then((snapshot)=>{
       if(snapshot.exists()){
         let emailInst = snapshot.val().usuEmailInstitucional;
@@ -108,7 +109,8 @@ async function SolicitaReset(email,password, rm, nome){
                   from: 'augusto@sitedoaugusto.com',
                   subject: Subject,
                   title: Title,
-                  body: Body
+                  body: Body,
+                  nome: nome
               },crossDomain: true,
               beforeSend: function() {
                   Swal.fire({
