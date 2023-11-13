@@ -12,7 +12,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-import {getDatabase, ref, set, get, child} from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+import {getDatabase, ref, set, get, child, update} from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
 
 const db = getDatabase();
 
@@ -30,7 +30,7 @@ function validaEmail(){
       var emailTu = emailInst.usuEmailInstitucional
       console.log(emailTu);
       if(emailTu == inEmail.value){
-        geraPassword(inEmail.value);
+        geraPassword(inEmail.value, rm.value);
       }
       else{
         Swal.fire({
@@ -41,12 +41,16 @@ function validaEmail(){
       }
     }
     else{
-        console.log("NN EXISTE");
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Não existe usuário cadastrado com esse RM!!',
+            })
     }
   });
 }
 
-function geraPassword(email) { //GERA SENHA
+function geraPassword(email, rm) { //GERA SENHA
     var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ!@#$%^&*()+?><:{}[]"; //TODOS CARACTERES
     var passwordLength = 6; //TAMANHO DA SENHA
     var password = "";
@@ -55,10 +59,10 @@ function geraPassword(email) { //GERA SENHA
       var randomNumber = Math.floor(Math.random() * chars.length); // BIBLIOTECA MATH PARA FAZER CALCULOS
       password += chars.substring(randomNumber, randomNumber + 1);
     }
-    SolicitaReset(email,password);
+    SolicitaReset(email,password, rm);
   }
 
-async function SolicitaReset(email,password){ 
+async function SolicitaReset(email,password, rm){ 
         if (email) {
         $.ajax({
             type:"POST",
@@ -84,10 +88,21 @@ async function SolicitaReset(email,password){
                         'warning'
                     )
                 }if(retorno == 1){
-                    Swal.fire(
-                        `Sucesso!`,
-                        `Orientações enviadas para o email: ${email}`,
-                        `success`)
+                    const dbref = ref(db);
+                    update(child(dbref, "UsuarioAutomatico/usuarios/"+rm),{
+                        password: password
+                    }).then(() => {
+                        Swal.fire(
+                            `Sucesso!`,
+                            `Senha temporária definida e orientações enviadas para o email: ${email}`,
+                            `success`)
+                      })
+                      .catch(error => {
+                        Swal.fire(
+                            `Erro!`,
+                            'Erro ao definir senha temporária: ' + error,
+                            `error`)
+                      });
                 }else{
                     Swal.fire(
                         `Erro`,

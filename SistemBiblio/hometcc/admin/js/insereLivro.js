@@ -187,7 +187,7 @@ function verificaAutorExiste(newIdLivros){
 }
 
 function salvaImagem() {
-    const dbref = ref(db)
+    const dbref = ref(db);
     // Obtém o elemento de entrada de arquivo pelo ID
     const inputFile = document.querySelector("#imgLivro");
     var urlImg;

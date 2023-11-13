@@ -21,37 +21,10 @@ import {getDatabase, ref, set, get, child, onValue,update, remove } from "https:
 
 const db = getDatabase();
 
-// var formentrar = document.querySelector('#entrar')
-// var formcadastrar = document.querySelector('#cadastrar-se')
-
-// var btncolor = document.querySelector('.btncolor')
-
-// document.querySelector('#btnentrar').addEventListener('click',()=>{
-//   formentrar.style.left = "25px"
-//   formcadastrar.style.left = "450px"
-//   btncolor.style.left = "0px"
-//   btncolor.style.width = "100px"
-// });
-
-// document.querySelector('#cadastrar').addEventListener('click',()=>{
-//   formentrar.style.left = "-450px"
-//   formcadastrar.style.left = "25px"
-//   btncolor.style.left = "105px"
-//   btncolor.style.width = "134px"
-// });
-// --------------------INICIO DO CADASTRO--------------------------------------------------------------------------
 var validaForm = document.getElementById('ValidaForm');
-
-var usuNome = document.getElementById('txtusuNome');
-var usuDataNasc = document.getElementById('usuDataNasc');
-var usuCurso = "3° Desenvolvimento de Sistemas";      //document.getElementById('usuCurso');
-var usuRM = document.getElementById('usuRM');
-var usuTelefone = "(17) 99123-4567";                 //document.getElementById('usuTelefone');
-var usuEndereço = "Rua José Piton, 238 - Jardim II"; //document.getElementById('usuEndereço');
-var usuCPF = "123.456.789-00";                       //document.getElementById('usuCPF');
-var usuEmail = document.getElementById('txtusuEmail');
+var usuRM = document.getElementById('txtRM');
 var usuSenha = document.getElementById('txtusuSenha');
-var usuSenha2 = document.getElementById('txtusuSenha2');
+
 function ValidaForm(){
 
 //   var usuNomeVal = usuNome.value;
@@ -166,16 +139,14 @@ function RegistreUsuario(){
 }
 validaForm.addEventListener('click', ValidaForm);
 // Info.: O ValidaForm está funcionando corretamente, se houver alguma dúvida, fale com Dev. Lucas Moreira Ferreira
-// --------------------FIM DO CADASTRO-----------------------------------------------------------------------------
-
 
 // --------------------INICIO LOGIN--------------------------------------------------------------------------
 var loginForm = document.getElementById('LoginForm');
 function LoginForm(){
-  var usuNome = document.getElementById('txtusuNomeL');
+  var rm = document.getElementById('txtusuNomeL');
   var usuSenhaL = document.getElementById('txtusuSenhaL');
 
-  var usuNomeVal = usuNome.value;
+  var usuNomeVal = rm.value;
   var usuSenhaLVal = usuSenhaL.value;
 
 if(!usuNomeVal){
@@ -197,11 +168,17 @@ if(!usuSenhaLVal){
 }
 
   const dbRef = ref(db);
-      get(child(dbRef, "usuário/"+usuNome.value)).then((snapshot)=>{
+      get(child(dbRef, "UsuarioAutomatico/usuarios/"+rm.value)).then((snapshot)=>{
         if(snapshot.exists()){
-          let dbpass = decPass(snapshot.val().password);
+          let dbpass = snapshot.val().password;
+          console.log(dbpass);
           if(dbpass == usuSenhaL.value){
-            Login(snapshot.val());
+            if(snapshot.val().primAcesso == true){
+              window.location = "./primeiroAcesso.html";
+            }
+            else{
+              Login(snapshot.val());
+            }
           }
           else{
             Swal.fire({
