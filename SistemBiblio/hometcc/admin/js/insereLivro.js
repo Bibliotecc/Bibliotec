@@ -54,7 +54,7 @@ function InsertLivroAutor(newId, newAutorId, urlImg){
     if(newAutorId == undefined || newAutorId == null){
         newAutorId = 1;
     }
-    set(ref(db, "livros/"+nomeLivro.value),{
+    set(ref(db, "livros/"+newId),{
         idLivro: newId,
         nomeLivro: nomeLivro.value,
         autorId: newAutorId,
@@ -104,7 +104,7 @@ function InsertLivro(newId, autalIdAutor){
         newId = 1;
     }
 
-    set(ref(db, "livros/"+nomeLivro.value),{
+    set(ref(db, "livros/"+newId),{
         idLivro: newId,
         nomeLivro: nomeLivro.value,
         autorId: autalIdAutor,
@@ -149,11 +149,14 @@ function GetUltimoId(){
 
         var newIdLivros = livros[livros.length - 1].idLivro + 1;
         Swal.fire('Conseguimos gerar o novo ID do Livro! Próxima fase ->','Linha 141', 'success');
-        verificaAutorExiste(newIdLivros);
+        setTimeout(function(){verificaAutorExiste(newIdLivros)}, 3000);
+        
         
     })
     .catch(()=>{
-        Swal.fire('Erro ao inserir!', 'Provavelmente foi um erro no servidor Linha 146 :(', 'error');
+        Swal.fire('Não existe livros! Sinônimo de primeiro cadastro! Bem Vindo!','Linha 156', 'success');
+        setTimeout(function(){verificaAutorExiste(1)}, 7000);
+        
     }); 
     
 }
@@ -177,10 +180,12 @@ function verificaAutorExiste(newIdLivros){
         var novoIdLivro = newIdLivros; // Novo ID do Livro 
         if(nAutor){
             Swal.fire('Esse autor já está cadastrado! Esse é ID dele:'+nAutor.autorId,"Proxima fase ->", 'success');
-            InsertLivro(novoIdLivro, nAutor.autorId);
+            setTimeout(function(){InsertLivro(novoIdLivro, nAutor.autorId)},3000);
+            
         }else{
             Swal.fire('Conseguimos gerar o novo ID para esse autor não cadastrado! Próxima fase ->',novoAutorId, 'success');
-            InsertLivroAutor(novoIdLivro, novoAutorId);
+            setTimeout(function(){InsertLivroAutor(novoIdLivro, novoAutorId)}, 3000);
+            
         }
     });
 

@@ -1,4 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-storage.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC95RHcPl1VhNT484rnwWDaE_E8cC_q4ZQ",
@@ -12,48 +13,230 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-import { getDatabase, ref, set, get, child, onValue, update, remove } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+import { getDatabase, ref, set, get, child, onValue, update, remove, } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
 
 const db = getDatabase();
+const storage = getStorage(app);
 
 // Aqui são todas as configurações necessárias para acessar o banco de dados. O que está dentro das chaves do import,
 // são os metódos que executam a função ao qual recebem o nome. Dev. Lucas Moreira
 
+//Referências URL
+var urlAtual = window.location.href;
+var urlClass = new URL(urlAtual);
+var nameLivro = urlClass.searchParams.get("name");
+
+
+var btnEditar = document.getElementById("bntEditar");
 
 // Referências aos campos tanto do FIREBASE quanto no FORMULÁRIO de alteração
 var nomeLivro = document.getElementById('nomeLivro');
-const dbrefLivro = ref(db, "livros/"+nomeLivro.value);
-var genero = document.getElementById('genero');
-// COLOCA OS OUTROS CAMPOS AQ
+var nomeAutor = document.getElementById("nomeAutor");
+var editora = document.getElementById("editora");
+var genLivro = document.getElementById("genLivro");
+var nomeColecao = document.getElementById("nomeColecao");
+var idioma = document.getElementById("idioma");
+var tipoItem = document.getElementById("tipoItem");
+var lançamento = document.getElementById("lançamento");
+var edicao = document.getElementById("edição");
+var numExemplar = document.getElementById("numExemplar");
+var numTombo =  document.getElementById("numTombo");
+var numPagina = document.getElementById("numPagina");
+var CDD = document.getElementById("CDD");
+var Cutter = document.getElementById("Cutter");
+var ISBN = document.getElementById("ISBN");
+var dataAquisicao = document.getElementById("dataAquisicao");
+var volume = document.getElementById("volume");
+var idLivro;
 
-dbrefLivro.once('value').then(function(snapshot) {
-    var dados = snapshot.val();
-    nomeLivro.value = dados.nomeLivro;
-    genero.value = dados.gênero;
+
+var nickLivro; // criado fora da função para ser usado em qualquer uma
+function buscaDados(livro){
+    var arrayLivro = livro.find((element) => element.nomeLivro == nameLivro);
+     nickLivro = arrayLivro.idLivro;
+// Acima eu tratei a array do livro que bate com o "pesquisado". Use console.log(arrayLivro) para ver
+
+     const dbref = ref(db, "livros/" + nickLivro);
+     if (nomeLivro.value === "") { //o sinal de = três verifica significa que ele verifica se o valor é igual e se o tipo também é
+        Swal.fire({
+            title: 'Erro',
+            text: 'Por favor, insira o nome do livro',
+            icon: 'error'
+        });
+        return;
+    }
+
+     Swal.fire({
+        title: 'Deseja buscar por: "'+nameLivro+'" ?',
+        cancelButtonText: 'Cancelar',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, buscar',
+        showLoaderOnConfirm: true,
+        preConfirm: () => {
+            return new Promise((resolve, reject) => {
+                onValue(dbref, (snapshot) => {
+                    const dados = snapshot.val();
+                    if (dados) {
+                        resolve(dados);
+                    } else {
+                        reject('Verifique o nome do livro');
+                        closed;
+                    }
+                });
+            });
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    })
+    .then((result) => {
+        if (result.value) {
+            preencherFormulario(result.value);
+            Swal.fire({
+                title: 'Encontrei os dados!',
+                icon: 'success',
+            });
+        } else {
+            Swal.fire({
+                title: 'Busca cancelada',
+                text: result.value,
+                icon: 'error',
+            });
+        }
+    });
+} 
+
+nomeLivro.value = nameLivro;
+function preencherFormulario(dados){  
+    idLivro = dados.idLivro 
+    genLivro.value = dados.gênero;
+    nomeAutor.value = dados.nomeAutor;
+    editora.value = dados.editora;
+    nomeColecao.value = dados.nomeColecao;
+    idioma.value = dados.idioma;
+    tipoItem.value = dados.tipoItem;
+    lançamento.value = dados.lançamento;
+    edicao.value = dados.edicao;
+    numExemplar.value = dados.numExemplar;
+    numTombo.value = dados.numTombo;
+    numPagina.value = dados.numPagina;
+    CDD.value = dados.CDD;
+    Cutter.value = dados.Cutter;
+    ISBN.value = dados.ISBN;
+    dataAquisicao.value = dados.dataAquisicao;
+    volume.value = dados.volume;
     // COLOCA OS OUTROS CAMPOS AQ
-}).catch(function(error) {
-    console.log("NÃO BUSCOU OS DADOS: " + error);
-    alert("NÃO BUSCOU OS DADOS: " + error);
-});
-
+}
 
 function atualizaLivros() {
     var novoNomeLivro = nomeLivro.value;
-    var novogenero = genero.value;
+    var novoGenLivro = genLivro.value;
+    var novoNomeAutor = nomeAutor.value;
+    var novoEditora = editora.value;
+    var novoNomeColecao = nomeColecao.value;
+    var novoIdioma = idioma.value;
+    var novoTipoItem = tipoItem.value;
+    var novoLançamento = lançamento.value;
+    var novoEdicao = edicao.value;
+    var novoNumExemplar = numExemplar.value;
+    var novoNumTombo = numTombo.value;
+    var novoNumPagina = numPagina.value;
+    var novoCDD = CDD.value;
+    var novoCutter = Cutter.value;
+    var novoISBN = ISBN.value;
+    var novoDataAquisicao = dataAquisicao.value;
+    var novoVolume = volume.value;
 
-
-    update(child(dbref, "livros/"+nomeLivro.value),{
-
+const dbref = ref(db);
+    update(child(dbref, "livros/"+nickLivro),{
         nomeLivro: novoNomeLivro,
-        gênero: novogenero
-       // COLOCA OS OUTROS CAMPOS AQ
+        genLivro: novoGenLivro,
+        nomeAutor: novoNomeAutor,
+        editora: novoEditora,
+        nomeColecao: novoNomeColecao,
+        idioma: novoIdioma,
+        tipoItem: novoTipoItem,
+        lançamento: novoLançamento,
+        edicao: novoEdicao,
+        numExemplar: novoNumExemplar,
+        numTombo: novoNumTombo,
+        numPagina: novoNumPagina,
+        CDD: novoCDD,
+        Cutter: novoCutter,
+        ISBN: novoISBN,
+        dataAquisicao: novoDataAquisicao,
+        volume: novoVolume,
     }).then(function() {
-        console.log("ALTERAÇÃO FEITA!");
-        alert("ALTERAÇÃO FEITA!");
+        salvaImagem(idLivro);
+        Swal.fire({
+            title: 'Dados alterados!',
+            icon: 'success',
+        });
     }).catch(function(error) {
-        console.error("ERRO AO ALTERAR: " + error);
-        alert("ERRO AO ALTERAR: " + error);
+        Swal.fire({
+            title: 'Erro ao alterar!',
+            text: error,
+            icon: 'error',
+        });
     });
 }
-
+function salvaImagem(idLivro) {
+    const dbref = ref(db);
+    // Obtém o elemento de entrada de arquivo pelo ID
+    const inputFile = document.querySelector("#imgLivro");
+    var urlImg;
+    // Verifica se um arquivo foi selecionado
+    if (inputFile.files.length > 0) {
+        // Pega o primeiro arquivo do input
+        const imgLivro = inputFile.files[0];
+        
+        // Referência para o local onde você deseja armazenar o arquivo no Storage
+        const storageRe = storageRef(storage, 'img/livros/' + imgLivro.name);
+        
+        // Faz o upload do arquivo
+        uploadBytes(storageRe, imgLivro)
+            .then((snapshot) => {
+                console.log("Sucesso ao salvar imagem!");
+                // Obtém a URL do arquivo após o upload
+                return getDownloadURL(snapshot.ref);
+            })
+            .then((downloadURL) => {
+                 urlImg = downloadURL;
+                console.log('Imagem disponível em:', urlImg);
+                update(child(dbref, "livros/"+idLivro),{
+                    urlImg: downloadURL
+                }).then(() => {
+                    console.log("Dados de 'livros' atualizados com sucesso!");
+                  })
+                  .catch(error => {
+                    console.error("Erro ao atualizar dados de 'livros': ", error);
+                  });
+            })
+            .catch((error) => {
+                console.log("Erro ao salvar imagem!", error);
+            });
+    } else {
+        console.error("Nenhum arquivo selecionado!");
+    }
+}
 // CHAMAR A FUNÇÃO ATUALIZA LIVROS QUANDO PRESSIONAR O BOTÃO
+btnEditar.addEventListener('click', atualizaLivros);
+
+
+
+
+
+
+// EVENTOS SUSTENTAM O SISTEMA
+function GetAllDataRealTime() {
+    const dbref = ref(db, "livros");
+
+    onValue(dbref, (snapshot) => {
+        var livros = [];
+        snapshot.forEach(childSnapshot => {
+            livros.push(childSnapshot.val());
+        });
+        
+        buscaDados(livros);
+        
+    })
+}
+window.onload = GetAllDataRealTime;
