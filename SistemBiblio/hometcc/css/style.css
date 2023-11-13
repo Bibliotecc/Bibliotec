@@ -38,6 +38,10 @@ header{
     height: 120px;
 }
 
+body{
+    padding: 0 0 100px 0;
+}
+
 .menu input{
     width: 450px;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -528,6 +532,7 @@ footer{
 
 .container-adm{
     width: 60%;
+    height: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -623,6 +628,7 @@ nav.menu-lateral:hover{
 
 .container-insert{  
     margin-top: 70px;
+    margin-bottom: 40px;
     min-width: 1150px;
     width: auto;
     background-color: #ffffff;
@@ -742,6 +748,87 @@ th, td {
 
 /* TELA INSERÇÃO DE ALUNOS */
 
+.container-alunos{
+    max-width: 600px;
+    height: 300px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    border-radius: 30px;
+}
+
+.conteudo-alunos{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+}
+
+.colocar-arquivo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    border: 3px solid #1D6A96;
+    padding: 30px;
+    border-radius: 30px;
+}
+
+.colocar-arquivo h1{
+    font-family: FonteTitulo;
+    font-size: 27px;
+    text-shadow: none;
+    padding: 15px 0px;
+}
+
+.colocar-arquivo p{
+    font-family: Especificacoes;
+    font-size: 16px;
+}
+
+.colocar-arquivo p input[type="file"]{
+    display: none;
+}
+
+.colocar-arquivo p label{
+    color: #1D6A96;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Especificacoes;
+}
+
+.colocar-arquivo img{
+    width: 50px;
+}
+
+.botao-alunos{
+    margin-top: 15px;
+}
+
+.botao-alunos button{
+    font-family: FonteTitulo;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    background: #006ce7;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    padding: 12px 60px;
+}
+
+.botao-alunos button:hover{
+    background-color: #3092ca;
+    transition: .2s
+}
+
+.borda-verde{
+    border-color: rgb(3, 204, 37);
+}
 
 /* RESPONSIVIDADE CELULAR */
 
