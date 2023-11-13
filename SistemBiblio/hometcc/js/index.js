@@ -86,9 +86,9 @@ function SelecionarDadosFiltro() {
 
 //  GET ALL 
 var stdNo = 0;
-var cntrPrin = document.getElementById('container-principal');
+//v0ar cntrPrin = document.getElementById('container-principal');
 var cBooks = document.getElementById('container-books-Romance');
-var cBooksFc = document.getElementById('container-books-FC');
+//var cBooksFc = document.getElementById('container-books-FC');
 var urlAtual = window.location.href;
 
 var urlFiltro = new URL(urlAtual);
@@ -97,8 +97,8 @@ var search = urlSearch.searchParams.get("search");
 var filtro = urlFiltro.searchParams.get("filtro");
 var urlArray = urlAtual.split('/');
 var ultimaBarra = urlArray[urlArray.length - 1];
-//
-//
+
+
 function AddItemToTable(nomeLivro, gênero, urlImg) {
     console.log(filtro);
     console.log(search);
@@ -109,8 +109,7 @@ function AddItemToTable(nomeLivro, gênero, urlImg) {
       //  console.log(searchSimilar);  
     var nomeLivroSimilar = [];
         nomeLivroSimilar = similaLivro(nomeLivro);
-       // console.log(nomeLivroSimilar);
-    //correspondeString(searchSimilar, nomeLivroSimilar);
+
     // -------------------------------------------------------- SEM PESQUISA E FILTRO
     if (ultimaBarra == 'index.html' || ultimaBarra == '' || search == '') {
 
@@ -124,12 +123,10 @@ function AddItemToTable(nomeLivro, gênero, urlImg) {
 
         divE.appendChild(img);
         divE.appendChild(a);
-        if (gênero == "Romance") {
-            cBooks.appendChild(divE);
-        }
-        if (gênero == "Ficção Cientifica") {
-            cBooksFc.appendChild(divE);
-        }
+
+        cBooks.appendChild(divE);
+
+
     }
     // ----------------------------------------------------- PESQUISA POR NOME
     if (search == nomeLivro ||correspondeString(searchSimilar, nomeLivroSimilar) && filtro == null) {
@@ -145,12 +142,7 @@ function AddItemToTable(nomeLivro, gênero, urlImg) {
         divE.appendChild(img);
         divE.appendChild(a);
 
-        if (gênero == "Romance") {
-            cBooks.appendChild(divE);
-        }
-        if (gênero == "Ficção Cientifica") {
-            cBooksFc.appendChild(divE);
-        }
+        cBooks.appendChild(divE);
     }
     // ----------------------------------------------------- PESQUISA POR GÊNERO    
     if (gênero == filtro) {
@@ -165,12 +157,8 @@ function AddItemToTable(nomeLivro, gênero, urlImg) {
         divE.appendChild(img);
         
         divE.appendChild(a);
-        if (gênero == "Romance") {
-            cBooks.appendChild(divE);
-        }
-        if (gênero == "Ficção Cientifica") {
-            cBooksFc.appendChild(divE);
-        }
+
+        cBooks.appendChild(divE);
     }
 }
 function AddAllItemToTable(livro) {
@@ -206,13 +194,8 @@ function GetAllDataRealTime() {
         AddAllItemToTable(livros);
     })
 }
-function reloadCache() {
-    window.location.reload();
-}
-
 
 // EVENTOS
-//setInterval(reloadCache, 60 * 1000);
 window.onload = GetAllDataOnce;
 
 // TRATAMENTOS
@@ -272,45 +255,3 @@ function correspondeString(searchSimilar, nomeLivroSimilar){
     }
     return false;
 }
-
-// nomeLivroSimilar = nomeLivroSimilar.split(" ")
-  //  nomeLivroSimilar = Array(nomeLivroSimilar);
- //   
- //   console.log(searchSimilar);
-   /* var corresponde = 0;
-  if(searchSimilar && nomeLivroSimilar){
-        for (let i = 0; i < nomeLivroSimilar.length || i < searchSimilar.length; i++) {
-                if(nomeLivroSimilar == searchSimilar){
-                    corresponde = corresponde + 1;
-                }
-        }
-        console.log(corresponde);
-        if(corresponde >= 2){
-            console.log("Talvez o livro corresponda mesmo");
-            return true;
-        }
-        else{
-            console.log("Se pá, ta errado esse livro aí");
-        }
-    
-    } 
---------------------------------------------------------------------------------------------------------------
-        var nomeLivroSimilar = nomeLivro.split(" ");
-            for (let i = 0; i < nomeLivroSimilar.length; i++) {
-                nomeLivroSimilar[i] = nomeLivroSimilar[i][0].toUpperCase() + nomeLivroSimilar[i].substr(1);
-            } 
-           // console.log(nomeLivroSimilar);
-            nomeLivroSimilar = nomeLivroSimilar.join(" ");
-           nomeLivroSimilar = nomeLivroSimilar.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    console.log("SIMILA LIVRO: "+nomeLivroSimilar);
-    
-    return nomeLivroSimilar;
-    
-    
-
-    
-    
-    
-    
-    
-    */

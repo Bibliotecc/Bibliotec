@@ -49,7 +49,7 @@ const db = getDatabase();
    var urlAtual = window.location.href;
    var urlClass = new URL(urlAtual);
    var alugarLivro = urlClass.searchParams.get("alugar");
-   var confirmaAluguel = urlClass.searchParams.get("confirmar");
+   var confirmaAluguel = urlClass.searchParams.get("confirmar"); 
 
 //-------------------------------------------------------------------------------------------------------------
 function AddItemToTable(nomeLivro, autor, lançamento, editora, idioma, numPagina){
@@ -172,20 +172,6 @@ function GetAllDataOnce(){
    });
 }
 //-------------------------------------------------------------------------------------------------------------
-function GetAllDataRealTime(){
-  //GET ALL TEMPO REAL 
-  const dbref = ref(db, "livros");
-
-   onValue(dbref,(snapshot)=>{
-       var livros =[];
-       snapshot.forEach(childSnapshot => {
-
-           livros.push(childSnapshot.val());
-       });
-
-       AddAllItemToTable(livros);
-   }) 
-}
 //-------------------------------------------------------------------------------------------------------------
 window.onload = GetAllDataOnce;
 //-------------------------------------------------------------------------------------------------------------
