@@ -48,15 +48,25 @@ function validaEmail(email, rm){
       if(snapshot.exists()){
         let emailInst = snapshot.val().usuEmailInstitucional;
         let usuNome = snapshot.val().usuNome;
+        let primAcesso = snapshot.val().primAcesso;
         console.table(emailInst, usuNome);
-        if(emailInst == email){
-          geraPassword(email, rm, usuNome);
+        if(emailInst == email ){
+          if(primAcesso == true){
+            geraPassword(email, rm, usuNome);
+          }
+          else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Parece que você já redefiniu a senha uma vez ..',
+              })
+          }
         }
         else{
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Não existe usuário cadastrado com esse email!!',
+            text: 'Não existe usuário cadastrado com esse email!',
             })
         }
       }

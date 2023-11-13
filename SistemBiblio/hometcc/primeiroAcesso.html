@@ -27,15 +27,15 @@
             <div class="container-login">
                 <div class="buttonsform">
                     <div class="btncolor"></div>
-                    <p> 1º Acesso </p>
+                    <button id="cadastrar">1° Acesso</button> 
                 </div>
                <form>
-                    <input type="text" placeholder="Insira seu RM" id="usuRM"/> 
-                    <input type="text" placeholder="Insira seu email institucional " id="usuEmail"/>
-                    <input type="text" placeholder="Vai exibir nome " id="txtusuSenha" readonly/>
+                    <input type="text" placeholder="Insria seu RM" id="usuRM"/> 
+                    <input type="text" placeholder="Insira sua nova senha" id="usuSenha"/>
+                    <input type="text" placeholder="Confirme sua senha" id="confirmaSenha"/>
                     <div class="divcheck">
                        <input type="checkbox"/>
-                        <span>Aceito os termos</span>    
+                        <span>Aceito os termos</span>
                     </div>
                     <a id="ValidaForm" class="buttoncadastro">Redefinir Senha</a>
                 </form>
@@ -74,11 +74,11 @@
             </div>
         </div>
     </div>
-    <script type="module" src="js/login.js"></script>
+    <script type="module" src="js/redefineSenha.js"></script>
     <!-- CRIP PASSWORD-->
         <script>
         // ----------- CRIPTOGRAFA SENHA ----------
-        var usuSenha = document.getElementById("txtusuSenha");
+        var usuSenha = document.getElementById("usuSenha");
         var usuSenhaL = document.getElementById("txtusuSenhaL");
         
             function cripSenha(){
@@ -87,25 +87,11 @@
             }
 
             function decPass(dbpass){
-                var senhaCrip = CryptoJS.AES.decrypt(dbpass, usuSenhaL.value);
+                var senhaCrip = CryptoJS.AES.decrypt(dbpass, usuSenha.value);
                 return senhaCrip.toString(CryptoJS.enc.Utf8);
             }
         </script>
-    <!-- EVENTOS ENTER-->
- <!--   <script>   
-        $(function(){
-        
-       $('corpo').keypress(function (e) {
-       var key = e.which;
-       if(key == 13)  // the enter key code
-        {
-          $('loginForm').click();
-          return false;  
-        }
-      });
-        
-      });  
-    </script> -->
+
   
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
