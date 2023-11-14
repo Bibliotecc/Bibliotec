@@ -1,0 +1,14 @@
+-- BIBLIOTEC 
+
+14/11/2023
+
+-> Remover input (pesquisa) tela adm;
+-> Tela consulta com filtros (emprestimos);
+-> Botao JSON inserir alunos; 
+-> Atualizar emprestimo como devolvido;
+-> Colocar itens do menu lateral;
+-> Substitui os espaços (em branco) da tela principal adm;
+-> Tela index dos usuarios -> Titulos do livros;
+
+
+---- DEUS NOS AJUDE !!

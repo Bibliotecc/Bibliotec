@@ -16,7 +16,7 @@ import {getDatabase, ref, set, get, child, onValue,update, remove } from "https:
 const db= getDatabase();
 
 const corpo = document.getElementById('corpo');
-function Emprestimos(nomeLivro, rm, dataPedido, idEmprestimo, statusEmp) {
+function Emprestimos(nomeLivro, usuNome, rm, dataPedido, idEmprestimo, statusEmp) {
     if(statusEmp == "Pendente"){
     const tr = document.createElement("tr");
     const tdRm = document.createElement("td");
@@ -29,7 +29,7 @@ function Emprestimos(nomeLivro, rm, dataPedido, idEmprestimo, statusEmp) {
     const btnRecusar = document.createElement("img");  
 
     tdRm.innerText = rm;
-    tdNomeAluno.innerText = "usuNome";
+    tdNomeAluno.innerText = usuNome;
     tdNomeLivro.innerText = nomeLivro;
     tdData.innerText = dataPedido;
     btnConfirmar.className = "btn";
@@ -37,14 +37,14 @@ function Emprestimos(nomeLivro, rm, dataPedido, idEmprestimo, statusEmp) {
     btnConfirmar.src="../img/icons/aceitar.png";
     btnConfirmar.addEventListener('click', function() {
 
-        atualizaEmpres(idEmprestimo, "Emprestado"); // ou a função que desejo chamar ao clicar
+        atualizaEmpres(idEmprestimo, "Emprestado", "success", "Empréstimo Autorizado!"); // ou a função que desejo chamar ao clicar
     });
     //tdRecusar.innerText = dataAquisicao;
     btnRecusar.className = "btn";
     btnRecusar.innerText = "Recusar";
     btnRecusar.src="../img/icons/cancelar.png";
     btnRecusar.addEventListener('click', function(){
-        atualizaEmpres(idEmprestimo, "Recusado");
+        atualizaEmpres(idEmprestimo, "Recusado", "error", "Empréstimo Recusado!");
     });
 
     tdBtn.appendChild(btnConfirmar);
@@ -66,7 +66,7 @@ function Emprestimos(nomeLivro, rm, dataPedido, idEmprestimo, statusEmp) {
     function AddAllItemToEmprestimos(emprestimos){
         corpo.innerHTML="";
         emprestimos.forEach(element => {
-            Emprestimos(element.livro, element.rm, element.dataPedido, element.idEmprestimo, element.statusEmp);
+            Emprestimos(element.livro, element.usuNome,element.rm, element.dataPedido, element.idEmprestimo, element.statusEmp);
 
         });
    }
@@ -101,7 +101,7 @@ function GetAllEmprestimos(){
 
 window.onload = GetAllDataOnce;
 
-function atualizaEmpres(idEmprestimo, statusEmp) {
+function atualizaEmpres(idEmprestimo, statusEmp, sweet, texto) {
 const dbRef = ref(db);
 
 update(child(dbRef, "emprestimos/" + idEmprestimo), {
@@ -109,9 +109,9 @@ update(child(dbRef, "emprestimos/" + idEmprestimo), {
 })
     .then(() => {
     Swal.fire(
-        `Sucesso!`,
-        'Empréstimo Autorizado!',
-        `success`
+        `Concluído!`,
+        texto,
+        sweet
     );
     })
     .catch(error => {
