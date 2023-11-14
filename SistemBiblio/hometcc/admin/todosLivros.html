@@ -103,6 +103,7 @@
                     const db = getDatabase();
                     const corpo = document.getElementById('corpo');
 
+<<<<<<< HEAD
         function AddItemToTable(nomeLivro, genero, autorId, numExemplar,editora,dataAquisicao,nomeColecao) {
             const tr = document.createElement("tr");
             const tdNome = document.createElement("td");
@@ -164,6 +165,69 @@
                     }
                     GetAllDataOnce();
 
+=======
+                    function AddItemToTable(nomeLivro, genero, autorId, numExemplar, editora, dataAquisicao, nomeColecao) {
+                        const tr = document.createElement("tr");
+                        const tdNome = document.createElement("td");
+                        const tdGenero = document.createElement("td");
+                        const tdautorId = document.createElement("td");
+                        const tdnumExemplar = document.createElement("td");
+                        const tdeditora = document.createElement("td");
+                        const tddataAquisicao = document.createElement("td");
+                        const tdnomeColecao = document.createElement("td");
+                        const tdEditar = document.createElement("td");
+                        const aEditar = document.createElement("a");
+                        aEditar.href = "#";
+                        const icone = document.createElement("i");
+                        icone.className = "fa-solid fa-pencil";
+
+
+                        tdNome.innerText = nomeLivro;
+                        tdGenero.innerText = genero;
+                        tdautorId.innerText = autorId;
+                        tdnumExemplar.innerText = numExemplar;
+                        tdeditora.innerText = editora;
+                        tddataAquisicao.innerText = dataAquisicao;
+                        tdnomeColecao.innerText = nomeColecao;
+
+                        tr.appendChild(tdNome);
+                        tr.appendChild(tdGenero);
+                        tr.appendChild(tdautorId);
+                        tr.appendChild(tdnumExemplar);
+                        tr.appendChild(tdeditora);
+                        tr.appendChild(tddataAquisicao);
+                        tr.appendChild(tdnomeColecao);
+                        tdEditar.appendChild(aEditar);
+                        aEditar.appendChild(icone);
+                        tr.appendChild(tdEditar);
+
+
+
+                        corpo.appendChild(tr);
+                    }
+
+                    function AddAllItemToTable(livros) {
+                        corpo.innerHTML = ""; // Clear the table
+
+                        livros.forEach(element => {
+                            AddItemToTable(element.nomeLivro, element.gênero, element.autorId, element.numExemplar, element.editora, element.dataAquisicao, element.nomeColecao);
+                        });
+                    }
+                    function GetAllDataOnce() {
+                        const dbref = ref(db, "livros");
+
+                        onValue(dbref, (snapshot) => {
+                            const livros = [];
+                            snapshot.forEach(childSnapshot => {
+                                livros.push(childSnapshot.val());
+                            });
+
+                            AddAllItemToTable(livros);
+                        });
+                    }
+                    GetAllDataOnce();
+
+>>>>>>> 0df6f892160a916d41862243b60dd0befee392ac
 
 
                 </script>
