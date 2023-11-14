@@ -9,6 +9,6 @@
 -> Colocar itens do menu lateral;
 -> Substitui os espaços (em branco) da tela principal adm;
 -> Tela index dos usuarios -> Titulos do livros;
-
+-> ARRUMAR ERRO JS LOGIN (ALGUM LUGAR FOI FEITO)
 
 ---- DEUS NOS AJUDE !!
