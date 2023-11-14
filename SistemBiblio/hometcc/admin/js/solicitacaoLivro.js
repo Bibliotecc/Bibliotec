@@ -23,8 +23,10 @@ function Emprestimos(nomeLivro, rm, dataPedido, idEmprestimo, statusEmp) {
     const tdNomeAluno = document.createElement("td");
     const tdNomeLivro = document.createElement("td");
     const tdData = document.createElement("td");
+    const tdBtn = document.createElement("td");
     const btnConfirmar = document.createElement("img");
-    const btnRecusar = document.createElement("td");  
+    const tdBtnn = document.createElement("td");
+    const btnRecusar = document.createElement("img");  
 
     tdRm.innerText = rm;
     tdNomeAluno.innerText = "usuNome";
@@ -35,16 +37,25 @@ function Emprestimos(nomeLivro, rm, dataPedido, idEmprestimo, statusEmp) {
     btnConfirmar.src="../img/icons/aceitar.png";
     btnConfirmar.addEventListener('click', function() {
 
-        confirmaEmpres(idEmprestimo); // ou a função que desejo chamar ao clicar
+        atualizaEmpres(idEmprestimo, "Emprestado"); // ou a função que desejo chamar ao clicar
     });
     //tdRecusar.innerText = dataAquisicao;
+    btnRecusar.className = "btn";
+    btnRecusar.innerText = "Recusar";
+    btnRecusar.src="../img/icons/cancelar.png";
+    btnRecusar.addEventListener('click', function(){
+        atualizaEmpres(idEmprestimo, "Recusado");
+    });
 
+    tdBtn.appendChild(btnConfirmar);
+    tdBtnn.appendChild(btnRecusar);
 
     tr.appendChild(tdRm);
     tr.appendChild(tdNomeAluno);
     tr.appendChild(tdNomeLivro);
     tr.appendChild(tdData);
-    tr.appendChild(btnConfirmar);
+    tr.appendChild(tdBtn);
+    tr.appendChild(tdBtnn);
 
 
 
@@ -90,11 +101,11 @@ function GetAllEmprestimos(){
 
 window.onload = GetAllDataOnce;
 
-function confirmaEmpres(idEmprestimo) {
+function atualizaEmpres(idEmprestimo, statusEmp) {
 const dbRef = ref(db);
 
 update(child(dbRef, "emprestimos/" + idEmprestimo), {
-    statusEmp: "Emprestado"
+    statusEmp: statusEmp
 })
     .then(() => {
     Swal.fire(

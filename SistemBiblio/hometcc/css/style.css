@@ -739,7 +739,10 @@ nav.menu-lateral:hover{
 table {
     width: 100%;
     border-collapse: collapse;
- 
+}
+
+tr{
+    justify-content: center;
 }
 
 th, td {
