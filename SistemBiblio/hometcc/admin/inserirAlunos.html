@@ -6,26 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excel to Firebase | Javacodepoint</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../js/autentificacaoUser.js"></script>
+    <script src="js/autentificacaoUser.js"></script>
 </head>
 
 <body class="body-adm">
     <nav class="menu-lateral">
         <div class="btn-expandir">
-            <i> <img src="../../img/icons/dashboardarrow.png" alt=""> </i>
+            <i> <img src="../img/icons/dashboardarrow.png" alt=""> </i>
         </div>
         <ul>
             <li class="item-menu">
-                <a href="../todosLivros.html">
-                    <span class="icone"> <img src="../../img/icons/book.png" alt=""> </span>
+                <a href="todosLivros.html">
+                    <span class="icone"> <img src="../img/icons/book.png" alt=""> </span>
                     <span class="txt-link">Livros</span>
                 </a>
             </li>
             <li class="item-menu">
-                <a href="../inserirLivros.html">
-                    <span class="icone"> <img src="../../img/icons/Badd.png" alt=""> </span>
+                <a href="inserirLivros.html">
+                    <span class="icone"> <img src="../img/icons/Badd.png" alt=""> </span>
                     <span class="txt-link">Inserir Livro</span>
                 </a>
             </li>
@@ -42,14 +42,14 @@
               </a>
           </li> -->
             <li class="item-menu">
-                <a href="index.html">
-                    <span class="icone"> <img src="../../img/icons/loginDash.png" alt=""> </span>
+                <a href="inserirAlunos.html">
+                    <span class="icone"> <img src="../img/icons/loginDash.png" alt=""> </span>
                     <span class="txt-link">Inserir Alunos</span>
                 </a>
             </li>
             <li class="item-menu">
                 <a href="#">
-                    <span class="icone"> <img src="../../img/icons/loginDash.png" alt=""> </span>
+                    <span class="icone"> <img src="../img/icons/loginDash.png" alt=""> </span>
                     <span class="txt-link">Conta</span>
                 </a>
             </li>
@@ -60,7 +60,7 @@
             <nav class="menu">
                 <ul>
                     <li id="nomeAdm"> </li>
-                    <li> <a href="../index.html"> <img src="../../img/logo/logotcc.png" alt="logotcc"> </a> </li>
+                    <li> <a href="index.html"> <img src="../img/logo/logotcc.png" alt="logotcc"> </a> </li>
                 </ul>
             </nav>
         </div>
@@ -69,7 +69,7 @@
         <div class="container-alunos">
             <div class="conteudo-alunos">
                 <div class="colocar-arquivo" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
-                    <img src="../../img/icons/upload.png" alt="">
+                    <img src="../img/icons/upload.png" alt="">
                     <h1> Arraste e solte o arquivo aqui</h1>
                     <p> ou
                         <label for="arquivo">procure o arquivo</label>
@@ -85,9 +85,9 @@
     <footer>
         <div class="container">
             <div class="container-footer">
-                <a href="#"> <img src="../../img/logo/facebook.png" alt=""> </a>
-                <a href="#"> <img src="../../img/logo/instagram.png" alt=""> </a>
-                <a href="#"> <img src="../../img/logo/twitter.png" alt=""> </a>
+                <a href="#"> <img src="../img/logo/facebook.png" alt=""> </a>
+                <a href="#"> <img src="../img/logo/instagram.png" alt=""> </a>
+                <a href="#"> <img src="../img/logo/twitter.png" alt=""> </a>
             </div>
         </div>
     </footer>
@@ -112,8 +112,8 @@
             </div>
         </div>
     </div>
-    <script type="module" src="teste.js"></script>
-    <script src="insere.js"></script>
+    <script type="module" src="admusers/teste.js"></script>
+    <script src="admusers/insere.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", initApp);
     </script>
