@@ -29,15 +29,10 @@
                             <a href="index.html?filtro=Ficção Cientifica"> Ficção Cientifica </a>
                             <a href="index.html"> Nenhum </a>
 
-                            <li class="dropdown"> <a> conta <img src="img/icons/seta.png" alt="" class="icon"> </a>
-                                <div class="dropdown-menu">
-                                    <a href="usuLocados.html"> Perfil </a>
-                                    <a href="login.html">Logout </a>
-                                   
+                            <li class="dropdown"> <li id="loginLI"></li>
                         </div>
                     </li>
-                    <li id="loginLI">
-                    </li>
+                    
                 </ul>
             </nav>
         </div>
@@ -185,22 +180,22 @@
             }
         }
         function Signout() {
-            Swal.fire({
-                title: 'Tem certeza que deseja sair?',
-                showDenyButton: true,
-                confirmButtonText: 'Quero Sair',
-                denyButtonText: `Não Quero Sair`,
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    localStorage.removeItem('user');
-                    localStorage.removeItem('keepLoggedIn');
-                    window.location = "index.html";
-                }
-                else if (result.isDenied) {
-                    Swal.fire('Entendo entendo, você não vai sair!', '', 'error');
-                }
-            })
+                    Swal.fire({
+                        title: 'O Que Deseja Fazer?',
+                        showDenyButton: true,
+                        confirmButtonColor: '#FF8C00',
+                        confirmButtonText: 'Ver Empréstimos',
+                        denyButtonText: 'Sair',
+                }).then((secondResult) => {
+                    if (secondResult.isConfirmed) {
+                        window.location = "usuLocados.html";
+                    } else if (secondResult.isDenied) {
+                        localStorage.removeItem('user');
+                        localStorage.removeItem('keepLoggedIn');
+                        window.location = "index.html";
+                    }
+                });
+
         }
         getUsername();
         if (currentUser == "!logado") {
@@ -213,13 +208,15 @@
             a.appendChild(img);
             li.appendChild(a);
 
-
         }
         else {
             let a = document.createElement("a");
-            a.innerText = currentUser.usuNome;
-            a.href = "javascript:Signout()";
-
+                a.innerText = currentUser.usuNome;
+                a.href = "javascript:Signout()";
+            let img = document.createElement("img");
+                img.className = "icon";
+                img.src = "img/icons/seta.png";    
+            a.appendChild(img);
             li.appendChild(a);
             console.log(currentUser.typeUser);
         }
