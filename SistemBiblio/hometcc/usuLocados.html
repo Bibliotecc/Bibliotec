@@ -47,8 +47,12 @@
                   <th>Livro(s) Locado(s)</th>
                   <th>Prazo para entrega</th>
                   <th id="atraso">Livros em atraso</th>
+                  <th>Status do Emprestimo</th>
                 </tr>
               </thead>
+              <tbody id="corpo">
+
+              </tbody>
             </table>
           </div>
         </div>
@@ -84,7 +88,10 @@
           </div>
         </div>
       </div>
-    
+  
+      
+
+      <script type="module" src="js/livrosUsuLocados.js"></script>
       <script>
         // Função para obter a hora atual e exibir a saudação apropriada
         function exibirSaudacao() {
@@ -109,6 +116,6 @@
         // Chame a função ao carregar a página
         window.onload = exibirSaudacao;
       </script>
-    
+  
     </body>
     </html>

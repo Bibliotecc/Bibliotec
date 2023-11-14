@@ -174,6 +174,7 @@ function solicitaEmprestimo(livro, autor){
         user = JSON.parse(localStorage.getItem('user'));
     const dbRef = ref(db);
     var rm = user.usuRM;
+    var usuNome = user.usuNome
     const pegaData = new Date();
 
     // Obter informações específicas da data (ano, mês, dia, etc.)
@@ -211,6 +212,7 @@ function solicitaEmprestimo(livro, autor){
             idLivro: livro.idLivro,
             autor: autor.autorNome,
             rm: rm,
+            usuNome: usuNome,
             statusEmp: "Pendente",
             dataPedido: dataHoje,
             dataDevolu: dataDevolucaoFormatada
