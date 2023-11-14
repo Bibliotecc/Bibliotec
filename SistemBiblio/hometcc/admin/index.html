@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina do Administrador</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="js/autentificacaoUser.js"></script>
 </head>
+
 <body class="body-adm">
     <nav class="menu-lateral">
         <div class="btn-expandir">
@@ -17,7 +20,7 @@
                     <span class="icone"> <img src="../img/icons/book.png" alt=""> </span>
                     <span class="txt-link">Livros</span>
                 </a>
-            </li> 
+            </li>
             <li class="item-menu">
                 <a href="inserirLivros.html">
                     <span class="icone"> <img src="../img/icons/Badd.png" alt=""> </span>
@@ -94,14 +97,14 @@
                     <p>Livia</p>
                     <p>Lucas</p>
                     <p>Lucca</p>
-                    <p>Pedro</p>    
+                    <p>Pedro</p>
                     <p>Renzo</p>
                 </div>
             </div>
         </div>
     </div>
 
-  <!--  <script>
+    <!--  <script>
        const carousel = document.getElementById("carousel");
     const prevButton = document.getElementById("prev-button");
     const nextButton = document.getElementById("next-button");
@@ -156,62 +159,64 @@
     // Inicialmente, atualize a exibição do carrossel
     updateCarouselSize();
     </script> -->
-    
+
     <script>
-         var li = document.getElementById('nomeAdm');
+        document.addEventListener("DOMContentLoaded", initApp);
+        var li = document.getElementById('nomeAdm');
 
-//  let signoutlink =document.getElementById('signoutlink');
-var currentUser = "!logado";
+        //  let signoutlink =document.getElementById('signoutlink');
+        var currentUser = "!logado";
 
-function getUsername() {
-    let keepLoggedIn = localStorage.getItem("keepLoggedIn");
-    if (keepLoggedIn == "yes") {
-        currentUser = JSON.parse(localStorage.getItem('user'));
-    }
-}
-function Signout() {
-    Swal.fire({
-        title: 'Tem certeza que deseja sair?',
-        showDenyButton: true,
-        confirmButtonText: 'Quero Sair',
-        denyButtonText: `Não Quero Sair`,
-    }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            localStorage.removeItem('user');
-            localStorage.removeItem('keepLoggedIn');
-            window.location = "index.html";
+        function getUsername() {
+            let keepLoggedIn = localStorage.getItem("keepLoggedIn");
+            if (keepLoggedIn == "yes") {
+                currentUser = JSON.parse(localStorage.getItem('user'));
+            }
         }
-        else if (result.isDenied) {
-            Swal.fire('Entendo entendo, você não vai sair!', '', 'error');
+        function Signout() {
+            Swal.fire({
+                title: 'Tem certeza que deseja sair?',
+                showDenyButton: true,
+                confirmButtonText: 'Quero Sair',
+                denyButtonText: `Não Quero Sair`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('keepLoggedIn');
+                    window.location = "index.html";
+                }
+                else if (result.isDenied) {
+                    Swal.fire('Entendo entendo, você não vai sair!', '', 'error');
+                }
+            })
         }
-    })
-}
-getUsername();
-if (currentUser == "!logado") {
-    let a = document.createElement("a");
-    a.innerText = "Login";
-    a.href = "../login.html";
-    let img = document.createElement("img");
-    img.src = "../img/icons/login.png";
-    img.className = "icon";
-    a.appendChild(img);
-    li.appendChild(a);
+        getUsername();
+        if (currentUser == "!logado") {
+            let a = document.createElement("a");
+            a.innerText = "Login";
+            a.href = "login.html";
+            let img = document.createElement("img");
+            img.src = "../img/icons/login.png";
+            img.className = "icon";
+            a.appendChild(img);
+            li.appendChild(a);
 
 
-}
-else {
-    let a = document.createElement("a");
-    a.innerText = currentUser.usuNome;
-    a.href = "javascript:Signout()";
+        }
+        else {
+            let a = document.createElement("a");
+            a.innerText = currentUser.usuNome;
+            a.href = "javascript:Signout()";
 
-    li.appendChild(a);
-    console.log(currentUser.typeUser);
-}
+            li.appendChild(a);
+            console.log(currentUser.typeUser);
+        }
 
     </script>
-    
+
     <script type="module" src="js/getLivros.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
+
 </html>
