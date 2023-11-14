@@ -51,7 +51,7 @@ function updateSenha(){
     })
     return false;
   }
-  if(usuSenha.value != confirmaSenha.value){
+  else{
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -72,13 +72,13 @@ if (usuSenha.value == confirmaSenha.value) {
           primAcesso: false
         }).then(() => {
           Swal.fire({
-            title: "Bom trabalho!",
-            text: "Sua senha foi alterada!",
-            icon: "success",
-            confirmButtonText: "Ok"
-          }).then((result) => {
-            if (result.isConfirmed){
-              window.location = './index.html';
+            title: "A Senha foi Alterada!",
+            text: "Vamos prosseguir para a tela principal?",
+            showCancelButton: true,
+            confirmButtonText: "Sim!",
+            showLoaderOnConfirm: true,
+            preConfirm: function () {
+              window.location = "./primeiroAcesso.html";
             }
           });
         }).catch(error => {
