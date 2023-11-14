@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+    <script src="js/autentificacaoUser.js"></script>
 </head>
-<body>
-        <input id="inEmail" type="text" placeholder="Insira o seu Email Instirucional">
-        <br>
-        <input id="rm" type="text" placeholder="Insira seu RM">
-        <br>
-        <button id="redPass" type="submit">Redefinir Senha</button>
 
-    <script  type="module" src="js/get_pass.js"></script>
+<body>
+    <input id="inEmail" type="text" placeholder="Insira o seu Email Instirucional">
+    <br>
+    <input id="rm" type="text" placeholder="Insira seu RM">
+    <br>
+    <button id="redPass" type="submit">Redefinir Senha</button>
+
+    <script type="module" src="js/get_pass.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", initApp);
+    </script>
 </body>
+
 </html>

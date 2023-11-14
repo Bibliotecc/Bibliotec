@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inserindo Livro</title>
     <link rel="stylesheet" href=".././css/style.css">
+    <script src="js/autentificacaoUser.js"></script>
 </head>
 
 <body>
@@ -39,7 +40,7 @@
                 </a>
             </li> -->
             <li class="item-menu">
-                <a href="admusers/index.html">
+                <a href="inserirAlunos.html">
                     <span class="icone"> <img src="../img/icons/loginDash.png" alt=""> </span>
                     <span class="txt-link">Inserir Alunos</span>
                 </a>
@@ -137,6 +138,7 @@
     </div>
     </div>
     <script>
+        document.addEventListener("DOMContentLoaded", initApp);
         var li = document.getElementById('nomeAdm');
 
         //  let signoutlink =document.getElementById('signoutlink');

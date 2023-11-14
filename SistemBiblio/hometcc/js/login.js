@@ -66,6 +66,8 @@ if(!usuSenhaLVal){
           }
           else{
               if(decPass(dbpass) == usuSenhaL.value){
+              localStorage.setItem('auth', 1);
+              localStorage.setItem('typeUser', snapshot.val().typeUser);
               Login(snapshot.val());
               }
               else{

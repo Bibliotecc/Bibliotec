@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,36 +10,39 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
-   </head>
-<header> 
+</head>
+<header>
     <div class="container">
         <nav class="menu">
             <ul>
                 <li> <a href="index.html"> <img src="img/logo/logotcc.png" alt="logotcc"> </a> </li>
-                <li> 
-                    <input type="text" name="txtBuscaLivro" id="txtBuscaLivro" placeholder="O que você esta procurando?"> </li>
+                <li>
+                    <input type="text" name="txtBuscaLivro" id="txtBuscaLivro"
+                        placeholder="O que você esta procurando?">
+                </li>
                 <li> <a href="login.html"> Login <img src="img/icons/login.png" alt="" class="icon"> </a> </li>
             </ul>
         </nav>
     </div>
 </header>
-<body id="corpo"> 
-    <div class="background-fundo-all"> 
+
+<body id="corpo">
+    <div class="background-fundo-all">
         <div class="body-login">
             <div class="container-login">
                 <div class="buttonsform">
                     <h1>Login</h1>
                     <!-- <button id="cadastrar">1° Acesso</button> -->
                 </div>
-                <form  id="entrar">
-                    <input type="text" placeholder="RM" id="txtRM" required/>
-                    <input type="password" placeholder="Senha" id="txtusuSenhaL" required/>
+                <form id="entrar">
+                    <input type="text" placeholder="RM" id="txtRM" required />
+                    <input type="password" placeholder="Senha" id="txtusuSenhaL" required />
                     <br><br>
                     <a id="LoginForm" class="buttoncadastro"> Entrar </a>
                     <br><br><br>
-                    <a id="solictSenha" class="buttoncadastro"> Solicitar Senha </a>                    
+                    <a id="solictSenha" class="buttoncadastro"> Solicitar Senha </a>
                 </form>
-                
+
             </div>
         </div>
     </div>
@@ -68,7 +72,7 @@
                     <p>Livia</p>
                     <p>Lucas</p>
                     <p>Lucca</p>
-                    <p>Pedro</p>    
+                    <p>Pedro</p>
                     <p>Renzo</p>
                 </div>
             </div>
@@ -76,23 +80,23 @@
     </div>
     <script type="module" src="js/login.js"></script>
     <!-- CRIP PASSWORD-->
-        <script>
+    <script>
         // ----------- CRIPTOGRAFA SENHA ----------
         var usuSenha = document.getElementById("usuSenha");
         var usuSenhaL = document.getElementById("txtusuSenhaL");
-        
-            function cripSenha(){
-                var senhaCrip = CryptoJS.AES.encrypt(usuSenha.value, usuSenha.value);
-                return senhaCrip.toString();
-            }
 
-            function decPass(dbpass){
-                var senhaCrip = CryptoJS.AES.decrypt(dbpass, usuSenhaL.value);
-                return senhaCrip.toString(CryptoJS.enc.Utf8);
-            }
-        </script>
+        function cripSenha() {
+            var senhaCrip = CryptoJS.AES.encrypt(usuSenha.value, usuSenha.value);
+            return senhaCrip.toString();
+        }
+
+        function decPass(dbpass) {
+            var senhaCrip = CryptoJS.AES.decrypt(dbpass, usuSenhaL.value);
+            return senhaCrip.toString(CryptoJS.enc.Utf8);
+        }
+    </script>
     <!-- EVENTOS ENTER-->
- <!--   <script>   
+    <!--   <script>   
         $(function(){
         
        $('corpo').keypress(function (e) {
@@ -106,8 +110,9 @@
         
       });  
     </script> -->
-  
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="js/solicitaSenha.js"></script>
 </body>
+
 </html>

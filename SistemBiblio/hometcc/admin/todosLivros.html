@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,9 @@
     <link rel="stylesheet" href="../css/style.css">
     <title>Bibliotec</title>
     <script src="https://kit.fontawesome.com/9044e11f90.js" crossorigin="anonymous"></script>
+    <script src="js/autentificacaoUser.js"></script>
 </head>
+
 <body id="corpo-livros">
     <nav class="menu-lateral">
         <div class="btn-expandir">
@@ -19,7 +22,7 @@
                     <span class="icone"> <img src="../img/icons/book.png" alt=""> </span>
                     <span class="txt-link">Livros</span>
                 </a>
-            </li> 
+            </li>
             <li class="item-menu">
                 <a href="inserirLivros.html">
                     <span class="icone"> <img src="../img/icons/Badd.png" alt=""> </span>
@@ -27,7 +30,7 @@
                 </a>
             </li>
             <li class="item-menu">
-                <a href="admusers/index.html">
+                <a href="inserirAlunos.html">
                     <span class="icone"> <img src="../img/icons/loginDash.png" alt=""> </span>
                     <span class="txt-link">Inserir Alunos</span>
                 </a>
@@ -45,11 +48,14 @@
             <nav class="menu">
                 <ul>
                     <li> <a href="index.html"> <img src=".././img/logo/logotcc.png" alt="logotcc"> </a> </li>
-                    <li> 
-                        <input type="text" name="txtBuscaLivro" id="txtBuscaLivro" placeholder="O que você esta procurando?"> </li>
-                    <li> <a href="../admin/index.html"> Administradora <img src="../img/icons/login.png" alt="" class="icon"> </a> </li>
+                    <li>
+                        <input type="text" name="txtBuscaLivro" id="txtBuscaLivro"
+                            placeholder="O que você esta procurando?">
+                    </li>
+                    <li> <a href="../admin/index.html"> Administradora <img src="../img/icons/login.png" alt=""
+                                class="icon"> </a> </li>
                 </ul>
-            </nav> 
+            </nav>
         </div>
     </header>
     <div class="background-fundo-all">
@@ -74,28 +80,30 @@
                     </table>
                 </div>
                 <script type="module">
+                    document.addEventListener("DOMContentLoaded", initApp);
                     // Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+                    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyC95RHcPl1VhNT484rnwWDaE_E8cC_q4ZQ",
-  authDomain: "tccsb-39f62.firebaseapp.com",
-  projectId: "tccsb-39f62",
-  storageBucket: "tccsb-39f62.appspot.com",
-  messagingSenderId: "446535834077",
-  appId: "1:446535834077:web:b43e6da142918afae53e34",
-  measurementId: "G-QFJFTQ66ZC"
-};
-
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-import {getDatabase, ref, set, get, child, onValue,update, remove } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+                    const firebaseConfig = {
+                        apiKey: "AIzaSyC95RHcPl1VhNT484rnwWDaE_E8cC_q4ZQ",
+                        authDomain: "tccsb-39f62.firebaseapp.com",
+                        projectId: "tccsb-39f62",
+                        storageBucket: "tccsb-39f62.appspot.com",
+                        messagingSenderId: "446535834077",
+                        appId: "1:446535834077:web:b43e6da142918afae53e34",
+                        measurementId: "G-QFJFTQ66ZC"
+                    };
 
 
-        const db = getDatabase();
-        const corpo = document.getElementById('corpo');
+                    // Initialize Firebase
+                    const app = initializeApp(firebaseConfig);
+                    import { getDatabase, ref, set, get, child, onValue, update, remove } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
 
+
+                    const db = getDatabase();
+                    const corpo = document.getElementById('corpo');
+
+<<<<<<< HEAD
         function AddItemToTable(nomeLivro, genero, autorId, numExemplar,editora,dataAquisicao,nomeColecao) {
             const tr = document.createElement("tr");
             const tdNome = document.createElement("td");
@@ -112,84 +120,147 @@ import {getDatabase, ref, set, get, child, onValue,update, remove } from "https:
                   icone.className = "fa-solid fa-pencil";
                   
 
-            tdNome.innerText = nomeLivro;
-            tdGenero.innerText = genero;
-            tdautorId.innerText = autorId;
-            tdnumExemplar.innerText = numExemplar;
-            tdeditora.innerText = editora;
-            tddataAquisicao.innerText = dataAquisicao;
-            tdnomeColecao.innerText = nomeColecao;
-            
-            tr.appendChild(tdNome);
-            tr.appendChild(tdGenero);
-            tr.appendChild(tdautorId);
-            tr.appendChild(tdnumExemplar);
-            tr.appendChild(tdeditora);
-            tr.appendChild( tddataAquisicao);
-            tr.appendChild( tdnomeColecao);
-            tdEditar.appendChild(aEditar);
-            aEditar.appendChild(icone);                   
-            tr.appendChild(tdEditar);
-            
+                        tdNome.innerText = nomeLivro;
+                        tdGenero.innerText = genero;
+                        tdautorId.innerText = autorId;
+                        tdnumExemplar.innerText = numExemplar;
+                        tdeditora.innerText = editora;
+                        tddataAquisicao.innerText = dataAquisicao;
+                        tdnomeColecao.innerText = nomeColecao;
+
+                        tr.appendChild(tdNome);
+                        tr.appendChild(tdGenero);
+                        tr.appendChild(tdautorId);
+                        tr.appendChild(tdnumExemplar);
+                        tr.appendChild(tdeditora);
+                        tr.appendChild(tddataAquisicao);
+                        tr.appendChild(tdnomeColecao);
+                        tdEditar.appendChild(aEditar);
+                        aEditar.appendChild(icone);
+                        tr.appendChild(tdEditar);
 
 
-            corpo.appendChild(tr);
-        }
 
-        function AddAllItemToTable(livros) {
-            corpo.innerHTML = ""; // Clear the table
+                        corpo.appendChild(tr);
+                    }
 
-            livros.forEach(element => {
-                AddItemToTable(element.nomeLivro, element.gênero, element.autorId, element.numExemplar, element.editora, element.dataAquisicao,element.nomeColecao);
-            });
-        }
-        function GetAllDataOnce() {
-            const dbref = ref(db, "livros");
+                    function AddAllItemToTable(livros) {
+                        corpo.innerHTML = ""; // Clear the table
 
-            onValue(dbref, (snapshot) => {
-                const livros = [];
-                snapshot.forEach(childSnapshot => {
-                    livros.push(childSnapshot.val());
-                });
+                        livros.forEach(element => {
+                            AddItemToTable(element.nomeLivro, element.gênero, element.autorId, element.numExemplar, element.editora, element.dataAquisicao, element.nomeColecao);
+                        });
+                    }
+                    function GetAllDataOnce() {
+                        const dbref = ref(db, "livros");
 
-                AddAllItemToTable(livros);
-            });
-        }
-              GetAllDataOnce();
+                        onValue(dbref, (snapshot) => {
+                            const livros = [];
+                            snapshot.forEach(childSnapshot => {
+                                livros.push(childSnapshot.val());
+                            });
 
-              
+                            AddAllItemToTable(livros);
+                        });
+                    }
+                    GetAllDataOnce();
+
+=======
+                    function AddItemToTable(nomeLivro, genero, autorId, numExemplar, editora, dataAquisicao, nomeColecao) {
+                        const tr = document.createElement("tr");
+                        const tdNome = document.createElement("td");
+                        const tdGenero = document.createElement("td");
+                        const tdautorId = document.createElement("td");
+                        const tdnumExemplar = document.createElement("td");
+                        const tdeditora = document.createElement("td");
+                        const tddataAquisicao = document.createElement("td");
+                        const tdnomeColecao = document.createElement("td");
+                        const tdEditar = document.createElement("td");
+                        const aEditar = document.createElement("a");
+                        aEditar.href = "#";
+                        const icone = document.createElement("i");
+                        icone.className = "fa-solid fa-pencil";
+
+
+                        tdNome.innerText = nomeLivro;
+                        tdGenero.innerText = genero;
+                        tdautorId.innerText = autorId;
+                        tdnumExemplar.innerText = numExemplar;
+                        tdeditora.innerText = editora;
+                        tddataAquisicao.innerText = dataAquisicao;
+                        tdnomeColecao.innerText = nomeColecao;
+
+                        tr.appendChild(tdNome);
+                        tr.appendChild(tdGenero);
+                        tr.appendChild(tdautorId);
+                        tr.appendChild(tdnumExemplar);
+                        tr.appendChild(tdeditora);
+                        tr.appendChild(tddataAquisicao);
+                        tr.appendChild(tdnomeColecao);
+                        tdEditar.appendChild(aEditar);
+                        aEditar.appendChild(icone);
+                        tr.appendChild(tdEditar);
+
+
+
+                        corpo.appendChild(tr);
+                    }
+
+                    function AddAllItemToTable(livros) {
+                        corpo.innerHTML = ""; // Clear the table
+
+                        livros.forEach(element => {
+                            AddItemToTable(element.nomeLivro, element.gênero, element.autorId, element.numExemplar, element.editora, element.dataAquisicao, element.nomeColecao);
+                        });
+                    }
+                    function GetAllDataOnce() {
+                        const dbref = ref(db, "livros");
+
+                        onValue(dbref, (snapshot) => {
+                            const livros = [];
+                            snapshot.forEach(childSnapshot => {
+                                livros.push(childSnapshot.val());
+                            });
+
+                            AddAllItemToTable(livros);
+                        });
+                    }
+                    GetAllDataOnce();
+
+>>>>>>> 0df6f892160a916d41862243b60dd0befee392ac
+
 
                 </script>
             </div>
         </div>
     </div>
-<footer>
-    <div class="container">
-        <div class="container-footer">
-            <a href="#"> <img src="../img/logo/facebook.png" alt=""> </a>
-            <a href="#"> <img src="../img/logo/instagram.png" alt=""> </a>
-            <a href="#"> <img src="../img/logo/twitter.png" alt=""> </a>
-        </div>
-    </div>
-</footer>
-<div class="end-page">
-    <div class="container">
-        <div class="container-desc">
-            <div class="estil-titulo-endpage">
-                <h2> Criadores do Site </h2>
-                <h2> 3º Desenvolvimento de Sistemas </h2>
-            </div>
-            <div class="estil-endpage">
-                <p>Bruno</p>
-                <p>Diogo</p>
-                <p>Felipe</p>
-                <p>Gabriella</p>
-                <p>Livia</p>
-                <p>Lucas</p>
-                <p>Lucca</p>
-                <p>Pedro</p>    
-                <p>Renzo</p>
+    <footer>
+        <div class="container">
+            <div class="container-footer">
+                <a href="#"> <img src="../img/logo/facebook.png" alt=""> </a>
+                <a href="#"> <img src="../img/logo/instagram.png" alt=""> </a>
+                <a href="#"> <img src="../img/logo/twitter.png" alt=""> </a>
             </div>
         </div>
+    </footer>
+    <div class="end-page">
+        <div class="container">
+            <div class="container-desc">
+                <div class="estil-titulo-endpage">
+                    <h2> Criadores do Site </h2>
+                    <h2> 3º Desenvolvimento de Sistemas </h2>
+                </div>
+                <div class="estil-endpage">
+                    <p>Bruno</p>
+                    <p>Diogo</p>
+                    <p>Felipe</p>
+                    <p>Gabriella</p>
+                    <p>Livia</p>
+                    <p>Lucas</p>
+                    <p>Lucca</p>
+                    <p>Pedro</p>
+                    <p>Renzo</p>
+                </div>
+            </div>
+        </div>
     </div>
-</div>

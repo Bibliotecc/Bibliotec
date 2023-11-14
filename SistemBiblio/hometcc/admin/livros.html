@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>livros admin</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="js/autentificacaoUser.js"></script>
 </head>
+
 <body>
+
     <body class="body-adm">
         <nav class="menu-lateral">
             <div class="btn-expandir">
@@ -19,18 +23,18 @@
                         <span class="icone"> <img src="../img/icons/book.png" alt=""> </span>
                         <span class="txt-link">Livros</span>
                     </a>
-                </li> 
+                </li>
                 <li class="item-menu">
                     <a href="inserirLivros.html">
                         <span class="icone"> <img src="../img/icons/Badd.png" alt=""> </span>
                         <span class="txt-link">Inserir Livro</span>
                     </a>
                 </li>
-        
-                    <a href="#">
-                        <span class="icone"> <img src="../img/icons/loginDash.png" alt=""> </span>
-                        <span class="txt-link">Conta</span>
-                    </a>
+
+                <a href="#">
+                    <span class="icone"> <img src="../img/icons/loginDash.png" alt=""> </span>
+                    <span class="txt-link">Conta</span>
+                </a>
                 </li>
             </ul>
         </nav>
@@ -50,5 +54,9 @@
                 <h1>lista de nomes </h1>
             </div>
         </div>
-</body>
+        <script>
+            document.addEventListener("DOMContentLoaded", initApp);
+        </script>
+    </body>
+
 </html>
