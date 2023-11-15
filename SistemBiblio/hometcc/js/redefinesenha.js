@@ -51,7 +51,7 @@ function updateSenha(){
     })
     return false;
   }
-  else{
+  if(confirmaSenha.value != usuSenha.value){
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
