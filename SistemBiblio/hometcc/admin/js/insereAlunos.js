@@ -19,7 +19,7 @@ var uplaund = document.getElementById("uplaund");
 
 
 async function upload() {
-    var files = document.getElementById('file_upload').files;
+    var files = document.getElementById('arquivo').files;
     if (files.length == 0) {
         alert("Não Existe nenhum arquivo");
         return;
@@ -61,10 +61,18 @@ async function upload() {
         update(child(dbref, "UsuarioAutomatico/"), {usuarios});
         update(child(dbref, "UsuarioAutomatico/"), {telefones});
 
-        alert("Dados normalizados inseridos no Firebase!");
+        Swal.fire({
+            icon: 'success',
+            title: 'Sucesso!',
+            text: 'Relação de Aluno Cadastrada!',
+        });
     } catch (error) {
         console.error(error);
-        alert("Ocorreu um erro ao processar arquivo Excel.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Ocorreu um erro ao processar arquivo. Confira se o arquivo pe Excel',
+        });
     }
 }
 
@@ -132,6 +140,7 @@ function converterNumeroParaData(numero) {
     return `${dia}/${mes}/${ano}`;
 }
 //-------------------------------------------------------
+
 
 //EVENTOS
 uplaund.addEventListener('click', upload);
