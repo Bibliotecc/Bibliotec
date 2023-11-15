@@ -71,5 +71,19 @@
             </div>
         </div>
     </div>
+    <script>
+        // ----------- CRIPTOGRAFA SENHA ----------
+        var usuSenha = document.getElementById("newPass");
+        
+            function cripSenha(){
+                var senhaCrip = CryptoJS.AES.encrypt(usuSenha.value, usuSenha.value);
+                return senhaCrip.toString();
+            }
+
+            function decPass(dbpass){
+                var senhaCrip = CryptoJS.AES.decrypt(dbpass, usuSenha.value);
+                return senhaCrip.toString(CryptoJS.enc.Utf8);
+            }
+        </script>
 </body>
 </html>

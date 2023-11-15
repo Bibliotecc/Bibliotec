@@ -68,17 +68,17 @@ if (usuSenha.value == confirmaSenha.value) {
       if (snapshot.val().primAcesso == true) {
         const dbref = ref(db);
         update(child(dbref, "UsuarioAutomatico/usuarios/" + rm.value), {
-          password: cripSenha(),
+          password: cripSenha(usuSenha.value),
           primAcesso: false
         }).then(() => {
           Swal.fire({
             title: "Bom trabalho!",
-            text: "Sua senha foi alterada!",
+            text: "Sua senha foi alterada! Faça Login!",
             icon: "success",
             confirmButtonText: "Ok"
           }).then((result) => {
             if (result.isConfirmed){
-              window.location = './index.html';
+              window.location = './login.html';
             }
           });
         }).catch(error => {
