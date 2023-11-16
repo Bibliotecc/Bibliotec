@@ -15,8 +15,16 @@ const app = initializeApp(firebaseConfig);
 import {getDatabase, ref, set, get, child, onValue,update, remove } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
 const db= getDatabase();
 
+var urlAtual = window.location.href;
+
+var urlPsq = new URL(urlAtual);
+var psq = urlPsq.searchParams.get("psq");
+var urlArray = urlAtual.split('/');
+var ultimaBarra = urlArray[urlArray.length - 1];
+
 const corpo = document.getElementById('corpo');
 function Emprestimos(nomeLivro, usuNome, rm, dataPedido, idEmprestimo, statusEmp) {
+    if (psq === rm || psq === nomeLivro || psq === usuNome){
         const tr = document.createElement("tr");
         const tdRm = document.createElement("td");
             tdRm.innerText = rm;
@@ -39,6 +47,7 @@ function Emprestimos(nomeLivro, usuNome, rm, dataPedido, idEmprestimo, statusEmp
         tr.appendChild(tdStatus);
 
         corpo.appendChild(tr);
+    }
     }
         
     function AddAllItemToEmprestimos(emprestimos){

@@ -71,20 +71,20 @@
     </header>
     <div class="background-fundo-all">
         <div class="container-pesquisa">
-            <input type="text" placeholder="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></input>
+            <input type="text" placeholder="Pesquisar" id="inputValue">
             <div>
-                <input name="rmbtn" id="rmbtn" type="radio">
+                <input name="btn" id="rmbtn" type="radio" value="rm">
                 <label for="rmbtn">RM</label>
             </div>
             <div>
-                <input name="nomebtn" id="nomebtn" type="radio">
+                <input name="btn" id="nomebtn" type="radio" value="usuNome">
                 <label for="nomebtn">Nome do Aluno</label>
             </div>
             <div>
-                <input name="nomeLivrobtn" id="nomeLivrobtn" type="radio">
+                <input name="btn" id="nomeLivrobtn" type="radio" value="nomeLivro">
                 <label for="nomeLivrobtn">Nome do Livro</label>
             </div>
-            <button class="btnbuscar">Buscar</button>
+            <button class="btnbuscar" onclick="obterValor()">Buscar</button>
         </div>
         <div class="container-adm-livros">
             <div class="container-livros">
@@ -139,6 +139,63 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.querySelector(".btnbuscar").addEventListener("click", function () {
+            obterValor();
+        });
+
+        // Adicione um evento de tecla ao campo de entrada
+        document.getElementById("inputValue").addEventListener("keydown", function (event) {
+            if (event.key == "Enter") {
+                obterValor();
+            }
+        });
+        function obterValor(){ 
+            var inputValue = document.getElementById("inputValue");
+            var pesquisa = document.getElementById("inputValue").value;
+            var radios = document.getElementsByName("btn");
+            for (var i = 0; i < radios.length; i++){
+                if (radios[i].checked){
+                    filtrar(pesquisa, radios[i].value);
+                }
+            }
+        }
+        function filtrar(pesquisa, radioValue) {
+            if (radioValue === "rm") {
+                // Pega Valor do ID Pesquisar
+                var search = pesquisa;
+
+                // Verifico se a Tecla Pressionada é o ENTE
+                searchData();
+
+                // Crio a função, uma ação para o searchData()
+                function searchData() {
+                    window.location = 'historicoEmp.html?psq=' + search;
+                }
+            }
+            if (radioValue === "nomeLivro") {
+                var search = pesquisa;
+                    searchData();
+
+                    function searchData() {
+                        window.location = 'historicoEmp.html?psq=' + search;
+                    }
+                
+            }
+            /*if (radioValue === "usuNome") {
+                searchData();
+
+                    function searchData() {
+                        window.location = 'historicoEmp.html?psq=' + search;
+                    }
+            }*/
+        }
+            
+            
+        
+
+        
+    </script>
 </body>
 
 </html>
