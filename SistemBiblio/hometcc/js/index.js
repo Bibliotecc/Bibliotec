@@ -91,6 +91,11 @@ var cBooksR = document.getElementById('container-books-Romance');
 var cBooksF = document.getElementById('container-books-Ficcao');
 var cBooksA = document.getElementById('container-books-Acao');
 var cBooksC = document.getElementById('container-books-Comedia');
+var bookCR = document.getElementById('container-principal-R');
+var bookCF = document.getElementById('container-principal-F');
+var bookCA = document.getElementById('container-principal-A');
+var bookCC = document.getElementById('container-principal-C');
+
 var urlAtual = window.location.href;
 
 var urlFiltro = new URL(urlAtual);
@@ -102,6 +107,8 @@ var ultimaBarra = urlArray[urlArray.length - 1];
 
 let romanceHeaderAdded = false;
 let ficcaoHeaderAdded = false;
+let acaoHeaderAdded = false;
+let comediaHeaderAdded = false;
 
 function AddItemToTable(nomeLivro, gênero, urlImg) {
     console.log(filtro);
@@ -118,28 +125,38 @@ function AddItemToTable(nomeLivro, gênero, urlImg) {
             let h1 = document.createElement("h1");
             h1.innerText = gênero;
 
-            cBooksR.appendChild(h1);
-            cBooksR.appendChild(br);
+            bookCR.appendChild(h1);
+            bookCR.appendChild(br);
             romanceHeaderAdded = true;
         } else if (!ficcaoHeaderAdded && gênero === "Ficção Cientifica") {
             let br = document.createElement("br");
             let h1 = document.createElement("h1");
             h1.innerText = gênero;
 
-            cBooksF.appendChild(h1);
-            cBooksF.appendChild(br);
+            bookCF.appendChild(h1);
+            bookCF.appendChild(br);
             ficcaoHeaderAdded = true;
+        } else if (!acaoHeaderAdded && gênero === "Ação") {
+            let h1 = document.createElement("h1");
+            h1.innerText = gênero;
+            bookCA.appendChild(h1);
+            acaoHeaderAdded = true;
+        } else if (!comediaHeaderAdded && gênero === "Comédia") {
+            let h1 = document.createElement("h1");
+            h1.innerText = gênero;
+            bookCC.appendChild(h1);
+            comediaHeaderAdded = true;
         }
         
     // -------------------------------------------------------- SEM PESQUISA E FILTRO
     if (ultimaBarra == 'index.html' || ultimaBarra == '' || search == '') {
 
         let divE = document.createElement("div");
-        divE.className = 'estil-books';
+            divE.className = 'estil-books';
         let img = document.createElement("img");
-        img.src = urlImg;
+            img.src = urlImg;
         let a = document.createElement("a");
-        a.innerText = 'Reservar';
+            a.innerText = 'Reservar';
         a.href = "aluguel.html?alugar=" + nomeLivro;
 
         divE.appendChild(img);
@@ -220,6 +237,8 @@ function AddAllItemToTable(livro) {
     stdNo = 0;
     cBooksR.innerHTML = "";
     cBooksF.innerHTML = "";
+    bookCA.innerHTML = "";
+    bookCC.innerHTML = "";
 
     livro.forEach(element => {
         AddItemToTable(element.nomeLivro, element.gênero, element.urlImg);

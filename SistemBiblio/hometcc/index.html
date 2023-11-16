@@ -39,29 +39,53 @@
     </header>
     <div class="background-fundo-all">
         <div id="container-principal-R" class="container">  
+            <!-- TITULO-->
         </div>
             <div id="carousel-container" class="container-books">
                 <div id="carousel" class="carousel">
                     <div id="container-books-Romance" class="container-books">
+                        <!--ESTIL BOOKS-->
                     </div>
                 </div>
             </div>
-            <div class="container-estil-carousel-button">
-                <div class="estil-button-carousel">
-                    <button id="prev-button" class="carousel-button"> <i class="fa-solid fa-chevron-left"></i> </button>
-                    <button id="next-button" class="carousel-button"> <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
+            <button class="estil-botao-vermais" onclick="verMais('Romance')"> Ver Mais </button>
 
             <div id="container-principal-F" class="container">  
+                <!-- TITULO-->
             </div>
-            <div id="carousel-container" class="container-books">
-                <div id="carousel" class="carousel">
-                        <div id="container-books-Ficcao" class="container-books"></div>
+                <div id="carousel-container" class="container-books">
+                    <div id="carousel" class="carousel">
+                        <div id="container-books-Ficcao" class="container-books">
+                            <!--ESTIL BOOKS-->
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                <button class="estil-botao-vermais" onclick="verMais('Ficção Cientifica')"> Ver Mais </button>
+
+                <div id="container-principal-C" class="container">  
+                    <!-- TITULO-->
+                </div>
+                    <div id="carousel-container" class="container-books">
+                        <div id="carousel" class="carousel">
+                            <div id="container-books-Comedia" class="container-books">
+                                <!--ESTIL BOOKS-->
+                            </div>
+                        </div>
+                    </div>
+                    <button class="estil-botao-vermais" onclick="verMais('Comédia')"> Ver Mais </button>
+
+
+                    <div id="container-principal-A" class="container">  
+                        <!-- TITULO-->
+                    </div>
+                        <div id="carousel-container" class="container-books">
+                            <div id="carousel" class="carousel">
+                                <div id="container-books-Acao" class="container-books">
+                                    <!--ESTIL BOOKS-->
+                                </div>
+                            </div>
+                        </div>
+                        <button class="estil-botao-vermais" onclick="verMais('Acao')"> Ver Mais </button>
     </div>
     <footer>
         <div class="container">
@@ -94,81 +118,90 @@
             </div>
         </div>
     </div>
-    <script>
-    const carousel = document.getElementById("carousel");
-    const prevButton = document.getElementById("prev-button");
-    const nextButton = document.getElementById("next-button");
-    let isDragging = false;
-    let startPosition = 0;
-    let currentTranslate = 0;
-    let visibleBooks = 1;
 
-    prevButton.addEventListener("click", () => {
-        navigateCarousel(1);
-    });
-
-    nextButton.addEventListener("click", () => {
-        navigateCarousel(-1);
-    });
-
-    carousel.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        startPosition = e.clientX - currentTranslate;
-        carousel.style.cursor = "grabbing";
-    });
-
-    carousel.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-        const currentPosition = e.clientX;
-        const translate = currentPosition - startPosition;
-        currentTranslate = translate;
-        carousel.style.transform = `translateX(${translate}px)`;
-    });
-
-    carousel.addEventListener("mouseup", () => {
-        isDragging = false;
-        carousel.style.cursor = "grab";
-    });
-
-    carousel.addEventListener("mouseleave", () => {
-        isDragging = false;
-        carousel.style.cursor = "grab";
-    });
-
-    // Prevent user from selecting text while dragging
-    carousel.addEventListener("selectstart", (e) => {
-        e.preventDefault();
-    });
-
-    function navigateCarousel(direction) {
-        const cardWidth = document.querySelector(".container-books").offsetWidth;
-        currentTranslate += direction * cardWidth * visibleBooks;
-        currentTranslate = Math.max(
-            -cardWidth * (document.querySelectorAll(".container-books").length - visibleBooks),
-            Math.min(0, currentTranslate)
-        );
-        carousel.style.transform = `translateX(${currentTranslate}px)`;
-    }
-
-    // Update the visible books when the window is resized
-    window.addEventListener("resize", () => {
-        visibleBooks = calculateVisibleBooks();
-        navigateCarousel(0); // Reset the carousel position
-    });
-
-    // Calculate the number of visible books based on the container width
-    function calculateVisibleBooks() {
-        const containerWidth = document.querySelector(".container-books").offsetWidth;
-        const bookWidth = document.querySelector(".book").offsetWidth;
-        return Math.floor(containerWidth / bookWidth);
-    }
-
-    // Initially, calculate and set the visible books
-    visibleBooks = calculateVisibleBooks();
-    </script>
 
     <script type="module" src="js\index.js"></script>
-
+<!-- 
+    <script>
+        const carousel = document.getElementById("carousel");
+        const prevButton = document.getElementById("prev-button");
+        const nextButton = document.getElementById("next-button");
+        let isDragging = false;
+        let startPosition = 0;
+        let currentTranslate = 0;
+        let visibleItems = 1;
+    
+        prevButton.addEventListener("click", () => {
+            navigateCarousel(1);
+        });
+    
+        nextButton.addEventListener("click", () => {
+            navigateCarousel(-1);
+        });
+    
+        carousel.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            startPosition = e.clientX - currentTranslate;
+            carousel.style.cursor = "grabbing";
+        });
+    
+        carousel.addEventListener("mousemove", (e) => {
+            if (!isDragging) return;
+            const currentPosition = e.clientX;
+            const translate = currentPosition - startPosition;
+            currentTranslate = translate;
+            carousel.style.transform = `translateX(${translate}px)`;
+        });
+    
+        carousel.addEventListener("mouseup", () => {
+            isDragging = false;
+            carousel.style.cursor = "grab";
+        });
+    
+        carousel.addEventListener("mouseleave", () => {
+            isDragging = false;
+            carousel.style.cursor = "grab";
+        });
+    
+        // Prevent user from selecting text while dragging
+        carousel.addEventListener("selectstart", (e) => {
+            e.preventDefault();
+        });
+    
+        function navigateCarousel(direction) {
+            const itemWidth = document.querySelector(".estil-books").offsetWidth;
+            currentTranslate += direction * itemWidth * visibleItems;
+            currentTranslate = Math.max(
+                -itemWidth * (document.querySelectorAll(".estil-books").length - visibleItems),
+                Math.min(0, currentTranslate)
+            );
+            carousel.style.transform = `translateX(${currentTranslate}px)`;
+        }
+    
+        // Update the visible items when the window is resized
+        window.addEventListener("resize", () => {
+            visibleItems = calculateVisibleItems();
+            navigateCarousel(0); // Reset the carousel position
+        });
+    
+        // Calculate the number of visible items based on the container width
+        function calculateVisibleItems() {
+            const containerWidth = document.querySelector(".container-books").offsetWidth;
+            const itemWidth = document.querySelector(".estil-books").offsetWidth;
+            return Math.floor(containerWidth / itemWidth);
+        }
+    
+        // Initially, calculate and set the visible items
+        visibleItems = calculateVisibleItems();
+    </script> -->
+    
+<script>
+    
+        // Crio a função, uma ação para o searchData()
+        function verMais(genero) {
+            window.location = 'buscaGen.html?gen=' + genero;
+        }
+</script>
     <script>
         var li = document.getElementById('loginLI');
 
