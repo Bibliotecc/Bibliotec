@@ -2,13 +2,13 @@
 
 15/11/2023
 
--> Tela consulta com filtros (emprestimos);     
+-> Remover input (pesquisa) tela adm;
+-> Tela consulta com filtros (emprestimos); 
 -> Atualizar emprestimo como devolvido;
 -> Substitui os espaços (em branco) da tela principal adm; (Coloquei um grafico);
 -> Tela index dos usuarios -> Titulos do livros;
 
 ---- DEUS NOS AJUDE !!
-
 
 ----------------------------------
 14/11/2023

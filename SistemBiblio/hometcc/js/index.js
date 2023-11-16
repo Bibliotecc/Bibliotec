@@ -87,8 +87,10 @@ function SelecionarDadosFiltro() {
 //  GET ALL 
 var stdNo = 0;
 //v0ar cntrPrin = document.getElementById('container-principal');
-var cBooks = document.getElementById('container-books-Romance');
-//var cBooksFc = document.getElementById('container-books-FC');
+var cBooksR = document.getElementById('container-books-Romance');
+var cBooksF = document.getElementById('container-books-Ficcao');
+var cBooksA = document.getElementById('container-books-Acao');
+var cBooksC = document.getElementById('container-books-Comedia');
 var urlAtual = window.location.href;
 
 var urlFiltro = new URL(urlAtual);
@@ -98,6 +100,8 @@ var filtro = urlFiltro.searchParams.get("filtro");
 var urlArray = urlAtual.split('/');
 var ultimaBarra = urlArray[urlArray.length - 1];
 
+let romanceHeaderAdded = false;
+let ficcaoHeaderAdded = false;
 
 function AddItemToTable(nomeLivro, gênero, urlImg) {
     console.log(filtro);
@@ -109,7 +113,24 @@ function AddItemToTable(nomeLivro, gênero, urlImg) {
       //  console.log(searchSimilar);  
     var nomeLivroSimilar = [];
         nomeLivroSimilar = similaLivro(nomeLivro);
+        if (!romanceHeaderAdded && gênero === "Romance") {
+            let br = document.createElement("br");
+            let h1 = document.createElement("h1");
+            h1.innerText = gênero;
 
+            cBooksR.appendChild(h1);
+            cBooksR.appendChild(br);
+            romanceHeaderAdded = true;
+        } else if (!ficcaoHeaderAdded && gênero === "Ficção Cientifica") {
+            let br = document.createElement("br");
+            let h1 = document.createElement("h1");
+            h1.innerText = gênero;
+
+            cBooksF.appendChild(h1);
+            cBooksF.appendChild(br);
+            ficcaoHeaderAdded = true;
+        }
+        
     // -------------------------------------------------------- SEM PESQUISA E FILTRO
     if (ultimaBarra == 'index.html' || ultimaBarra == '' || search == '') {
 
@@ -124,9 +145,19 @@ function AddItemToTable(nomeLivro, gênero, urlImg) {
         divE.appendChild(img);
         divE.appendChild(a);
 
-        cBooks.appendChild(divE);
-
-
+        if(gênero == "Romance"){
+            
+            cBooksR.appendChild(divE);
+        }
+        if(gênero == "Ficção Cientifica"){
+            cBooksF.appendChild(divE);
+        }
+        if(gênero == "Ação"){
+            cBooksA.appendChild(divE);
+        }
+        if(gênero == "Comédia"){
+            cBooksC.appendChild(divE);
+        }
     }
     // ----------------------------------------------------- PESQUISA POR NOME
     if (search == nomeLivro ||correspondeString(searchSimilar, nomeLivroSimilar) && filtro == null) {
@@ -142,7 +173,19 @@ function AddItemToTable(nomeLivro, gênero, urlImg) {
         divE.appendChild(img);
         divE.appendChild(a);
 
-        cBooks.appendChild(divE);
+        
+        if(gênero == "Romance"){
+            cBooksR.appendChild(divE);
+        }
+        if(gênero == "Ficção Cientifica"){
+            cBooksF.appendChild(divE);
+        }
+        if(gênero == "Ação"){
+            cBooksA.appendChild(divE);
+        }
+        if(gênero == "Comédia"){
+            cBooksC.appendChild(divE);
+        }
     }
     // ----------------------------------------------------- PESQUISA POR GÊNERO    
     if (gênero == filtro) {
@@ -158,12 +201,26 @@ function AddItemToTable(nomeLivro, gênero, urlImg) {
         
         divE.appendChild(a);
 
-        cBooks.appendChild(divE);
+        
+        if(gênero == "Romance"){
+            cBooksR.appendChild(divE);
+        }
+        if(gênero == "Ficção Cientifica"){
+            cBooksF.appendChild(divE);
+        }
+        if(gênero == "Ação"){
+            cBooksA.appendChild(divE);
+        }
+        if(gênero == "Comédia"){
+            cBooksC.appendChild(divE);
+        }
     }
 }
 function AddAllItemToTable(livro) {
     stdNo = 0;
-    cBooks.innerHTML = "";
+    cBooksR.innerHTML = "";
+    cBooksF.innerHTML = "";
+
     livro.forEach(element => {
         AddItemToTable(element.nomeLivro, element.gênero, element.urlImg);
     });
