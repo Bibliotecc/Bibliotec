@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <title>Bibliotec</title>
     <script src="https://kit.fontawesome.com/9044e11f90.js" crossorigin="anonymous"></script>
 </head>
+
 <body id="corpo-livros">
     <nav class="menu-lateral">
         <div class="btn-expandir">
@@ -57,14 +59,33 @@
             <nav class="menu">
                 <ul>
                     <li> <a href="index.html"> <img src=".././img/logo/logotcc.png" alt="logotcc"> </a> </li>
-                    <li> 
-                        <input type="text" name="txtBuscaLivro" id="txtBuscaLivro" placeholder="O que você esta procurando?"> </li>
-                    <li> <a href="../admin/index.html"> Administradora <img src="../img/icons/login.png" alt="" class="icon"> </a> </li>
+                    <li>
+                        <input type="text" name="txtBuscaLivro" id="txtBuscaLivro"
+                            placeholder="O que você esta procurando?">
+                    </li>
+                    <li> <a href="../admin/index.html"> Administradora <img src="../img/icons/login.png" alt=""
+                                class="icon"> </a> </li>
                 </ul>
-            </nav> 
+            </nav>
         </div>
     </header>
     <div class="background-fundo-all">
+        <div class="container-pesquisa">
+            <input type="text" placeholder="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></input>
+            <div>
+                <input name="rmbtn" id="rmbtn" type="radio">
+                <label for="rmbtn">RM</label>
+            </div>
+            <div>
+                <input name="nomebtn" id="nomebtn" type="radio">
+                <label for="nomebtn">Nome do Aluno</label>
+            </div>
+            <div>
+                <input name="nomeLivrobtn" id="nomeLivrobtn" type="radio">
+                <label for="nomeLivrobtn">Nome do Livro</label>
+            </div>
+            <button class="btnbuscar">Buscar</button>
+        </div>
         <div class="container-adm-livros">
             <div class="container-livros">
                 <div class="box-conteudo-livros">
@@ -111,7 +132,7 @@
                     <p>Livia</p>
                     <p>Lucas</p>
                     <p>Lucca</p>
-                    <p>Pedro</p>    
+                    <p>Pedro</p>
                     <p>Renzo</p>
                 </div>
             </div>
@@ -119,4 +140,5 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
+
 </html>

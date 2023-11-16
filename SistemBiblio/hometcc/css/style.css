@@ -714,20 +714,64 @@ nav.menu-lateral:hover{
 
 .button-cadastrar-livro a:hover{
     background-color: #3092ca;
-    transition: .2s}
+    transition: .2s
+}
 
 .container-adm-livros .container-livros .box-conteudo-livros ul {
     display: inline-block; 
     margin-right: 20px; 
     align-items: center;
 }
+
+.container-pesquisa{
+    max-width: 1000px;
+    width: auto;
+    background-color: #ffffff;
+    justify-content: space-between;
+    display: flex;
+    margin: 40px auto 0 auto;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+}
+
+.container-pesquisa input{
+    text-align: center;
+    font-family: Paragrafos;
+    font-size: 18px;
+    padding: 2px 0;
+}
+
+.container-pesquisa label{
+    font-family: Especificacoes;
+    font-size: 18px;
+}
+
+.btnbuscar{
+    font-size: 18px;
+    font-family: FonteTitulo;
+    background-color: #1D6A96;
+    color: #ffffff;
+    border: none;
+    padding: 7px 50px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btnbuscar:hover{
+    background-color: #3092ca;
+    transition: .2s
+}
+
 .container-adm-livros{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    margin-top: 70px;
+    margin-top: 40px;
 }
+
 .container-livros{
     background-color: #fff;
     padding: 20px; 
