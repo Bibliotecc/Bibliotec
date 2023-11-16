@@ -13,23 +13,22 @@
 <body>
     <header>
         <div class="container">
-            <nav class="menu">
-                <ul>
-                    <li> <a href="index.html"> <img src="img/logo/logotcc.png" alt="logotcc"> </a> </li>
-                    <li>
-                        <input type="text" name="txtBuscaLivro" id="txtBuscaLivro"
-                            placeholder="O que você esta procurando?">
-                    </li>
-                    <li class="dropdown"><a>Conta<img src="img/icons/seta.png" class="icon"> </a>
-                        <div class="dropdown-menu">
-                            <a href="usuLocados.html"> Perfil </a>
-                            <a href="login.html"> Sair </a>
-                            </li>
-                        </div>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
+          <nav class="menu">
+            <ul>
+              <li> <a href="index.html"> <img src="img/logo/logotcc.png" alt="logotcc"> </a> </li>
+            <!-- <li>
+                  <input type="text" name="txtBuscaLivro" id="txtBuscaLivro"
+                      placeholder="O que você esta procurando?">
+              </li> -->
+              <li class="dropdown">
+                <!-- <a> Filtros <img src="img/icons/seta.png" alt="" class="icon"> </a>-->
+                  <div class="dropdown-menu">
+                      <li class="dropdown"> <li id="loginLI"></li>
+                  </div>
+              </li>
+              
+          </ul>
+          </nav>
         </div>
     </header>
   
@@ -44,10 +43,10 @@
             <table>
               <thead>
                 <tr>
-                  <th>Livro(s) Locado(s)</th>
-                  <th>Prazo para entrega</th>
-                  <th id="atraso">Livros em atraso</th>
-                  <th>Status do Emprestimo</th>
+                  <th>Livro(s) Emprestado(s)</th>
+                  <th>Prazo de Devolução</th>
+                  <th id="atraso">Devolução em atraso?</th>
+                  <th>Status do Empréstimo</th>
                 </tr>
               </thead>
               <tbody id="corpo">
@@ -110,12 +109,68 @@
           }
     
           saudacaoDiv.innerHTML = saudacao;
-          mensagemFixaDiv.innerHTML = 'aqui estão seus débitos';
+          mensagemFixaDiv.innerHTML = 'Aqui estão seus empréstimos:';
         }
     
         // Chame a função ao carregar a página
         window.onload = exibirSaudacao;
       </script>
-  
+      <script>
+        var li = document.getElementById('loginLI');
+
+        //  let signoutlink =document.getElementById('signoutlink');
+        var currentUser = "!logado";
+
+        function getUsername() {
+            let keepLoggedIn = localStorage.getItem("keepLoggedIn");
+            if (keepLoggedIn == "yes") {
+                currentUser = JSON.parse(localStorage.getItem('user'));
+            }
+        }
+        function Signout() {
+                    Swal.fire({
+                        title: 'O Que Deseja Fazer?',
+                        showDenyButton: true,
+                        confirmButtonColor: '#FF8C00',
+                        confirmButtonText: 'Ver Empréstimos',
+                        denyButtonText: 'Sair',
+                }).then((secondResult) => {
+                    if (secondResult.isConfirmed) {
+                        window.location = "usuLocados.html";
+                    } else if (secondResult.isDenied) {
+                        localStorage.removeItem('user');
+                        localStorage.removeItem('keepLoggedIn');
+                        window.location = "index.html";
+                    }
+                });
+
+        }
+        getUsername();
+        if (currentUser == "!logado") {
+            let a = document.createElement("a");
+            a.innerText = "Login";
+            a.href = "login.html";
+            let img = document.createElement("img");
+            img.src = "img/icons/login.png";
+            img.className = "icon";
+            a.appendChild(img);
+            li.appendChild(a);
+
+        }
+        else {
+            let a = document.createElement("a");
+                a.innerText = currentUser.usuNome;
+                a.href = "javascript:Signout()";
+            let img = document.createElement("img");
+                img.className = "icon";
+                img.src = "img/icons/seta.png";    
+            a.appendChild(img);
+            li.appendChild(a);
+            console.log(currentUser.typeUser);
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     </body>
     </html>

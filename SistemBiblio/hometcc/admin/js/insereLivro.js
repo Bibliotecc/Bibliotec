@@ -88,7 +88,7 @@ function InsertLivroAutor(newId, newAutorId, urlImg){
         autorNome: nomeAutor.value      
     })
     .then(()=>{
-        salvaImagem();
+        salvaImagem(newId);
         Swal.fire('Conseguimos Inserir o Autor na Tabela Autores!',newAutorId, 'success');
     })
     .catch((error)=>{
@@ -126,7 +126,7 @@ function InsertLivro(newId, autalIdAutor){
         urlImg: ""   
     })
     .then(()=>{
-        salvaImagem();
+        salvaImagem(newId);
         Swal.fire('Conseguimos Inserir os Dados do Livro!',newId,'success');
     })
     .catch((error)=>{
@@ -191,7 +191,7 @@ function verificaAutorExiste(newIdLivros){
 
 }
 
-function salvaImagem() {
+function salvaImagem(idLivro) {
     const dbref = ref(db);
     // Obtém o elemento de entrada de arquivo pelo ID
     const inputFile = document.querySelector("#imgLivro");
@@ -214,7 +214,7 @@ function salvaImagem() {
             .then((downloadURL) => {
                  urlImg = downloadURL;
                 console.log('Imagem disponível em:', urlImg);
-                update(child(dbref, "livros/"+nomeLivro.value),{
+                update(child(dbref, "livros/"+idLivro),{
                     urlImg: downloadURL
                 }).then(() => {
                     console.log("Dados de 'livros' atualizados com sucesso!");

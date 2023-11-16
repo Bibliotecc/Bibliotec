@@ -7,6 +7,7 @@
     <title>Pagina do Administrador</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="js/autentificacaoUser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="body-adm">
@@ -30,7 +31,13 @@
             <li class="item-menu">
                 <a href="solicitacoesLivros.html">
                     <span class="icone"> <img src="../img/icons/relogio.png" alt=""> </span>
-                    <span class="txt-link">Solicitações</span>
+                    <span class="txt-link">Solicitações <br>de Empréstimos</span>
+                </a>
+            </li>
+            <li class="item-menu">
+                <a href="historicoEmp.html">
+                    <span class="icone"> <img src="../img/icons/relogio.png" alt=""> </span>
+                    <span class="txt-link">Históricos <br>de Empréstimos</span>
                 </a>
             </li>
             <li class="item-menu">
@@ -58,20 +65,21 @@
         </div>
     </header>
     <div class="container-adm">
-        <div class="box-conteudo-adm">
+        <canvas id="meuGrafico"></canvas>
+       <!--<div class="box-conteudo-adm">
             <div class="livros-alocados-list">
                 <p>Livros No Banco de Dados</p>
                 <div id="livros-alocados-list">
-                    <!-- AUTOMATICO DO JS-->
+                    
                 </div>
             </div>
             <div class="alunos-vencimento-list">
                 <p> Solicitações de Empréstimo </p>
                 <div id="solictEmp">
-                    <!-- AUTOMATICO DO JS-->
+                     AUTOMATICO DO JS
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
     <footer>
         <div class="container">
@@ -216,6 +224,7 @@
     </script>
 
     <script type="module" src="js/getLivros.js"></script>
+    <script type="module" src="js/graficoTESTE.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 

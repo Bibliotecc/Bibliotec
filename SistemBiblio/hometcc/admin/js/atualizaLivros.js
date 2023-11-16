@@ -31,7 +31,7 @@ var btnEditar = document.getElementById("bntEditar");
 
 // Referências aos campos tanto do FIREBASE quanto no FORMULÁRIO de alteração
 var nomeLivro = document.getElementById('nomeLivro');
-var nomeAutor = document.getElementById("nomeAutor");
+var nameAutor = document.getElementById("nomeAutor");
 var editora = document.getElementById("editora");
 var genLivro = document.getElementById("genLivro");
 var nomeColecao = document.getElementById("nomeColecao");
@@ -48,14 +48,17 @@ var ISBN = document.getElementById("ISBN");
 var dataAquisicao = document.getElementById("dataAquisicao");
 var volume = document.getElementById("volume");
 var idLivro;
+var autorId = document.getElementById("autorId");
 
 
-var nickLivro; // criado fora da função para ser usado em qualquer uma
-function buscaDados(livro){
+var nickLivro;
+var nomeAutor; // criado fora da função para ser usado em qualquer uma
+function buscaDados(livro, autores){
     var arrayLivro = livro.find((element) => element.nomeLivro == nameLivro);
      nickLivro = arrayLivro.idLivro;
-// Acima eu tratei a array do livro que bate com o "pesquisado". Use console.log(arrayLivro) para ver
-
+     var idAutor = arrayLivro.autorId;
+     var arrayAutor = autores.find((element) => element.autorId == idAutor); // Nome do Autor
+     nomeAutor = arrayAutor.autorNome; // Acima eu tratei a array do livro que bate com o "pesquisado". Use console.log(arrayLivro) para ver
      const dbref = ref(db, "livros/" + nickLivro);
      if (nomeLivro.value === "") { //o sinal de = três verifica significa que ele verifica se o valor é igual e se o tipo também é
         Swal.fire({
@@ -77,7 +80,8 @@ function buscaDados(livro){
                 onValue(dbref, (snapshot) => {
                     const dados = snapshot.val();
                     if (dados) {
-                        resolve(dados);
+                            console.log(nomeAutor);
+                        resolve(dados, nomeAutor, autores);
                     } else {
                         reject('Verifique o nome do livro');
                         closed;
@@ -89,7 +93,7 @@ function buscaDados(livro){
     })
     .then((result) => {
         if (result.value) {
-            preencherFormulario(result.value);
+            preencherFormulario(result.value, nomeAutor, autores);
             Swal.fire({
                 title: 'Encontrei os dados!',
                 icon: 'success',
@@ -105,10 +109,21 @@ function buscaDados(livro){
 } 
 
 nomeLivro.value = nameLivro;
-function preencherFormulario(dados){  
-    idLivro = dados.idLivro 
+var autoress;
+var nAutor;
+function preencherFormulario(dados, nomeAutor, autores){
+
+    autoress = autores;
+    nAutor = autores.find((element) => element.autorNome == nomeAutor); // Nome do Autor
+    idAutor =  nAutor.autorId;
+
+    
+    console.log(idAutor);
+
+    autorId.value =  idAutor + " (Permanece o ID do autor cadastrado, até edita-lo)";
+    idLivro = dados.idLivro; 
     genLivro.value = dados.gênero;
-    nomeAutor.value = dados.nomeAutor;
+    nameAutor.value = nomeAutor;
     editora.value = dados.editora;
     nomeColecao.value = dados.nomeColecao;
     idioma.value = dados.idioma;
@@ -125,31 +140,53 @@ function preencherFormulario(dados){
     volume.value = dados.volume;
     // COLOCA OS OUTROS CAMPOS AQ
 }
-
+var idAutor;
 function atualizaLivros() {
-    var novoNomeLivro = nomeLivro.value;
-    var novoGenLivro = genLivro.value;
-    var novoNomeAutor = nomeAutor.value;
-    var novoEditora = editora.value;
-    var novoNomeColecao = nomeColecao.value;
-    var novoIdioma = idioma.value;
-    var novoTipoItem = tipoItem.value;
-    var novoLançamento = lançamento.value;
-    var novoEdicao = edicao.value;
-    var novoNumExemplar = numExemplar.value;
-    var novoNumTombo = numTombo.value;
-    var novoNumPagina = numPagina.value;
-    var novoCDD = CDD.value;
-    var novoCutter = Cutter.value;
-    var novoISBN = ISBN.value;
-    var novoDataAquisicao = dataAquisicao.value;
-    var novoVolume = volume.value;
+    const dbref = ref(db);
 
-const dbref = ref(db);
+    var novoNomeLivro;
+    var novoGenLivro; 
+    var novoIdAutor; 
+    var novoEditora;
+    var novoIdioma;
+    var novoNomeColecao;
+    var novoTipoItem; 
+    var novoLançamento; 
+    var novoEdicao; 
+    var novoNumExemplar; 
+    var novoNumTombo; 
+    var novoNumPagina; 
+    var novoCDD;
+    var novoCutter; 
+    var novoISBN; 
+    var novoDataAquisicao; 
+    var novoVolume;
+
+    var nAutorr = autoress.find((element) => element.autorNome == nameAutor.value); // Nome do Autor
+    var idAutorNovo =  nAutorr.autorId;
+
+    novoNomeLivro = nomeLivro.value;
+    novoGenLivro = genLivro.value;
+    novoIdAutor = idAutorNovo;
+    novoEditora = editora.value;
+    novoNomeColecao = nomeColecao.value;
+    novoIdioma = idioma.value;
+    novoTipoItem = tipoItem.value;
+    novoLançamento = lançamento.value;
+    novoEdicao = edicao.value;
+    novoNumExemplar = numExemplar.value;
+    novoNumTombo = numTombo.value;
+    novoNumPagina = numPagina.value;
+    novoCDD = CDD.value;
+    novoCutter = Cutter.value;
+    novoISBN = ISBN.value;
+    novoDataAquisicao = dataAquisicao.value;
+    novoVolume = volume.value;
+
     update(child(dbref, "livros/"+nickLivro),{
         nomeLivro: novoNomeLivro,
         genLivro: novoGenLivro,
-        nomeAutor: novoNomeAutor,
+        autorId : novoIdAutor,
         editora: novoEditora,
         nomeColecao: novoNomeColecao,
         idioma: novoIdioma,
@@ -224,7 +261,6 @@ btnEditar.addEventListener('click', atualizaLivros);
 
 
 
-
 // EVENTOS SUSTENTAM O SISTEMA
 function GetAllDataRealTime() {
     const dbref = ref(db, "livros");
@@ -235,7 +271,20 @@ function GetAllDataRealTime() {
             livros.push(childSnapshot.val());
         });
         
-        buscaDados(livros);
+        buscaAutor(livros);
+        
+    })
+}
+function buscaAutor(livros){
+    const dbref = ref(db, "autores");
+
+    onValue(dbref, (snapshot) => {
+        var autores = [];
+        snapshot.forEach(childSnapshot => {
+            autores.push(childSnapshot.val());
+        });
+        
+        buscaDados(livros, autores);
         
     })
 }

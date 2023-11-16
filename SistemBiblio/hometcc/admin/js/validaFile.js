@@ -31,8 +31,8 @@ function dragOverHandler(ev) {
 }
 
 // Borda Verde
-
-const initApp = () => {
+ 
+function initApp() {
     const droparea = document.querySelector('.colocar-arquivo');
 
     const active = () => droparea.classList.add("borda-verde");

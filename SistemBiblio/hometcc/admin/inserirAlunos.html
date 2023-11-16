@@ -29,18 +29,18 @@
                     <span class="txt-link">Inserir Livro</span>
                 </a>
             </li>
-            <!--    <li class="item-menu">
-              <a href="#">
-                  <span class="icone"> <img src="../img/icons/Breservados.png" alt=""> </span>
-                  <span class="txt-link">Livros Alocados</span>
-              </a>
-          </li>
-          <li class="item-menu">
-              <a href="livrosDispo.html">
-                  <span class="icone"> <img src="../img/icons/Bdisponiveis.png" alt=""> </span>
-                  <span class="txt-link">Livros Disponiveis</span>
-              </a>
-          </li> -->
+            <li class="item-menu">
+                <a href="solicitacoesLivros.html">
+                    <span class="icone"> <img src="../img/icons/relogio.png" alt=""> </span>
+                    <span class="txt-link">Solicitações <br>de Empréstimos</span>
+                </a>
+            </li>
+            <li class="item-menu">
+                <a href="historicoEmp.html">
+                    <span class="icone"> <img src="../img/icons/relogio.png" alt=""> </span>
+                    <span class="txt-link">Históricos <br>de Empréstimos</span>
+                </a>
+            </li>
             <li class="item-menu">
                 <a href="inserirAlunos.html">
                     <span class="icone"> <img src="../img/icons/loginDash.png" alt=""> </span>
@@ -68,17 +68,14 @@
     <div class="container-adm">
         <div class="container-alunos">
             <div class="conteudo-alunos">
-                <div class="colocar-arquivo" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
-                    <img src="../img/icons/upload.png" alt="">
-                    <h1> Arraste e solte o arquivo aqui</h1>
-                    <p> ou
-                        <label for="arquivo">procure o arquivo</label>
-                        <input type="file" name="arquivo" id="arquivo"> no dispositivo
-                    </p>
+                <div class="colocar-arquivo-container">
+                    <h1>Escolha seu arquivo:</h1>
+                    <input type="file" id="arquivo" class="colocar-arquivo">
+                    <div class="botao-alunos">
+                        <button id="uplaund">Enviar</button>
+                    </div>
                 </div>
-                <div class="botao-alunos">
-                    <button>Enviar</button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -112,11 +109,17 @@
             </div>
         </div>
     </div>
-    <script type="module" src="admusers/teste.js"></script>
-    <script src="admusers/insere.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", initApp);
-    </script>
+    <script type="module" src="js/insereAlunos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
-
 </html>
+
+<!--
+
+<img src="../img/icons/upload.png" alt="">
+<h1> Arraste e solte o arquivo aqui</h1>
+<p> ou
+<label for="arquivo">procure o arquivo</label>
+<input type="file" name="arquivo" id="arquivo"> no dispositivo
+</p>
+-->

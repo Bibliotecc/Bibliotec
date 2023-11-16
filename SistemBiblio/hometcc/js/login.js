@@ -44,7 +44,7 @@ if(!usuSenhaLVal){
   title: 'Oops...',
   text: 'A senha não pode ficar em branco!',
   })
-  return false;
+  return false; 
 }
 
   const dbRef = ref(db);
@@ -53,7 +53,7 @@ if(!usuSenhaLVal){
           let dbpass = snapshot.val().password;
           console.log(decPass(dbpass));
           if(snapshot.val().primAcesso == true){
-            if(dbpass == usuSenhaL.value){
+            if(decPass(dbpass) == usuSenhaL.value){
                 window.location = "./primeiroAcesso.html";
               }
             else{

@@ -757,7 +757,7 @@ th, td {
 
 .container-alunos{
     max-width: 600px;
-    height: 300px;
+    height: auto;
     width: auto;
     margin-left: auto;
     margin-right: auto;
@@ -781,20 +781,28 @@ th, td {
     padding: 30px;
     border-radius: 30px;
 }
+.colocar-arquivo-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    padding: 30px;
+    border-radius: 30px;
+}
 
-.colocar-arquivo h1{
+.colocar-arquivo-container h1{
     font-family: FonteTitulo;
     font-size: 27px;
     text-shadow: none;
     padding: 15px 0px;
 }
 
-.colocar-arquivo p{
+.colocar-arquivo-container p{
     font-family: Especificacoes;
     font-size: 16px;
 }
 
-.colocar-arquivo p input[type="file"]{
+.colocar-arquivo-container p input[type="file"]{
     display: none;
 }
 
@@ -807,9 +815,28 @@ th, td {
     font-family: Especificacoes;
 }
 
-.colocar-arquivo img{
+.colocar-arquivo-container img{
     width: 50px;
 }
+
+.custom-file-upload {
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3498db;
+    border: 1px solid #3498db;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.custom-file-upload img {
+    margin-right: 10px;
+}
+
+
 
 .botao-alunos{
     margin-top: 15px;

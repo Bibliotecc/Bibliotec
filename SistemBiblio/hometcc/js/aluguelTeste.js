@@ -51,14 +51,14 @@ function GetAllDataOnce(){
                 autores.push(childSnapshot.val());
             });
 
-            // Encontrar o livro com base no nome
+            // Encontrar o livro com base no nome 
             var livro = livros.find((element) => element.nomeLivro == alugarLivro);
 
             // Encontrar o autor com base no autorId do livro
             var autor = autores.find((element) => element.autorId == livro.autorId);
             console.log(autor);
 
-            // Chamar a função para adicionar os itens à tabela
+            // Chama a função para adicionar os itens à tabela
             AddItemToTable(livro, autor);
         })
         .catch((error) => {
@@ -66,8 +66,8 @@ function GetAllDataOnce(){
         });
 }
   //-------------------------------------------------------------------------------------------------------------
-  window.onload = GetAllDataOnce;
-function AddItemToTable(livro, autorID) {
+
+function AddItemToTable(livro, autor) {
         var nomeLivro = livro.nomeLivro;
 
     var cDescBooks = document.getElementById('desc-livro-content');
@@ -89,7 +89,7 @@ function AddItemToTable(livro, autorID) {
     a.innerText = 'Reservar';
     a.addEventListener('click', function() {
         // Adicione a lógica de reserva aqui
-        solicitaEmprestimo(livro, autorID); // ou a função que você deseja chamar ao clicar em Reservar
+        verificaDisponibilidade(livro, autor); // ou a função que você deseja chamar ao clicar em Reservar
     });
 
     // Adicionar elementos criados ao DOM
@@ -102,7 +102,7 @@ function AddItemToTable(livro, autorID) {
 //----------DESCRIÇÃO DO LIVRO---------------------------
 var cEspecLivro = document.getElementById("container-especificacao-livro");
 
-    var autor = autorID.autorNome;
+    var autorNome = autor.autorNome;
     var lançamento = livro.lançamento;
     var editora = livro.editora;
     var idioma = livro.idioma;
@@ -115,7 +115,7 @@ let divItenEspec1 = document.createElement("div");
 let h4A = document.createElement("h4");
     h4A.innerText = "Autor(a)";
 let pA = document.createElement("p");
-    pA.innerText = autor;
+    pA.innerText = autorNome;
 divItenEspec1.appendChild(h4A);
 divItenEspec1.appendChild(pA);
 //---->>  2     
@@ -166,15 +166,40 @@ cEspecLivro.appendChild(divItenEspec4);
 cEspecLivro.appendChild(divItenEspec5);
 }
 
-function solicitaEmprestimo(livro, autor){
-    var user = "!logado";
+
+
+function verificaDisponibilidade(livro, autorID){
     let keepLoggedIn = localStorage.getItem("keepLoggedIn");
+    
+    
+
+    var numDisponivel = livro.numDisponivel;
+    var numExemplar = livro.numExemplar;
 
     if(keepLoggedIn == "yes"){
-        user = JSON.parse(localStorage.getItem('user'));
+       var user = JSON.parse(localStorage.getItem('user'));
+        var rm = user.usuRM;
+        var usuNome = user.usuNome
+        if(numDisponivel <= numExemplar && numDisponivel != 0){
+            solicitaEmprestimo(livro, autorID, numDisponivel, rm, usuNome)
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Livro Indisponível',
+                text: 'Desculpe, este livro está emprestado no momento. Consulte a biblioteca para mais informações.',
+            });
+        }
+    }else{
+        Swal.fire(
+            `Erro!`,
+            'Você precisa estar logado',
+            `error`)
+    }
+}
+
+function solicitaEmprestimo(livro, autor, numDisponivel, rm, usuNome){
     const dbRef = ref(db);
-    var rm = user.usuRM;
-    var usuNome = user.usuNome
+
     const pegaData = new Date();
 
     // Obter informações específicas da data (ano, mês, dia, etc.)
@@ -202,10 +227,6 @@ function solicitaEmprestimo(livro, autor){
     // Obtenha a chave única gerada por push()
     const novaChave = novoEmprestimoRef.key;
 
-
-
-
-
         const emprestimoData = {
             idEmprestimo: novaChave,
             livro: livro.nomeLivro,
@@ -221,20 +242,23 @@ function solicitaEmprestimo(livro, autor){
         updateData[`emprestimos/${novaChave}`] = emprestimoData;
     update(dbRef, updateData)
         .then(() => {
-            Swal.fire({
-                title: "Empréstimo solicitado com sucesso!",
-                text: "Vamos prosseguir para a tela principal?",
-                showCancelButton: true,
-                confirmButtonText: "Sim!",
-                showLoaderOnConfirm: true,
-                preConfirm: function () {
-                    return new Promise(function (resolve) {
-                        resolve([
-                            window.location = "./index.html"
-                        ])
-                    })
-                }
-            });
+                    update(child(dbRef, "livros/"+livro.idLivro),{
+                        numDisponivel: numDisponivel - 1
+                    });
+                    Swal.fire({
+                        title: "Empréstimo solicitado com sucesso!",
+                        text: "Vamos prosseguir para a tela principal?",
+                        showCancelButton: true,
+                        confirmButtonText: "Sim!",
+                        showLoaderOnConfirm: true,
+                        preConfirm: function () {
+                            return new Promise(function (resolve) {
+                                resolve([
+                                    window.location = "./index.html"
+                                ])
+                            })
+                        }
+                    });
         })
         .catch(error => {
             Swal.fire(
@@ -242,12 +266,9 @@ function solicitaEmprestimo(livro, autor){
                 'Erro ao solicitar empréstimo: ' + error,
                 `error`)
         });
-    }
-    else{
-        Swal.fire(
-            `Erro!`,
-            'Você precisa estar logado',
-            `error`)
-    }  
+  
 
-}
+}  
+
+// --------- EVENTOS ---------
+window.onload = GetAllDataOnce;

@@ -80,8 +80,8 @@
         var usuSenha = document.getElementById("usuSenha");
         var usuSenhaL = document.getElementById("txtusuSenhaL");
         
-            function cripSenha(){
-                var senhaCrip = CryptoJS.AES.encrypt(usuSenha.value, usuSenha.value);
+            function cripSenha(usSenha){
+                var senhaCrip = CryptoJS.AES.encrypt(usSenha, usuSenha.value);
                 return senhaCrip.toString();
             }
 

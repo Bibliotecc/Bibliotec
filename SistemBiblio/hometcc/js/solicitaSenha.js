@@ -26,18 +26,30 @@ var solictSenha = document.getElementById("solictSenha");
 solictSenha.addEventListener('click', solicitaSenha);
 function solicitaSenha(){
   Swal.fire({
-    title: "Preencha os campos, será rápido!",
-    html: 
-          '<input id="inEmail" type="text" class="swal2-input" placeholder="Email Instirucional"> <br>' +
+    title: "Preencha os campos!",
+    html: '<p>Isso pode levar alguns minutos, aguarde.</p><br>'+
+          '<label>Email Instirucional:</label><br>'+
+          '<input id="inEmail" type="text" class="swal2-input" placeholder="Email Instirucional"><br><br>' +
+          '<label>RM:</label><br>'+
           '<input id="rm" type="text" class="swal2-input" placeholder="RM">',
     showCancelButton: true,
-    confirmButtonText: "Look up",
+    confirmButtonText: "Enivar",
     showLoaderOnConfirm: true,
     preConfirm: function () {
         return new Promise(function (resolve) {
-          resolve([
-                validaEmail($('#inEmail').val(), $('#rm').val())
-          ])
+          if($('#rm').val() && $('#inEmail').val()){
+            resolve([
+              validaEmail($('#inEmail').val(), $('#rm').val())
+            ])
+          }
+          else{
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Preencha todos os campos!',
+                })
+            
+          }
         })  
     }});
 }
