@@ -25,6 +25,8 @@ var ultimaBarra = urlArray[urlArray.length - 1];
 const corpo = document.getElementById('corpo');
 function Emprestimos(nomeLivro, usuNome, rm, dataPedido, idEmprestimo, statusEmp) {
     if (psq === rm || psq === nomeLivro || psq === usuNome){
+
+        
         const tr = document.createElement("tr");
         const tdRm = document.createElement("td");
             tdRm.innerText = rm;
