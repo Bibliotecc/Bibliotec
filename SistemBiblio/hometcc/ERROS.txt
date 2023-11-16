@@ -5,7 +5,6 @@
 -> Remover input (pesquisa) tela adm;
 -> Tela consulta com filtros (emprestimos); 
 -> Atualizar emprestimo como devolvido;
--> Colocar itens do menu lateral;
 -> Substitui os espaços (em branco) da tela principal adm; (Coloquei um grafico);
 -> Tela index dos usuarios -> Titulos do livros;
 -> ARRUMAR ERRO JS LOGIN (ALGUM LUGAR FOI FEITO)
