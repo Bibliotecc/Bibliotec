@@ -778,9 +778,10 @@ th, td {
     align-items: center;
     margin-top: 20px;
     border: 3px solid #1D6A96;
-    padding: 30px;
+    padding: 60px;
     border-radius: 30px;
 }
+
 .colocar-arquivo-container{
     display: flex;
     flex-direction: column;
@@ -797,12 +798,20 @@ th, td {
     padding: 15px 0px;
 }
 
-.colocar-arquivo-container p{
+.colocar-arquivo-container label{
     font-family: Especificacoes;
-    font-size: 16px;
+    font-size: 20px;
+    text-decoration: underline;
+    cursor: pointer;
+    font-style: italic;
 }
 
-.colocar-arquivo-container p input[type="file"]{
+.colocar-arquivo-container label:hover{
+    color: #929191;
+    transition: .1s;
+}
+
+.colocar-arquivo-container input[type="file"]{
     display: none;
 }
 
