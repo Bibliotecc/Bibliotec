@@ -38,10 +38,10 @@ function AddGrafico(livros, emprestimos){
         plugins: {
             legend: {
                 labels: {
-                    color: 'black',
+                    color: '#000000',
                     font:{
-                        family: 'Arial',
-                        size: '15pt',
+                        family: 'Especificacoes',
+                        size: '18px',
                     }
                 },
             },
@@ -58,7 +58,6 @@ function AddGrafico(livros, emprestimos){
                         '#7FFF00',
                         '#FF1493',
                     ],
-                    
                     hoverOffset: 4
                 }],
             },

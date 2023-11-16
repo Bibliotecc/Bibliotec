@@ -53,7 +53,7 @@ if(!usuSenhaLVal){
           let dbpass = snapshot.val().password;
           console.log(decPass(dbpass));
           if(snapshot.val().primAcesso == true){
-            if(decPass(dbpass) == usuSenhaL.value){
+            if(dbpass == usuSenhaL.value){
                 window.location = "./primeiroAcesso.html";
               }
             else{
