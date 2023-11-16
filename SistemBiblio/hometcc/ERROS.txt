@@ -2,7 +2,7 @@
 
 15/11/2023
 
--> Tela consulta com filtros (emprestimos); 
+-> Tela consulta com filtros (emprestimos);     
 -> Atualizar emprestimo como devolvido;
 -> Substitui os espaços (em branco) da tela principal adm; (Coloquei um grafico);
 -> Tela index dos usuarios -> Titulos do livros;
