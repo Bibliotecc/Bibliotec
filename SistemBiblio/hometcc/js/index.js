@@ -96,6 +96,11 @@ var bookCF = document.getElementById('container-principal-F');
 var bookCA = document.getElementById('container-principal-A');
 var bookCC = document.getElementById('container-principal-C');
 
+var divBtnR = document.getElementById("btnVmR");
+var divBtnFC = document.getElementById("btnVmFC");
+var divBtnC = document.getElementById("btnVmC");
+var divBtnA = document.getElementById("btnVmA");
+
 var urlAtual = window.location.href;
 
 var urlFiltro = new URL(urlAtual);
@@ -120,30 +125,63 @@ function AddItemToTable(nomeLivro, gênero, urlImg) {
       //  console.log(searchSimilar);  
     var nomeLivroSimilar = [];
         nomeLivroSimilar = similaLivro(nomeLivro);
-        if (!romanceHeaderAdded && gênero === "Romance") {
+        if (!romanceHeaderAdded && gênero === "Romance" ) {
             let br = document.createElement("br");
             let h1 = document.createElement("h1");
-            h1.innerText = gênero;
-
+                h1.innerText = gênero;
+            let btn = document.createElement("button");
+                btn.className = "estil-botao-vermais";
+                btn.innerText = "Ver Mais";
+                btn.onclick = function (){
+                    verMais(gênero)
+                }  
+            divBtnR.appendChild(btn);
+                
             bookCR.appendChild(h1);
             bookCR.appendChild(br);
             romanceHeaderAdded = true;
-        } else if (!ficcaoHeaderAdded && gênero === "Ficção Cientifica") {
+        } else if (!ficcaoHeaderAdded && gênero === "Ficção Cientifica" ) {
             let br = document.createElement("br");
             let h1 = document.createElement("h1");
-            h1.innerText = gênero;
+                h1.innerText = gênero;
+            let btn = document.createElement("button");
+                btn.className = "estil-botao-vermais";
+                btn.innerText = "Ver Mais";
+                btn.onclick = function (){
+                    verMais(gênero)
+                }  
+
+            divBtnFC.appendChild(btn);
 
             bookCF.appendChild(h1);
             bookCF.appendChild(br);
             ficcaoHeaderAdded = true;
-        } else if (!acaoHeaderAdded && gênero === "Ação") {
+        } else if (!acaoHeaderAdded && gênero === "Ação" ) {
             let h1 = document.createElement("h1");
-            h1.innerText = gênero;
+                h1.innerText = gênero;
+            let btn = document.createElement("button");
+                btn.className = "estil-botao-vermais";
+                btn.innerText = "Ver Mais";
+                btn.onclick = function (){
+                    verMais(gênero)
+                }  
+
+            divBtnA.appendChild(btn);
+
             bookCA.appendChild(h1);
             acaoHeaderAdded = true;
-        } else if (!comediaHeaderAdded && gênero === "Comédia") {
+        } else if (!comediaHeaderAdded && gênero === "Comédia" ) {
             let h1 = document.createElement("h1");
-            h1.innerText = gênero;
+                h1.innerText = gênero;
+            let btn = document.createElement("button");
+                btn.className = "estil-botao-vermais";
+                btn.innerText = "Ver Mais";
+                btn.onclick = function (){
+                    verMais(gênero)
+                }
+        
+            divBtnC.appendChild(btn);    
+
             bookCC.appendChild(h1);
             comediaHeaderAdded = true;
         }

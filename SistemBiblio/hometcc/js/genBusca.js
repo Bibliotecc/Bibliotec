@@ -23,11 +23,11 @@ import { getDatabase, ref, set, get, child, onValue, update, remove } from "http
 const db = getDatabase();
 //------- Referencias -----------
 
-var nomeLivro = document.getElementById("nomeLivro");
-var nomeLivroP = document.getElementById("nomeLivroP");
-var insBtn = document.getElementById("Insbtn");
-var slctBtn = document.getElementById("Slctbtn");
-var filtroFc = document.getElementById("filtroFc");
+var divBtnR = document.getElementById("btnVmR");
+var divBtnFC = document.getElementById("btnVmFC");
+var divBtnC = document.getElementById("btnVmC");
+var divBtnA = document.getElementById("btnVmA");
+
 
 
 
