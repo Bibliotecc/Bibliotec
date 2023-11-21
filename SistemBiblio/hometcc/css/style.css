@@ -1044,6 +1044,20 @@ th{
     margin-top: 30px;
     
 }
+.labeladm{
+    width: max-content;
+    height: max-content;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    font-family: Especificacoes;
+    background-color: #1D6A96;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 30px;
+    padding: 8px 20px;
+
+}
 
 
 
