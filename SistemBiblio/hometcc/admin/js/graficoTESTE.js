@@ -46,6 +46,14 @@ function AddGrafico(livros, emprestimos){
                 },
             },
         },
+        layout: {
+            margin: {
+                left: 20,
+                right: 20,
+                top: 20,
+                bottom: 20,
+            }
+        },
     }
         // Cria o gráfico de rosquinha
         const meuGrafico = new Chart(contexto, {
@@ -55,8 +63,8 @@ function AddGrafico(livros, emprestimos){
                 datasets: [{
                     data: [qntdEmprestimos.length, qntdLivros.length],
                     backgroundColor: [
-                        '#7FFF00',
-                        '#FF1493',
+                        '#000000',
+                        '#FFFFFF',
                     ],
                     hoverOffset: 4
                 }],
