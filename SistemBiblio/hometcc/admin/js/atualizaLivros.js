@@ -70,10 +70,8 @@ function buscaDados(livro, autores){
     }
 
      Swal.fire({
-        title: 'Deseja buscar por: "'+nameLivro+'" ?',
-        cancelButtonText: 'Cancelar',
-        showCancelButton: true,
-        confirmButtonText: 'Sim, buscar',
+        title: 'buscando por:"'+nameLivro+'" ',
+        confirmButtonText: 'ok',
         showLoaderOnConfirm: true,
         preConfirm: () => {
             return new Promise((resolve, reject) => {
