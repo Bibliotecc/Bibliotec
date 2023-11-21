@@ -73,7 +73,7 @@
         <div class="container-pesquisa">
             <input type="text" placeholder="Pesquisar" id="inputValue">
             <div>
-                <input name="btn" id="rmbtn" type="radio" value="rm">
+                <input name="btn" id="rmbtn" type="radio" value="rm" checked>
                 <label for="rmbtn">RM</label>
             </div>
             <div>
@@ -161,40 +161,22 @@
             }
         }
         function filtrar(pesquisa, radioValue) {
+            var search = pesquisa;
+
             if (radioValue === "rm") {
-                // Pega Valor do ID Pesquisar
-                var search = pesquisa;
-
-                // Verifico se a Tecla Pressionada é o ENTE
-                searchData();
-
-                // Crio a função, uma ação para o searchData()
-                function searchData() {
-                    window.location = 'historicoEmp.html?psq=' + search;
-                }
+                searchData('rm', search);
+            } else if (radioValue === "nomeLivro") {
+                searchData('nomeLivro', search);
+            } else if (radioValue === "usuNome") {
+                searchData('usuNome', search);
             }
-            if (radioValue === "nomeLivro") {
-                var search = pesquisa;
-                    searchData();
-
-                    function searchData() {
-                        window.location = 'historicoEmp.html?psq=' + search;
-                    }
+        }
+        
+        function searchData(tipo, search) {
+            var url = 'historicoEmp.html?psq=' + search;
+            window.location.href = url;
                 
             }
-            /*if (radioValue === "usuNome") {
-                searchData();
-
-                    function searchData() {
-                        window.location = 'historicoEmp.html?psq=' + search;
-                    }
-            }*/
-        }
-            
-            
-        
-
-        
     </script>
 </body>
 

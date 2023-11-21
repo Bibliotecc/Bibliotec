@@ -48,15 +48,16 @@ function Emprestimos(nomeLivro, usuNome, rm, dataPedido, idEmprestimo, statusEmp
 
         corpo.appendChild(tr);
     }
-    }
+}
         
-    function AddAllItemToEmprestimos(emprestimos){
-        corpo.innerHTML="";
-        emprestimos.forEach(element => {
-            Emprestimos(element.livro, element.usuNome,element.rm, element.dataPedido, element.idEmprestimo, element.statusEmp);
+function AddAllItemToEmprestimos(emprestimos){
+    corpo.innerHTML="";
+    emprestimos.forEach(element => {
+        Emprestimos(element.livro, element.usuNome,element.rm, element.dataPedido, element.idEmprestimo, element.statusEmp);
 
-        });
-   }
+    });
+}
+
 function GetAllDataOnce(){
 const dbref = ref(db);
 
@@ -72,6 +73,7 @@ get(child(dbref, "livros"))
     GetAllEmprestimos();
 });
 }
+
 function GetAllEmprestimos(){
     const dbref = ref(db, "emprestimos");
 
