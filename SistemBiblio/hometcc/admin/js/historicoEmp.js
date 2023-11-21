@@ -30,24 +30,33 @@ function Emprestimos(nomeLivro, usuNome, rm, dataPedido, idEmprestimo, statusEmp
             tdDataDev.innerText = "--";    
         const tdStatus = document.createElement("td");  
             tdStatus.innerText = statusEmp;
+        const tdAltera = document.createElement("td");
+        const btnAltera = document.createElement("img");
+            btnAltera.src = "../img/icons/lapis.png";
+            btnAltera.addEventListener('click', function() {
+                alteraStatus(idEmprestimo, statusEmp); // ou a função que desejo chamar ao clicar
+            });
 
+        tdAltera.appendChild(btnAltera);
+        
         tr.appendChild(tdRm);
         tr.appendChild(tdNomeAluno);
         tr.appendChild(tdNomeLivro);
         tr.appendChild(tdData);
         tr.appendChild(tdDataDev);
         tr.appendChild(tdStatus);
+        tr.appendChild(tdAltera);
 
         corpo.appendChild(tr);
     }
         
-    function AddAllItemToEmprestimos(emprestimos){
+function AddAllItemToEmprestimos(emprestimos){
         corpo.innerHTML="";
         emprestimos.forEach(element => {
             Emprestimos(element.livro, element.usuNome,element.rm, element.dataPedido, element.idEmprestimo, element.statusEmp);
 
         });
-   }
+}
 function GetAllDataOnce(){
 const dbref = ref(db);
 
@@ -76,5 +85,49 @@ function GetAllEmprestimos(){
         AddAllItemToEmprestimos(emprestimos);
     })
 }
+function alteraStatus(idEmprestimo, statusEmp){
+    Swal.fire({
+        title: 'O Que Deseja Fazer?',
+        html:   '<label for="selecao">Escolha uma opção:</label> <br>'+
+        '<p> Atualmente ela está: '+statusEmp+'. <br>'+
+        '<select id="selecao">'+
+        '<option value="Pendente">Pendente</option>'+
+        '<option value="Emprestado">Emprestado</option>'+
+        '<option value="Devolvido">Devolvido</option>'+
+        '<option value="Atrasado">Atrasado</option>'+
+        '</select>',
+        showDenyButton: true,
+        confirmButtonColor: '#FF8C00',
+        confirmButtonText: 'Alterar',
+        denyButtonText: 'Sair',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var select = document.getElementById('selecao');
+            var valorSelecionado = select.options[select.selectedIndex].value;
+            atualizaEmp(idEmprestimo, valorSelecionado);
+        }
+    });
 
+}
+function atualizaEmp(idEmprestimo, valorSelecionado){
+    const dbRef = ref(db);
+
+    update(child(dbRef, "emprestimos/" + idEmprestimo), {
+        statusEmp: valorSelecionado
+    })
+        .then(() => {
+        Swal.fire(
+            `Concluído!`,
+            'Status Alterado',
+            'success'
+        );
+        })
+        .catch(error => {
+        Swal.fire(
+            `Erro!`,
+            'Erro ao autorizar empréstimo: ' + error,
+            `error`
+        );
+        });
+}
 window.onload = GetAllDataOnce;

@@ -55,8 +55,8 @@ function AddGrafico(livros, emprestimos){
                 datasets: [{
                     data: [qntdEmprestimos.length, qntdLivros.length],
                     backgroundColor: [
-                        '#7FFF00',
-                        '#FF1493',
+                        '#000000',
+                        '#FFFFFF',
                     ],
                     hoverOffset: 4
                 }],

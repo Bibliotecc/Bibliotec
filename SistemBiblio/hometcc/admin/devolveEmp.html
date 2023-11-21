@@ -50,6 +50,12 @@
                     <span class="txt-link">Inserir Alunos</span>
                 </a>
             </li>
+            <li class="item-menu">
+                <a href="#">
+                    <span class="icone"> <img src="../img/icons/login2.png" alt=""> </span>
+                    <span class="txt-link">Conta</span>
+                </a>
+            </li>
         </ul>
     </nav>
     <header>
@@ -57,6 +63,8 @@
             <nav class="menu">
                 <ul>
                     <li> <a href="index.html"> <img src=".././img/logo/logotcc.png" alt="logotcc"> </a> </li>
+                    <li> 
+                        <input type="text" name="txtBuscaLivro" id="txtBuscaLivro" placeholder="O que você esta procurando?"> </li>
                     <li> <a href="../admin/index.html"> Administradora <img src="../img/icons/login.png" alt="" class="icon"> </a> </li>
                 </ul>
             </nav> 
@@ -73,9 +81,7 @@
                                 <th>Nome Aluno</th>
                                 <th>Nome Livro</th>
                                 <th>Data da solicitação</th>
-                                <th>Data de Devolução</th>
-                                <th>Status do Empréstimo</th>
-                                <th>Alterar Status</th>
+                                <th>Confirmar Devolução</th>
                             </tr>
                         </thead>
                         <tbody id="corpo">
@@ -85,7 +91,7 @@
             </div>
         </div>
     </div>
-    <script type="module" src="js/historicoEmp.js"></script>
+    <script type="module" src="js/devolverLivro.js"></script>
     <footer>
         <div class="container">
             <div class="container-footer">

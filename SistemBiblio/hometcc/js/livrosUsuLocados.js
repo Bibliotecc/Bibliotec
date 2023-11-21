@@ -47,7 +47,6 @@ const dataHoje = `${dia.toString().padStart(2, '0')}-${mes.toString().padStart(2
                             }else{
                                 tdPrazo.innerText = dataDevolu;
                             }
-                            
                     const tdAtraso = document.createElement("td");
                             if(statusEmp == "Recusado"){
                                 tdAtraso.innerText = "---";
@@ -59,7 +58,6 @@ const dataHoje = `${dia.toString().padStart(2, '0')}-${mes.toString().padStart(2
                                     tdAtraso.innerText = "Não";
                                 }       
                             }
-
                     const tdStatusEmp= document.createElement("td");
                             tdStatusEmp.innerText = statusEmp;
 

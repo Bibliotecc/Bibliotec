@@ -28,12 +28,12 @@ function solicitaSenha(){
   Swal.fire({
     title: "Preencha os campos!",
     html: '<p>Isso pode levar alguns minutos, aguarde.</p><br>'+
-          '<label>Email Instirucional:</label><br>'+
-          '<input id="inEmail" type="text" class="swal2-input" placeholder="Email Instirucional"><br><br>' +
+          '<label>Email Institucional:</label><br>'+
+          '<input id="inEmail" type="text" class="swal2-input" placeholder="Email Institucional"><br><br>' +
           '<label>RM:</label><br>'+
           '<input id="rm" type="text" class="swal2-input" placeholder="RM">',
     showCancelButton: true,
-    confirmButtonText: "Enivar",
+    confirmButtonText: "Enviar",
     showLoaderOnConfirm: true,
     preConfirm: function () {
         return new Promise(function (resolve) {
