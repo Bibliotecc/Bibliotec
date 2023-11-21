@@ -63,6 +63,22 @@
         </div>
     </header>
     <div class="background-fundo-all">
+        <div class="container-pesquisa">
+            <input type="text" placeholder="Pesquisar" id="inputValue">
+            <div>
+                <input name="btn" id="rmbtn" type="radio" value="rm" checked>
+                <label for="rmbtn">RM</label>
+            </div>
+            <div>
+                <input name="btn" id="nomebtn" type="radio" value="usuNome">
+                <label for="nomebtn">Nome do Aluno</label>
+            </div>
+            <div>
+                <input name="btn" id="nomeLivrobtn" type="radio" value="nomeLivro">
+                <label for="nomeLivrobtn">Nome do Livro</label>
+            </div>
+            <button class="btnbuscar" onclick="obterValor()">Buscar</button>
+        </div>
         <div class="container-adm-livros">
             <div class="container-livros">
                 <div class="box-conteudo-livros">
@@ -75,7 +91,6 @@
                                 <th>Data da solicitação</th>
                                 <th>Data de Devolução</th>
                                 <th>Status do Empréstimo</th>
-                                <th>Alterar Status</th>
                             </tr>
                         </thead>
                         <tbody id="corpo">
@@ -110,12 +125,52 @@
                     <p>Livia</p>
                     <p>Lucas</p>
                     <p>Lucca</p>
-                    <p>Pedro</p>    
+                    <p>Pedro</p>
                     <p>Renzo</p>
                 </div>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.querySelector(".btnbuscar").addEventListener("click", function () {
+            obterValor();
+        });
+
+        // Adicione um evento de tecla ao campo de entrada
+        document.getElementById("inputValue").addEventListener("keydown", function (event) {
+            if (event.key == "Enter") {
+                obterValor();
+            }
+        });
+        function obterValor(){ 
+            var inputValue = document.getElementById("inputValue");
+            var pesquisa = document.getElementById("inputValue").value;
+            var radios = document.getElementsByName("btn");
+            for (var i = 0; i < radios.length; i++){
+                if (radios[i].checked){
+                    filtrar(pesquisa, radios[i].value);
+                }
+            }
+        }
+        function filtrar(pesquisa, radioValue) {
+            var search = pesquisa;
+
+            if (radioValue === "rm") {
+                searchData('rm', search);
+            } else if (radioValue === "nomeLivro") {
+                searchData('nomeLivro', search);
+            } else if (radioValue === "usuNome") {
+                searchData('usuNome', search);
+            }
+        }
+        
+        function searchData(tipo, search) {
+            var url = 'historicoEmp.html?psq=' + search;
+            window.location.href = url;
+                
+            }
+    </script>
 </body>
+
 </html>
