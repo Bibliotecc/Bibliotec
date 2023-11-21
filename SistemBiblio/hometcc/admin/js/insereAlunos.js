@@ -57,15 +57,27 @@ async function upload() {
 
         // Inserir dados normalizados no Firebase
         const dbref = ref(db);
+        const dadosExistem = await verificaExisteDados();
 
-        update(child(dbref, "UsuarioAutomatico/"), {usuarios});
-        update(child(dbref, "UsuarioAutomatico/"), {telefones});
+        if (dadosExistem) {
+            update(child(dbref, "UsuarioAutomatico/usuarios"), usuarios);
+            update(child(dbref, "UsuarioAutomatico/telefones"), telefones);
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso!',
+                text: 'Relação de Aluno Cadastrada!',
+            });
+        } else {
+            update(child(dbref, "UsuarioAutomatico/"), { usuarios });
+            update(child(dbref, "UsuarioAutomatico/"), { telefones });
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso!',
+                text: '1° Relação de Aluno Cadastrada!',
+            });
+        }
 
-        Swal.fire({
-            icon: 'success',
-            title: 'Sucesso!',
-            text: 'Relação de Aluno Cadastrada!',
-        });
+
     } catch (error) {
         console.error(error);
         Swal.fire({
@@ -91,8 +103,7 @@ function excelFileToJSON(file) {
                     if (roa.length > 0) {
                         roa.forEach(function (item) {
                             const rm = item.RM;
-                            const email = item[Object.keys(item)[5]];
-                            const emaili = item[Object.keys(item)[6]];
+                            
                             console.log(item['Data de Nasc.']);
                             const dataNascimento = converterNumeroParaData(item['Data de Nasc.']);
 
@@ -101,7 +112,7 @@ function excelFileToJSON(file) {
                             item['usuDataNasc'] = dataNascimento;
                             item['usuTel'] = item.Telefone;
                             item['usuCel'] = item.Celular;
-                            item['usuEmailInst'] = emaili;
+                            item['usuEmailInst'] = item['e-mail institucional'];;
                             item['typeUser'] = "leitor";
                             item['password'] = "";
                             item['primAcesso'] = true;
@@ -141,6 +152,27 @@ function converterNumeroParaData(numero) {
 }
 //-------------------------------------------------------
 
+function verificaExisteDados() {
+    const dbref = ref(db);
 
+    return new Promise((resolve, reject) => {
+        get(child(dbref, "UsuarioAutomatico")).then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log("Existe itens");
+                resolve(true);
+            } else {
+                console.log("Não existe itens");
+                resolve(false);
+            }
+        }).catch((error) => {
+            console.error("Erro ao verificar dados:", error);
+            reject(error);
+        });
+    });
+}
+
+
+
+//-------------------------------------------------------
 //EVENTOS
 uplaund.addEventListener('click', upload);
