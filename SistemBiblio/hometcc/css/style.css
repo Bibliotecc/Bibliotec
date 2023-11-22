@@ -548,6 +548,54 @@ footer{
     font-size: 20px;
     font-family: FonteTitulo;
 }
+/* LUQINHA QUE MEXEUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU */
+
+.card-letra {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 270px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.card-num {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 270px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.card-letra h3 {
+    color: #333;
+    font-size: 20px;
+    font-family: FonteTitulo;
+}
+
+.card-num p {
+    color: #337eaa;
+    font-size: 60px;
+    font-family: Especificacoes;
+
+}
+
+.container-adm-row{
+    display: flex;
+    justify-content: space-around;
+}
+
 
 /* TELA ADM */
 

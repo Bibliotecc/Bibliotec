@@ -171,8 +171,6 @@ function verificaExisteDados() {
     });
 }
 
-
-
 //-------------------------------------------------------
 //EVENTOS
 uplaund.addEventListener('click', upload);
