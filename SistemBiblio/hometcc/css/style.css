@@ -139,6 +139,8 @@ header{
     align-items: center;
     width: 100%;
     margin-left: 70px;
+    max-width: 50%; /* Defina a largura máxima desejada */
+    /* overflow-x: auto; Adicione rolagem horizontal se necessário */
 }
 .carousel {
     width: 100%; /* Defina a largura desejada para o carrossel */

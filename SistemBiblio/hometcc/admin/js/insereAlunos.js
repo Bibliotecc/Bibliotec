@@ -83,7 +83,7 @@ async function upload() {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Ocorreu um erro ao processar arquivo. Confira se o arquivo pe Excel',
+            text: 'Ocorreu um erro ao processar arquivo. Confira se o arquivo é do Excel.',
         });
     }
 }

@@ -86,197 +86,66 @@ function SelecionarDadosFiltro() {
 
 //  GET ALL 
 var stdNo = 0;
-//v0ar cntrPrin = document.getElementById('container-principal');
-var cBooksR = document.getElementById('container-books-Romance');
-var cBooksF = document.getElementById('container-books-Ficcao');
-var cBooksA = document.getElementById('container-books-Acao');
-var cBooksC = document.getElementById('container-books-Comedia');
-var bookCR = document.getElementById('container-principal-R');
-var bookCF = document.getElementById('container-principal-F');
-var bookCA = document.getElementById('container-principal-A');
-var bookCC = document.getElementById('container-principal-C');
+var genreContainers = {};
 
-var divBtnR = document.getElementById("btnVmR");
-var divBtnFC = document.getElementById("btnVmFC");
-var divBtnC = document.getElementById("btnVmC");
-var divBtnA = document.getElementById("btnVmA");
+function AddItemToTable(nomeLivro, genero, urlImg) {
+    if (!genreContainers[genero]) {
+        // Criação de elementos apenas uma vez para cada gênero
+        var genreHeaderAdded = false;
 
-var urlAtual = window.location.href;
+        var containerPrin = document.getElementById("background-fundo-all");
 
-var urlFiltro = new URL(urlAtual);
-var urlSearch = new URL(urlAtual);
-var search = urlSearch.searchParams.get("search");
-var filtro = urlFiltro.searchParams.get("filtro");
-var urlArray = urlAtual.split('/');
-var ultimaBarra = urlArray[urlArray.length - 1];
+        const container = document.createElement("div");
+        container.className = "container";
+        container.id = "container-principal";
+        const titleGen = document.createElement("h1");
+        titleGen.innerText = genero;
 
-let romanceHeaderAdded = false;
-let ficcaoHeaderAdded = false;
-let acaoHeaderAdded = false;
-let comediaHeaderAdded = false;
+        const booksContainer = document.createElement("div");
+        booksContainer.className = "container-books";
+        booksContainer.id = "carousel-container"; //
 
-function AddItemToTable(nomeLivro, gênero, urlImg) {
-    console.log(filtro);
-    console.log(search);
-    console.log(ultimaBarra);
+        containerPrin.appendChild(container);
+        container.appendChild(titleGen);
+        containerPrin.appendChild(booksContainer);
 
-    var searchSimilar = [];
-        searchSimilar = trataSearch(search);
-      //  console.log(searchSimilar);  
-    var nomeLivroSimilar = [];
-        nomeLivroSimilar = similaLivro(nomeLivro);
-        if (!romanceHeaderAdded && gênero === "Romance" ) {
-            let br = document.createElement("br");
-            let h1 = document.createElement("h1");
-                h1.innerText = gênero;
-            let btn = document.createElement("button");
-                btn.className = "estil-botao-vermais";
-                btn.innerText = "Ver Mais";
-                btn.onclick = function (){
-                    verMais(gênero)
-                }  
-            divBtnR.appendChild(btn);
-                
-            bookCR.appendChild(h1);
-            bookCR.appendChild(br);
-            romanceHeaderAdded = true;
-        } else if (!ficcaoHeaderAdded && gênero === "Ficção Cientifica" ) {
-            let br = document.createElement("br");
-            let h1 = document.createElement("h1");
-                h1.innerText = gênero;
-            let btn = document.createElement("button");
-                btn.className = "estil-botao-vermais";
-                btn.innerText = "Ver Mais";
-                btn.onclick = function (){
-                    verMais(gênero)
-                }  
+        genreContainers[genero] = {
+            container: container,
+            booksContainer: booksContainer,
+            headerAdded: genreHeaderAdded
+        };
 
-            divBtnFC.appendChild(btn);
-
-            bookCF.appendChild(h1);
-            bookCF.appendChild(br);
-            ficcaoHeaderAdded = true;
-        } else if (!acaoHeaderAdded && gênero === "Ação" ) {
-            let h1 = document.createElement("h1");
-                h1.innerText = gênero;
-            let btn = document.createElement("button");
-                btn.className = "estil-botao-vermais";
-                btn.innerText = "Ver Mais";
-                btn.onclick = function (){
-                    verMais(gênero)
-                }  
-
-            divBtnA.appendChild(btn);
-
-            bookCA.appendChild(h1);
-            acaoHeaderAdded = true;
-        } else if (!comediaHeaderAdded && gênero === "Comédia" ) {
-            let h1 = document.createElement("h1");
-                h1.innerText = gênero;
-            let btn = document.createElement("button");
-                btn.className = "estil-botao-vermais";
-                btn.innerText = "Ver Mais";
-                btn.onclick = function (){
-                    verMais(gênero)
-                }
-        
-            divBtnC.appendChild(btn);    
-
-            bookCC.appendChild(h1);
-            comediaHeaderAdded = true;
-        }
-        
-    // -------------------------------------------------------- SEM PESQUISA E FILTRO
-    if (ultimaBarra == 'index.html' || ultimaBarra == '' || search == '') {
-
-        let divE = document.createElement("div");
-            divE.className = 'estil-books';
-        let img = document.createElement("img");
-            img.src = urlImg;
-        let a = document.createElement("a");
-            a.innerText = 'Reservar';
-        a.href = "aluguel.html?alugar=" + nomeLivro;
-
-        divE.appendChild(img);
-        divE.appendChild(a);
-
-        if(gênero == "Romance"){
-            
-            cBooksR.appendChild(divE);
-        }
-        if(gênero == "Ficção Cientifica"){
-            cBooksF.appendChild(divE);
-        }
-        if(gênero == "Ação"){
-            cBooksA.appendChild(divE);
-        }
-        if(gênero == "Comédia"){
-            cBooksC.appendChild(divE);
-        }
+        // Botão "Ver Mais" para cada gênero
+        const divBtn = document.createElement("div");
+        var btn = document.createElement("button");
+        btn.className = "estil-botao-vermais";
+        btn.innerText = "Ver Mais";
+        btn.onclick = function () {
+            verMais(genero);
+        };
+        containerPrin.appendChild(divBtn);
+        divBtn.appendChild(btn);
     }
-    // ----------------------------------------------------- PESQUISA POR NOME
-    if (search == nomeLivro ||correspondeString(searchSimilar, nomeLivroSimilar) && filtro == null) {
-        console.log("URL DA IMAGEM"+urlImg);
-        let divE = document.createElement("div");
-        divE.className = 'estil-books';
-        let img = document.createElement("img");
-        img.src = urlImg;
-        let a = document.createElement("a");
-        a.innerText = 'Reservar';
-        a.href = "aluguel.html?alugar=" + nomeLivro;
 
-        divE.appendChild(img);
-        divE.appendChild(a);
+    var containerInfo = genreContainers[genero];
 
-        
-        if(gênero == "Romance"){
-            cBooksR.appendChild(divE);
-        }
-        if(gênero == "Ficção Cientifica"){
-            cBooksF.appendChild(divE);
-        }
-        if(gênero == "Ação"){
-            cBooksA.appendChild(divE);
-        }
-        if(gênero == "Comédia"){
-            cBooksC.appendChild(divE);
-        }
-    }
-    // ----------------------------------------------------- PESQUISA POR GÊNERO    
-    if (gênero == filtro) {
-        let divE = document.createElement("div");
-        divE.className = 'estil-books';
-        let img = document.createElement("img");
-            img.src = urlImg;
-        let a = document.createElement("a");
-        a.innerText = 'Reservar';
-        a.href = "aluguel.html?alugar=" + nomeLivro;
+    // Adiciona os elementos à div correspondente ao gênero
+    var divE = document.createElement("div");
+    divE.className = 'estil-books';
+    var img = document.createElement("img");
+    img.src = urlImg;
+    var a = document.createElement("a");
+    a.innerText = 'Reservar';
+    a.href = "aluguel.html?alugar=" + nomeLivro;
 
-        divE.appendChild(img);
-        
-        divE.appendChild(a);
+    divE.appendChild(img);
+    divE.appendChild(a);
 
-        
-        if(gênero == "Romance"){
-            cBooksR.appendChild(divE);
-        }
-        if(gênero == "Ficção Cientifica"){
-            cBooksF.appendChild(divE);
-        }
-        if(gênero == "Ação"){
-            cBooksA.appendChild(divE);
-        }
-        if(gênero == "Comédia"){
-            cBooksC.appendChild(divE);
-        }
-    }
+    containerInfo.booksContainer.appendChild(divE);
 }
+
 function AddAllItemToTable(livro) {
     stdNo = 0;
-    cBooksR.innerHTML = "";
-    cBooksF.innerHTML = "";
-    bookCA.innerHTML = "";
-    bookCC.innerHTML = "";
 
     livro.forEach(element => {
         AddItemToTable(element.nomeLivro, element.gênero, element.urlImg);
@@ -332,7 +201,7 @@ function populateGenreDropdown(genres) {
     const dropdown = document.getElementById("Fltr");
     const divD = document.createElement("div");
     divD.className = "dropdown-menu";
-
+    
     genres.forEach((genre) => {
         const a = document.createElement("a");
         a.href = "buscaGen.html?gen=" + genre;
