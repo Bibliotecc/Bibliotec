@@ -6,6 +6,7 @@
 
 .background-fundo-all{
     background-image: url(../img/background/background.png);
+    padding-bottom: 100px;
     overflow: hidden;
 }
 
@@ -230,7 +231,6 @@ header{
 footer{
     height: 120px;
     background-color: #1D6A96;
-    margin-top: 100px;
 }
 
 .container-footer{
