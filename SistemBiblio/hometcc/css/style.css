@@ -134,10 +134,20 @@ header{
     display: flex;
     justify-content: flex-start;
     column-gap: 6%;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    margin-left: 70px;
+}
+.container-books-index{
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 6%;
     flex-wrap: nowrap;
     align-items: center;
     width: 100%;
     margin-left: 70px;
+    
 }
 
 .carousel {
