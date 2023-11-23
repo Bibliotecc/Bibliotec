@@ -86,9 +86,11 @@ function SelecionarDadosFiltro() {
 
 //  GET ALL 
 var stdNo = 0;
+var tst1;
 var genreContainers = {};
 
 function AddItemToTable(nomeLivro, genero, urlImg) {
+
     if (!genreContainers[genero]) {
         // Criação de elementos apenas uma vez para cada gênero
         var genreHeaderAdded = false;
@@ -108,11 +110,13 @@ function AddItemToTable(nomeLivro, genero, urlImg) {
         containerPrin.appendChild(container);
         container.appendChild(titleGen);
         containerPrin.appendChild(booksContainer);
+        var qntdLivrosPassados = 1;
 
         genreContainers[genero] = {
             container: container,
             booksContainer: booksContainer,
-            headerAdded: genreHeaderAdded
+            headerAdded: genreHeaderAdded,
+            qntdLivros: qntdLivrosPassados
         };
 
         // Botão "Ver Mais" para cada gênero
@@ -140,14 +144,21 @@ function AddItemToTable(nomeLivro, genero, urlImg) {
 
     divE.appendChild(img);
     divE.appendChild(a);
+//
 
+if(genreContainers[genero].qntdLivros <= 4){
     containerInfo.booksContainer.appendChild(divE);
+    genreContainers[genero].qntdLivros++
+}
+
+
 }
 
 function AddAllItemToTable(livro) {
     stdNo = 0;
 
     livro.forEach(element => {
+        
         AddItemToTable(element.nomeLivro, element.gênero, element.urlImg);
     });
 }
@@ -281,3 +292,5 @@ function correspondeString(searchSimilar, nomeLivroSimilar){
     }
     return false;
 }
+
+

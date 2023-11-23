@@ -80,7 +80,7 @@ function buscaDados(livro, autores){
                 onValue(dbref, (snapshot) => {
                     const dados = snapshot.val();
                     if (dados) {
-                            console.log(nomeAutor);
+                        console.log(nomeAutor);
                         resolve(dados, nomeAutor, autores);
                     } else {
                         reject('Verifique o nome do livro');
@@ -185,14 +185,14 @@ function atualizaLivros() {
 
     update(child(dbref, "livros/"+nickLivro),{
         nomeLivro: novoNomeLivro,
-        genLivro: novoGenLivro,
+        gênero: novoGenLivro,
         autorId : novoIdAutor,
         editora: novoEditora,
         nomeColecao: novoNomeColecao,
         idioma: novoIdioma,
         tipoItem: novoTipoItem,
         lançamento: novoLançamento,
-        edicao: novoEdicao,
+        edição: novoEdicao,
         numExemplar: novoNumExemplar,
         numTombo: novoNumTombo,
         numPagina: novoNumPagina,

@@ -39,7 +39,7 @@
                 </a>
             </li>
             <li class="item-menu">
-                <a href="historicoEmp.html">
+                <a href="historicoEmp.html?psq=">
                     <span class="icone"> <img src="../img/icons/relogio2.png" alt=""> </span>
                     <span class="txt-link">Históricos <br>de Empréstimos</span>
                 </a>
@@ -65,18 +65,6 @@
     <div class="background-fundo-all">
         <div class="container-pesquisa">
             <input type="text" placeholder="Pesquisar" id="inputValue">
-            <div>
-                <input name="btn" id="rmbtn" type="radio" value="rm" checked>
-                <label for="rmbtn">RM</label>
-            </div>
-            <div>
-                <input name="btn" id="nomebtn" type="radio" value="usuNome">
-                <label for="nomebtn">Nome do Aluno</label>
-            </div>
-            <div>
-                <input name="btn" id="nomeLivrobtn" type="radio" value="nomeLivro">
-                <label for="nomeLivrobtn">Nome do Livro</label>
-            </div>
             <button class="btnbuscar" onclick="obterValor()">Buscar</button>
         </div>
         <div class="container-adm-livros">
@@ -150,22 +138,16 @@
             var inputValue = document.getElementById("inputValue");
             var pesquisa = document.getElementById("inputValue").value;
             var radios = document.getElementsByName("btn");
-            for (var i = 0; i < radios.length; i++){
-                if (radios[i].checked){
-                    filtrar(pesquisa, radios[i].value);
-                }
-            }
+
+            filtrar(pesquisa);
+
+
         }
-        function filtrar(pesquisa, radioValue) {
+        function filtrar(pesquisa) {
             var search = pesquisa;
 
-            if (radioValue === "rm") {
                 searchData('rm', search);
-            } else if (radioValue === "nomeLivro") {
-                searchData('nomeLivro', search);
-            } else if (radioValue === "usuNome") {
-                searchData('usuNome', search);
-            }
+
         }
         
         function searchData(tipo, search) {

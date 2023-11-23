@@ -21,10 +21,10 @@ var urlPsq = new URL(urlAtual);
 var psq = urlPsq.searchParams.get("psq");
 var urlArray = urlAtual.split('/');
 var ultimaBarra = urlArray[urlArray.length - 1];
-
 const corpo = document.getElementById('corpo');
 function Emprestimos(nomeLivro, usuNome, rm, dataPedido, idEmprestimo, statusEmp) {
-    if (psq === rm || psq === nomeLivro || psq === usuNome  || psq == "" || psq == null){        
+    var condicao = psq == rm || psq.toUpperCase() == nomeLivro.toUpperCase() || psq.toUpperCase() == usuNome.toUpperCase() || psq == '' || psq == null || psq == dataPedido ||psq == idEmprestimo || psq.toUpperCase() ==  statusEmp.toUpperCase();
+    if (condicao){        
         const tr = document.createElement("tr");
         const tdRm = document.createElement("td");
             tdRm.innerText = rm;
