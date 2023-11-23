@@ -111,6 +111,9 @@ function buscaDados(livro, autores){
 nomeLivro.value = nameLivro;
 var autoress;
 var nAutor;
+
+var antigoNumExemplar; 
+var antigoNumDisponivel;
 function preencherFormulario(dados, nomeAutor, autores){
 
     autoress = autores;
@@ -131,6 +134,8 @@ function preencherFormulario(dados, nomeAutor, autores){
     lançamento.value = dados.lançamento;
     edicao.value = dados.edicao;
     numExemplar.value = dados.numExemplar;
+    antigoNumExemplar = parseInt(dados.numExemplar);
+    antigoNumDisponivel = parseInt(dados.numDisponivel);
     numTombo.value = dados.numTombo;
     numPagina.value = dados.numPagina;
     CDD.value = dados.CDD;
@@ -143,7 +148,7 @@ function preencherFormulario(dados, nomeAutor, autores){
 var idAutor;
 function atualizaLivros() {
     const dbref = ref(db);
-
+    
     var novoNomeLivro;
     var novoGenLivro; 
     var novoIdAutor; 
@@ -161,6 +166,7 @@ function atualizaLivros() {
     var novoISBN; 
     var novoDataAquisicao; 
     var novoVolume;
+    var novoNumDisponivel;
 
     var nAutorr = autoress.find((element) => element.autorNome == nameAutor.value); // Nome do Autor
     var idAutorNovo =  nAutorr.autorId;
@@ -182,6 +188,18 @@ function atualizaLivros() {
     novoISBN = ISBN.value;
     novoDataAquisicao = dataAquisicao.value;
     novoVolume = volume.value;
+    
+    if (numExemplar.value > antigoNumExemplar) {
+        novoNumDisponivel = antigoNumDisponivel + (parseInt(numExemplar.value) - antigoNumExemplar);
+    }
+
+    else if (numExemplar.value < antigoNumExemplar) {
+        novoNumDisponivel = antigoNumDisponivel - (antigoNumExemplar - parseInt(numExemplar.value));
+    }
+
+    else {
+        novoNumDisponivel = antigoNumDisponivel;
+    }
 
     update(child(dbref, "livros/"+nickLivro),{
         nomeLivro: novoNomeLivro,
@@ -194,6 +212,7 @@ function atualizaLivros() {
         lançamento: novoLançamento,
         edição: novoEdicao,
         numExemplar: novoNumExemplar,
+        numDisponivel: novoNumDisponivel.toString(),
         numTombo: novoNumTombo,
         numPagina: novoNumPagina,
         CDD: novoCDD,

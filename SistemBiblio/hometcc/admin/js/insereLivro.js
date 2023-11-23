@@ -51,9 +51,7 @@ function InsertLivroAutor(newId, newAutorId, urlImg){
     if(newId == undefined || newId == null){
         newId = 1;
     }
-    if(newAutorId == undefined || newAutorId == null){
-        newAutorId = 1;
-    }
+
     set(ref(db, "livros/"+newId),{
         idLivro: newId,
         nomeLivro: nomeLivro.value,
@@ -66,6 +64,7 @@ function InsertLivroAutor(newId, newAutorId, urlImg){
         lançamento: lançamento.value,
         edição: edicao.value,
         numExemplar: numExemplar.value,
+        numDisponivel: numExemplar.value,
         numTombo: numTombo.value,
         CDD: CDD.value,
         Cutter: Cutter.value,
@@ -77,23 +76,14 @@ function InsertLivroAutor(newId, newAutorId, urlImg){
     })
     .then(()=>{
         Swal.fire('Conseguimos Inserir os Dados do Livro!',newId, 'success');
+        salvaImagem(newId);
         
     })
     .catch((error)=>{
         Swal.fire('Erro ao inserir!', ' :( Provavelmente foi um erro no servidor,Linha 77,veja: '+error, 'error');
     }); 
 //----------------------------------------------------------------------------------------------------------------
-    set(ref(db, "autores/"+newAutorId),{
-        autorId: newAutorId,
-        autorNome: nomeAutor.value      
-    })
-    .then(()=>{
-        salvaImagem(newId);
-        Swal.fire('Conseguimos Inserir o Autor na Tabela Autores!',newAutorId, 'success');
-    })
-    .catch((error)=>{
-        Swal.fire('Erro ao inserir!', ' :( Provavelmente foi um erro no servidor,Linha 88,veja: '+error, 'error');
-    });
+
 
 }
 
@@ -116,6 +106,7 @@ function InsertLivro(newId, autalIdAutor){
         lançamento: lançamento.value,
         edição: edicao.value,
         numExemplar: numExemplar.value,
+        numDisponivel: numExemplar.value,
         numTombo: numTombo.value,
         CDD: CDD.value,
         Cutter: Cutter.value,
@@ -127,7 +118,7 @@ function InsertLivro(newId, autalIdAutor){
     })
     .then(()=>{
         salvaImagem(newId);
-        Swal.fire('Conseguimos Inserir os Dados do Livro!',newId,'success');
+        Swal.fire('Conseguimos Inserir os Dados do Livro!', '','success');
     })
     .catch((error)=>{
         Swal.fire('Erro ao inserir!', ' :( Provavelmente foi um erro no servidor,Linha 123, veja: '+error, 'error');
@@ -149,6 +140,7 @@ function GetUltimoId(){
 
         var newIdLivros = livros[livros.length - 1].idLivro + 1;
         Swal.fire('Conseguimos gerar o novo ID do Livro! Próxima fase ->','Linha 141', 'success');
+        console.log("Peguei o ID do Livro: "+ newIdLivros);
         setTimeout(function(){verificaAutorExiste(newIdLivros)}, 3000);
         
         
@@ -161,35 +153,48 @@ function GetUltimoId(){
     
 }
 
-function verificaAutorExiste(newIdLivros){
+function verificaAutorExiste(newIdLivros) {
     const dbref = ref(db);
+    console.log("Entrei no verifica com o ID do Livro: " + newIdLivros);
 
     get(child(dbref, "autores"))
-    .then((snapshot)=>{
-        var autores =[];
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                var autores = [];
+                snapshot.forEach((childSnapshot) => {
+                    autores.push(childSnapshot.val());
+                });
 
-        snapshot.forEach(childSnapshot => {
-            autores.push(childSnapshot.val());
-        })
+                var nAutor = autores.find((autor) => autor.autorNome === nomeAutor.value);
 
-        var nomeAutorVal = nomeAutor.value; // Nome do Autor
-        var nAutor = autores.find((element) => element.autorNome == nomeAutorVal); // Nome do Autor
-        var novoAutorId = autores[autores.length - 1].autorId + 1; // Novo ID do Autores
-//                                 ^^^^ SOBRE O AUTOR ^^^^
-
-        var novoIdLivro = newIdLivros; // Novo ID do Livro 
-        if(nAutor){
-            Swal.fire('Esse autor já está cadastrado! Esse é ID dele:'+nAutor.autorId,"Proxima fase ->", 'success');
-            setTimeout(function(){InsertLivro(novoIdLivro, nAutor.autorId)},3000);
-            
-        }else{
-            Swal.fire('Conseguimos gerar o novo ID para esse autor não cadastrado! Próxima fase ->',novoAutorId, 'success');
-            setTimeout(function(){InsertLivroAutor(novoIdLivro, novoAutorId)}, 3000);
-            
-        }
-    });
-
+                if (nAutor) {
+                    console.log(nAutor.autorId);
+                    Swal.fire('Esse autor já está cadastrado! Esse é ID dele: Proxima fase ->', 'success');
+                    InsertLivro(newIdLivros, nAutor.autorId);
+                } else {
+                    var novoAutorId = autores.length + 1;
+                    console.log(novoAutorId);
+                    Swal.fire('Conseguimos gerar o novo ID para esse autor não cadastrado! Próxima fase ->', 'success');
+                    InsertLivro(newIdLivros, novoAutorId);
+                }
+            } else {
+                var newAutorId = 1;
+                set(ref(db, "autores/" + newAutorId), {
+                    autorId: newAutorId,
+                    autorNome: nomeAutor.value
+                })
+                    .then(() => {
+                        console.log("Cria tabela Autores!");
+                        Swal.fire('Conseguimos Inserir o Autor na Tabela Autores!', '', 'success');
+                        InsertLivro(newIdLivros, newAutorId);
+                    })
+                    .catch((error) => {
+                        Swal.fire('Erro ao inserir!', ' :( Provavelmente foi um erro no servidor, Linha 178, veja: ' + error, 'error');
+                    });
+            }
+        });
 }
+
 
 function salvaImagem(idLivro) {
     const dbref = ref(db);

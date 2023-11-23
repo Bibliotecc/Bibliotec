@@ -744,11 +744,11 @@ nav.menu-lateral:hover{
     margin-left: auto;
     text-align: center;
     font-family: Especificacoes;
-    background-color: #1D6A96;
-    color: #fff;
+    color: #000000;
     border-radius: 10px;
     font-size: 30px;
     padding: 8px 20px;
+
 }
 .label-adm{
 width: max-content;
@@ -756,11 +756,10 @@ height: max-content;
 margin-right: auto;
 margin-left: auto;
 text-align: center;
+color: #000000;
 font-family: paragrafos;
-background-color: #1D6A96;
-color: #fff;
 border-radius: 10px;
-font-size: 20px;
+font-size: 15px;
 padding: 8px 20px;
 }
 
