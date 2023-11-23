@@ -138,8 +138,51 @@ function GetAllDataRealTime() {
     })
 }
 
+function getGenres() {
+    const dbref = ref(db, "livros");
+
+    return get(dbref)
+        .then((snapshot) => {
+            const genres = new Set();
+
+            snapshot.forEach(childSnapshot => {
+                const genre = childSnapshot.val().gênero;
+                genres.add(genre);
+            });
+
+            return Array.from(genres);
+        })
+        .catch((error) => {
+            console.error("Erro ao obter gêneros: ", error);
+            return [];
+        });
+}
+function populateGenreDropdown(genres) {
+    const dropdown = document.getElementById("Fltr");
+    const divD = document.createElement("div");
+    divD.className = "dropdown-menu";
+
+    genres.forEach((genre) => {
+        const a = document.createElement("a");
+        a.href = "buscaGen.html?gen=" + genre;
+        a.innerText = genre;
+
+        divD.appendChild(a);
+    });
+
+    dropdown.appendChild(divD);
+}
+
 // EVENTOS
-window.onload = GetAllDataOnce;
+window.onload = function() {
+    getGenres().then((genres) => {
+        // Agora você tem a lista de gêneros, você pode usá-la para preencher o menu suspenso
+        populateGenreDropdown(genres);
+        // Em seguida, carregue os dados ou faça outras operações necessárias
+        GetAllDataOnce();
+    });
+}
+
 
 // TRATAMENTOS
 // TRATAMENTO DO SEARCH

@@ -22,62 +22,96 @@ import {getDatabase, ref, set, get, child, onValue,update, remove } from "https:
 
 const db = getDatabase();
   //------- Referencias -----------
-  var corpo = document.getElementById('livros-alocados-list');
+  var tblLivros = document.getElementById('qntdLivro');
+  var numberLivro = document.getElementById('numberLivro');
+function Livros(qntdadeLivros){
 
-function Livros(nomeLivro, gênero, dp){
-
-    let hr = document.createElement("hr");
+    let h3 = document.createElement("h3");
+        h3.innerText = "Quantidade de Livros Cadastrados";
     let nL = document.createElement("p");
-        nL.innerText = nomeLivro;
+        nL.innerText = qntdadeLivros;
 
-
-    corpo.appendChild(hr);              // Linha           //
-    corpo.appendChild(nL);             // Nome Livro      //
+      tblLivros.appendChild(h3);              // Linha           //
+      numberLivro.appendChild(nL);             // Nome Livro      //
   }
 
 //----------------------------------------
-var corpoS = document.getElementById('solictEmp');
+var tblemprestimos = document.getElementById('qntdEmp');
+var numberEmp = document.getElementById('numberEmp');
+var tblSolicitcao = document.getElementById('qntdSlct');
+var numberSlct = document.getElementById('numberSlct');
+var tblAtraso = document.getElementById('qntdAtr');
+var numberAtr = document.getElementById('numberAtr');
 
-function Emprestimos(nomeLivro, rm, dataPedido, idEmprestimo, statusEmp){
-    if(statusEmp == "Pendente"){
-        let hr = document.createElement("hr");
-        let nL = document.createElement("p");
-            nL.innerText = nomeLivro;
-        let RM = document.createElement("p");
-            RM.innerText = rm;
-        let pedidoData = document.createElement("p");
-            pedidoData.innerText = dataPedido;              
-        let btn = document.createElement("button");
-            btn.className = "btn";
-            btn.innerText = "Confirmar";
-            btn.addEventListener('click', function() {
-                // Adicione a lógica de reserva aqui
-                confirmaEmpres(idEmprestimo); // ou a função que desejo chamar ao clicar
-            });    
+function Emprestimos(qntdadeEmprestimos, qntdSolicitada, qntdAtraso){
 
+    let h31 = document.createElement("h3");
+        h31.innerText = "Quantidade de Livros Emprestados";
+    let nL = document.createElement("p");
+        nL.innerText = qntdadeEmprestimos;
 
-        corpoS.appendChild(hr);              // Linha               //
-        corpoS.appendChild(nL);             // Nome Livro          //
-        corpoS.appendChild(RM);            //  RM                 //
-        corpoS.appendChild(pedidoData);   //   pedidoData        //
-        corpoS.appendChild(btn);         //    Botao Confirma   //
-    }
+    let h32 = document.createElement("h3");  
+        h32.innerText = "Quantidade de Livros Solicitados";
+    let nL2 = document.createElement("p");
+        nL2.innerText = qntdSolicitada;
+
+    let h33 = document.createElement("h3");  
+        h33.innerText = "Quantidade de Devoluções Atrasadas";
+    let nL3 = document.createElement("p");
+        nL3.innerText = qntdAtraso;
+
+        tblemprestimos.appendChild(h31);
+        numberEmp.appendChild(nL);
+
+        tblSolicitcao.appendChild(h32);
+        numberSlct.appendChild(nL2);
+
+        tblAtraso.appendChild(h33);
+        numberAtr.appendChild(nL3);
     }
 
   function AddAllItemToLivros(livro){
-   corpo.innerHTML="";
-   livro.forEach(element => {
-        Livros(element.nomeLivro, element.gênero, element.numExemplar);
-
-   });
+    tblLivros.innerHTML="";
+        var qntdLivros = 1;
+    
+        livro.forEach(element => {
+          qntdLivros = qntdLivros + 1;
+        });
+    
+        // qntdLivros = qntdLivros + 1;
+        Livros(qntdLivros);
+        console.log(qntdLivros);
   }
-  function AddAllItemToEmprestimos(emprestimos){
-    corpoS.innerHTML="";
+  function AddAllItemToEmprestimos( emprestimos) {
+    tblemprestimos.innerHTML = "";
+    numberEmp.innerHTML = "";
+    tblSolicitcao.innerHTML = "";
+    numberSlct.innerHTML = "";
+    tblAtraso.innerHTML = "";
+    numberAtr.innerHTML = "";
+
+    var qntdEmprestada = 0;
+    var qntdSolicitada = 0;
+    var qntdAtraso = 0;
+
     emprestimos.forEach(element => {
-        Emprestimos(element.livro, element.rm, element.dataPedido, element.idEmprestimo, element.statusEmp);
- 
+        // Verifica se o livro está emprestado
+        if (element.statusEmp === "Emprestado") {
+            qntdEmprestada = qntdEmprestada + 1;
+        }
+        if(element.statusEmp === "Pendente"){
+          qntdSolicitada = qntdSolicitada + 1;
+        }
+        if(element.statusEmp === "Atrasado"){
+          qntdAtraso = qntdAtraso + 1;
+        }
     });
-   }
+
+    // Chama a função Emprestimos passando apenas a quantidade de livros emprestados
+    Emprestimos(qntdEmprestada, qntdSolicitada, qntdAtraso);
+    console.log(qntdEmprestada, qntdSolicitada, qntdAtraso);
+}
+
 
 //-------- get all dados ---------
 function GetAllDataOnce(){
@@ -119,7 +153,8 @@ function GetAllEmprestimos(){
  
             emprestimos.push(childSnapshot.val());
         });
- 
+
+     
         AddAllItemToEmprestimos(emprestimos);
     })
  }

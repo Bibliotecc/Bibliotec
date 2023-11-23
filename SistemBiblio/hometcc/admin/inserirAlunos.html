@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excel to Firebase | Javacodepoint</title>
+    <title>Inserir Alunos</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -69,9 +69,9 @@
         <div class="container-alunos">
             <div class="conteudo-alunos">
                 <div class="colocar-arquivo-container">
-                    <h1>Escolha seu arquivo:</h1>
+                    <h1>Inserir Relação de Alunos</h1>
                     <div class="colocar-arquivo">
-                        <label for="arquivo">Escolher arquivo</label>
+                        <label for="arquivo" id="lblArquivo">Escolha o Arquivo</label>
                         <input type="file" id="arquivo">
                     </div>
                     <div class="botao-alunos">
@@ -114,6 +114,25 @@
     </div>
     <script type="module" src="js/insereAlunos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        var inputArquivo = document.getElementById("arquivo");
+        var lblArquivo = document.getElementById("lblArquivo");
+
+        function mudaLbl() {
+            var texto = "Escolha o Arquivo";
+            if (inputArquivo.files.length > 0) {
+                texto = inputArquivo.files[0].name;
+            }
+            lblArquivo.innerText = texto;
+        }
+
+        window.onload = function () {
+            mudaLbl();
+            // Adiciona um ouvinte de evento de mudança para atualizar o texto quando um arquivo é escolhido
+            inputArquivo.addEventListener('change', mudaLbl);
+        };
+    </script>
+        
 </body>
 </html>
 
