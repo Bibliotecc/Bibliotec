@@ -131,9 +131,9 @@ header{
     text-align: center;
 }
 
-.container-books{
+.container-books-index{
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     column-gap: 6%;
     flex-wrap: nowrap;
     align-items: center;
@@ -141,6 +141,26 @@ header{
     margin-left: 70px;
     max-width: 50%; /* Defina a largura máxima desejada */
     /* overflow-x: auto; Adicione rolagem horizontal se necessário */
+}
+.container-books{
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 6%;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    margin-left: 70px;
+
+}
+.container-books{
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 6%;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    margin-left: 70px;
+
 }
 .carousel {
     width: 100%; /* Defina a largura desejada para o carrossel */
@@ -724,6 +744,19 @@ nav.menu-lateral:hover{
     border-radius: 10px;
     font-size: 30px;
     padding: 8px 20px;
+}
+.label-adm{
+width: max-content;
+height: max-content;
+margin-right: auto;
+margin-left: auto;
+text-align: center;
+font-family: paragrafos;
+background-color: #1D6A96;
+color: #fff;
+border-radius: 10px;
+font-size: 20px;
+padding: 8px 20px;
 }
 
 .container-dados-insert{
