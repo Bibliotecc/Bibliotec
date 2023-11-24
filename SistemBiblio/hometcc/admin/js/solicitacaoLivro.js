@@ -101,6 +101,8 @@ function GetAllEmprestimos(){
 
 window.onload = GetAllDataOnce;
 
+const pegaData = new Date();
+
 function atualizaEmpres(idEmprestimo, statusEmp, sweet, texto) {
 const dbRef = ref(db);
 
