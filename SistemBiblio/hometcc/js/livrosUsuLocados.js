@@ -31,12 +31,12 @@ const dataHoje = `${dia.toString().padStart(2, '0')}-${mes.toString().padStart(2
     let keepLoggedIn = localStorage.getItem("keepLoggedIn");
            
         const corpo = document.getElementById('corpo');
-        function AddItemToTable(nomeLivro, rm, dataDevolu, idEmprestimo, statusEmp) {
+        function AddItemToTable(nomeLivro, rm, dataPrazo, dataDevolu, idEmprestimo, statusEmp) {
             console.log(rm+"||"+Rm);
             if(keepLoggedIn == "yes"){
                 user = JSON.parse(localStorage.getItem('user'));
                 var Rm = user.usuRM;
-                if(rm == Rm){
+                if(rm == Rm){ 
                     console.log("RM Compatível");
                     const tr = document.createElement("tr");
                     const tdNomeLivro = document.createElement("td");
@@ -45,8 +45,14 @@ const dataHoje = `${dia.toString().padStart(2, '0')}-${mes.toString().padStart(2
                             if(statusEmp == "Recusado"){
                                 tdPrazo.innerText = "---";
                             }else{
-                                tdPrazo.innerText = dataDevolu;
+                                tdPrazo.innerText = dataPrazo;
                             }
+                    const tdDataDev = document.createElement("td");    
+                        if(statusEmp == "Devolvido"){
+                            tdDataDev.innerText = dataDevolu;        
+                        }else{
+                            tdDataDev.innerText = "--";
+                        }        
                     const tdAtraso = document.createElement("td");
                             if(statusEmp == "Recusado"){
                                 tdAtraso.innerText = "---";
@@ -65,6 +71,7 @@ const dataHoje = `${dia.toString().padStart(2, '0')}-${mes.toString().padStart(2
                     tr.appendChild(tdNomeLivro);
                     tr.appendChild(tdPrazo);
                     tr.appendChild(tdAtraso);
+                    tr.appendChild(tdDataDev);
                     tr.appendChild(tdStatusEmp);
 
                     corpo.appendChild(tr);
@@ -77,7 +84,7 @@ const dataHoje = `${dia.toString().padStart(2, '0')}-${mes.toString().padStart(2
         function AddAllItemToEmprestimos(emprestimos){
             corpo.innerHTML="";
             emprestimos.forEach(element => {
-                AddItemToTable(element.livro, element.rm, element.dataDevolu, element.idEmprestimo, element.statusEmp);
+                AddItemToTable(element.livro, element.rm, element.dataPrazo, element.dataDevolu, element.idEmprestimo, element.statusEmp);
          
             });
            }

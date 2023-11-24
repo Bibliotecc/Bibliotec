@@ -22,7 +22,7 @@ var psq = urlPsq.searchParams.get("psq");
 var urlArray = urlAtual.split('/');
 var ultimaBarra = urlArray[urlArray.length - 1];
 const corpo = document.getElementById('corpo');
-function Emprestimos(nomeLivro, usuNome, rm, dataPedido, idEmprestimo, statusEmp) {
+function Emprestimos(nomeLivro, usuNome, rm, dataPedido, dataPrazo, dataDevolu,idEmprestimo, statusEmp) {
     var condicao = psq == rm || psq.toUpperCase() == nomeLivro.toUpperCase() || psq.toUpperCase() == usuNome.toUpperCase() || psq == '' || psq == null || psq == dataPedido ||psq == idEmprestimo || psq.toUpperCase() ==  statusEmp.toUpperCase();
     if (condicao){        
         const tr = document.createElement("tr");
@@ -34,8 +34,15 @@ function Emprestimos(nomeLivro, usuNome, rm, dataPedido, idEmprestimo, statusEmp
             tdNomeLivro.innerText = nomeLivro;
         const tdData = document.createElement("td");  
             tdData.innerText = dataPedido;
-        const tdDataDev = document.createElement("td");
-            tdDataDev.innerText = "--";    
+        const tdDataDev = document.createElement("td");    
+        if(statusEmp == "Devolvido"){
+            tdDataDev.innerText = dataDevolu;        
+        }else{
+            tdDataDev.innerText = "--";
+        }
+        if(dataPrazo > dataPedido){
+            statusEmp = "Atrasado";        
+        }     
         const tdStatus = document.createElement("td");  
             tdStatus.innerText = statusEmp;
         const tdAltera = document.createElement("td");
@@ -62,7 +69,7 @@ function Emprestimos(nomeLivro, usuNome, rm, dataPedido, idEmprestimo, statusEmp
 function AddAllItemToEmprestimos(emprestimos){
     corpo.innerHTML="";
     emprestimos.forEach(element => {
-        Emprestimos(element.livro, element.usuNome,element.rm, element.dataPedido, element.idEmprestimo, element.statusEmp);
+        Emprestimos(element.livro, element.usuNome,element.rm, element.dataPedido, element.dataPrazo, element.dataDevolu,element.idEmprestimo, element.statusEmp);
 
     });
 }
