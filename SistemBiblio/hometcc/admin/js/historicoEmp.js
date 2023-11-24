@@ -40,8 +40,8 @@ function Emprestimos(nomeLivro, usuNome, rm, dataPedido, idEmprestimo, statusEmp
             tdStatus.innerText = statusEmp;
         const tdAltera = document.createElement("td");
         const btnAltera = document.createElement("i");
-            btnAltera.className = "fa-solid fa-pencil";
-            btnAltera.cl = "fa-solid fa-pencil";
+            btnAltera.className = "fa-solid fa-pencil testeicon";
+            btnAltera.cl = "fa-solid fa-pencil testeicon";
             btnAltera.addEventListener('click', function() {
                 alteraStatus(idEmprestimo, statusEmp); // ou a função que desejo chamar ao clicar
             });
