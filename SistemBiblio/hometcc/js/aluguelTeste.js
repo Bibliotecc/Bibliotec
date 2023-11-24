@@ -201,7 +201,20 @@ function solicitaEmprestimo(livro, autor, numDisponivel, rm, usuNome){
     const dbRef = ref(db);
 
     const pegaData = new Date();
+    const pegaData2 = new Date();
+//  
+// Adiciona 10 dias à data atual
+pegaData2.setDate(pegaData2.getDate() + 10);
 
+// Obter informações específicas da nova data (ano, mês, dia, etc.)
+    const ano2 = pegaData2.getFullYear();
+    const mes2 = pegaData2.getMonth() + 1; // Lembre-se que os meses começam do zero
+    const dia2 = pegaData2.getDate();
+    const horas2 = pegaData.getHours();
+    const minutos2 = pegaData.getMinutes();
+    const dataDaqui10Dias = `${dia2.toString().padStart(2, '0')}-${mes2.toString().padStart(2, '0')}-${ano2} ${horas2.toString().padStart(2, '0')}:${minutos2.toString().padStart(2, '0')}`;
+
+//
     // Obter informações específicas da data (ano, mês, dia, etc.)
     const ano = pegaData.getFullYear();
     const mes = pegaData.getMonth() + 1; // Lembre-se que os meses começam do zero
@@ -210,16 +223,6 @@ function solicitaEmprestimo(livro, autor, numDisponivel, rm, usuNome){
     const minutos = pegaData.getMinutes();
     const segundos = pegaData.getSeconds();
     const dataHoje = `${dia.toString().padStart(2, '0')}-${mes.toString().padStart(2, '0')}-${ano} ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
-    const dataDevolucao = new Date(pegaData);
-    dataDevolucao.setDate(dataDevolucao.getDate() + 10);
-    // Obter informações específicas da data de devolução
-    const anoDevolucao = dataDevolucao.getFullYear();
-    const mesDevolucao = dataDevolucao.getMonth() + 1; // Lembre-se que os meses começam do zero
-    const diaDevolucao = dataDevolucao.getDate();
-    
-    // Formatar a data de devolução como uma string
-    const dataDevolucaoFormatada = `${diaDevolucao.toString().padStart(2, '0')}-${mesDevolucao.toString().padStart(2, '0')}-${anoDevolucao}`;
-    
 
     // Use push diretamente na referência para obter uma chave única
     const novoEmprestimoRef = push(child(dbRef, "emprestimos"));
@@ -236,7 +239,8 @@ function solicitaEmprestimo(livro, autor, numDisponivel, rm, usuNome){
             usuNome: usuNome,
             statusEmp: "Pendente",
             dataPedido: dataHoje,
-            dataDevolu: dataDevolucaoFormatada
+            dataPrazo: dataDaqui10Dias,
+            dataDevolu: "" 
         };
         const updateData = {};
         updateData[`emprestimos/${novaChave}`] = emprestimoData;

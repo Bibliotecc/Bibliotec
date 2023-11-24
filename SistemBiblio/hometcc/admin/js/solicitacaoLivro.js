@@ -104,7 +104,18 @@ window.onload = GetAllDataOnce;
 function atualizaEmpres(idEmprestimo, statusEmp, sweet, texto) {
 const dbRef = ref(db);
 
+const dataDevolucao = new Date(pegaData);
+dataDevolucao.setDate(dataDevolucao.getDate() + 10);
+// Obter informações específicas da data de devolução
+const anoDevolucao = dataDevolucao.getFullYear();
+const mesDevolucao = dataDevolucao.getMonth() + 1; // Lembre-se que os meses começam do zero
+const diaDevolucao = dataDevolucao.getDate();
+
+// Formatar a data de devolução como uma string
+const dataDevolucaoFormatada = `${diaDevolucao.toString().padStart(2, '0')}-${mesDevolucao.toString().padStart(2, '0')}-${anoDevolucao}`;
+
 update(child(dbRef, "emprestimos/" + idEmprestimo), {
+    dataPrazo: dataDevolucaoFormatada,
     statusEmp: statusEmp
 })
     .then(() => {

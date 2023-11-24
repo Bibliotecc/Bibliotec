@@ -75,7 +75,7 @@ function Emprestimos(qntdadeEmprestimos, qntdSolicitada, qntdAtraso){
         var qntdLivros = 1;
     
         livro.forEach(element => {
-          qntdLivros = qntdLivros + 1;
+          qntdLivros = qntdLivros;
         });
     
         // qntdLivros = qntdLivros + 1;

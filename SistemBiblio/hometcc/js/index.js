@@ -98,14 +98,14 @@ function AddItemToTable(nomeLivro, genero, urlImg) {
         var containerPrin = document.getElementById("background-fundo-all");
 
         const container = document.createElement("div");
-        container.className = "container";
-        container.id = "container-principal";
+            container.className = "container";
+            container.id = "container-principal";
         const titleGen = document.createElement("h1");
-        titleGen.innerText = genero;
+            titleGen.innerText = genero;
 
         const booksContainer = document.createElement("div");
-        booksContainer.className = "container-books";
-        booksContainer.id = "carousel-container"; //
+            booksContainer.className = "container-books";
+            booksContainer.id = "carousel-container"; //
 
         containerPrin.appendChild(container);
         container.appendChild(titleGen);
@@ -156,9 +156,7 @@ if(genreContainers[genero].qntdLivros <= 4){
 
 function AddAllItemToTable(livro) {
     stdNo = 0;
-
-    livro.forEach(element => {
-        
+    livro.forEach(element => {       
         AddItemToTable(element.nomeLivro, element.gênero, element.urlImg);
     });
 }
