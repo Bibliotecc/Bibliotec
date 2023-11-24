@@ -112,9 +112,11 @@ dataDevolucao.setDate(dataDevolucao.getDate() + 10);
 const anoDevolucao = dataDevolucao.getFullYear();
 const mesDevolucao = dataDevolucao.getMonth() + 1; // Lembre-se que os meses começam do zero
 const diaDevolucao = dataDevolucao.getDate();
+const horas = pegaData.getHours();
+const minutos = pegaData.getMinutes();
 
 // Formatar a data de devolução como uma string
-const dataDevolucaoFormatada = `${diaDevolucao.toString().padStart(2, '0')}-${mesDevolucao.toString().padStart(2, '0')}-${anoDevolucao}`;
+const dataDevolucaoFormatada = `${diaDevolucao.toString().padStart(2, '0')}-${mesDevolucao.toString().padStart(2, '0')}-${anoDevolucao} ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
 
 update(child(dbRef, "emprestimos/" + idEmprestimo), {
     dataPrazo: dataDevolucaoFormatada,
