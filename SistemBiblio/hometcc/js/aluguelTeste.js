@@ -201,20 +201,7 @@ function solicitaEmprestimo(livro, autor, numDisponivel, rm, usuNome){
     const dbRef = ref(db);
 
     const pegaData = new Date();
-    const pegaData2 = new Date();
-//  
-// Adiciona 10 dias à data atual
-pegaData2.setDate(pegaData2.getDate() + 10);
 
-// Obter informações específicas da nova data (ano, mês, dia, etc.)
-    const ano2 = pegaData2.getFullYear();
-    const mes2 = pegaData2.getMonth() + 1; // Lembre-se que os meses começam do zero
-    const dia2 = pegaData2.getDate();
-    const horas2 = pegaData.getHours();
-    const minutos2 = pegaData.getMinutes();
-    const dataDaqui10Dias = `${dia2.toString().padStart(2, '0')}-${mes2.toString().padStart(2, '0')}-${ano2} ${horas2.toString().padStart(2, '0')}:${minutos2.toString().padStart(2, '0')}`;
-
-//
     // Obter informações específicas da data (ano, mês, dia, etc.)
     const ano = pegaData.getFullYear();
     const mes = pegaData.getMonth() + 1; // Lembre-se que os meses começam do zero
@@ -239,7 +226,7 @@ pegaData2.setDate(pegaData2.getDate() + 10);
             usuNome: usuNome,
             statusEmp: "Pendente",
             dataPedido: dataHoje,
-            dataPrazo: dataDaqui10Dias,
+            dataPrazo: "",
             dataDevolu: "" 
         };
         const updateData = {};
