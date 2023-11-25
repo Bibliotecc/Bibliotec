@@ -169,13 +169,25 @@ function verificaAutorExiste(newIdLivros) {
 
                 if (nAutor) {
                     console.log(nAutor.autorId);
-                    Swal.fire('Esse autor já está cadastrado! Esse é ID dele: Proxima fase ->', 'success');
                     InsertLivro(newIdLivros, nAutor.autorId);
+                    Swal.fire('Esse autor já está cadastrado! Esse é ID dele: Aguarde a próxima notificação', 'success');
+                    
                 } else {
+                
                     var novoAutorId = autores.length + 1;
-                    console.log(novoAutorId);
-                    Swal.fire('Conseguimos gerar o novo ID para esse autor não cadastrado! Próxima fase ->', 'success');
-                    InsertLivro(newIdLivros, novoAutorId);
+
+                    update(ref(db, "autores/" + novoAutorId), {
+                        autorId: novoAutorId,
+                        autorNome: nomeAutor.value
+                    })
+                    .then(() => {
+                        console.log("Cria tabela Autores!");
+                        Swal.fire('Conseguimos gerar o novo ID para esse autor não cadastrado! Aguarde a próxima notificação', 'success');
+                        InsertLivro(newIdLivros, novoAutorId);
+                    })
+                    .catch((error) => {
+                        Swal.fire('Erro ao inserir!', ' :( Provavelmente foi um erro no servidor, Linha 189, veja: ' + error, 'error');
+                    });                  
                 }
             } else {
                 var newAutorId = 1;

@@ -58,7 +58,16 @@ function buscaDados(livro, autores){
      nickLivro = arrayLivro.idLivro;
      var idAutor = arrayLivro.autorId;
      var arrayAutor = autores.find((element) => element.autorId == idAutor); // Nome do Autor
-     nomeAutor = arrayAutor.autorNome; // Acima eu tratei a array do livro que bate com o "pesquisado". Use console.log(arrayLivro) para ver
+     
+     if(arrayAutor == undefined){
+        Swal.fire({
+            title: 'Autor Indefinido',
+            text: 'O campo "autorId" está vazio no banco de dados',
+            icon: 'error',
+        });
+     }
+     nomeAutor = arrayAutor.autorNome; // Acima eu tratei a array do livro que bate com o "pesquisado".
+
      const dbref = ref(db, "livros/" + nickLivro);
      if (nomeLivro.value === "") { //o sinal de = três verifica significa que ele verifica se o valor é igual e se o tipo também é
         Swal.fire({
@@ -111,7 +120,7 @@ function buscaDados(livro, autores){
 nomeLivro.value = nameLivro;
 var autoress;
 var nAutor;
-
+var idAutor;
 var antigoNumExemplar; 
 var antigoNumDisponivel;
 function preencherFormulario(dados, nomeAutor, autores){
@@ -146,7 +155,37 @@ function preencherFormulario(dados, nomeAutor, autores){
     // COLOCA OS OUTROS CAMPOS AQ
 }
 var idAutor;
-function atualizaLivros() {
+
+
+function verificaAutorExiste() {
+    const dbref = ref(db);
+
+    get(child(dbref, "autores/"+nameAutor.value))
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                var autores = [];
+                snapshot.forEach((childSnapshot) => {
+                    autores.push(childSnapshot.val());
+                });
+
+                var nAutor = autores.find((autor) => autor.autorNome === nomeAutor.value);
+
+                if (nAutor) {
+                    console.log(nAutor.autorId);
+                    Swal.fire('Esse autor já está cadastrado! Esse é ID dele: Proxima fase ->', 'success');
+                    atualizaLivros(nAutor.autorId);
+                } else{
+                    var novoAutorId = autores.length + 1;
+                    console.log(novoAutorId);
+                    Swal.fire('Conseguimos gerar o novo ID para esse autor não cadastrado! Próxima fase ->', 'success');
+                    atualizaLivros(novoAutorId);
+                }
+            }
+        });
+}
+
+
+function atualizaLivros(AutorId) {
     const dbref = ref(db);
     
     var novoNomeLivro;
@@ -168,12 +207,10 @@ function atualizaLivros() {
     var novoVolume;
     var novoNumDisponivel;
 
-    var nAutorr = autoress.find((element) => element.autorNome == nameAutor.value); // Nome do Autor
-    var idAutorNovo =  nAutorr.autorId;
 
     novoNomeLivro = nomeLivro.value;
     novoGenLivro = genLivro.value;
-    novoIdAutor = idAutorNovo;
+    novoIdAutor = AutorId;
     novoEditora = editora.value;
     novoNomeColecao = nomeColecao.value;
     novoIdioma = idioma.value;
@@ -274,9 +311,7 @@ function salvaImagem(idLivro) {
     }
 }
 // CHAMAR A FUNÇÃO ATUALIZA LIVROS QUANDO PRESSIONAR O BOTÃO
-btnEditar.addEventListener('click', atualizaLivros);
-
-
+btnEditar.addEventListener('click', verificaAutorExiste);
 
 
 
