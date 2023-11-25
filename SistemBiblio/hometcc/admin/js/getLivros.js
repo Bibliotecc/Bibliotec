@@ -72,10 +72,10 @@ function Emprestimos(qntdadeEmprestimos, qntdSolicitada, qntdAtraso){
 
   function AddAllItemToLivros(livro){
     tblLivros.innerHTML="";
-        var qntdLivros = 1;
+        var qntdLivros = 0;
     
         livro.forEach(element => {
-          qntdLivros = qntdLivros;
+          qntdLivros = qntdLivros + 1;
         });
     
         // qntdLivros = qntdLivros + 1;

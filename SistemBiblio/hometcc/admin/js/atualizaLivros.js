@@ -160,30 +160,34 @@ var idAutor;
 function verificaAutorExiste() {
     const dbref = ref(db);
 
-    get(child(dbref, "autores/"+nameAutor.value))
+    get(child(dbref, "autores/"))
         .then((snapshot) => {
             if (snapshot.exists()) {
                 var autores = [];
                 snapshot.forEach((childSnapshot) => {
                     autores.push(childSnapshot.val());
                 });
-
-                var nAutor = autores.find((autor) => autor.autorNome === nomeAutor.value);
-
+                var nAutor = autores.find((autor) => autor.autorNome === nameAutor.value);
                 if (nAutor) {
-                    console.log(nAutor.autorId);
                     Swal.fire('Esse autor já está cadastrado! Esse é ID dele: Proxima fase ->', 'success');
                     atualizaLivros(nAutor.autorId);
                 } else{
                     var novoAutorId = autores.length + 1;
-                    console.log(novoAutorId);
-                    Swal.fire('Conseguimos gerar o novo ID para esse autor não cadastrado! Próxima fase ->', 'success');
-                    atualizaLivros(novoAutorId);
+                    set(ref(db, "autores/" + novoAutorId),{
+                        autorId: novoAutorId,
+                        autorNome: nameAutor.value
+                    })
+                    .then(()=>{
+                        atualizaLivros(novoAutorId);
+                        Swal.fire('Conseguimos gerar o novo ID para esse autor não cadastrado! Próxima fase ->', 'success');
+                    })
+                    .catch((error)=>{
+                        Swal.fire('Erro ao inserir!', ' :( Provavelmente foi um erro no servidor, Linha 189, veja: ' + error, 'error');
+                    }); 
                 }
             }
         });
-}
-
+    }
 
 function atualizaLivros(AutorId) {
     const dbref = ref(db);
