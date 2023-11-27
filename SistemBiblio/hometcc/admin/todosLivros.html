@@ -114,65 +114,101 @@
                     const db = getDatabase();
                     const corpo = document.getElementById('corpo');
 
-        function AddItemToTable(nomeLivro, genero, autorId, numExemplar,editora,dataAquisicao,nomeColecao) {
-            const tr = document.createElement("tr");
-            const tdNome = document.createElement("td");
-            const tdGenero = document.createElement("td");
-            const tdautorId = document.createElement("td");
-            const tdnumExemplar = document.createElement("td");
-            const tdeditora = document.createElement("td");
-            const tddataAquisicao = document.createElement("td");
-            const tdnomeColecao = document.createElement("td");
-            const tdEditar = document.createElement("td");
-            const aEditar = document.createElement("a");
-                  aEditar.href = "editandoLivros.html?name="+nomeLivro;
-            const icone = document.createElement("i");
-                  icone.className = "fa-solid fa-pencil testeicon";
-                  
-                        tdNome.innerText = nomeLivro;
-                        tdGenero.innerText = genero;
-                        tdautorId.innerText = autorId;
-                        tdnumExemplar.innerText = numExemplar;
-                        tdeditora.innerText = editora;
-                        tddataAquisicao.innerText = dataAquisicao;
-                        tdnomeColecao.innerText = nomeColecao;
 
-                        tr.appendChild(tdNome);
-                        tr.appendChild(tdGenero);
-                        tr.appendChild(tdautorId);
-                        tr.appendChild(tdnumExemplar);
-                        tr.appendChild(tdeditora);
-                        tr.appendChild(tddataAquisicao);
-                        tr.appendChild(tdnomeColecao);
-                        tdEditar.appendChild(aEditar);
-                        aEditar.appendChild(icone);
-                        tr.appendChild(tdEditar);
+                    var nomeAutor; // criado fora da função para ser usado em qualquer uma
+                    function buscaDados(livro, autores) {
+                        var arrayLivro = livro.find((element) => element.nomeLivro == nameLivro);
+                        nickLivro = arrayLivro.idLivro;
+                        var idAutor = arrayLivro.autorId;
+                        var arrayAutor = autores.find((element) => element.autorId == idAutor); // Nome do Autor
 
-
-
-                        corpo.appendChild(tr);
-                    }
-
-                    function AddAllItemToTable(livros) {
-                        corpo.innerHTML = ""; // Clear the table
-
-                        livros.forEach(element => {
-                            AddItemToTable(element.nomeLivro, element.gênero, element.autorId, element.numExemplar, element.editora, element.dataAquisicao, element.nomeColecao);
-                        });
-                    }
-                    function GetAllDataOnce() {
-                        const dbref = ref(db, "livros");
-
-                        onValue(dbref, (snapshot) => {
-                            const livros = [];
-                            snapshot.forEach(childSnapshot => {
-                                livros.push(childSnapshot.val());
+                        if (arrayAutor == undefined) {
+                            Swal.fire({
+                                title: 'Autor Indefinido',
+                                text: 'O campo "autorId" está vazio no banco de dados',
+                                icon: 'error',
                             });
-
-                            AddAllItemToTable(livros);
-                        });
+                        }
                     }
-                    GetAllDataOnce();
+
+                        function AddItemToTable(nomeLivro, genero, autorId, numExemplar, editora, dataAquisicao, nomeColecao, NomeAutores) {
+
+                            var nAutor = NomeAutores.find((element) => element.autorId == autorId); // Nome do Autor
+                            var NomeDoAutor =  nAutor.autorNome;
+
+                            const tr = document.createElement("tr");
+                            const tdNome = document.createElement("td");
+                            const tdGenero = document.createElement("td");
+                            const tdautorId = document.createElement("td");
+                            const tdnumExemplar = document.createElement("td");
+                            const tdeditora = document.createElement("td");
+                            const tddataAquisicao = document.createElement("td");
+                            const tdnomeColecao = document.createElement("td");
+                            const tdEditar = document.createElement("td");
+                            const aEditar = document.createElement("a");
+                            aEditar.href = "editandoLivros.html?name=" + nomeLivro;
+                            const icone = document.createElement("i");
+                            icone.className = "fa-solid fa-pencil testeicon";
+
+                            tdNome.innerText = nomeLivro;
+                            tdGenero.innerText = genero;
+                            tdautorId.innerText = NomeDoAutor;
+                            tdnumExemplar.innerText = numExemplar;
+                            tdeditora.innerText = editora;
+                            tddataAquisicao.innerText = dataAquisicao;
+                            tdnomeColecao.innerText = nomeColecao;
+
+                            tr.appendChild(tdNome);
+                            tr.appendChild(tdGenero);
+                            tr.appendChild(tdautorId);
+                            tr.appendChild(tdnumExemplar);
+                            tr.appendChild(tdeditora);
+                            tr.appendChild(tddataAquisicao);
+                            tr.appendChild(tdnomeColecao);
+                            tdEditar.appendChild(aEditar);
+                            aEditar.appendChild(icone);
+                            tr.appendChild(tdEditar);
+
+
+
+                            corpo.appendChild(tr);
+                        }
+
+                        function AddAllItemToTable(livros, NomeAutores) {
+                            corpo.innerHTML = ""; // Clear the table
+                            var autores;
+
+                            livros.forEach(element => {
+                                AddItemToTable(element.nomeLivro, element.gênero, element.autorId, element.numExemplar, element.editora, element.dataAquisicao, element.nomeColecao, NomeAutores);
+                            });
+                        }
+                        function GetAllDataOnce() {
+                            const dbref = ref(db, "livros");
+
+                            onValue(dbref, (snapshot) => {
+                                const livros = [];
+                                snapshot.forEach(childSnapshot => {
+                                    livros.push(childSnapshot.val());
+                                });
+
+                                GetAllDataAutor(livros);
+                            });
+                        }
+                        function GetAllDataAutor(livros){
+                            const dbref = ref(db, "autores");
+
+                            onValue(dbref, (snapshot) => {
+                                const autores = [];
+                                snapshot.forEach(childSnapshot => {
+                                    autores.push(childSnapshot.val());
+                                });
+
+
+                                AddAllItemToTable(livros, autores);
+                            });
+                            
+                        }
+                        GetAllDataOnce();
 
 
 

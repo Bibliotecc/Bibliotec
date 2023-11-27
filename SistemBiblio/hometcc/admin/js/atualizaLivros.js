@@ -53,23 +53,25 @@ var autorId = document.getElementById("autorId");
 
 var nickLivro;
 var nomeAutor; // criado fora da função para ser usado em qualquer uma
-function buscaDados(livro, autores){
+function buscaDados(livro, autores) {
     var arrayLivro = livro.find((element) => element.nomeLivro == nameLivro);
-     nickLivro = arrayLivro.idLivro;
-     var idAutor = arrayLivro.autorId;
-     var arrayAutor = autores.find((element) => element.autorId == idAutor); // Nome do Autor
-     
-     if(arrayAutor == undefined){
+    nickLivro = arrayLivro.idLivro;
+    var idAutor = arrayLivro.autorId;
+    var arrayAutor = autores.find((element) => element.autorId == idAutor); // Nome do Autor
+
+    if (arrayAutor == undefined) {
         Swal.fire({
             title: 'Autor Indefinido',
             text: 'O campo "autorId" está vazio no banco de dados',
             icon: 'error',
         });
-     }
-     nomeAutor = arrayAutor.autorNome; // Acima eu tratei a array do livro que bate com o "pesquisado".
+    }
 
-     const dbref = ref(db, "livros/" + nickLivro);
-     if (nomeLivro.value === "") { //o sinal de = três verifica significa que ele verifica se o valor é igual e se o tipo também é
+    nomeAutor = arrayAutor.autorNome; // Acima eu tratei a array do livro que bate com o "pesquisado".
+
+    const dbref = ref(db, "livros/" + nickLivro);
+
+    if (nomeLivro.value === "") {
         Swal.fire({
             title: 'Erro',
             text: 'Por favor, insira o nome do livro',
@@ -78,29 +80,12 @@ function buscaDados(livro, autores){
         return;
     }
 
-     Swal.fire({
-        title: 'Buscando por: "'+nameLivro+'" !',
-        confirmButtonText: 'ok',
-        showLoaderOnConfirm: true,
-        preConfirm: () => {
-            return new Promise((resolve, reject) => {
-                onValue(dbref, (snapshot) => {
-                    const dados = snapshot.val();
-                    if (dados) {
-                        console.log(nomeAutor);
-                        resolve(dados, nomeAutor, autores);
-                    } else {
-                        reject('Verifique o nome do livro');
-                        closed;
-                    }
-                });
-            });
-        },
-        allowOutsideClick: () => !Swal.isLoading()
-    })
-    .then((result) => {
-        if (result.value) {
-            preencherFormulario(result.value, nomeAutor, autores);
+    // Remova a promessa e chame diretamente a função onValue
+    onValue(dbref, (snapshot) => {
+        const dados = snapshot.val();
+        if (dados) {
+            console.log(nomeAutor);
+            preencherFormulario(dados, nomeAutor, autores);
             Swal.fire({
                 title: 'Encontrei os dados!',
                 icon: 'success',
@@ -108,12 +93,13 @@ function buscaDados(livro, autores){
         } else {
             Swal.fire({
                 title: 'Busca cancelada',
-                text: result.value,
+                text: 'Verifique o nome do livro',
                 icon: 'error',
             });
         }
     });
-} 
+}
+
 
 nomeLivro.value = nameLivro;
 var autoress;
@@ -314,7 +300,6 @@ function salvaImagem(idLivro) {
 }
 // CHAMAR A FUNÇÃO ATUALIZA LIVROS QUANDO PRESSIONAR O BOTÃO
 btnEditar.addEventListener('click', verificaAutorExiste);
-
 
 
 // EVENTOS SUSTENTAM O SISTEMA
