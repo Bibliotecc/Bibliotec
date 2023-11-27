@@ -203,16 +203,16 @@
             Swal.fire({
                 title: 'Tem certeza que deseja sair?',
                 showDenyButton: true,
-                confirmButtonText: 'Quero Sair',
-                denyButtonText: `Não Quero Sair`,
+                confirmButtonText: 'Não Quero Sair',
+                denyButtonText: `Quero Sair`,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
+                if (result.isDenied) {
                     localStorage.removeItem('user');
                     localStorage.removeItem('keepLoggedIn');
                     window.location = "index.html";
                 }
-                else if (result.isDenied) {
+                else if (result.isConfirmed) {
                     Swal.fire('Entendo entendo, você não vai sair!', '', 'error');
                 }
             })

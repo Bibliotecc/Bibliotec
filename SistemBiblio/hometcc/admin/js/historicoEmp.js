@@ -120,10 +120,61 @@ function alteraStatus(idEmprestimo, statusEmp){
         confirmButtonText: 'Alterar',
         denyButtonText: 'Sair',
     }).then((result) => {
+        const pegaData = new Date();
+        // Obter informações específicas da nova data (ano, mês, dia, etc.)
+        const ano = pegaData.getFullYear();
+        const mes = pegaData.getMonth() + 1; // Lembre-se que os meses começam do zero
+        const dia = pegaData.getDate();
+        const horas = pegaData.getHours();
+        const minutos = pegaData.getMinutes();
+        const segundos = pegaData.getSeconds();
+        const dataHoje = `${dia.toString().padStart(2, '0')}-${mes.toString().padStart(2, '0')}-${ano} ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
+
         if (result.isConfirmed) {
+            const dbRef = ref(db);
             var select = document.getElementById('selecao');
             var valorSelecionado = select.options[select.selectedIndex].value;
-            atualizaEmp(idEmprestimo, valorSelecionado);
+
+            if(valorSelecionado == "Emprestado" || valorSelecionado == "Pendente"){
+                update(child(dbRef, "emprestimos/" + idEmprestimo), {
+                    statusEmp: valorSelecionado,
+                    dataDevolu: ""
+                }).then(() => {
+                    Swal.fire(
+                        `Concluído!`,
+                        'Status Alterado Para ' + valorSelecionado,
+                        'success'
+                    );
+                    })
+                    .catch(error => {
+                    Swal.fire(
+                        `Erro!`,
+                        'Erro ao autorizar empréstimo: ' + error,
+                        `error`
+                    );
+                    });
+            }if(valorSelecionado == "Devolvido"){
+                update(child(dbRef, "emprestimos/" + idEmprestimo), {
+                    statusEmp: valorSelecionado,
+                    dataDevolu: dataHoje
+                }).then(() => {
+                    Swal.fire(
+                        `Concluído!`,
+                        'Status Alterado Para ' + valorSelecionado,
+                        'success'
+                    );
+                    })
+                    .catch(error => {
+                    Swal.fire(
+                        `Erro!`,
+                        'Erro ao autorizar empréstimo: ' + error,
+                        `error`
+                    );
+                    });
+            }
+            else{
+                atualizaEmp(idEmprestimo, valorSelecionado);
+            }
         }
     });
 
@@ -137,7 +188,7 @@ function atualizaEmp(idEmprestimo, valorSelecionado){
         .then(() => {
         Swal.fire(
             `Concluído!`,
-            'Status Alterado',
+            'Status Alterado Para ' + valorSelecionado,
             'success'
         );
         })

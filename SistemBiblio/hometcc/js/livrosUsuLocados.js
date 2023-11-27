@@ -16,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 import {getDatabase, ref, set, get, child, onValue,update, remove } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
 const db = getDatabase();    
-
+ 
 //-------------
 const pegaData = new Date();
 
@@ -57,7 +57,7 @@ const dataHoje = `${dia.toString().padStart(2, '0')}-${mes.toString().padStart(2
                             if(statusEmp == "Recusado"){
                                 tdAtraso.innerText = "---";
                             }else{
-                                if(dataDevolu < dataHoje){
+                                if(dataDevolu < dataHoje && dataDevolu != ""){
                                     tdAtraso.innerText = "Sim";
                                 }
                                 if(dataDevolu > dataHoje){

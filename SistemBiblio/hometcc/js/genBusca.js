@@ -79,27 +79,27 @@ function AddItemToTable(nomeLivro, gênero, urlImg) {
 
     }
     // ----------------------------------------------------- PESQUISA POR NOME
-    // if (search == nomeLivro ||correspondeString(searchSimilar, nomeLivroSimilar) && generoPsq == gênero) {
-    //     console.log("OLHA EU AQUII DOOISS!!");
+    if (search == nomeLivro || correspondeString(searchSimilar, nomeLivroSimilar) == true) {
+        console.log("OLHA EU AQUII DOOISS!!");
 
-    //     console.log("URL DA IMAGEM"+urlImg);
-    //     let divE = document.createElement("div");
-    //     divE.className = 'estil-books';
-    //     let img = document.createElement("img");
-    //     img.src = urlImg;
-    //     let a = document.createElement("a");
-    //     a.innerText = 'Reservar';
-    //     a.href = "aluguel.html?alugar=" + nomeLivro;
+        console.log("URL DA IMAGEM"+urlImg);
+        let divE = document.createElement("div");
+        divE.className = 'estil-books';
+        let img = document.createElement("img");
+        img.src = urlImg;
+        let a = document.createElement("a");
+        a.innerText = 'Reservar';
+        a.href = "aluguel.html?alugar=" + nomeLivro;
 
-    //     divE.appendChild(img);
-    //     divE.appendChild(a);
+        divE.appendChild(img);
+        divE.appendChild(a);
 
         
 
-    //         cBooksR.appendChild(divE);
+        cBooksR.appendChild(divE);
 
 
-    // }
+    }
     // ----------------------------------------------------- PESQUISA POR GÊNERO    
 
 }
@@ -171,7 +171,7 @@ function populateGenreDropdown(genres) {
     });
 
     dropdown.appendChild(divD);
-}
+} 
 
 // EVENTOS
 window.onload = function() {
@@ -225,6 +225,7 @@ function correspondeString(searchSimilar, nomeLivroSimilar){
     if (searchSimilar && nomeLivroSimilar) {
         for (let i = 0; i < nomeLivroSimilar.length; i++) {
             if (nomeLivroSimilar[i].includes(searchSimilar) || nomeLivroSimilar == searchSimilar) {
+                console.log("AUDHAUIODHIAUDHIUAHDIUOAHDIOUAHDIOUAHDUIOHADOOADPI");
                 return true;
             }else{
                 // nomeLivroSimilar = nomeLivroSimilar.split(" ");
