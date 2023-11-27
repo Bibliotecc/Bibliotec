@@ -98,14 +98,14 @@ function AddItemToTable(nomeLivro, genero, urlImg) {
         var containerPrin = document.getElementById("background-fundo-all");
 
         const container = document.createElement("div");
-            container.className = "container";
-            container.id = "container-principal";
+        container.className = "container";
+        container.id = "container-principal";
         const titleGen = document.createElement("h1");
-            titleGen.innerText = genero;
+        titleGen.innerText = genero;
 
         const booksContainer = document.createElement("div");
-            booksContainer.className = "container-books";
-            booksContainer.id = "carousel-container"; //
+        booksContainer.className = "container-books";
+        booksContainer.id = "carousel-container"; //
 
         containerPrin.appendChild(container);
         container.appendChild(titleGen);
@@ -144,19 +144,19 @@ function AddItemToTable(nomeLivro, genero, urlImg) {
 
     divE.appendChild(img);
     divE.appendChild(a);
-//
+    //
 
-if(genreContainers[genero].qntdLivros <= 4){
-    containerInfo.booksContainer.appendChild(divE);
-    genreContainers[genero].qntdLivros++
-}
+    if (genreContainers[genero].qntdLivros <= 4) {
+        containerInfo.booksContainer.appendChild(divE);
+        genreContainers[genero].qntdLivros++
+    }
 
 
 }
 
 function AddAllItemToTable(livro) {
     stdNo = 0;
-    livro.forEach(element => {       
+    livro.forEach(element => {
         AddItemToTable(element.nomeLivro, element.gênero, element.urlImg);
     });
 }
@@ -210,7 +210,7 @@ function populateGenreDropdown(genres) {
     const dropdown = document.getElementById("Fltr");
     const divD = document.createElement("div");
     divD.className = "dropdown-menu";
-    
+
     genres.forEach((genre) => {
         const a = document.createElement("a");
         a.href = "buscaGen.html?gen=" + genre;
@@ -223,7 +223,7 @@ function populateGenreDropdown(genres) {
 }
 
 // EVENTOS
-window.onload = function() {
+window.onload = function () {
     getGenres().then((genres) => {
         // Agora você tem a lista de gêneros, você pode usá-la para preencher o menu suspenso
         populateGenreDropdown(genres);
@@ -235,36 +235,36 @@ window.onload = function() {
 
 // TRATAMENTOS
 // TRATAMENTO DO SEARCH
-function trataSearch(search){
-    if(!search){
+function trataSearch(search) {
+    if (!search) {
         console.log("Nada Pesquisado!");
 
     }
-    else{
-    var searchSimilar = search;
+    else {
+        var searchSimilar = search;
 
-    var palavras = searchSimilar.split(" ");
-    for (let i = 0; i < palavras.length; i++) {
-        palavras[i] = palavras[i][0].toUpperCase() + palavras[i].substr(1);
-    }
+        var palavras = searchSimilar.split(" ");
+        for (let i = 0; i < palavras.length; i++) {
+            palavras[i] = palavras[i][0].toUpperCase() + palavras[i].substr(1);
+        }
         //console.log(palavras);
         palavras = palavras.join(" ");
-       palavras = palavras.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    console.log("TRATA SEARCH: "+ palavras);
-    return palavras;
+        palavras = palavras.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        console.log("TRATA SEARCH: " + palavras);
+        return palavras;
     }
 }
 // TARATAMENTO PARA O NOME LIVROS
-function similaLivro(nomeLivro){
+function similaLivro(nomeLivro) {
     return nomeLivro.split(" ")
-    .map(word => word.charAt(0)
-    .toUpperCase() + word.slice(1))
-    .join(" ")
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '');
+        .map(word => word.charAt(0)
+            .toUpperCase() + word.slice(1))
+        .join(" ")
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
 }
 
-function correspondeString(searchSimilar, nomeLivroSimilar){
+function correspondeString(searchSimilar, nomeLivroSimilar) {
     console.log("CORRESPONDE STRING 1: ");
     console.log(nomeLivroSimilar);
     console.log("-------------------");
@@ -275,16 +275,16 @@ function correspondeString(searchSimilar, nomeLivroSimilar){
         for (let i = 0; i < nomeLivroSimilar.length; i++) {
             if (nomeLivroSimilar[i].includes(searchSimilar) || nomeLivroSimilar == searchSimilar) {
                 return true;
-            }else{
+            } else {
                 // nomeLivroSimilar = nomeLivroSimilar.split(" ");
                 // searchSimilar = searchSimilar.split(" ");
                 // console.log(Array(nomeLivroSimilar));
                 // console.log("-------------------");
                 // console.log(Array(searchSimilar));
                 // console.log("-------------------");
-                    // if(nomeLivroSimilar[i] == searchSimilar[i]){
-                    //     return true;
-                    // }
+                // if(nomeLivroSimilar[i] == searchSimilar[i]){
+                //     return true;
+                // }
             }
         }
     }
