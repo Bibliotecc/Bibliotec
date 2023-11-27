@@ -810,6 +810,7 @@ padding: 8px 20px;
 
 .button-cadastrar-livro a{
     margin-top: 10%;
+    cursor: pointer;
     border-radius: 10px;
     text-align: center;
     text-decoration: none;
